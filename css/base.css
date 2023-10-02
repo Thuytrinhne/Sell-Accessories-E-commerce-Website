@@ -15,5 +15,4 @@ html
     line-height: 1.6rem;  
     font-family: 'Roboto', sans-serif;    /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
     box-sizing: border-box;
-   
 }
