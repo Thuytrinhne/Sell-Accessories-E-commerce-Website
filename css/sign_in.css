@@ -1,0 +1,94 @@
+/* ==================================  SIGNIN  ================================== */
+
+/* ================ signin header ================ */
+.signin a{
+    text-decoration: none;
+    color: #e05994;
+}
+
+.signin_header{
+    height: 84px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 260px;
+}
+
+
+/* ==============  body  ============== */
+.signin_body{
+    position: relative;
+}
+
+.signin_body-form{
+    height: 500px;
+    width: 450px; 
+    font-size: 16px;
+    border-radius: 7px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translateY(-50% );
+    
+}
+
+.sign_body-form-container{
+    margin: 28px 52px;
+
+}
+
+
+
+.signin_body-input input{
+    margin-bottom: 20px;
+    border: rgb(195, 191, 191) solid 1px;
+    padding: 7px 15px;
+    border-radius: 7px;
+}
+
+.signin_body-input input,
+.signin_body-input button{
+    width: 100%;
+}
+
+
+/* .loginandremember .signin_btn::after{
+    content: "";
+    border: #fff dashed 3px;
+    width: 100%;
+    padding: 12px ;
+
+} */
+
+.loginandremember .signin_btn{
+    width: 100%; 
+    background-color: #e05994;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    /* border: #fff dashed 3px; */
+    border-radius: 30px;
+}
+
+
+
+.signin_byfb-or-gg .Facebook_btn,
+.signin_byfb-or-gg .Google_btn{
+    width: 49%; 
+    background-color: #fff;
+    border: rgb(195, 191, 191) solid 1px;
+    padding: 12px;
+    border-radius: 30px;
+    border:#e05994 dashed 3px;
+}
+
+.signin_byfb-or-gg img{
+    height: 24px;
+    width: 24px;
+    margin-right: 6px;
+}
+
+
+
+  

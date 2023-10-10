@@ -1,0 +1,76 @@
+/* ==================================  signup  ================================== */
+
+/* ================ signup header ================ */
+.signup a{
+    text-decoration: none;
+    color: #e05994;
+}
+
+.signup_header{
+    height: 84px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 260px;
+}
+
+
+/* ==============  body  ============== */
+.signup_body{
+    position: relative;
+}
+
+.signup_body-form{
+    height: 350px;
+    width: 450px; 
+    font-size: 16px;
+    border-radius: 7px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translateY(-50% );
+    
+}
+
+.signup_body-form-container{
+    margin: 45px 52px;
+
+}
+
+
+
+
+
+
+
+.signup_body-input input{
+    margin-bottom: 28px;
+    border: rgb(195, 191, 191) solid 1px;
+    padding: 7px 15px;
+    border-radius: 7px;
+}
+
+.signup_body-input input,
+.signup_body-input button{
+    width: 100%;
+}
+
+
+.signup_button .signup_btn{
+    width: 100%; 
+    background-color: #e05994;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    /* border: #fff dashed 3px; */
+    border-radius: 30px;
+}
+
+
+
+
+
+
+
+  
