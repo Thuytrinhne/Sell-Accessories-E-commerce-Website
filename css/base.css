@@ -2,7 +2,7 @@
     --white-color:#fff;
     --black-color: #000;
     --text-color: #333;
-    --border-color: #bdbdbd;
+    --border-color: rgb(189, 189, 189);
     --primary-color: #e05994;
     --partial-color: #f78da7;
 }
@@ -11,8 +11,14 @@
 }
 html
 {
-    font-size: 62.5%;   /* 100%: 16px, 62.5%: 10px */
+    font-size: 10px;   /* 100%: 16px, 62.5%: 10px */
     line-height: 1.6rem;  
     font-family: 'Roboto', sans-serif;    /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
     box-sizing: border-box;
+}
+
+.product-related {
+    margin: 40px;
+    background-color: #F0F0F0;
+    
 }
