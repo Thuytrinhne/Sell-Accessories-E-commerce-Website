@@ -21,7 +21,7 @@
 }
 
 .signup_body-form{
-    height: 350px;
+    height: 550px;
     width: 450px; 
     font-size: 16px;
     border-radius: 7px;
@@ -34,21 +34,46 @@
 }
 
 .signup_body-form-container{
-    margin: 45px 52px;
+    margin: 26px 42px;
 
 }
 
-
-
-
-
-
-
 .signup_body-input input{
-    margin-bottom: 28px;
+    margin-bottom: 14px;
     border: rgb(195, 191, 191) solid 1px;
     padding: 7px 15px;
     border-radius: 7px;
+}
+
+.gender .gender-tick{
+    display: inline-block; 
+    margin-right: 18px;
+}
+
+.DayOfBirth{
+    margin: 13px 0;
+}
+
+.policy{
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.DayOfBirth select{
+    border: rgb(195, 191, 191) solid 1px;
+    border-radius: 4px;
+    padding-right: 30px;
+    width: 32.5%;
+    /* display: inline; */
+    padding: 6px 12px;
+}
+
+.signup_body-input input{
+    position: relative;
+}
+
+.signup_body-input input .fa-solid{
+    
 }
 
 .signup_body-input input,
@@ -57,15 +82,113 @@
 }
 
 
-.signup_button .signup_btn{
-    width: 100%; 
-    background-color: #e05994;
-    color: #fff;
-    padding: 12px;
-    border: none;
-    /* border: #fff dashed 3px; */
-    border-radius: 30px;
+.signup_btn
+{
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    color: var(--white-color);
+    font-size: 1.9rem;
+    font-weight: 500;
+    background-color: var(--primary-color);
+    border-radius: 40px;
+    text-align: center;
+    border:solid 4px transparent;
+    padding: 12px 0;
+    cursor: pointer;
+    width: 60%;
 }
+.signup_btn:hover
+{
+    color: white;
+    background-color: #81D1E5;
+    transition: all 0.2s linear;
+}
+.signup_btn::before
+{
+    border-radius: 40px;
+    display:  block;
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: 2px dashed var(--white-color);
+}
+
+.signup_button{
+    text-align: center;
+}
+
+
+
+.signup_have-an-account{
+    margin-top: 18px; 
+    color: rgb(195, 191, 191); 
+    text-align: center;
+}
+
+/* ===================== FOOTER ====================== */
+.footer
+{
+    margin: 0 12%;
+    height:530px;
+}
+.footer-container{
+    display: grid;
+    grid-template-columns: 168px 400px auto auto;
+    column-gap: 20px;
+    background-color: var(--white-color);
+}
+.footer-list
+{
+    font-size: 1.3rem;
+    margin-top: 26px;
+    border: none;
+}
+.footer-item
+{
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 450;
+
+}
+.footer-logo
+{
+    padding: 0;
+    width: 227px;
+    transition: transform 1s ease-in;
+}
+
+.footer-logo:hover {
+    transform: rotate(360deg);
+}
+
+.footer-link-center
+{
+    margin-top: 40px;
+    width: 227px;
+}
+.footer-connect
+{
+    margin-top: 20px;
+}
+.footer-connect-img
+{
+    height: 37px;
+}
+.footer-connect-link
+{
+    text-decoration: none;
+    margin-right: 8px;
+}
+.foooter-identify
+{
+    margin-top:15px;
+}
+
 
 
 

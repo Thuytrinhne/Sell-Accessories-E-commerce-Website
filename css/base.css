@@ -5,6 +5,7 @@
     --border-color: #bdbdbd;
     --primary-color: #e05994;
     --partial-color: #f78da7;
+    --buy-Amount-Btn-size: 23px;
 }
 *{
     /* box-sizing: inherit; */

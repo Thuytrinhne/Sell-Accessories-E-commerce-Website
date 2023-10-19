@@ -3,7 +3,9 @@
     margin: 0;
 }
 
-
+.cart{
+    /* background-color: ; */
+}
 
 .cart_container{
     margin: 48px 33%;
@@ -17,7 +19,7 @@
 /* ===========  product box  =========== */
 .product_box{
     display: grid;
-    grid-template-columns: 15% 75% 10%;
+    grid-template-columns: 15% 53% 25% 6%;
     border-bottom: #c7c7c7 dashed 1px;
     padding: 16px 0;
 }
@@ -50,7 +52,7 @@
 .total{
     display: grid;
     grid-template-columns: 50% 50%;
-    margin: 12px 0 24px 0;
+    margin: 12px 0 36px 0;
 
 }
 
@@ -59,19 +61,90 @@
     color: #777;
 }
 
-.payment_container button{
-    background-color: #e05994;
-    color: #fff;
-    padding: 18px;
-    border: none;
-    /* border: #fff dashed 3px; */
+.pay_btn
+{
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    color: var(--white-color);
+    font-size: 1.9rem;
+    font-weight: 500;
+    background-color: var(--primary-color);
+    border-radius: 400px;
+    text-align: center;
+    border:solid 4px transparent;
+    padding: 8px 17px;
+    cursor: pointer;
+    padding: 20px 64px;
+}
+.pay_btn:hover
+{
+    color: white;
+    background-color: #81D1E5;
+    transition: all 0.2s linear;
+}
+.pay_btn::before
+{
     border-radius: 40px;
-    width: 100%;
+    display:  block;
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: 2px dashed var(--white-color);
 }
 
-.checkcart_button, .pay_button{
-    width: 49.5%;
+
+.pay_button{
+    text-align: center;
+}
+
+
+/* ===========  buy-amount  ============ */
+.buy-amount_container{
     display: inline-block;
-    font-size: 17px;
+    position: relative;
 }
 
+.buy-amount button{
+    height: var(--buy-Amount-Btn-size);
+    width: var(--buy-Amount-Btn-size);
+    border: #ececec solid 1px;
+    cursor: pointer;
+}
+
+.buy-amount button:hover{
+    background-color: #dedede;
+}
+
+.buy-amount {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.buy-amount button svg{
+
+    color: #909090;
+}
+
+.buy-amount button:hover svg{
+    color: #7e7e7e;
+}
+
+
+.buy-amount input{
+    border: #ececec solid 1px;
+    width: 54px;
+    height: var(--buy-Amount-Btn-size);
+    padding: 0 5px;
+    text-align: center;
+    font-size: 14px;
+    outline: none;
+    color: #777;
+}
