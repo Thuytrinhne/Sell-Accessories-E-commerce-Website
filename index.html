@@ -22,17 +22,19 @@
 <body>
     <div class="app">
         <header class="header">
-            <div class="grid">
-                <div class="header_general-infor"> 
+          
+                <div class="header_general-infor grid"> 
                   <div class="header-contact">
                     <div class="header-contact__phone">CSKH: 0934454699 </div>
                     <div class="header-contact__email">hippo.cskh@gmail.com</div>
-                  </div>
-    
+                  </div>  
                    <div class="header-auth">
-                    <!-- <a class="nav-link-black"  href="">Đăng ký</a>
+                    <div class="header-auth-notlogin">
+                    <a class="nav-link-black"  href="">Đăng ký</a>
                      <div class="nav-link-line"></div>
-                    <a class="nav-link-black"  href="">Đăng nhập</a> -->
+                    <a class="nav-link-black"  href="">Đăng nhập</a>
+                    </div>
+                    <div class="header-auth-logined">
                     <div class="nav-link-black nav-link-subLogin">Chào Trinh,</div>
                     <div class ="nav-link-subLogin-user">
                       <div class="nav-link-black nav-link-black--noHover">Tài khoản
@@ -52,12 +54,12 @@
                             </span>                         
                           <a class="header-auth-subLogin-link" href="">Quản lý đơn hàng</a>
                         </div>
-                        <div class="header-auth-subLogin-item">
+                        <!-- <div class="header-auth-subLogin-item">
                           <span class="material-symbols-outlined header-auth-subLogin-icon">
                             favorite
                             </span>                          
                           <a class="header-auth-subLogin-link" href="">Sản phẩm yêu thích</a>
-                        </div>
+                        </div> -->
                         <div class="header-auth-subLogin-item">
                           <span class="material-symbols-outlined header-auth-subLogin-icon">
                             location_on
@@ -73,10 +75,11 @@
                       </div>
                     </div>
                     </div>
+                  </div>
                    </div>
                   </div>
                      
-                </div> 
+               
                 <div class="container-nav">     
                 <nav class="navbar navbar-expand-lg bg-body-tertiary header__nav">
                     <div class="container-fluid">
@@ -116,7 +119,9 @@
                       </div>
                         </div> 
                     </div>
+   
                   </nav>
+                </div>
         </header>
         <div class="body">
           <div class="body-assort">
@@ -232,6 +237,7 @@
               </li>
             </ul>
           </div>
+          <div class="body-main">
             <div class="body-banner-container grid">
                 <div class="body-banner">
                    <div class="body-banner-item1">
@@ -842,6 +848,210 @@
                           </button>
                       </div>
             </div> 
+          </div> 
+          <div class="body-user grid">
+            <div class="body-user-feature">
+              <div class="body-user-feature-header">
+                  <a href="">
+                    <img class="body-user-img" src="https://hasaki.vn/images/graphics/account-full.svg" alt="">
+                  </a>
+                  <div class="body-user-infor">
+                    <div class="body-user-infor-name">
+                      <strong>Chào Trinh</strong>
+                    </div>
+                    <div class="body-user-infor-edit">
+                    <a href="" class="body-user-infor-link">Sửa tài khoản</a>
+                    <span class="material-symbols-outlined body-user-infor-icon">
+                      edit
+                    </span>
+                  </div>
+                </div>
+              </div>
+           
+              <div class="body-user-feature-footer">
+                <div class="body-user-feature-item">
+                  <span class="material-symbols-outlined body-user-feature-item-icon  body-user-feature-item-icon--blue">
+                    manage_accounts
+                    </span>
+                    <span class="body-user-feature-text">Tài Khoản Của Tôi
+                    </span>
+                    </div>
+                <div class="body-user-feature-item">
+                  <span class="material-symbols-outlined body-user-feature-item-icon body-user-feature-item-icon--blue2">
+                    list_alt
+                    </span>
+                  <span class="body-user-feature-text">Đơn Mua</span>
+                </div>
+                
+                <div class="body-user-feature-item">
+                  <span class="material-symbols-outlined body-user-feature-item-icon body-user-feature-item-icon--orange">
+                    distance
+                    </span>
+                  <span class="body-user-feature-text">Sổ Địa Chỉ Nhận Hàng</span>
+                </div>
+                <div class="body-user-feature-item">
+                  <span class="material-symbols-outlined body-user-feature-item-icon body-user-feature-item-icon--yellow">
+                    logout
+                  </span>  
+                  <span class="body-user-feature-text">Thoát</span>
+                </div>
+               
+              </div>
+            </div>
+            <div class="body-user-display">
+              <div class="body-user-display-myaccount">
+              <div class="body-user-display-header">
+                <div class="body-user-display-title1">Tài Khoản Của Tôi</div>
+                <div class="body-user-display-title2">Quản lý thông tin cá nhân để bảo mật tài khoản</div>
+              </div>
+              <hr class="body-user-display-line">
+              <div class="body-user-display-container">
+                  <form class="body-user-display-frm" action="">
+                    <table class="body-user-display-tbl">
+                      <tr class="body-user-display-tr">
+                        <td  class="body-user-display-td-label">
+                          <label for="text">Họ và tên</label>
+                        </td>
+                        <td class="body-user-display-td-input">
+                          <input class="body-user-display-input"type="text" value="Nguyễn Thùy Trinh">
+                        </td>
+                      </tr>
+                      <tr class="body-user-display-tr">
+                        <td class="body-user-display-td-label">
+                          <label for="text">Giới tính</label>
+                        </td>
+                        <td  class="body-user-display-td-input">
+                          <input class="body-user-display-rdo" type="radio">
+                          <span class="body-user-display-rdo-text" >Nam</span>
+                          <input class="body-user-display-rdo" type="radio">
+                          <span class="body-user-display-rdo-text">Nữ</span>
+                          <input class="body-user-display-rdo" type="radio">
+                          <span class="body-user-display-rdo-text">Khác</span>
+                        </td>
+                      </tr>
+                      <tr class="body-user-display-tr">
+                        <td class="body-user-display-td-label">
+                          <label for="text">Ngày sinh</label>
+                        </td>
+                        <td  class="body-user-display-td-input">
+                          <input class="body-user-display-input" type="date">
+
+                        </td>
+                      </tr>
+                      <tr class="body-user-display-tr">
+                        <td class="body-user-display-td-label">
+                          <label for="text">Email</label>
+                        </td>
+                        <td  class="body-user-display-td-input">
+                          <input  class="body-user-display-input"  type="email" value="21522719@gm.uit.edu.vn">
+                        </td>
+                      </tr>
+                      <tr class="body-user-display-tr">
+                        <td class="body-user-display-td-label">
+                          <label for="text">Số điện thoại</label>
+                        </td>
+                        <td  class="body-user-display-td-input">
+                          <input  class="body-user-display-input" type="phone" value="0987282918">
+                        </td>
+                      </tr>
+                    </table>
+                  </form>
+                  <div class="body-user-display-btn">
+                  <fieldset class="body-user-display-fieldset">
+                    <legend class="body-user-display-legend">THAY ĐỔI MẬT KHẨU</legend>
+                    <table class="body-user-display-tbl">
+                      <tr class="body-user-display-tr">
+                        <td class="body-user-display-td-label">
+                          <label for="text">Mật khẩu hiện tại</label>
+                        </td>
+                        <td  class="body-user-display-td-input">
+                          <input  class="body-user-display-input" type="password">
+                        </td>
+                      </tr>
+                      <tr class="body-user-display-tr">
+                        <td class="body-user-display-td-label">
+                          <label for="text">Mật khẩu mới</label>
+                        </td>
+                        <td  class="body-user-display-td-input">
+                          <input  class="body-user-display-input" type="password">
+                        </td>
+                      </tr>
+                      <tr class="body-user-display-tr">
+                        <td class="body-user-display-td-label">
+                          <label for="text">Xác nhận mật khẩu mới</label>
+                        </td>
+                        <td  class="body-user-display-td-input">
+                          <input  class="body-user-display-input" type="password">
+                        </td>
+                      </tr>
+                    
+                      
+                    </table>
+                  </fieldset>
+                  <button class="body-footer-seemore btn-red btn-bottom">LƯU THAY ĐỔI</button>
+                </div>
+              </div>
+            </div>
+            <div class="body-user-display-addressUser">
+              <div class="body-user-display-header">
+                <div class="body-user-display-title1 body-user-display-title3">Sổ địa chỉ</div>
+                <div class="body-user-display-listAddress">
+                  <div class="body-user-display-listAddress-border">
+                    <div class="body-user-display-listItem body-user-display-listItem-main">
+                      <div class="body-user-display-address-infor">
+                        <strong>Nguyễn Ngọc</strong>- 032898124
+                      </div>
+                      <div class="body-user-display-address-detail">Honda Đức Dũng - Ngã tư Đồng Rướn, Xã Bình Thuận, Huyện Bình Sơn, Quảng Ngãi
+
+                      </div>
+                      <span class="body-user-display-address-edit">
+                        <a class="body-user-display-address-link" href="">Chỉnh sửa
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="body-user-display-listAddress-border">
+                    <div class="body-user-display-listItem">
+                      <div class="body-user-display-address-infor">
+                        <strong>Nguyễn Ngọc</strong>- 032898124
+                      </div>
+                      <div class="body-user-display-address-detail">Honda Đức Dũng - Ngã tư Đồng Rướn, Xã Bình Thuận, Huyện Bình Sơn, Quảng Ngãi
+
+                      </div>
+                      <span class="body-user-display-address-edit">
+                        <a class="body-user-display-address-link" href="">Chỉnh sửa
+                          <img src="https://hasaki.vn/images/graphics/icon_delete.gif" alt="">
+                        </a>
+                      </span>
+                    </div>
+                    </div>
+                    <div class="body-user-display-listAddress-border">
+                    <div class="body-user-display-listItem">
+                      <div class="body-user-display-address-infor">
+                        <strong>Nguyễn Ngọc</strong>- 032898124
+                      </div>
+                      <div class="body-user-display-address-detail">Honda Đức Dũng - Ngã tư Đồng Rướn, Xã Bình Thuận, Huyện Bình Sơn, Quảng Ngãi
+
+                      </div>
+                      <span class="body-user-display-address-edit">
+                        <a class="body-user-display-address-link" href="">Chỉnh sửa
+                          <img src="https://hasaki.vn/images/graphics/icon_delete.gif" alt="">
+                        </a>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="body-user-display-footer">
+                <div>Bạn muốn giao hàng đến địa chỉ khác?</div>
+                <button class="body-footer-seemore btn-red">Thêm địa chỉ mới</button>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          </div>
+
         </div>
         <footer class="footer">
             <div class="footer-container grid">
