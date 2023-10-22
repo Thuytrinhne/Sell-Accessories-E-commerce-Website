@@ -1,13 +1,23 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    
 }
-html {
-    font-family:Roboto,sans-serif ;
-    font-size: 14px;
-    font-weight: 300;
+  
+html
+{
+    font-size: 10px;   /* 100%: 16px, 62.5%: 10px */
+    line-height: 1.6rem;  
+    font-family: 'Roboto', sans-serif;    /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
+    box-sizing: border-box;
 }
 
+.product-related {
+    margin: 40px;
+    background-color: #F0F0F0;
+    
+}
 
 div {
     display: block;
@@ -132,8 +142,8 @@ a.breadcrumbs__a--active {
     display: inline-block;
 }
 
-h4 {
-    font-size: 1rem;
+.info-detail-h4 {
+    font-size: 0.5rem;
     color: #767676;
     padding: 4px 0;
     text-transform: capitalize;
@@ -171,6 +181,10 @@ h4 {
     font-size: 11px;
     color: #999999;
     border-radius: 2em;
+}
+
+.info-number {
+    margin-top: 20px;
 }
 
 .input-number {
@@ -282,3 +296,119 @@ h4 {
 
 }
 
+
+.body-category-list
+{
+    margin-bottom: 200px;
+    margin-top: 100px;
+    display: flex;
+    gap: 20px;
+    z-index: -1;
+
+
+}
+.body-category-item
+{
+    position: relative;
+    height:240px;
+    width: 240px;
+    background-color: #ff8087;
+    box-sizing: content-box;
+    border-radius: 10px;
+}
+
+.body-category-link::before
+{
+    left: 8px;
+    top: 8px;
+    bottom: 8px;
+    right: 8px;
+    position: absolute;
+    display: block;
+    content: "";
+    border: 2px dashed #ffffff;
+    border-radius: 10px;
+}
+.body-category-img
+{
+    border-radius: 10px;
+    height:240px;
+    width: 240px;
+}
+.body-category-name
+{
+    position: absolute;
+    bottom: 10%;
+    padding-left: 30px;
+    color: var(--white-color);
+    text-shadow: 0px 0px 6px rgba(0,0,0,.2);
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.body-nav-btn
+{
+    position: relative;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background-color: #dd6363;
+    border: 1.29px solid white;
+    opacity: 0.85;
+    transition: all 0.3s ease 0s;
+
+}
+.body-nav-btn:hover
+{
+    opacity: 1;
+}
+.body-nav-btn::before
+{
+    display: block;
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: -5px;
+    bottom: -5px;
+    left: -5px;
+    right: -5px;
+    background: none;
+    border: 2px dashed #dd6363;
+    border-radius: 4px;
+    border-radius: 50%;
+}
+.body-nav-icon
+{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--white-color);
+
+}
+
+.btn-left {
+    margin-right:-25px;
+}
+
+.body-catogory
+{
+    position: relative;
+}
+
+.body-category-nav
+{
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: -1%;
+    right: 1%;
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+.input-group {
+    height: 35px;
+    width: 80px;
+    margin-left: -50px;
+}

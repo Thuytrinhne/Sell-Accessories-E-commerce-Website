@@ -6,19 +6,18 @@
     --primary-color: #e05994;
     --partial-color: #f78da7;
 }
-*{
-    box-sizing: inherit;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
 }
+  
 html
 {
     font-size: 10px;   /* 100%: 16px, 62.5%: 10px */
     line-height: 1.6rem;  
     font-family: 'Roboto', sans-serif;    /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
     box-sizing: border-box;
-}
-
-.product-related {
-    margin: 40px;
-    background-color: #F0F0F0;
-    
 }
