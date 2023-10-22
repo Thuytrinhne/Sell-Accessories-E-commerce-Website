@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .title_report {
     display: flex;
     margin: 10px 60px 0px 20px;
@@ -11,7 +10,34 @@
     color: #e05994;
 }
 
-.search_report {
+.select_report {
+    display: grid;
+    margin: 10px 60px 0px 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.5em;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    width: 50%;
+    text-align: center;
+}
+
+.select_report button {
+    text-decoration: none;
+    font-weight: bold;
+    color: #e05994;
+    background: #ffffff;
+    border: transparent;
+}
+
+.select_report button:hover {
+    color: #183a5c;
+    background-color: transparent;
+    transform: scale(1.2);
+}
+
+.search_order {
     margin: 10px 60px 0px 20px;
     background-color: white;
     border-radius: 10px;
@@ -19,13 +45,27 @@
     font-size: 1.5em;
 }
 
-.search_report button {
+.search_order input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid #183a5c;
+}
+
+.search_order input:hover {
+    transform: scale(1.1);
+}
+
+
+.search_order button {
     margin: 0px 15px 0px 15px;
     border-radius: 5px;
     width: 100px;
 }
 
-.search_report select {
+.search_order select {
     margin: 0px 15px 0px 15px;
     outline: none;
     border: none;
@@ -33,12 +73,126 @@
     width: 150px;
 }
 
-.search_report select:hover {
+.search_order select:hover {
     transform: scale(1.1);
     transition: all 0.2s;
 }
 
-.search_report button:hover {
+.search_order button:hover {
+    background-color: #f78da7;
+    transform: scale(1.1);
+    color: white;
+    font-weight: bold;
+}
+
+.selection_order {
+    margin: 10px 60px 0px 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.selection_product {
+    display: none;
+    margin: 10px 60px 0px 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+
+.content_report {
+    border-collapse: collapse;
+    margin: 25px 0px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0px 0px;
+    overflow: hidden;
+    font-size: 1.5em;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.content_report thead tr {
+    background-color: #f78da7;
+    color: #183a5c;
+    font-weight: bold;
+    height: 50px;
+
+}
+
+.content_report th,
+.content_report td {
+    padding: 12px 15px;
+}
+
+.content_report tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.content_report tbody tr:last-of-type {
+    border-bottom: 2px solid #f78da7;
+}
+
+.content_report tbody tr:hover {
+    background-color: #ddddddec;
+}
+
+.content_report tbody tr button {
+    border-radius: 5px;
+}
+
+.content_report tbody tr button:hover {
+    background-color: #f78da7;
+    transform: scale(1.1);
+    color: white;
+    font-weight: bold;
+}
+
+.title_report {
+    display: flex;
+    margin: 10px 60px 0px 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.5em;
+    justify-content: center;
+    align-items: center;
+    color: #e05994;
+}
+
+.search_order {
+    margin: 10px 60px 0px 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.5em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.search_order button {
+    margin: 0px 15px 0px 15px;
+    border-radius: 5px;
+    width: 100px;
+}
+
+.search_order select {
+    margin: 0px 15px 0px 15px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #000000;
+    width: 150px;
+}
+
+.search_order h2 {
+    color: #e05994;
+}
+
+.search_order select:hover {
+    transform: scale(1.1);
+    transition: all 0.2s;
+}
+
+.search_order button:hover {
     background-color: #f78da7;
     transform: scale(1.1);
     color: white;
@@ -97,104 +251,61 @@
     transform: scale(1.1);
     color: white;
     font-weight: bold;
-=======
-.title_report {
-    display: flex;
+}
+
+
+.search_product {
     margin: 10px 60px 0px 20px;
     background-color: white;
     border-radius: 10px;
     padding: 1rem;
     font-size: 1.5em;
-    justify-content: center;
-    align-items: center;
-    color: #e05994;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.search_report {
-    margin: 10px 60px 0px 20px;
-    background-color: white;
-    border-radius: 10px;
-    padding: 1rem;
-    font-size: 1.5em;
-}
-
-.search_report button {
+.search_product button {
     margin: 0px 15px 0px 15px;
     border-radius: 5px;
     width: 100px;
 }
 
-.search_report select {
+.search_product select {
     margin: 0px 15px 0px 15px;
     outline: none;
     border: none;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #000000;
     width: 150px;
 }
 
-.search_report select:hover {
+.search_product h2 {
+    color: #e05994;
+}
+
+.search_product select:hover {
     transform: scale(1.1);
     transition: all 0.2s;
 }
 
-.search_report button:hover {
+.search_product button:hover {
     background-color: #f78da7;
     transform: scale(1.1);
     color: white;
     font-weight: bold;
 }
 
-.table_report {
+.search_product {
     margin: 10px 60px 0px 20px;
     background-color: white;
     border-radius: 10px;
     padding: 1rem;
-}
-
-.content_report {
-    border-collapse: collapse;
-    margin: 25px 0px;
-    width: 100%;
-    height: auto;
-    border-radius: 10px 10px 0px 0px;
-    overflow: hidden;
     font-size: 1.5em;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.content_report thead tr {
-    background-color: #f78da7;
-    color: #183a5c;
-    font-weight: bold;
-    height: 50px;
-
-}
-
-.content_report th,
-.content_report td {
-    padding: 12px 15px;
-}
-
-.content_report tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.content_report tbody tr:last-of-type {
-    border-bottom: 2px solid #f78da7;
-}
-
-.content_report tbody tr:hover {
-    background-color: #ddddddec;
-}
-
-.content_report tbody tr button {
-    border-radius: 5px;
-}
-
-.content_report tbody tr button:hover {
-    background-color: #f78da7;
-    transform: scale(1.1);
-    color: white;
-    font-weight: bold;
->>>>>>> 3731eed2a85b6db52ee3afb9bf417bb5b42d2c00
+.search_product input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin-left: 15px;
+    margin-right: 15px;
+    border-bottom: 1px solid #183a5c;
 }

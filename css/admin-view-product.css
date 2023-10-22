@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .selection:not(.selection_list) {
     display: none;
 }
@@ -187,6 +186,7 @@
 }
 
 
+
 .priceAdd input {
     border: none;
     outline: none;
@@ -195,6 +195,24 @@
 }
 
 .priceAdd input:hover {
+    transform: scale(1.1);
+}
+
+.amountAdd {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.amountAdd input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    margin-left: 15px;
+}
+
+.amountAdd input:hover {
     transform: scale(1.1);
 }
 
@@ -231,238 +249,58 @@
     background-color: #39f205;
     transform: scale(1.2);
     color: #ffffff;
-=======
-.selection:not(.selection_list) {
-    display: none;
 }
 
-
-
-.product_header {
+.rangeCost {
     display: flex;
-    justify-content: space-between;
-    margin: 10px 60px 0px 20px;
-    background-color: white;
+    padding: 0 65px 0 45px;
     border-radius: 10px;
-    padding: 1rem;
-    font-size: 1.5em;
-}
-
-.header_title {
-    align-items: center;
-    text-align: center;
-    color: #e05994;
-    margin: 0 0 0 20px;
-    font-weight: bold;
-}
-
-.header_infor {
-    display: flex;
-    align-items: center;
-}
-
-.product_selection {
-    display: grid;
-    margin: 10px 60px 0px 20px;
-    background-color: white;
-    border-radius: 10px;
-    padding: 1rem;
-    font-size: 1.5em;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
-    width: 50%;
-    text-align: center;
-}
-
-.product_selection button {
-    text-decoration: none;
-    font-weight: bold;
-    color: #e05994;
-    background: #ffffff;
-    border: transparent;
-}
-
-.product_selection button:hover {
-    color: #183a5c;
-    background-color: transparent;
-    transform: scale(1.2);
-}
-
-.selection_list {
-    display: grid;
-    width: auto;
-    height: auto;
-    background: #ffffff;
-    margin: 10px 60px 0px 20px;
-    padding: 1rem;
-    border-radius: 10px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-
-.selection_list img {
-    width: 200px;
-}
-
-.selection_list nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    padding: 5px;
-    border: 3px solid #f1f1f1;
-    margin: 5px;
-    border-radius: 10px;
 }
 
-.selection_list nav p {
-    font-size: 18px;
+.sliderValue {
+    display: flex;
+    align-items: center;
     text-align: center;
-    justify-content: center;
 }
 
-.selection_list nav label {
+.sliderValue span {
     font-size: 20px;
     font-weight: bold;
-    color: rgba(224, 39, 15, 0.896)
+    margin: 20px;
 }
 
-.selection_list nav button {
-    font-size: 14px;
-    width: 70px;
-    white-space: nowrap;
-    border-radius: 10px;
-    margin: 0px 10px 0px 10px;
-    border: 1px solid #cccccc;
-}
-
-.Edit:hover {
-    background: #e05994;
-    transform: scale(1.2);
-}
-
-.Delete {
-    color: red
-}
-
-.Delete:hover {
-    color: #ffffff;
-    background-color: red;
-    transform: scale(1.2);
+#span_sliderValue {
+    font-size: 18px;
+    color: #f78da7;
 }
 
 
-/* Add */
 
-.selection_add {
-    display: grid;
-    width: auto;
-    height: auto;
-    background: #ffffff;
-    margin: 10px 60px 0px 20px;
-    padding: 1rem;
-    border-radius: 10px;
-    text-align: start;
-    font-size: 1.5em;
-    justify-content: center;
-}
-
-.imageAdd img {
-    width: 100px;
-}
-
-.addCard {
-    border: 3px solid #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 15px;
-    font-size: 16px;
-    font-weight: bold;
-
-}
-
-.nameAdd {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
-}
-
-
-.nameAdd input {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    margin-left: 15px;
-}
-
-.nameAdd input:hover {
-    transform: scale(1.1);
-}
-
-.imageAdd {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
-}
-
-.imageAdd img {
-    width: 50px;
-    margin-left: 16px;
-
-}
-
-.priceAdd {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
-}
-
-
-.priceAdd input {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    margin-left: 15px;
-}
-
-.priceAdd input:hover {
-    transform: scale(1.1);
-}
-
-.tag {
-    background-color: #f1f1f1;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
-}
-
-.tag select {
-    background: transparent;
-    border: none;
-    outline: none;
-    margin-left: 15px;
-}
-
-
-.confirmAdd {
+.rangeCost .field {
     display: flex;
+    background-color: #f78da7;
     align-items: center;
-    justify-content: center;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
 }
 
-.confirmAdd button {
-    margin: 30px;
-    font-weight: bold;
-    background: #f1f1f1;
-    padding: 10px;
+.rangeCost .field .value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.rangeCost .field input {
+    height: 3px;
+    width: 100%;
+    background: #ddd;
     border-radius: 5px;
+    outline: none;
+    border: none;
 }
 
-.confirmAdd button:hover {
-    background-color: #39f205;
-    transform: scale(1.2);
-    color: #ffffff;
->>>>>>> 3731eed2a85b6db52ee3afb9bf417bb5b42d2c00
+.rangeCost .field input:hover {
+    transform: none;
 }

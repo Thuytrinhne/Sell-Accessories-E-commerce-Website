@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
     background: #f1f1f1;
 }
@@ -56,7 +55,8 @@ body {
     height: 100%;
 
     max-width: 1930px;
-=======
+}
+
 body {
     background: #f1f1f1;
 }
@@ -114,5 +114,4 @@ body {
     height: 100%;
 
     max-width: 1930px;
->>>>>>> 3731eed2a85b6db52ee3afb9bf417bb5b42d2c00
 }

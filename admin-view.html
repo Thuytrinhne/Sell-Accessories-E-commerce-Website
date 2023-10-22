@@ -46,9 +46,7 @@
                         <ion-icon name="cart"></ion-icon>
                         Đơn hàng
                     </a></li>
-                <li class="list_choice"><a href="#" class="sale-off">
-                        <ion-icon name="receipt"></ion-icon> Mã khuyến mãi
-                    </a></li>
+
                 <li class="list_choice"><a href="#" class="report">
                         <ion-icon name="bar-chart"></ion-icon> Thống kê
                     </a></li>
@@ -72,6 +70,10 @@
                         </div>
                         <div class="user_infor">
                             <img src="/Assets/Images/user-icon.jpg" alt="Ảnh đại diện">
+                            <div class="logout">
+                                <ion-icon name="log-in"></ion-icon>
+                                <label>Đăng xuất</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,9 +126,6 @@
                             <ion-icon name="search-outline"></ion-icon>
                             <input type="input" placeholder="Tìm kiếm">
                         </div>
-                        <div class="user_infor">
-                            <img src="/Assets/Images/user-icon.jpg" alt="Ảnh đại diện">
-                        </div>
                     </div>
                 </div>
 
@@ -147,6 +146,7 @@
                             <span>150000</span>
                             <span>₫</span>
                         </label>
+                        <p>Số lượng: 15</p>
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -165,6 +165,7 @@
                             <span>150000</span>
                             <span>₫</span>
                         </label>
+                        <p>Số lượng: 15</p>
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -182,6 +183,7 @@
                             <span>150000</span>
                             <span>₫</span>
                         </label>
+                        <p>Số lượng: 15</p>
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -199,6 +201,7 @@
                             <span>150000</span>
                             <span>₫</span>
                         </label>
+                        <p>Số lượng: 15</p>
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -216,6 +219,7 @@
                             <span>150000</span>
                             <span>₫</span>
                         </label>
+                        <p>Số lượng: 15</p>
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -242,6 +246,10 @@
                             <label>Giá</label>
                             <input type="text" placeholder="Giá">
                         </div>
+                        <div class="amountAdd">
+                            <label>Số lượng</label>
+                            <input type="text" placeholder="Số lượng">
+                        </div>
                         <div class="tag">
                             <label>Thể loại</label>
                             <select>
@@ -262,17 +270,27 @@
                         <span>Trang chính</span>
                         <h1>Đơn hàng</h1>
                     </div>
-                    <div class="header_infor">
-                        <div class="search_box">
-                            <ion-icon name="search-outline"></ion-icon>
-                            <input type="input" placeholder="Tìm kiếm">
+
+                </div>
+                <div class="filter_list">
+                    <label>Bắt đầu</label>
+                    <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                    <label>Đến</label>
+                    <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                    <button>Tìm kiếm</button>
+                    <div class="rangeCost">
+                        <div class="sliderValue">
+                            <span>Giá đơn hàng:</span>
+                            <span id="span_sliderValue">100</span>
+                            <span>₫</span>
                         </div>
-                        <div class="user_infor">
-                            <img src="/Assets/Images/user-icon.jpg" alt="Ảnh đại diện">
+                        <div class="field">
+                            <div class="value left">0</div>
+                            <input id="input_field" type="range" min="0" max="200" value="100" steps="1">
+                            <div class="value right">200</div>
                         </div>
                     </div>
                 </div>
-
                 <div class="order_list">
                     <table class="content_order">
                         <thead>
@@ -323,95 +341,27 @@
                 </div>
             </div>
 
-            <div class="content sale-off">
-                <div class="title_sale-off">
-                    <h1>Mã khuyến mãi</h1>
-                </div>
 
-                <div class="add_sale-off">
-                    <div>
-                        <h2 style="color: #f78da7">Thêm mã khuyến mãi</h2>
-                    </div>
-                    <div class="attribute_add_sale-off">
-                        <input type="text" placeholder="Mã">
-                        <input type="number" placeholder="Số lượng">
-                        <input type="number" placeholder="Giá trị">
-                        <select>
-                            <option>Cài tóc</option>
-                            <option>Đèn học</option>
-                        </select>
-                        <button>Thêm</button>
-                    </div>
-                    <div class="sale-off_list">
-                        <table class="content_sale-off">
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Tên mã khuyến mãi</th>
-                                    <th>Số lượng</th>
-                                    <th>Thể loại</th>
-                                    <th>Giá trị</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Giảm áo quần</td>
-                                    <td>20</td>
-                                    <td>Cài tóc</td>
-                                    <td>100000</td>
-                                    <td><button>Xóa</button></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Giảm áo quần</td>
-                                    <td>20</td>
-                                    <td>Cài tóc</td>
-                                    <td>100000</td>
-                                    <td><button>Xóa</button></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Giảm áo quần</td>
-                                    <td>20</td>
-                                    <td>Cài tóc</td>
-                                    <td>100000</td>
-                                    <td><button>Xóa</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
             <div class="content report">
                 <div class="title_report">
                     <h1>Thống kê</h1>
                 </div>
+                <div class="select_report">
+                    <button href="#" class="report_order" onclick="showContent('selection_order')">Thống kê đơn
+                        hàng</button>
+                    <button href="#" class="report_product" onclick="showContent('selection_product')">Thống kê sản
+                        phẩm</button>
 
-                <div class="search_report">
-                    <select aria-placeholder="Tháng">
-                        <option>Tháng 1</option>
-                        <option>Tháng 2</option>
-                        <option>Tháng 3</option>
-                        <option>Tháng 4</option>
-                        <option>Tháng 5</option>
-                        <option>Tháng 6</option>
-                        <option>Tháng 7</option>
-                        <option>Tháng 8</option>
-                        <option>Tháng 9</option>
-                        <option>Tháng 10</option>
-                        <option>Tháng 11</option>
-                        <option>Tháng 12</option>
-                    </select>
-                    <select aria-placeholder="Năm">
-                        <option>2021</option>
-                        <option>2022</option>
-                        <option>2023</option>
-                    </select>
-                    <button>Xác nhận</button>
                 </div>
-                <div class="table_report">
+                <div class="selection_order">
+                    <div class="search_order">
+                        <h2>Tìm kiếm</h2>
+                        <label>Bắt đầu</label>
+                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <label>Đến</label>
+                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <button>Xác nhận</button>
+                    </div>
                     <table class="content_report">
                         <thead>
                             <tr>
@@ -419,6 +369,42 @@
                                 <th>Số đơn hàng</th>
                                 <th>Số đơn hủy</th>
                                 <th>Doanh thu</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23</td>
+                                <td>30</td>
+                                <td>2</td>
+                                <td>3000000</td>
+                                <td><button>Chi tiết</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="selection_product">
+                    <div class="search_product">
+                        <h2>Tìm kiếm</h2>
+                        <label>Bắt đầu</label>
+                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <label>Đến</label>
+                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <label>Thể loại</label>
+                        <select>
+                            <option>Tất cả</option>
+                            <option>Cài tóc</option>
+                            <option>Đèn học</option>
+                        </select>
+                        <button>Xác nhận</button>
+                    </div>
+                    <table class="content_report">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Số đơn hàng</th>
+                                <th>Số đơn hủy</th>
+                                <th>Doanh thuaaaa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -431,7 +417,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
 
             <div class="content manage">
@@ -439,49 +424,93 @@
                     <h1>Quản lý tài khoản</h1>
                 </div>
                 <div class="manage_list">
-                    <table class="content_manage">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Tên đăng nhập</th>
-                                <th>Chủ tài khoản</th>
-                                <th>Số điện thoại</th>
-                                <th>Email</th>
-                                <th>Loại tài khoản</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>user123</td>
-                                <td>Nguyễn Văn Phong</td>
-                                <td>0948346245</td>
-                                <td>21522461@gmail.com</td>
-                                <td>Vip</td>
-                                <td><button>Xóa tài khoản</button></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>user123</td>
-                                <td>Nguyễn Văn Phong</td>
-                                <td>0948346245</td>
-                                <td>21522461@gmail.com</td>
-                                <td>Staff</td>
-                                <td><button>Xóa tài khoản</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>user123</td>
-                                <td>Nguyễn Văn Phong</td>
-                                <td>0948346245</td>
-                                <td>21522461@gmail.com</td>
-                                <td>Normal</td>
-                                <td><button>Xóa tài khoản</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <div class="manage_staff">
+                        <h2>Danh sách Staff</h2>
+                        <button>Thêm tài khoản staff</button>
+                        <table class="staff_account">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Chủ tài khoản</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Email</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>user123</td>
+                                    <td>Nguyễn Văn Phong</td>
+                                    <td>0948346245</td>
+                                    <td>21522461@gmail.com</td>
+
+                                    <td><button>Xóa tài khoản</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>user123</td>
+                                    <td>Nguyễn Văn Phong</td>
+                                    <td>0948346245</td>
+                                    <td>21522461@gmail.com</td>
+
+                                    <td><button>Xóa tài khoản</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="manage_user">
+                        <h2>Danh sách khách hàng</h2>
+                        <input type="text">
+                        <button>Tìm kiếm</button>
+                        <table class="user_account">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Chủ tài khoản</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Email</th>
+                                    <th>Loại tài khoản</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>user123</td>
+                                    <td>Nguyễn Văn Phong</td>
+                                    <td>0948346245</td>
+                                    <td>21522461@gmail.com</td>
+                                    <td>Vip</td>
+                                    <td><button>Xóa tài khoản</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>user123</td>
+                                    <td>Nguyễn Văn Phong</td>
+                                    <td>0948346245</td>
+                                    <td>21522461@gmail.com</td>
+                                    <td>Normal</td>
+                                    <td><button>Xóa tài khoản</button></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>user123</td>
+                                    <td>Nguyễn Văn Phong</td>
+                                    <td>0948346245</td>
+                                    <td>21522461@gmail.com</td>
+                                    <td>Normal</td>
+                                    <td><button>Xóa tài khoản</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
+
+
             </div>
         </div>
     </div>
