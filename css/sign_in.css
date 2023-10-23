@@ -1,0 +1,171 @@
+/* ==================================  SIGNIN  ================================== */
+
+/* ================ signin header ================ */
+.signin a{
+    text-decoration: none;
+    color: #e05994;
+}
+
+
+
+.signin_header{
+    height: 84px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 260px;
+    
+}
+
+.signin_login-text{
+    display: inline-block; 
+    font-size: 28px; 
+    margin-left: 32px;
+}
+
+/* ==============  body  ============== */
+.signin_body{
+    position: relative;
+}
+
+.signin_body-form{
+    height: 440px;
+    width: 450px; 
+    font-size: 16px;
+    border-radius: 7px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translateY(-50% );
+    
+}
+
+.sign_body-form-container{
+    margin: 28px 52px;
+
+}
+
+
+
+.signin_body-input input{
+    margin-bottom: 16px;
+    border: rgb(195, 191, 191) solid 1px;
+    padding: 10px 15px;
+    border-radius: 7px;
+}
+
+.signin_body-input input,
+.signin_body-input button{
+    width: 100%;
+}
+
+
+.signin_btn
+{
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    color: var(--white-color);
+    font-size: 1.9rem;
+    font-weight: 500;
+    background-color: var(--primary-color);
+    border-radius: 40px;
+    text-align: center;
+    border:solid 4px transparent;
+    padding: 10px 0;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 12px;
+}
+
+.signin_body-form .forgot-pass{
+    margin-top: 12px;
+}
+
+.signin_btn:hover
+{
+    color: white;
+    background-color: #81D1E5;
+    transition: all 0.2s linear;
+}
+.signin_btn::before
+{
+    border-radius: 40px;
+    display:  block;
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: 2px dashed var(--white-color);
+}
+
+.signin-newbie p{
+    margin-top: 18px; 
+    color: rgb(195, 191, 191); 
+    text-align: center;
+}
+
+
+/* ===================== FOOTER ====================== */
+.footer
+{
+    margin: 0 12%;
+    height:530px;
+    /* border-top: 4px solid var(--partial-color); */
+}
+.footer-container{
+    display: grid;
+    grid-template-columns: 168px 400px auto auto;
+    column-gap: 20px;
+    background-color: var(--white-color);
+}
+.footer-list
+{
+    font-size: 1.3rem;
+    margin-top: 26px;
+    border: none;
+}
+.footer-item
+{
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 450;
+
+}
+.footer-logo
+{
+    padding: 0;
+    width: 227px;
+    transition: transform 1s ease-in;
+}
+
+.footer-logo:hover {
+    transform: rotate(360deg);
+}
+
+.footer-link-center
+{
+    margin-top: 40px;
+    width: 227px;
+}
+.footer-connect
+{
+    margin-top: 20px;
+}
+.footer-connect-img
+{
+    height: 37px;
+}
+.footer-connect-link
+{
+    text-decoration: none;
+    margin-right: 8px;
+}
+.foooter-identify
+{
+    margin-top:15px;
+}

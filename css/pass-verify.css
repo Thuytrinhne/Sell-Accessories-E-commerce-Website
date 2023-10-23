@@ -1,0 +1,155 @@
+/* ==================================  forgot-pass  ================================== */
+
+/* ================ forgot-pass header ================ */
+
+
+.forgot-pass_header{
+    height: 84px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 260px;
+}
+
+
+/* ==============  body  ============== */
+.forgot-pass_body{
+    position: relative;
+}
+
+.forgot-pass_body-form{
+    height: 385px;
+    width: 450px; 
+    font-size: 16px;
+    border-radius: 7px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: 15%;
+    transform: translateY(-50% );
+    
+}
+
+.forgot-pass_body-form-container{
+    margin: 45px 52px;
+
+}
+
+.forgot-pass_body-input label{
+    font-size: 16px; 
+    color: rgb(90, 90, 90);
+}
+
+.forgot-pass_body-input input{
+    margin-bottom: 16px;
+    border: rgb(195, 191, 191) solid 1px;
+    padding: 7px 15px;
+    border-radius: 7px;
+    width: 100%;
+}
+
+.forgot-pass_btn
+{
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    color: var(--white-color);
+    font-size: 1.9rem;
+    font-weight: 500;
+    background-color: var(--primary-color);
+    border-radius: 40px;
+    text-align: center;
+    border:solid 4px transparent;
+    padding: 10px 0;
+    cursor: pointer;
+    display: block;
+    margin-top: 16px;
+}
+.forgot-pass_btn:hover
+{
+    color: white;
+    background-color: #81D1E5;
+    transition: all 0.2s linear;
+}
+.forgot-pass_btn::before
+{
+    border-radius: 40px;
+    display:  block;
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: 2px dashed var(--white-color);
+}
+
+
+/* ===================== FOOTER ====================== */
+.footer
+{
+    margin: 0 12%;
+    height:530px;
+}
+.footer-container{
+    display: grid;
+    grid-template-columns: 168px 400px auto auto;
+    column-gap: 20px;
+    background-color: var(--white-color);
+}
+.footer-list
+{
+    font-size: 1.3rem;
+    margin-top: 26px;
+    border: none;
+}
+.footer-item
+{
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 450;
+
+}
+.footer-logo
+{
+    padding: 0;
+    width: 227px;
+    transition: transform 1s ease-in;
+}
+
+.footer-logo:hover {
+    transform: rotate(360deg);
+}
+
+.footer-link-center
+{
+    margin-top: 40px;
+    width: 227px;
+}
+.footer-connect
+{
+    margin-top: 20px;
+}
+.footer-connect-img
+{
+    height: 37px;
+}
+.footer-connect-link
+{
+    text-decoration: none;
+    margin-right: 8px;
+}
+.foooter-identify
+{
+    margin-top:15px;
+}
+
+
+
+
+
+
+
+
+  
