@@ -38,6 +38,34 @@
 
 }
 
+.verified{
+    /* display: flex; */
+    position: relative;
+}
+
+.verified button{
+    position: absolute;
+    height: 40px;
+    width: 30% !important;
+    border-radius: 0 7px 7px 0;
+    right: 0;
+    top: 0px;
+    border: none;
+    color: white;
+    background-color: #e05994;
+}
+
+.verified button:hover{
+    background-color: #81D1E5;
+    transition: all 0.2s linear;
+}
+
+
+
+
+
+
+
 .signup_body-input input{
     margin-bottom: 14px;
     border: rgb(195, 191, 191) solid 1px;

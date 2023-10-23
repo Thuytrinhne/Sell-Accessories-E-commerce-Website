@@ -1,10 +1,7 @@
 /* ==================================  forgot-pass  ================================== */
 
 /* ================ forgot-pass header ================ */
-.forgot-pass a{
-    text-decoration: none;
-    color: #e05994;
-}
+
 
 .forgot-pass_header{
     height: 84px;
@@ -44,13 +41,8 @@
     border: rgb(195, 191, 191) solid 1px;
     padding: 7px 15px;
     border-radius: 7px;
-}
-
-.forgot-pass_body-input input,
-.forgot-pass_body-input button{
     width: 100%;
 }
-
 
 .forgot-pass_btn
 {
@@ -66,7 +58,7 @@
     border:solid 4px transparent;
     padding: 10px 0;
     cursor: pointer;
-    width: 100%;
+    display: block;
 }
 .forgot-pass_btn:hover
 {

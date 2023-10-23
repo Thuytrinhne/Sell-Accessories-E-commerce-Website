@@ -29,7 +29,7 @@
 }
 
 .signin_body-form{
-    height: 500px;
+    height: 440px;
     width: 450px; 
     font-size: 16px;
     border-radius: 7px;
@@ -76,7 +76,13 @@
     padding: 10px 0;
     cursor: pointer;
     width: 100%;
+    margin-top: 12px;
 }
+
+.signin_body-form .forgot-pass{
+    margin-top: 12px;
+}
+
 .signin_btn:hover
 {
     color: white;
@@ -97,27 +103,10 @@
     border: 2px dashed var(--white-color);
 }
 
-
-
-
-.signin_byfb-or-gg .Facebook_btn,
-.signin_byfb-or-gg .Google_btn{
-    width: 49%; 
-    background-color: #fff;
-    border: rgb(219, 219, 219) solid 1px;
-    padding: 12px;
-
-}
-
-.signin_byfb-or-gg .Facebook_btn:hover,
-.signin_byfb-or-gg .Google_btn:hover{
-    background-color: rgb(239, 239, 239);
-}
-
-.signin_byfb-or-gg img{
-    height: 20px;
-    width: 20px;
-    margin-right: 6px;
+.signin-newbie p{
+    margin-top: 18px; 
+    color: rgb(195, 191, 191); 
+    text-align: center;
 }
 
 
