@@ -4,11 +4,9 @@
     width: 1300px;
     max-width: 100%;
     margin: 0 auto; /* tự động căn giữa khi nằm trong 1 khối khác */
-  
-    
 }
 
-/* header */
+/* ====================  header  ===================== */
 .header_general-infor
 {
     height: 35px;
@@ -30,7 +28,6 @@
     margin-left: 10px;
     text-decoration: none;
     color: var(--text-color);
-   
 }
 .nav-link-black:hover
 {
@@ -120,7 +117,7 @@
     z-index: 2;
     margin-right: 20px;
     margin-top: -3px;
-  }
+}
 .navbar-list
 {
     display: flex;
@@ -136,13 +133,13 @@
 }
 .nav-item-frame
 {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1.29px solid white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.29px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .nav-item-align
 {
@@ -181,15 +178,74 @@
     font-size: 36px;
     font-weight: 750;
 }
+/* ====================  end header  ===================== */
 
 
 
-/* ===============  checkou detail  ================ */
+
+/* ===============  checkout detail  ================ */
 .checkout_detail{
     margin: auto;
     width: 80%;
     margin-bottom: 32px;
-    
+}
+
+.location-list_container .order-info{
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 80% 19%;
+}
+
+.order-info a{
+    text-decoration: none;
+    font-size: 16px;
+    color: #e05994;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.order-info a:hover{
+    color: #3eafcb;
+}
+
+
+/* ==========  location list  ========= */
+.location-list_containerPlus{
+
+}
+
+.location-list_container{
+    margin: 48px 48px 32px;
+    height: 80%;
+}
+
+.location-detailPlus{
+    display: inline-block;
+}
+
+.location-detailPlus .area{
+    font-size: 14px;
+    color: #666666;
+}
+
+.location-detail{
+    font-size: 15px;
+}
+
+.location-tick{
+    display: inline-block;
+    position: relative;
+}
+
+.location-tick i{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00a43c;
+    width: 100%;
+    margin: auto;
 }
 
 .payment_info{
@@ -198,6 +254,54 @@
     padding: 32px 0 32px 0;
 }
 
+.location-info{
+    display: grid;
+    grid-template-columns: 5% 90% 5%;
+    margin-bottom: 24px;
+}
+
+.info_input textarea{
+    padding: 10px 16px;
+    display: block;
+    width: 100%;
+    background-color: rgb(246 246 246);
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+}
+
+.info_input label{
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+
+.location-list{
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, 
+    rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+}
+
+.location-list a{
+    text-decoration: none;
+    color: #e05994;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.location-list a:hover{
+    color: #3eafcb;
+}
+
+/* ==========  end location list  ========= */
+
+
+/* =============  total payment  =========== */
 .payment_total{
     background-color: rgb(242 242 242);
     height: 800px;
@@ -213,74 +317,6 @@
     display: inline-block;
 }
 
-.Location select{
-    padding: 10px 16px;
-    width: 95%;
-    background-color: rgb(246 246 246);
-    border-radius: 10px;
-    border: none;
-    font-size: 16px;
-    outline: none;
-    color: rgb(0, 0, 0);
-}
-
-.info_input {
-    margin: 41px 14px 0;
-}
-
-.info_input input,
-.info_input textarea{
-    padding: 10px 16px;
-    width: 95%;
-    background-color: rgb(246 246 246);
-    border-radius: 10px;
-    border: none;
-    font-size: 16px;
-    outline: none;
-}
-
-
-.info_input label{
-    color: #606060;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.form_info .addLocation-btn{
-    outline: none;
-    text-decoration: none;
-    position: relative;
-    color: var(--white-color);
-    font-size: 1.9rem;
-    font-weight: 500;
-    background-color: var(--primary-color);
-    border-radius: 40px;
-    text-align: center;
-    border:solid 4px transparent;
-    cursor: pointer;
-    padding: 12px 0;
-    width: 27%;
-    margin: 16px 0 0 14px;
-}
-
-.form_info .addLocation-btn:hover{
-    color: white;
-    background-color: #81D1E5;
-    transition: all 0.2s linear;
-}
-
-.form_info .addLocation-btn::before{
-    border-radius: 40px;
-    display:  block;
-    content: "";
-    position: absolute;
-    z-index: 0;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    border: 2px dashed var(--white-color);
-}
 
 
 
@@ -375,6 +411,9 @@
     right: 0px;
     border: 2px dashed var(--white-color);
 }
+
+/* ===============  end checkout detail  ================ */
+
 
 
 
