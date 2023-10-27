@@ -263,3 +263,8 @@ filter-price__slider {
    background-color: plum;
     color: #e05994;
 }
+/* add */
+.page-item
+{
+    z-index: 0;
+}

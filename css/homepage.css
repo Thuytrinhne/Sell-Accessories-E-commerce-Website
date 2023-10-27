@@ -1,15 +1,3 @@
-.grid{
-    /* website: >1200px => width: 1200px; <1200px => width: tùy chỉnh bằng width đó */
-    width: 1300px;
-    max-width: 100%;
-    margin: 0 auto; /* tự động căn giữa khi nằm trong 1 khối khác */
-  
-    
-}
-.body-main
-{
-    display: none;
-}
 
 /* header */
 .header_general-infor
@@ -21,37 +9,31 @@
     background-color: var(--white-color);
 
 }
+
 .header-auth-notlogin
 {
-    display: none;
-}
-.header-auth
-{
     display: flex;
 }
-.header-auth-logined
-{
-    display: flex;
 
-}
+
 .nav-link-black
 {
     
-    font-size: 1.4rem;
-    font-weight: 600;
+    font-size: 1.6rem;
+    font-weight: 400;
     margin-left: 10px;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--white-color);
    
 }
 .nav-link-black:hover
 {
-    color: rgb(0, 0, 0, 0.6);
+    color:  rgba(255, 255, 255, 0.8)
 
 }
 .nav-link-line
 {
-    border-right: 1px solid #adadad;
+    border-right: 1px solid white;
     padding-right: 10px;
 }
 
@@ -207,14 +189,14 @@
 {
     min-width: 280px;
     position: absolute;
-    background-color: #f2f1f6;
+    background-color: white;
     list-style-type: none;
     padding: 40px 30px;
     z-index: 100;
-    top: 96%;
+    top: 100%;
     border: 1px solid #dd6363;
     display: none;
-    
+    z-index: 1;
 
 }
 
@@ -229,12 +211,18 @@
     font-size: 1.4rem;
 }
 /* user  */
+.body-user-flex
+{
+    display: flex;
+}
 .body-user
 {
     margin-top: 10px;
     display: flex;
     padding-bottom: 70px;
+    display: none;
 }
+
 .body-user-feature
 {
     width: 200px;
@@ -414,26 +402,13 @@
 {
     position: relative;
 }
-.body-footer-seemore.btn-red
-{
-    background-color: #ff8087;
-    padding: 10px 22px;
-   
-}
-.body-footer-seemore.btn-red.btn-bottom
-{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-.body-user-display-myaccount
-{
-    display: none;
-}
+/* button see more */
+
+
 /* sổ địa chỉ */
 .body-user-display-addressUser
 {
-    /* display: none; */
+    display: none;
 }
 .body-user-display-listAddress
 {
@@ -662,6 +637,7 @@
     justify-content: center;
     margin-top: 20px;
 }
+/* button  */
 .body-footer-seemore
 {
     outline: none;
@@ -696,6 +672,7 @@
     right: 0px;
     border: 2px dashed var(--white-color);
 }
+/* category */
 .body-catogory
 {
     position: relative;
@@ -863,23 +840,23 @@
 /* body: logined */
 .nav-link-subLogin
 {
-    cursor:text;
+    cursor:pointer;
 }
-.nav-link-subLogin:hover
-{
-    color: var(--text-color);
 
-}
 .nav-link-subLogin-user
 {
     position: relative;
+}
+.header-auth
+{
+    display: none;
 }
 .header-auth-subLogin
 {
     width: 200px;
     position: absolute;
-    right: 6%;
-    top: 106%;
+    right: -74%;
+    top: 137%;
     z-index: 12;
     display: none;
 }
@@ -904,10 +881,7 @@
 {
     margin-top: 11px;
 }
-.nav-link-black--noHover:hover
-{
-    color: var(--text-color);
-}
+
 .header-auth-subLogin-link
 {
     font-weight: 400;
@@ -929,18 +903,88 @@
     font-size: 2.1rem;
 
 }
-.nav-link-subLogin-user:hover .header-auth-subLogin
+.header-auth-logined:hover .header-auth-subLogin
 {
     display: block;
+}
+.body-assort-item
+{
+    position: relative;
+}
+.body-assort-item1::before
+{
+    content: "";
+    width: 290px;
+    height: 24px;
+    background-color:transparent;
+    position: absolute;
+    right: -92px;
+    top: 48%;
+    z-index: 20;
+}
+.body-assort-item2::before
+{
+    content: "";
+    width: 250px;
+    height: 24px;
+    background-color: transparent;
+    position: absolute;
+    right: -13px;
+    top: 48%;
+    z-index: 20;
+}
+.body-assort-item3::before
+{
+    content: "";
+    width: 250px;
+    height: 24px;
+    background-color: transparent;
+    position: absolute;
+    right: -2px;
+    top: 48%;
+    z-index: 20;
+}
+.body-assort-item4::before
+{
+    content: "";
+    width: 260px;
+    height: 24px;
+    background-color: transparent;
+    position: absolute;
+    right: -117px;
+    top: 48%;
+    z-index: 20;
+}
+.body-assort-item5::before
+{
+    content: "";
+    width: 78px;
+    height: 24px;
+    background-color: transparent;
+    position: absolute;
+    right: -2px;
+    top: 48%;
+    z-index: 20;
+}
+.body-assort-item6::before
+{
+    content: "";
+    width: 170px;
+    height: 25px;
+    background-color: transparent;
+    position: absolute;
+    right: -7px;
+    top: 48%;
+    z-index: 20;
 }
 .nav-link-subLogin-user::before
 {
     content: "";
-    width: 100px;
-    height: 15px;
+    width: 200px;
+    height: 24px;
     background-color: transparent;
     position: absolute;
-    right: 2%;
-    top:  70%;
+    right: -72%;
+    top: 48%;
     z-index: 20;
 }

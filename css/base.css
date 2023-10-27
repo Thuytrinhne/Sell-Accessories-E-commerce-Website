@@ -22,3 +22,56 @@ html
     font-family: 'Roboto', sans-serif;    /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
     box-sizing: border-box;
 }
+.grid{
+    /* website: >1200px => width: 1200px; <1200px => width: tùy chỉnh bằng width đó */
+    width: 1300px;
+    max-width: 100%;
+    margin: 0 auto; /* tự động căn giữa khi nằm trong 1 khối khác */
+  
+    
+}.body-footer-seemore.btn-red
+{
+    background-color: #ff8087;
+    padding: 10px 22px;
+   
+}
+.body-footer-seemore.btn-red.btn-bottom
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.body-footer-seemore
+{
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    color: var(--white-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    background-color: #81D1E5;
+    border-radius: 25px;
+    text-align: center;
+    border:solid 4px transparent;
+    padding: 8px 17px;
+   
+
+}
+.body-footer-seemore:hover
+{
+    color: white;
+    background-color: var(--primary-color);
+}
+.body-footer-seemore::before
+{
+    border-radius: 25px;
+    display:  block;
+    content: "";
+    position: absolute;
+    z-index: 0;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: 2px dashed var(--white-color);
+}

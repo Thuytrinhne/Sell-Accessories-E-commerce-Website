@@ -25,62 +25,115 @@
 </head>
 <body>
         <div class="app">
-            <header class="header">
-                <div class="grid">
-                  <div class="header_general-infor"> 
-                    <div class="header-contact">
-                      <div class="header-contact__phone">CSKH: 0934454699 </div>
-                      <div class="header-contact__email">hippo.cskh@gmail.com</div>
-                    </div>
-      
-                     <div class="header-auth">
-                      <a class="nav-link active nav-link-black" aria-current="page" href="#">Đăng ký / Đăng nhập</a>
-                     </div>
-                    </div>
-                       
-                  </div> 
-                  <div class="container-nav">     
-                  <nav class="navbar navbar-expand-lg bg-body-tertiary header__nav">
-                      <div class="container-fluid">
-                          <div class="grid">                 
-                        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                          <a class="navbar-brand" href="#">
-                              <img class="header-logo" src="https://mossvn.com/images/logo-moss-remake1.png" alt="Logo cửa hàng">
-                          </a>
+          <header class="header">
           
-                          <form class="d-flex container-search" role="search">
-                            <input class="form-control me-2 search-header" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
-                            <button type="submit" class="search-button">
-                              <i class="fa fa-search"></i>
-                            </button>
-                          </form>
-                          <ul class="navbar-list">
-                              
-                              <li class="nav-item-align">
-                                <img src="https://hasaki.vn/images/graphics/icon_header_2.svg" alt class="loading" data-was-processed="true" >
-                                <a class="nav-link active nav-link-white" href="#">Về Chúng Tôi</a>
-                              </li>
-                              <li class="nav-item-align">
-                                <img src="https://hasaki.vn/images/graphics/icon_header_store.svg" alt class="loading" data-was-processed="true">
-                              <a class="nav-link active nav-link-white" href="#">Các Mặt Hàng Tại Moss</a>
-                            </li>
-                              <li>
-                                <img src="https://hasaki.vn/images/graphics/icon_header_1.svg" alt="">    
-                              </li>
-                              <li>
-                                <div class="nav-item-frame">
-                                  <i class="fa-solid fa-heart nav-item__icon"></i>                                
-                                </div>
-                                </li>
-                            </ul>
-                        </div>
-                          </div> 
+            <div class="header_general-infor grid"> 
+              <div class="header-contact">
+                <div class="header-contact__phone">CSKH: 0972 264 919 </div>
+                <div class="header-contact__email">hippo.cskh@gmail.com</div>
+              </div>  
+             
+              </div>
+                 
+           
+            <div class="container-nav">     
+            <nav class="navbar navbar-expand-lg bg-body-tertiary header__nav">
+                <div class="container-fluid">
+                    <div class="grid">                 
+                  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <a class="navbar-brand" href="#">
+                        <img class="header-logo" src="https://mossvn.com/images/logo-moss-remake1.png" alt="Logo cửa hàng">
+                    </a>
+    
+                    <form class="container-search" role="search">
+                      <div class="search-header">
+                      <input class="container-search-text" type="search" placeholder="Tìm kiếm sản phẩm">
                       </div>
-                    </nav>
-                   
-              </header>
+                      <button type="submit" class="search-button">
+                        <i class="fa fa-search"></i>
+                      </button>
+                    </form>
+                    <ul class="navbar-list">
+                        
+                      <li class="nav-item-align">
+                        <img src="https://hasaki.vn/images/graphics/icon_header_2.svg" alt class="loading" data-was-processed="true" >
+                        <div class="header-auth-login">
+                        <div class="header-auth-notlogin">
+                          <a class="nav-link-black"  href="">Đăng ký</a>
+                           <div class="nav-link-line"></div>
+                          <a class="nav-link-black"  href="">Đăng nhập</a>
+                          </div>
+                        </div>
+                        <div class="header-auth">
+                
+                          <div class="header-auth-logined">
+                          <div class="nav-link-black nav-link-subLogin">Chào Trinh,</div>
+                          <div class ="nav-link-subLogin-user">
+                            <div class="nav-link-black nav-link-subLogin">Tài khoản
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                            <div class="header-auth-subLogin">
+                                <div class="header-auth-subLogin__list">
+                              <div class="header-auth-subLogin-item">
+                                <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                  manage_accounts
+                                  </span>                        
+                                  <a class="header-auth-subLogin-link" href="">Tài khoản của bạn</a>
+                              </div>
+                              <div class="header-auth-subLogin-item">
+                                <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                  list_alt
+                                  </span>                         
+                                <a class="header-auth-subLogin-link" href="">Quản lý đơn hàng</a>
+                              </div>
+                              <!-- <div class="header-auth-subLogin-item">
+                                <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                  favorite
+                                  </span>                          
+                                <a class="header-auth-subLogin-link" href="">Sản phẩm yêu thích</a>
+                              </div> -->
+                              <div class="header-auth-subLogin-item">
+                                <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                  location_on
+                                  </span>                          
+                                  <a class="header-auth-subLogin-link" href="">Địa chỉ giao hàng</a>
+                              </div>
+                              <div class="header-auth-subLogin-item">
+                                <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                  logout
+                                </span>                          
+                                <a class="header-auth-subLogin-link" href="">Thoát</a>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                         </div>
+                      </a>
+                    </li>
+                        <li class="nav-item-align">
+                          <img src="https://hasaki.vn/images/graphics/icon_header_store.svg" alt class="loading" data-was-processed="true">
+                          <a class="nav-link active nav-link-white" href="#" onclick="redirectOnClick(`about.html`)" >Về Chúng Tôi</a>
+                        </li>
+                        <li>
+                          <div class="nav-item-frame nav-item-pointer">
+                            <i class="fa-solid fa-heart nav-item__icon"></i>                                
+                          </div>
+                          </li>
+                        <li>
+                          <img class="nav-item-pointer" src="https://hasaki.vn/images/graphics/icon_header_1.svg" alt="">    
+                        </li>
+                       
+                      </ul>
+                  </div>
+                    </div> 
+                </div>
 
+              </nav>
             </div>
+          </header>
+
+           
 
             <div class="container" >
                  <!-- begin breadcrumbs -->
@@ -763,68 +816,68 @@
             </div>
 
             <!-- footer  -->
-            <div class="footer">
+            <footer class="footer">
               <div class="footer-container grid">
-                <div class="footer-list">
-                  <div>
-                      <a href="" class="footer-item">Chính sách vận chuyển và thanh toán</a>
-                  </div>
-                  <div>
-                    <a href="" class="footer-item">Chính sách bảo vệ thông tin cá nhân của khách hàng</a>
-                  </div>
-                <div>
-                  <a href="" class="footer-item">Liên hệ</a>
-                </div>
-                <div>
-                <a href="" class="footer-item">Chính sách đổi hàng</a>
-                </div>
-              <div>
-                <a href="" class="footer-item">Chính sách bảo hành</a>
-              </div>
-                </div>
-                <div class="footer-list">
-                  <h2>CÔNG TY CỔ PHẦN MOSS RETAIL <br>
-                    MOSS RETAIL JSC</h2>
-                    <h3>Tổng đài hỗ trợ:</h3>
-                    <p>0972 264 919
-                    </p>
-                    <h3>Địa chỉ: </h3>
-                      <p><strong>75 Nguyễn Việt Hồng, P.An Phú, Q.Ninh Kiều, TP.CẦN THƠ</strong></p>
-                    <h3>Email:</h3>
-                    <p>official@mossvn.com</p>
-                    <h3>Website:</h3>
-                    <p>mossvn.com</p>
-                    <h3>Facebook Fanpage:</h3>
-                    <a href="">facebook.com/office.moss</a>
-                    <h3>Instagram:
-                    </h3>
-                    <a href="">instagram.com/office.moss</a>
-                      <br> <br>
-                    <h3 class="foooter-identity"><strong>Số ĐKKD: </strong>1801737615 - <strong>Ngày cấp:</strong> 30/01/2023</h3>
-                    <div class="footer-connect">
-                      <a class="footer-connect-link" href="">
-                        <img class="footer-connect-img" src="https://mossvn.com/images/facebook.png" alt="">
-                      </a>
-                      <a class="footer-connect-link" href="">
-                        <img class="footer-connect-img" src="https://mossvn.com/images/tet_bestseller.png" alt="">
-                      </a>
-                      <a class="footer-connect-link" href="">
-                        <img class="footer-connect-img" src="https://mossvn.com/images/tet_bestseller3.png" alt="">
-                      </a>
+                  <div class="footer-list">
+                    <div>
+                        <a href="" class="footer-item">Chính sách vận chuyển và thanh toán</a>
                     </div>
-                </div>    
-                <div class="footer-list">
-                  <span>
-                    <img class="footer-logo" src="https://mossvn.com/images/logo-moss-remake-R.png" alt="">
-                  </span>
+                    <div>
+                      <a href="" class="footer-item">Chính sách bảo vệ thông tin cá nhân của khách hàng</a>
+                    </div>
+                  <div>
+                    <a href="" class="footer-item">Liên hệ</a>
+                  </div>
+                  <div>
+                  <a href="" class="footer-item">Chính sách đổi hàng</a>
+                  </div>
+                 <div>
+                  <a href="" class="footer-item">Chính sách bảo hành</a>
+                 </div>
+                  </div>
+                  <div class="footer-list">
+                    <h2>CÔNG TY CỔ PHẦN MOSS RETAIL <br>
+                      MOSS RETAIL JSC</h2>
+                      <h3>Tổng đài hỗ trợ:</h3>
+                      <p>0972 264 919
+                      </p>
+                      <h3>Địa chỉ: </h3>
+                        <p><strong>75 Nguyễn Việt Hồng, P.An Phú, Q.Ninh Kiều, TP.CẦN THƠ</strong></p>
+                      <h3>Email:</h3>
+                      <p>official@mossvn.com</p>
+                      <h3>Website:</h3>
+                      <p>mossvn.com</p>
+                      <h3>Facebook Fanpage:</h3>
+                      <a href="">facebook.com/office.moss</a>
+                      <h3>Instagram:
+                      </h3>
+                      <a href="">instagram.com/office.moss</a>
+                        <br> <br>
+                      <h3 class="foooter-identity"><strong>Số ĐKKD: </strong>1801737615 - <strong>Ngày cấp:</strong> 30/01/2023</h3>
+                      <div class="footer-connect">
+                        <a class="footer-connect-link" href="">
+                          <img class="footer-connect-img" src="https://mossvn.com/images/facebook.png" alt="">
+                        </a>
+                        <a class="footer-connect-link" href="">
+                          <img class="footer-connect-img" src="https://mossvn.com/images/tet_bestseller.png" alt="">
+                        </a>
+                        <a class="footer-connect-link" href="">
+                          <img class="footer-connect-img" src="https://mossvn.com/images/tet_bestseller3.png" alt="">
+                        </a>
+                      </div>
+                  </div>    
+                  <div class="footer-list">
+                    <span>
+                      <img class="footer-logo" src="https://mossvn.com/images/logo-moss-remake-R.png" alt="">
+                    </span>
+                  </div>
+                  <div class="footer-list">
+                    <a class="" href="http://online.gov.vn/Home/WebDetails/84164" target="_blank">
+                      <img class="footer-link-center" src="https://mossvn.com/images/20150827110756-dathongbao.png" alt="">
+                    </a>
+                  </div>
                 </div>
-                <div class="footer-list">
-                  <a class="" href="http://online.gov.vn/Home/WebDetails/84164" target="_blank">
-                    <img class="footer-link-center" src="https://mossvn.com/images/20150827110756-dathongbao.png" alt="">
-                  </a>
-                </div>
-              </div>
-            </div>
+             </footer>
             <!-- end footer -->
 
         </div>

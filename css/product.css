@@ -70,6 +70,7 @@ a.breadcrumbs__a--active {
 /* ///////////// */
 .container {
     background-color: #fff;
+    margin-bottom: 202px;
 }
 
 .col-2-4 {
@@ -411,4 +412,9 @@ a.breadcrumbs__a--active {
     height: 35px;
     width: 80px;
     margin-left: -50px;
+}
+/* add */
+.col-4
+{
+    z-index: 0;
 }
