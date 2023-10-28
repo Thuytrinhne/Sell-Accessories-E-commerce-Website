@@ -103,39 +103,45 @@
 
                  <!-- begin filter content -->
                  <div class="row filter__content">
-                    <div class="col-4 filter-price">
-                        <div class="row filter-price__range">
-                            <span class="filter-price__range__span1"> <b>Price range:</b> </span>
-                            <span class="filter-price__range__span2"><b>0Đ-15000000Đ</b></span>
-                        </div>
-                        <label for="customRange1" class="form-label"></label>
-                        <input type="range" class="form-range" id="customRange1">
+                    <div class="col-5 price-range-container">
+                      <span class="price-range-title">Price range: </span>
+                      <input type="number" class="price-input" id="minPrice" placeholder="Min">
+                      <span>-</span>
+                      <input type="number" class="price-input" id="maxPrice" placeholder="Max">
+                      <button class="price-search-btn" >Search</button>
                     </div>
 
-                    <div class="col-3"></div>
                     
-                    <div class="col-5 filter-sort">
+                    
+                    <div class="col-6 filter-sort">
                         <span class="filter-sort__sortby">
                             <b>Sort by:</b>
                         </span>
 
-                        <span class="filter-sort__sortby">
-                            Theo mức độ phổ biến
-                        </span>
+                        <select class="filter-sort__select" onchange="handleSelect()">
+                          <option class="filter-sort__option" value="option1">Thứ tự theo mức độ phổ biến</option>
+                          <option class="filter-sort__option" value="option2">Độ liên quan</option>
+                          <option class="filter-sort__option" value="option3">Thứ tự theo điểm đánh giá</option>
+                          <option class="filter-sort__option" value="option3">Mới nhất</option>
+                          <option class="filter-sort__option" value="option3">Thứ tự theo giá: thấp đến cao</option>
+                          <option class="filter-sort__option" value="option3">Thứ tự theo giá: cao xuống thấp</option>
+                        </select>
 
                         <span class="filter-sort__sortby" style="margin-left: 50px;">
                             <b>Show:</b> 
                         </span>
+                        <select class="filter-sort__select" onchange="handleSelect()">
+                          <option class="filter-sort__option" value="option1">12</option>
+                          <option class="filter-sort__option" value="option2">24</option>
+                          <option class="filter-sort__option" value="option3">48</option>
+                          <option class="filter-sort__option" value="option3">Show all</option>
+                        </select>
 
-                        <span class="filter-sort__sortby">
-                            100
-                        </span>
 
-
-                        <span class="filter-sort__sortby" style="margin-left: 50px;">
+                        <button class="filter-sort__btn" style="margin-left: 50px;" onclick="Filter_display()">
                             <i class="ti-filter"></i>
                             <b>FILTER</b> 
-                        </span>
+                        </button>
                     </div>
 
 
@@ -172,21 +178,21 @@
                     <div class="col-3 filter-size">
                         <h4>SIZE</h4>
                         <div class="row filter-size">
-                            <span class="size-option" style="background-color:azure ;">3 </span>
+                            <span class="size-option" style="background-color:azure ;">1 </span>
+                            <span class="size-option" style="background-color:azure ;">2 </span>
+                            <span class="size-option" style="background-color:azure ;">3</span>
+                            <span class="size-option" style="background-color:azure ;">4 </span>
                             <span class="size-option" style="background-color:azure ;">5 </span>
-                            <span class="size-option" style="background-color:azure ;">6</span>
+                            <span class="size-option" style="background-color:azure ;">6 </span>
+                            <span class="size-option" style="background-color:azure ;">7 </span>
+                            <span class="size-option" style="background-color:azure ;">8 </span>
                             <span class="size-option" style="background-color:azure ;">9 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
                             <span class="size-option" style="background-color:azure ;">10 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
-                            <span class="size-option" style="background-color:azure ;">3 </span>
+                            <span class="size-option" style="background-color:azure ;">11 </span>
+                            <span class="size-option" style="background-color:azure ;">12</span>
+                            <span class="size-option" style="background-color:azure ;">13</span>
+                            <span class="size-option" style="background-color:azure ;">14</span>
+                            <span class="size-option" style="background-color:azure ;">15</span>
                                
                         </div>
                     </div>
@@ -741,24 +747,7 @@
                  </div>
 
                  <!-- end filter content -->
-                 
-                <div class="row row-pagination">
-                  <nav aria-label="...">
-                    <ul class="pagination pagination-lg justify-content-center">
-                      <li class="page-item disabled">
-                        <span class="page-link">Previous</span>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item active" aria-current="page">
-                        <span class="page-link active" style="background-color: plum;">2</span>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
+
 
             </div>
 
@@ -828,5 +817,6 @@
             <!-- end footer -->
 
         </div>
+        <script src="js/script.js"></script>
 </body>
 </html>
