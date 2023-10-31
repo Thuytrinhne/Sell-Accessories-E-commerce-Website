@@ -316,3 +316,15 @@
 .rangeCost .field input:hover {
     transform: none;
 }
+
+.tag button {
+    font-size: 25px;
+    border: none;
+    font-weight: 700;
+    color: #e05994;
+}
+
+.tag button:hover {
+    transform: scale(1.1);
+    color: rgb(31, 241, 31);
+}
