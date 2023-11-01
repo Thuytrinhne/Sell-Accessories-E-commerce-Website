@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <div class="container">
         <div class="row title">
             <h1>Chi tiết đơn hàng</h1>
@@ -24,7 +25,7 @@
                     <span>27/10/2023</span>
                 </div>
                 <div class="row order_confirm">
-                    <button>Hoàn tất</button>
+                    <button id="openWindow-payment">Hoàn tất</button>
                 </div>
             </div>
             <div class="col location_delivery">
@@ -163,6 +164,14 @@
             </div>
         </div>
     </div>
+    <script>
+        var btn_openWindow_payment = document.getElementById("openWindow-payment")
+
+        btn_openWindow_payment.addEventListener("click", function () {
+            // Mở tab mới với window.html
+            window.open("payment-view.html", "_blank");
+        });
+    </script>
 </body>
 
 </html>

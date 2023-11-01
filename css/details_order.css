@@ -67,6 +67,11 @@ html {
     border: none;
 }
 
+.infor_order button:hover {
+    background-color: #e71f76;
+    transform: scale(1.1);
+}
+
 .location_delivery span {
     color: #e71f76;
     font-weight: bold;

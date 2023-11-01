@@ -61,4 +61,6 @@ function AddNewTag() {
     // Hiển thị phần tử có lớp tương ứng
     getTagcontent.style.display = 'block';
     document.querySelector('.category').style.color = "#f78da7";
-}
+};
+
+
