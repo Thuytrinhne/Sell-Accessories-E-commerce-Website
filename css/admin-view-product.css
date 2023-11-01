@@ -86,11 +86,23 @@
     justify-content: center;
 }
 
-.selection_list nav label {
-    font-size: 20px;
-    font-weight: bold;
-    color: rgba(224, 39, 15, 0.896)
+#old_price {
+    text-decoration: line-through;
+    font-size: 16px;
+    color: #bebebe;
 }
+
+#discount_price {
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+}
+
+.sku_code span {
+    font-size: 14px;
+    font-weight: 400;
+}
+
 
 .selection_list nav button {
     font-size: 14px;
@@ -303,4 +315,16 @@
 
 .rangeCost .field input:hover {
     transform: none;
+}
+
+.tag button {
+    font-size: 25px;
+    border: none;
+    font-weight: 700;
+    color: #e05994;
+}
+
+.tag button:hover {
+    transform: scale(1.1);
+    color: rgb(31, 241, 31);
 }

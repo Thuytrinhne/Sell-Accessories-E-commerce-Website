@@ -48,3 +48,17 @@ inputSlider.oninput = (() => {
     slideValue.textContent = value;
     slideValue.classList.add("show");
 });
+
+
+function AddNewTag() {
+    var getTagcontent = document.querySelector('.content.category');
+    document.querySelectorAll('a').forEach(styles => {
+        styles.style.color = "#183a5c";
+    })
+    document.querySelectorAll('.content').forEach(content => {
+        content.style.display = 'none';
+    })
+    // Hiển thị phần tử có lớp tương ứng
+    getTagcontent.style.display = 'block';
+    document.querySelector('.category').style.color = "#f78da7";
+}

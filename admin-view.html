@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="./css/admin-view-sale-off.css">
     <link rel="stylesheet" href="./css/admin-view-report.css">
     <link rel="stylesheet" href="./css/admin-view-manage.css">
+    <link rel="stylesheet" href="./css/admin-view-category.css">
 </head>
 
 <body>
@@ -36,6 +37,10 @@
                 <li class="list_choice"><a href="#" class="dashboard">
                         <ion-icon name="home-sharp"></ion-icon>
                         Bảng điều khiển
+                    </a></li>
+                <li class="list_choice"><a href="#" class="category">
+                        <ion-icon name="pricetags"></ion-icon>
+                        Danh sách thể loại
                     </a></li>
                 <li class="list_choice"><a href="#" class="product">
                         <ion-icon name="bag"></ion-icon>
@@ -90,9 +95,9 @@
                                 </div>
                             </div>
                             <div class="detail_card .">
-                                <ion-icon name="shirt-outline" style="background-color: aqua;"></ion-icon>
+                                <ion-icon name="gift" style="background-color: aqua;"></ion-icon>
                                 <div class="amount">
-                                    <span class="amount_title">Số lượng tồn kho</span>
+                                    <span class="amount_title">Giao hàng thành công</span>
                                     <span class="amount_value">1555</span>
                                 </div>
                             </div>
@@ -111,6 +116,48 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content category">
+                <div class="category_header">
+                    <div class="header_title">
+                        <span>Trang chính</span>
+                        <h1>Quản lý danh sách thể loại</h1>
+                    </div>
+                </div>
+                <div class="category_addlist">
+                    <h2>Thêm thể loại</h2>
+                    <input type="text" placeholder="Nhập thể loại mới">
+                    <button>Xác nhận</button>
+                </div>
+                <div class="category_list">
+                    <div>
+                        <h2>Tìm kiếm</h2>
+                        <input type="text" placeholder="Nhập tên thể loại">
+                        <button>Tìm kiếm</button>
+                    </div>
+                    <div>
+                        <h2>Danh sách thể loại</h2>
+                        <table class="category_table">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên thể loại</th>
+                                    <th>Số sản phẩm</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Đèn học</td>
+                                    <td>19</td>
+                                    <td><button>Xóa</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -139,33 +186,24 @@
                 </div>
 
                 <div class="selection selection_list">
-                    <nav id="product_1" class="product_1">
-                        <img src="./Assets/Images/product_1.jpg">
-                        <p>Cài tóc</p>
-                        <label id="price">
-                            <span>150000</span>
-                            <span>₫</span>
-                        </label>
-                        <p>Số lượng: 15</p>
-                        <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
-                        <div class="Edit-Delete">
-                            <button class="Edit">
-                                <ion-icon name="pencil"></ion-icon>
-                                Sửa
-                            </button>
-                            <button class="Delete">
-                                <ion-icon name="trash-bin"></ion-icon>
-                                Xóa</button>
-                        </div>
-                    </nav>
                     <nav id="product_1" class="product product_1">
                         <img src="./Assets/Images/product_1.jpg">
                         <p>Cài tóc</p>
-                        <label id="price">
-                            <span>150000</span>
+                        <label id="old_price">
+                            <span>199000</span>
+                            <span>₫</span>
+                        </label>
+                        <label id="discount_price">
+                            <span>188000</span>
                             <span>₫</span>
                         </label>
                         <p>Số lượng: 15</p>
+                        <div class="sku_code">
+                            <span>SKU:</span>
+                            <span>1112312313123</span>
+                        </div>
+
+
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -179,11 +217,21 @@
                     <nav id="product_1" class="product product_1">
                         <img src="./Assets/Images/product_1.jpg">
                         <p>Cài tóc</p>
-                        <label id="price">
-                            <span>150000</span>
+                        <label id="old_price">
+                            <span>199000</span>
+                            <span>₫</span>
+                        </label>
+                        <label id="discount_price">
+                            <span>188000</span>
                             <span>₫</span>
                         </label>
                         <p>Số lượng: 15</p>
+                        <div class="sku_code">
+                            <span>SKU:</span>
+                            <span>1112312313123</span>
+                        </div>
+
+
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -197,11 +245,21 @@
                     <nav id="product_1" class="product product_1">
                         <img src="./Assets/Images/product_1.jpg">
                         <p>Cài tóc</p>
-                        <label id="price">
-                            <span>150000</span>
+                        <label id="old_price">
+                            <span>199000</span>
+                            <span>₫</span>
+                        </label>
+                        <label id="discount_price">
+                            <span>188000</span>
                             <span>₫</span>
                         </label>
                         <p>Số lượng: 15</p>
+                        <div class="sku_code">
+                            <span>SKU:</span>
+                            <span>1112312313123</span>
+                        </div>
+
+
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -215,11 +273,49 @@
                     <nav id="product_1" class="product product_1">
                         <img src="./Assets/Images/product_1.jpg">
                         <p>Cài tóc</p>
-                        <label id="price">
-                            <span>150000</span>
+                        <label id="old_price">
+                            <span>199000</span>
+                            <span>₫</span>
+                        </label>
+                        <label id="discount_price">
+                            <span>188000</span>
                             <span>₫</span>
                         </label>
                         <p>Số lượng: 15</p>
+                        <div class="sku_code">
+                            <span>SKU:</span>
+                            <span>1112312313123</span>
+                        </div>
+
+
+                        <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
+                        <div class="Edit-Delete">
+                            <button class="Edit">
+                                <ion-icon name="pencil"></ion-icon>
+                                Sửa</button>
+                            <button class="Delete">
+                                <ion-icon name="trash-bin"></ion-icon>
+                                Xóa</button>
+                        </div>
+                    </nav>
+                    <nav id="product_1" class="product product_1">
+                        <img src="./Assets/Images/product_1.jpg">
+                        <p>Cài tóc</p>
+                        <label id="old_price">
+                            <span>199000</span>
+                            <span>₫</span>
+                        </label>
+                        <label id="discount_price">
+                            <span>188000</span>
+                            <span>₫</span>
+                        </label>
+                        <p>Số lượng: 15</p>
+                        <div class="sku_code">
+                            <span>SKU:</span>
+                            <span>1112312313123</span>
+                        </div>
+
+
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
                             <button class="Edit">
@@ -256,6 +352,8 @@
                                 <option>Cài tóc</option>
                                 <option>Đèn học</option>
                             </select>
+
+                            <button onclick="AddNewTag()">+</button>
                         </div>
 
                         <div class="confirmAdd">
@@ -270,8 +368,8 @@
                         <span>Trang chính</span>
                         <h1>Đơn hàng</h1>
                     </div>
-
                 </div>
+
                 <div class="filter_list">
                     <label>Bắt đầu</label>
                     <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
