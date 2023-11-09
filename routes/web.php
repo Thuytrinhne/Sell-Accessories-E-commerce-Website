@@ -132,7 +132,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 // end router admin
 
 
-// rounter customer
+// router customer
 Route::get('/customer/account', function () {
    
     return view('front.customer.account');
