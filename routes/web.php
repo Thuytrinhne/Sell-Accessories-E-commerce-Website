@@ -145,6 +145,7 @@ Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'
 
 
 // router auth
+// login
 Route::get('/login', function () {
    return view('auth.signin');
 })->name('login');
