@@ -80,6 +80,7 @@ Route::get('/customer/orders/detail', function () {
 
 
 // router auth
+// login
 Route::get('/login', function () {
    return view('auth.signin');
 })->name('login');
