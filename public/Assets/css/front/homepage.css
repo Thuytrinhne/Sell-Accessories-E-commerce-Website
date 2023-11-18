@@ -844,10 +844,7 @@
 {
     position: relative;
 }
-.header-auth
-{
-    display: none;
-}
+
 .header-auth-subLogin
 {
     width: 200px;

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Auth;
 
 class CheckLoginAdmin
 {
@@ -15,12 +16,12 @@ class CheckLoginAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // if(Auth::check()&&Auth::user()->status = 1)
-        // {
-        //     return $next($request);
-        // }else{
-        //     return redirect('/');
-        // }
-        return $next($request);
+        if(Auth::check()&&Auth::user()->status = 2)
+        {
+            return $next($request);
+        }
+        return redirect()-> route('loginAdmin');
+
+        
     }
 }

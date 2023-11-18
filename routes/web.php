@@ -1,6 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+// trinh use
+use App\Http\Controllers\AccessController;
+use App\Http\Controllers\AdminController;
+// end trinh use
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +23,9 @@ Route::get('/', function () {
 Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
  })->name('front.account');
-
-
+// login for admin 
+Route::get('/admin/login', [AdminController::class,'login'])->name('loginAdmin');
+Route::post('/admin/login', [AdminController::class,'postLoginAdmin'])->name('postLoginAdmin');
 // router admin
 Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
@@ -84,9 +90,16 @@ Route::get('/customer/orders/detail', function () {
 Route::get('/login', function () {
    return view('auth.signin');
 })->name('login');
-Route::get('/signup', function () {
-   return view('auth.signup');
-})->name('signup');
+Route::post('/login', [AccessController::class,'postLogin'])->name('postLogin');
+// logout
+Route::get('/logout', [AccessController::class,'logout'])->name('logout');
+// Signup
+Route::get('/signup', [AccessController::class,'indexSignUp'])->name('signup');
+Route::post('/signup', [AccessController::class,'postUser'])->name('postUser');
+Route::get('/signup/sendOTP/{email}', [AccessController::class,'sendOTP'])->name('sendOTP');
+
+
+
 Route::get('/forgot-pass', function () {
    return view('auth.forgot-pass');
 })->name('forgot-pass');
@@ -124,5 +137,4 @@ Route::get('/checkout', function () {
 // end router product
 
  
-
 

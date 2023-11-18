@@ -18,11 +18,13 @@
             <div class="signin_body-form" >
                 <div class="sign_body-form-container">
                     <h2 style="margin-bottom: 20px; font-size: 24px;">Đăng nhập</h2>
+                    <form action="{{route('postLogin')}}" method="POST">
+                        @csrf
                     <div class="signin_body-input">
                         <label for="">Tên tài khoản hoặc địa chỉ email</label>  <br>
-                        <input type="text" placeholder="Số diện thoại hoặc email"><br>
+                        <input name="email" type="text" placeholder="Số diện thoại hoặc email"><br>
                         <label for="">Mật khẩu</label><br>
-                        <input type="text" placeholder="Mật khẩu">
+                        <input name="password" type="password" placeholder="Mật khẩu">
                     </div>
 
                     <input type="checkbox" name="remember_password" id="" style="margin-right: 8px;">
@@ -30,10 +32,10 @@
                 
 
                     <div class="loginandremember">
-                        <button class="signin_btn" onclick="sigInOnclick()">Đăng nhập</button><br>
+                        <button type="submit" class="signin_btn" onclick="sigInOnclick()">Đăng nhập</button><br>
                         <a class="forgot-pass" href="Forgot-pass.html">Quên mật khẩu?</a><br>
                     </div>
-
+                    </form>
                     
                     <div class="signin-newbie">
                         <p>Bạn mới biết đến T&P? <a href="signup.html">Đăng ký</a></p>

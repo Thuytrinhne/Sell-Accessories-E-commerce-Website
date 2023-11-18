@@ -47,7 +47,7 @@
     position: relative;
 }
 
-.verified button{
+.verified a{
     position: absolute;
     height: 40px;
     width: 30% !important;

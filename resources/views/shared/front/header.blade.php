@@ -30,58 +30,61 @@
                   <li class="nav-item-align">
                     <img src="https://hasaki.vn/images/graphics/icon_header_2.svg" alt class="loading" data-was-processed="true" >
                     <div class="header-auth-login">
-                    <div class="header-auth-notlogin">
-                      <a class="nav-link-black"  href="./signup.html" target="_blank">Đăng ký</a>
-                       <div class="nav-link-line"></div>
-                      <a class="nav-link-black"  href="./signin.html" target="_blank">Đăng nhập</a>
-                      </div>
+                          @if(Auth::check())         
+                          <div class="header-auth">
+                  
+                            <div class="header-auth-logined">
+                            <div class="nav-link-black nav-link-subLogin">Chào {{Auth::user()->full_name}},</div>
+                            <div class ="nav-link-subLogin-user">
+                              <div class="nav-link-black nav-link-subLogin">Tài khoản
+                                  <i class="fa-solid fa-caret-down"></i>
+                              </div>
+                              <div class="header-auth-subLogin">
+                                  <div class="header-auth-subLogin__list">
+                                <div class="header-auth-subLogin-item">
+                                  <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                    manage_accounts
+                                    </span>                        
+                                    <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('account')">Tài khoản của bạn</a>
+                                </div>
+                                <div class="header-auth-subLogin-item">
+                                  <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                    list_alt
+                                    </span>                         
+                                  <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('orders')">Quản lý đơn hàng</a>
+                                </div>
+                                <!-- <div class="header-auth-subLogin-item">
+                                  <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                    favorite
+                                    </span>                          
+                                  <a class="header-auth-subLogin-link" href="">Sản phẩm yêu thích</a>
+                                </div> -->
+                                <div class="header-auth-subLogin-item">
+                                  <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                    location_on
+                                    </span>                          
+                                    <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('location')">Địa chỉ giao hàng</a>
+                                </div>
+                                <div class="header-auth-subLogin-item">
+                                  <span class="material-symbols-outlined header-auth-subLogin-icon">
+                                    logout
+                                  </span>                          
+                                  <a class="header-auth-subLogin-link" href="{{route('logout')}}">Thoát</a>
+                                </div>
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                          @else
+                          <div class="header-auth-notlogin">
+                            <a class="nav-link-black"  href="{{route('signup')}}" target="_blank">Đăng ký</a>
+                            <div class="nav-link-line"></div>
+                            <a class="nav-link-black"  href="{{route('login')}}" target="_blank">Đăng nhập</a>
+                          </div>
+                        
+                          @endif
                     </div>
-                    <div class="header-auth">
-            
-                      <div class="header-auth-logined">
-                      <div class="nav-link-black nav-link-subLogin">Chào Trinh,</div>
-                      <div class ="nav-link-subLogin-user">
-                        <div class="nav-link-black nav-link-subLogin">Tài khoản
-                            <i class="fa-solid fa-caret-down"></i>
-                        </div>
-                        <div class="header-auth-subLogin">
-                            <div class="header-auth-subLogin__list">
-                          <div class="header-auth-subLogin-item">
-                            <span class="material-symbols-outlined header-auth-subLogin-icon">
-                              manage_accounts
-                              </span>                        
-                              <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('account')">Tài khoản của bạn</a>
-                          </div>
-                          <div class="header-auth-subLogin-item">
-                            <span class="material-symbols-outlined header-auth-subLogin-icon">
-                              list_alt
-                              </span>                         
-                            <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('orders')">Quản lý đơn hàng</a>
-                          </div>
-                          <!-- <div class="header-auth-subLogin-item">
-                            <span class="material-symbols-outlined header-auth-subLogin-icon">
-                              favorite
-                              </span>                          
-                            <a class="header-auth-subLogin-link" href="">Sản phẩm yêu thích</a>
-                          </div> -->
-                          <div class="header-auth-subLogin-item">
-                            <span class="material-symbols-outlined header-auth-subLogin-icon">
-                              location_on
-                              </span>                          
-                              <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('location')">Địa chỉ giao hàng</a>
-                          </div>
-                          <div class="header-auth-subLogin-item">
-                            <span class="material-symbols-outlined header-auth-subLogin-icon">
-                              logout
-                            </span>                          
-                            <a class="header-auth-subLogin-link" href="#">Thoát</a>
-                          </div>
-                        </div>
-                      </div>
-                      </div>
-                    </div>
-                     </div>
-                  </a>
+                 
                 </li>
                     <li class="nav-item-align">
                       <img src="https://hasaki.vn/images/graphics/icon_header_store.svg" alt class="loading" data-was-processed="true">
