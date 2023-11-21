@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- link bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-   
+
     <!-- link css laravel -->
     <link rel="stylesheet" href="{{asset('Assets/css/base.css')}}">
     <link rel="stylesheet" href="{{asset('Assets/css/front/homepage.css')}}">
@@ -40,6 +40,49 @@
 </head>
 
 <body>
+    <style>
+        html,body{
+            width: 100%;
+            position: relative;
+        }
+        .create_account .card{
+            position: absolute;
+            width: 82%;
+            margin-top: 10px;
+            line-height: 1.7;
+        }
+
+        .create_account .form-group{
+            margin: 10px 0;
+            margin-right: 30px;
+            font-size: 16px;
+        }
+
+        .create_account input{
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+
+        .create_account button{
+            padding: 6px 20px;
+            font-size: 14px;
+            margin-bottom: 7px;
+        }
+
+        .account_management .btn-primary{
+            padding: 8px 18px;
+            font-size: 14px;
+            background-color: gainsboro;
+            outline: none;
+            color: black;
+            border: none;
+        }
+
+        .account_management .btn{
+            padding: 8px 18px;
+        }
+        
+    </style>
     <header class="header"></header>
     <div class="container">
         <!-- nav here -->

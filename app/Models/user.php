@@ -12,4 +12,13 @@ class user extends Model
     protected $hidden = [
         'password'
     ];
+    protected $fillable = [
+        "id",
+        "sex",
+        "full_name",
+        "phone",
+        "email",
+        "role_id",
+    ];
+
 }

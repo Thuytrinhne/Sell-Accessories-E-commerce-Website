@@ -33,14 +33,14 @@ class CategoryRespository
      */
     public static function store(CategoryRequest $request)
     {
-       $category = new Category;
-       $category->name_category=$request->input('name_category');
-       
-       if (!($request->input('parent_id')==='NULL'))
-        {
-            $category->parent_id=$request->input('parent_id');
-        }
-        $category->save();
+        $category = new Category;
+        $category->name_category=$request->input('name_category');
+        
+        if (!($request->input('parent_id')==='NULL'))
+            {
+                $category->parent_id=$request->input('parent_id');
+            }
+            $category->save();
     }
 
     /**

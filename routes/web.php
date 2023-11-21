@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\AccountController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,32 +17,44 @@ Route::get('/', function () {
    return view('homepage');
 })->name('front.homepage');
 Route::get('/aboutUs', function () {
-    return view('front.shop.aboutUs');
- })->name('front.account');
+   return view('front.shop.aboutUs');
+})->name('front.account');
 
 
 // router admin
 Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
-    Route::get('/', function () {
-    return view('admin.dashboard');
-    })->name('admin.dashboard');
+   Route::get('/', function () {
+   return view('admin.dashboard');
+   })->name('admin.dashboard');
 
-    Route::get('/product', function () {
-    return view('admin.product');
-    })->name('admin.product');
+   Route::get('/product', function () {
+   return view('admin.product');
+   })->name('admin.product');
 
-    Route::get('/order', function () {
-    return view('admin.order');
-    })->name('admin.order');
+   Route::get('/order', function () {
+   return view('admin.order');
+   })->name('admin.order');
 
-    Route::get('/report', function () {
-    return view('admin.report');
-    })->name('admin.report');
+   Route::get('/report', function () {
+   return view('admin.report');
+   })->name('admin.report');
 
-    Route::get('/account', function () {
-    return view('admin.account');
-        })->name('admin.account');
+      // Route::get('/account', function () {
+      // return view('admin.account');
+      // })->name('admin.account');
+
+   Route::prefix('account')->group( function(){
+      // hiển thị danh sách danh mục 
+      Route::get('/', [AccountController::class,'index'])->name('admin.account');
+      // // xử lý thêm danh mục
+      // Route::get('/create', [AccountController::class,'create'])->name('admin.account.create');
+      Route::get('/add', [AccountController::class,'create'])->name('admin.account.add');
+      // // xử lý xóa danh mục
+      Route::get('/delete', [AccountController::class,'destroy'])->name('admin.account.destroy');
+      // // sửa 1 danh mục
+      Route::get('/edit', [AccountController::class,'edit'])->name('admin.account.edit');
+   });
 
    Route::prefix('category')->group( function()
    {
@@ -63,7 +76,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 // router customer
 Route::get('/customer/account', function () {
    
-    return view('front.customer.account');
+   return view('front.customer.account');
 })->name('front.account');
 Route::get('/customer/orders', function () {
    
