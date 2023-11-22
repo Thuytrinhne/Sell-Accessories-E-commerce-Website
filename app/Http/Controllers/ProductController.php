@@ -12,7 +12,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products= product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->select(
+            'product.name_product','product.id',
+            'product_item.price', 'product_item.discount_price','product_item.image',
+        )
+        ->get();    
+        // Pass the data to the view
+        return view('homepage',compact('products'));
     }
 
     /**
@@ -34,9 +41,26 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(product $product)
+    public function show($id)
     {
-        //
+
+        $products = product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->join('category','product.category_id','=','category.id')
+        ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
+        ->join('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
+        ->join('variation','variation_option.id_Variation','=','variation.id')
+        ->select(
+            'product.name_product', 'product.id',
+            'product_item.price', 'product_item.discount_price','product_item.SKU','product_item.image',
+            'variation_option.value',
+            'variation.name',
+            'category.name_category',
+        )
+        ->where('product.id', '=', $id )
+        ->first(); 
+
+
+        return view('front.product-order-screens.detail-product',['product' => $products]);
     }
 
     /**

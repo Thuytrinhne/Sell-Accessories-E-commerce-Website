@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User_AddressController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,21 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomepageController::class, 'index']
 )->name('front.homepage');
+//Qtoan them vao
+Route::group(['prefix' => '/'], function () {
+   Route::get('/', [ProductController::class, 'index'])->name('products.index');
+   
+   Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
+   
+});
+
+   // other routes related to products
+
+
+// Route::get('/', function () {
+//    return view('homepage');
+// })->name('front.homepage');
+
 Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
  })->name('front.account');   
@@ -104,9 +120,12 @@ Route::get('/checkout/choose-location', [User_AddressController::class, 'index']
  Route::get('/filter', function () {
     return view('front.product-order-screens.filter');
  })->name('filter');
- Route::get('/detail-product', function () {
-    return view('front.product-order-screens.detail-product');
- })->name('front.account');
+
+
+//trùng nên cmt lại
+//  Route::get('/detail-product', function () {
+//     return view('front.product-order-screens.detail-product');
+//  })->name('front.account');
  Route::get('/not-found', function () {
     return view('front.product-order-screens.not-found');
  })->name('front.account');

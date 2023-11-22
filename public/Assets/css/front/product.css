@@ -87,6 +87,8 @@ a.breadcrumbs__a--active {
 
 #current-image{
     width: 92%;
+    height: 475px;
+    overflow: hidden;
     border-radius: 3%;
     
 }
@@ -170,15 +172,20 @@ a.breadcrumbs__a--active {
 
 .info__color {
     padding: 0px;
+    text-transform: capitalize;
 }
 
 .color-option {
     width: 40px;
     height: 40px;
-    color: transparent;
+    color: #e05994;
     border-radius: 50%;
     margin: 5px;
     cursor: pointer;
+    line-height: 40px;
+    text-align: center;
+    font-size: 10px;
+    border: #f78da7 dotted 1px;
 }
 
 .info-category-link {
@@ -248,6 +255,21 @@ a.breadcrumbs__a--active {
     border: 2px dashed var(--white-color);
 }
 
+.info-buy__btn:hover {
+    outline: none;
+    text-decoration: none;
+    position: relative;
+    color: var(--white-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    background-color:#162c6e ;
+    border-radius: 25px;
+    text-align: center;
+    border: solid 4px transparent;
+    padding: 8px 45px;
+    text-transform:uppercase;
+}
+
 .info-whistlist-wrapper {
     cursor: pointer;
 }
@@ -256,6 +278,12 @@ a.breadcrumbs__a--active {
     background: none;
     border: none;
     color: #e05994;
+}
+
+.info-whistlist-btn:hover {
+    background: none;
+    border: none;
+    color:rgb(116, 89, 224);
 }
 
 
