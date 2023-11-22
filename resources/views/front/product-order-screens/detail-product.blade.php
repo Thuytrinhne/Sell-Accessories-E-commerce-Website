@@ -30,7 +30,7 @@
           <!-- begin gallery -->
           <div class="col-5 row-gallery">
               <div class="row">
-                      <img id="current-image" src="Assets/Images/keptoc.jpg" alt="">
+                      <img id="current-image" src="{{$product->image}}" alt="">
               </div>
               <div class="row" >
                   <div class="col-2-4">
@@ -54,37 +54,24 @@
           <div class="col-7">
               <div class="row info-header">
                   <h1 class="info-header__h1">
-                      Cài tóc bằng da hình con bướm
+                    {{$product->name_product}}
                   </h1>
-              </div>
-
-              <div class="row info-detail" >
-                
-                  <div class="col-2">
-                      <h4 info-detail-h4><b>6</b> Đã bán</h3>
-                  </div>
-                  
               </div>
 
               <div class="row info-price">
                   <div class="col-1 info-price--default">
-                      <p>25.000đ</p>
+                      <p>{{$product->price}}</p>
                   </div>
-                  <div class="col-2 info-price--sale">12.000Đ</div>
+                  <div class="col-2 info-price--sale">{{$product->discount_price}}</div>
                  
                   <div class="col-7"></div>
               </div>
-
               
               <div class="row info__color">
-                  <h4>Màu sắc</h4>
+                  <h4>{{$product->name}}</h4>
               </div>
-              <div class="row">
-                  
-                  <span class="color-option" style="background-color: green;">Xanh </span>
-                  <span class="color-option" style="background-color: red;">Đỏ</span>
-                  <span class="color-option" style="background-color: blueviolet;">Tím</span>
-                  <span class="color-option" style="background-color: yellow;">Vàng</span>           
+              <div class="row">  
+                  <span class="color-option" style="background-color:{{$product->value}};">{{$product->value}} </span>
               </div>
 
               <div class="row info-number">
@@ -104,7 +91,7 @@
 
               <div class="row info-category" style="margin-top: 20px;">
                   <h4>Category: 
-                      <a href="" class="info-category-link">Kẹp tóc</a>
+                      <a href="" class="info-category-link">{{$product->name_category}}</a>
                   </h4>
               </div>
 

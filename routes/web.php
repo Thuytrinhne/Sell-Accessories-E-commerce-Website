@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,9 +13,22 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-   return view('homepage');
-})->name('front.homepage');
+
+//Qtoan them vao
+Route::group(['prefix' => '/'], function () {
+   Route::get('/', [ProductController::class, 'index'])->name('products.index');
+   
+   Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
+   
+});
+
+   // other routes related to products
+
+
+// Route::get('/', function () {
+//    return view('homepage');
+// })->name('front.homepage');
+
 Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
  })->name('front.account');
@@ -111,9 +125,12 @@ Route::get('/checkout', function () {
  Route::get('/filter', function () {
     return view('front.product-order-screens.filter');
  })->name('filter');
- Route::get('/detail-product', function () {
-    return view('front.product-order-screens.detail-product');
- })->name('front.account');
+
+
+//trùng nên cmt lại
+//  Route::get('/detail-product', function () {
+//     return view('front.product-order-screens.detail-product');
+//  })->name('front.account');
  Route::get('/not-found', function () {
     return view('front.product-order-screens.not-found');
  })->name('front.account');
