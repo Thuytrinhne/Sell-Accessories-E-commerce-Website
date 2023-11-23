@@ -1,5 +1,18 @@
 @extends('layouts.auth')
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+            @if(session('SignUpSuccess'))
+            <script>
+                Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('SignUpSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+            </script>
+            @endif
    <div class="signin">
         <!-- ================ signin header ================ -->
         <div class="signin-header-container">

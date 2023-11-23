@@ -54,7 +54,6 @@ class CategoryRequest extends FormRequest
     {
         $this->merge([
             
-
         ]);
     }
     protected function failedAuthorization()

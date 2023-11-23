@@ -39,6 +39,8 @@
 
 .signup_body-form-container{
     margin: 26px 42px;
+    margin-top: -20px;
+
 
 }
 
@@ -67,11 +69,13 @@
 
 
 
-
+.signup_body-input
+{
+    height: 65px;
+}
 
 
 .signup_body-input input{
-    margin-bottom: 14px;
     border: rgb(195, 191, 191) solid 1px;
     padding: 7px 15px;
     border-radius: 7px;
