@@ -99,3 +99,9 @@ html
     z-index: 1;
    
 }
+.msg-error
+{
+    color:red;
+    font-weight: 100;
+    font-size: 14px;
+}

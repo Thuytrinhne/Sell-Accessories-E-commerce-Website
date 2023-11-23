@@ -1,7 +1,27 @@
 @extends('layouts.auth')
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            @if(session('Expired'))
+            <script>
+                Swal.fire({
+                icon: "error",
+                title: "{{ session('Expired') }}",
+                text: "Bạn vui lòng kiểm tra lại nhé",
+                });
+            </script>
+            @endif
+            @if (session('Wrong'))
+                <script>
+                Swal.fire({
+                icon: 'error',
+                title: '{{ session('Wrong') }}',
+                text: 'Bạn vui lòng kiểm tra lại nhé',
+                })
 
-<div class="signup">
+                </script>
+            @endif
+           
+        <div class="signup">
         <!-- ================ signup header ================ -->
         <div class="signup_header">
             <div class="signup_logocontainer" >
@@ -23,14 +43,23 @@
                         
                             <div class="signup_body-input">
                                 <!-- <label for="" style="margin-bottom: 6px;">Số điện thoại hoặc địa chỉ email</label>  <br> -->
-                                <input id="emailInput" name="email" type="text" placeholder="Số diện thoại hoặc email"><br>
-                            
+                                @if(session('sendOTP'))
+                                <input id="emailInput" name="email" type="text" placeholder="Số diện thoại hoặc email" value="{{ session('sendOTP')}}"><br>
+                                
+                                @else 
+                                <input id="emailInput" name="email" type="text" placeholder="Số diện thoại hoặc email" value=""><br>
+                                @endif
+                                @error('email')
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                             </div>
                             
                             <div class="signup_body-input verified">
                                 <!-- <label for="" style="margin-bottom: 6px;">Nhập mã xác thực</label>  <br> -->
-                                <input type="text" placeholder="Nhập mã xác thực 6 số" ><a onclick="generateURL()" href="#">Lấy mã</a><br>
-                                
+                                <input name="otp" type="text" placeholder="Nhập mã xác thực 6 số" ><a onclick="generateURL()" href="#">Lấy mã</a><br>
+                                @error('otp')
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                             </div>
                     <script>
                     function generateURL() {
@@ -38,30 +67,64 @@
                         var url = "{{ route('sendOTP', ['email' => '14']) }}";
                         url = url.replace('14',email);
                         window.location.href = url;
-                    }
-                </script>
+                        }
+                   
+                        {
+                            var seconds = 30;
+                            var minutes = 1;
+
+                            var timer = setInterval(() => {
+
+                                if(minutes < 0){
+                                    $('.time').text('');
+                                    clearInterval(timer);
+                                }
+                                else{
+                                    let tempMinutes = minutes.toString().length > 1? minutes:'0'+minutes;
+                                    let tempSeconds = seconds.toString().length > 1? seconds:'0'+seconds;
+
+                                    $('.time').text(tempMinutes+':'+tempSeconds);
+                                }
+
+                                if(seconds <= 0){
+                                    minutes--;
+                                    seconds = 59;
+                                }
+
+                                seconds--;
+
+                            }, 1000);
+                        }
+                    </script>
                                     
                         <div class="signup_body-input">
                             <!-- <label for="" style="margin-bottom: 6px;">Nhập mật khẩu</label>  <br> -->
                             <input  name="password" type="password" placeholder="Nhập mật khẩu từ 6-32 kí tự"><br>
+                            @error('password')
+                                <span class="msg-error">{{$message}}</span>
+                             @enderror
                         </div>
 
                         <div class="signup_body-input">
                             <!-- <label for="" style="margin-bottom: 6px;">Nhập mật khẩu</label>  <br> -->
-                            <input name="full_name" type="text" placeholder="Họ tên"><br>
+                            <input name="full_name" type="text" placeholder="Họ tên">
+                            @error('full_name')
+                            <span class="msg-error">{{$message}}</span>
+                            @enderror
+                            <br>
                         </div>
 
                         <div class="gender">
                             <div class="gender-tick" >
-                                <input style="margin-right: 5px;" name="gender" type="radio" value="Nam" />Nam
+                                <input style="margin-right: 5px;" name="gender" type="radio" value="0" />Nam
                             </div>
 
                             <div class="gender-tick" >
-                                <input style="margin-right: 5px;" name="gender" type="radio" value="Nam" />Nữ
+                                <input style="margin-right: 5px;" name="gender" type="radio" value="1" />Nữ
                             </div>
 
                             <div class="gender-tick" >
-                                <input style="margin-right: 5px;" name="gender" type="radio" value="Nam" />Khác
+                                <input style="margin-right: 5px;" name="gender" type="radio" value="2" />Khác
                             </div>
                         </div>
 
@@ -98,6 +161,8 @@
                                 <option value="28">28</option>
                                 <option value="29">29</option>
                                 <option value="30">30</option>
+                                <option value="30">31</option>
+
                             </select>
         
                             <select name="MM" id="MM">
@@ -201,5 +266,6 @@
             </div>
         </div>
     </div>
-  
+   
+
 @endsection
