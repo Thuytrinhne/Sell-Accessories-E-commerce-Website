@@ -20,7 +20,11 @@
 
                 </script>
             @endif
-           
+           @if(session('sendOTPSuccess'))
+           <div class="alert alert-success">
+                <h4 style="text-align: center;">{{ session('sendOTPSuccess') }}</h4>
+            </div>
+           @endif
         <div class="signup">
         <!-- ================ signup header ================ -->
         <div class="signup_header">
@@ -34,20 +38,18 @@
         <!-- ================ signup body ================ -->
         <div class="signup_body">
             <img src="./Assets/Images/background-signup.jpg" alt="" style="height:470px;">
-
             <div class="signup_body-form" >
                 <div class="signup_body-form-container">
                     <h2 style="margin-bottom: 18px; font-size: 24px;">Đăng ký</h2>
-                    <form action="{{route('postUser')}}" method="POST">
+                    <form class="postUser" action="{{route('postUser')}}" method="POST">
                         @csrf
-                        
                             <div class="signup_body-input">
                                 <!-- <label for="" style="margin-bottom: 6px;">Số điện thoại hoặc địa chỉ email</label>  <br> -->
                                 @if(session('sendOTP'))
                                 <input id="emailInput" name="email" type="text" placeholder="Số diện thoại hoặc email" value="{{ session('sendOTP')}}"><br>
                                 
                                 @else 
-                                <input id="emailInput" name="email" type="text" placeholder="Số diện thoại hoặc email" value=""><br>
+                                <input id="emailInput" name="email" type="text" placeholder="Số diện thoại hoặc email" value="{{ old('email') }}"><br>
                                 @endif
                                 @error('email')
                                 <span class="msg-error">{{$message}}</span>
@@ -56,11 +58,12 @@
                             
                             <div class="signup_body-input verified">
                                 <!-- <label for="" style="margin-bottom: 6px;">Nhập mã xác thực</label>  <br> -->
-                                <input name="otp" type="text" placeholder="Nhập mã xác thực 6 số" ><a onclick="generateURL()" href="#">Lấy mã</a><br>
+                                <input name="otp" type="text" placeholder="Nhập mã xác thực 6 số"  value="{{ old('otp') }}"><a onclick="generateURL()" href="#">Lấy mã</a><br>
                                 @error('otp')
                                 <span class="msg-error">{{$message}}</span>
                                 @enderror
                             </div>
+                    
                     <script>
                     function generateURL() {
                         var email = document.getElementById("emailInput").value;
@@ -99,7 +102,7 @@
                                     
                         <div class="signup_body-input">
                             <!-- <label for="" style="margin-bottom: 6px;">Nhập mật khẩu</label>  <br> -->
-                            <input  name="password" type="password" placeholder="Nhập mật khẩu từ 6-32 kí tự"><br>
+                            <input  name="password" type="password" placeholder="Nhập mật khẩu từ 6-32 kí tự" value="{{ old('password') }}"><br>
                             @error('password')
                                 <span class="msg-error">{{$message}}</span>
                              @enderror
@@ -107,7 +110,7 @@
 
                         <div class="signup_body-input">
                             <!-- <label for="" style="margin-bottom: 6px;">Nhập mật khẩu</label>  <br> -->
-                            <input name="full_name" type="text" placeholder="Họ tên">
+                            <input name="full_name" type="text" placeholder="Họ tên" value ="{{ old('full_name') }}">
                             @error('full_name')
                             <span class="msg-error">{{$message}}</span>
                             @enderror
@@ -116,149 +119,106 @@
 
                         <div class="gender">
                             <div class="gender-tick" >
-                                <input style="margin-right: 5px;" name="gender" type="radio" value="0" />Nam
+                                <input style="margin-right: 5px;" name="sex" type="radio" value="0" {{ old('sex') == '0' ? 'checked' : '' }} />Nam
                             </div>
 
                             <div class="gender-tick" >
-                                <input style="margin-right: 5px;" name="gender" type="radio" value="1" />Nữ
+                                <input style="margin-right: 5px;" name="sex" type="radio" value="1" {{ old('sex') == '1' ? 'checked' : '' }} />Nữ
                             </div>
 
                             <div class="gender-tick" >
-                                <input style="margin-right: 5px;" name="gender" type="radio" value="2" />Khác
+                                <input style="margin-right: 5px;" name="sex" type="radio" value="2" {{ old('sex') == '2' ? 'checked' : '' }}/>Khác
                             </div>
+
+                            @error('gender')
+                            <br>
+                            <span class="msg-error">{{$message}}</span>
+                            @enderror
                         </div>
 
                         <div class="DayOfBirth">
                             <select name="DD" id="DD">
                                 <option value="">Ngày</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="30">31</option>
+                                <option value="1" {{ old('DD') == '1' ? 'selected' : '' }}>1</option>
+                                <option value="2" {{ old('DD') == '2' ? 'selected' : '' }}>2</option>
+                                <option value="3" {{ old('DD') == '3' ? 'selected' : '' }}>3</option>
+                                <option value="4" {{ old('DD') == '4' ? 'selected' : '' }}>4</option>
+                                <option value="5" {{ old('DD') == '5' ? 'selected' : '' }}>5</option>
+                                <option value="6" {{ old('DD') == '6' ? 'selected' : '' }}>6</option>
+                                <option value="7" {{ old('DD') == '7' ? 'selected' : '' }}>7</option>
+                                <option value="8" {{ old('DD') == '8' ? 'selected' : '' }}>8</option>
+                                <option value="9" {{ old('DD') == '9' ? 'selected' : '' }}>9</option>
+                                <option value="10" {{ old('DD') == '10' ? 'selected' : '' }}>10</option>
+                                <option value="11" {{ old('DD') == '11' ? 'selected' : '' }}>11</option>
+                                <option value="12" {{ old('DD') == '12' ? 'selected' : '' }}>12</option>
+                                <option value="13" {{ old('DD') == '13' ? 'selected' : '' }}>13</option>
+                                <option value="14" {{ old('DD') == '14' ? 'selected' : '' }}>14</option>
+                                <option value="15" {{ old('DD') == '15' ? 'selected' : '' }}>15</option>
+                                <option value="16" {{ old('DD') == '16' ? 'selected' : '' }}>16</option>
+                                <option value="17" {{ old('DD') == '17' ? 'selected' : '' }}>17</option>
+                                <option value="18" {{ old('DD') == '18' ? 'selected' : '' }}>18</option>
+                                <option value="19" {{ old('DD') == '19' ? 'selected' : '' }}>19</option>
+                                <option value="20" {{ old('DD') == '20' ? 'selected' : '' }}>20</option>
+                                <option value="21" {{ old('DD') == '21' ? 'selected' : '' }}>21</option>
+                                <option value="22" {{ old('DD') == '22' ? 'selected' : '' }}>22</option>
+                                <option value="23" {{ old('DD') == '23' ? 'selected' : '' }}>23</option>
+                                <option value="24" {{ old('DD') == '24' ? 'selected' : '' }}>24</option>
+                                <option value="25" {{ old('DD') == '25' ? 'selected' : '' }}>25</option>
+                                <option value="26" {{ old('DD') == '26' ? 'selected' : '' }}>26</option>
+                                <option value="27" {{ old('DD') == '27' ? 'selected' : '' }}>27</option>
+                                <option value="28" {{ old('DD') == '28' ? 'selected' : '' }}>28</option>
+                                <option value="29" {{ old('DD') == '29' ? 'selected' : '' }}>29</option>
+                                <option value="30" {{ old('DD') == '30' ? 'selected' : '' }}>30</option>
+                                <option value="31" {{ old('DD') == '31' ? 'selected' : '' }}>31</option>
 
                             </select>
         
                             <select name="MM" id="MM">
-                                <option value="">Tháng</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
+                                <option value="" >Tháng</option>
+                                <option value="1" {{ old('MM') == '1' ? 'selected' : '' }}>1</option>
+                                <option value="2" {{ old('MM') == '2' ? 'selected' : '' }}>2</option>
+                                <option value="3" {{ old('MM') == '3' ? 'selected' : '' }}>3</option>
+                                <option value="4" {{ old('MM') == '4' ? 'selected' : '' }}>4</option>
+                                <option value="5" {{ old('MM') == '5' ? 'selected' : '' }}>5</option>
+                                <option value="6" {{ old('MM') == '6' ? 'selected' : '' }}>6</option>
+                                <option value="7" {{ old('MM') == '7' ? 'selected' : '' }}>7</option>
+                                <option value="8" {{ old('MM') == '8' ? 'selected' : '' }}>8</option>
+                                <option value="9" {{ old('MM') == '9' ? 'selected' : '' }}>9</option>
+                                <option value="10" {{ old('MM') == '10' ? 'selected' : '' }}>10</option>
+                                <option value="11" {{ old('MM') == '11' ? 'selected' : '' }}>11</option>
+                                <option value="12" {{ old('MM') == '12' ? 'selected' : '' }}>12</option>
                             </select>
         
                             <select name="YY" id="YY">
-                                <option value="">Năm</option>
-                                <option value="1950">1950</option>
-                                <option value="1951">1951</option>
-                                <option value="1952">1952</option>
-                                <option value="1953">1953</option>
-                                <option value="1954">1954</option>
-                                <option value="1955">1955</option>
-                                <option value="1956">1956</option>
-                                <option value="1957">1957</option>
-                                <option value="1958">1958</option>
-                                <option value="1959">1959</option>
-                                <option value="1960">1960</option>
-                                <option value="1961">1961</option>
-                                <option value="1962">1962</option>
-                                <option value="1963">1963</option>
-                                <option value="1964">1964</option>
-                                <option value="1965">1965</option>
-                                <option value="1966">1966</option>
-                                <option value="1967">1967</option>
-                                <option value="1968">1968</option>
-                                <option value="1969">1969</option>
-                                <option value="1970">1970</option>
-                                <option value="1971">1971</option>
-                                <option value="1972">1972</option>
-                                <option value="1973">1973</option>
-                                <option value="1974">1974</option>
-                                <option value="1975">1975</option>
-                                <option value="1976">1976</option>
-                                <option value="1977">1977</option>
-                                <option value="1978">1978</option>
-                                <option value="1979">1979</option>
-                                <option value="1980">1980</option>
-                                <option value="1981">1981</option>
-                                <option value="1982">1982</option>
-                                <option value="1983">1983</option>
-                                <option value="1984">1984</option>
-                                <option value="1985">1985</option>
-                                <option value="1986">1986</option>
-                                <option value="1987">1987</option>
-                                <option value="1988">1988</option>
-                                <option value="1989">1989</option>
-                                <option value="1990">1990</option>
-                                <option value="1991">1991</option>
-                                <option value="1992">1992</option>
-                                <option value="1993">1993</option>
-                                <option value="1994">1994</option>
-                                <option value="1995">1995</option>
-                                <option value="1996">1996</option>
-                                <option value="1997">1997</option>
-                                <option value="1998">1998</option>
-                                <option value="1999">1999</option>
-                                <option value="2000">2000</option>
-                                <option value="2001">2001</option>
-                                <option value="2002">2002</option>
-                                <option value="2003">2003</option>
-                                <option value="2004">2004</option>
-                                <option value="2005">2005</option>
-                                <option value="2006">2006</option>
-                                <option value="2007">2007</option>
-                                <option value="2008">2008</option>
+                            <option value="" >Năm</option>
+
+                            @for ($year = 1950; $year <= date('Y'); $year++)
+                                <option value="{{ $year }}" {{ old('YY') == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endfor
                                 
                             </select>
+                            @error('birth')
+                            <br>
+                            <span class="msg-error">{{$message}}</span>
+                            @enderror
                         </div>
 
                         <div class="policy">
-                            <input type="checkbox" name="policy" id="policy"> 
+                            <input type="checkbox" name="policy" id="policy"  {{ old('policy') ? 'checked' : ''}} > 
                             Tôi đã đọc và đồng ý với <a href="">Điều kiện giao dịch chung</a> 
-                            và <a href="">Chính sách bảo mật thông tin</a> của T&P
-
+                            và <a href="">Chính sách bảo mật thông tin</a> của T&P 
+        
+                            @error('policy')
+                            <br>
+                            <span class="msg-error">{{$message}}</span>
+                            @enderror
                         </div>
-
+                      
                         <div class="signup_button">
                             <button type="submit" class="signup_btn" onclick="sigUpOnclick()">Đăng ký</button><br>
                         </div>
                     </form>
-
-                    
+                       
                     <div class="signup_have-an-account">
                         <p>Bạn đã có tài khoản? <a href="signin.html">Đăng nhập</a></p>
                     </div>

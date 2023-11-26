@@ -11,7 +11,7 @@
 	
     <link rel="stylesheet" href="{{asset('Assets/css/admin/login.css')}}">
 
-	</head>
+ </head>
 	<body class="img js-fullheight" style="background-image: url({{asset('Assets/Images/bg.jpg')}});">
 	<section class="ftco-section">
 		<div class="container">

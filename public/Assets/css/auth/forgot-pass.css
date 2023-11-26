@@ -46,6 +46,7 @@
 
 .forgot-pass_btn
 {
+    width: 100%;
     outline: none;
     text-decoration: none;
     position: relative;

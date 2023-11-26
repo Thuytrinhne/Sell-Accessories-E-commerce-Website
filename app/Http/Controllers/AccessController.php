@@ -13,9 +13,9 @@ use App\Mail\SendEmailCode;
 use App\Http\Requests\AccessRequest;
 class AccessController extends Controller
 {
-    public static function indexSignUp()
+    public static function indexSignUp(Request $request)
     {
-        return AccessService::indexSignUp();
+        return AccessService::indexSignUp($request);
     }
     public static function postUser(AccessRequest $request)
     {
@@ -52,7 +52,15 @@ class AccessController extends Controller
         } catch (Exception $e) {
             info("Error: ". $e->getMessage());
         }
-        return redirect()->back()->with('sendOTP', $request->email);
+        return redirect()->back()->with('sendOTP', $request->email)
+        ->with('sendOTPSuccess', 'TShopping đã gửi mã xác thực vào Email của bạn vui lòng kiểm tra lại nhé');
     }
-    
+    public static function forgotPassword()
+    {
+        return view('auth.forgot-pass');
+    }
+    public static function handleForgotPass(Request $request)
+    {
+        dd($request);
+    }
 }

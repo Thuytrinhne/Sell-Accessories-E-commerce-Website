@@ -21,16 +21,19 @@
             <div class="forgot-pass_body-form" >
                 <div class="forgot-pass_body-form-container">
                     <h2 style="margin-bottom: 28px; font-size: 24px;">Quên mật khẩu</h2>
+                    <form method="POST" action="{{route('handleForgot-pass')}}">
+                        @csrf
                     <div class="forgot-pass_body-input">
                         <label for="" style="margin-bottom: 6px; font-size: 13px; color: rgb(129, 129, 129);">Vui lòng nhập địa chỉ email. 
                             Bạn sẽ nhận được một liên kết tạo mật khẩu mới qua email.</label>  <br>
-                        <input type="text" placeholder="Nhập email"><br>
+                        <input name="email" type="text" placeholder="Nhập email"><br>
                     </div>
 
 
                     <div class="forgot-pass_button">
-                        <a class="forgot-pass_btn" href="pass-verify.html">Tiếp tục</a><br>
+                        <button type="submit" class="forgot-pass_btn">Tiếp tục</button><br>
                     </div>  
+                    </form>
                 </div>
             </div>
         </div>

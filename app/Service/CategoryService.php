@@ -13,6 +13,7 @@ class CategoryService
      */
     public static function index(Request $request)
     {
+        
         $categoryPaginate = CategoryRespository::indexPaginate();
         $category = CategoryRespository::index();
         $old = $request->old('name_category');
