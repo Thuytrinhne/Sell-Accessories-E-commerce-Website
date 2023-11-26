@@ -27,7 +27,8 @@ class AccessRequest extends FormRequest
             'password' => 'bail|required|min:6',
             'full_name' => 'bail|required|max:100',
             'sex' => 'required',
-            'birth'  => 'required'
+             'birth' => 'required|date',
+            'policy' => 'required'
         ];
     }
     public function messages()
@@ -42,6 +43,8 @@ class AccessRequest extends FormRequest
             'password.required' => ':attribute bắt buộc phải nhập !',
             'name_category.unique' => ':attribute đã tồn tại !',
             'name_category.max' => ':attribute tối đa :max ký tự !',
+            'policy.required' => 'Thông tin bắt buộc !'
+
         ];
     }
     public function attributes()
@@ -67,7 +70,7 @@ class AccessRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            
+            'birth' => $this->YY . '-' . $this->MM . '-' . $this->DD,
         ]);
     }
     protected function failedAuthorization()

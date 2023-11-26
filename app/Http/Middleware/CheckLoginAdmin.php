@@ -19,7 +19,7 @@ class CheckLoginAdmin
         if(Auth::check()&&Auth::user()->status = 2)
         {
             return $next($request);
-        }
+        } 
         return redirect()-> route('loginAdmin');
 
         

@@ -17,14 +17,12 @@ class AccessService
      */
     public static function indexSignUp()
     {
-        
         $response = response ()
         ->view('auth.signup');
         return $response;
     }
     public static function postUser(AccessRequest $request)
     {
-      
         //validate
         // check otp 
         $data = email_verification::where('email', $request->email)->first();
@@ -33,7 +31,6 @@ class AccessService
         {
             // Vui lòng kiểm tra lại mã OTP
             return redirect()->back()->with('Wrong', 'Mã OTP của bạn không chính xác');
-
         }
         else
         {
@@ -48,8 +45,8 @@ class AccessService
                 $user->role_id = 1;
                 $user->password=$request->password;
                 $user->email=$request->email;
-                $user->sex=$request->gender;
-                $user->birth= \Carbon\Carbon::createFromDate($request->YY, $request->MM, $request->DD);
+                $user->sex=$request->sex;
+                $user->birth= $request->birth;
                 $user->save();
                 return redirect()-> route('login')->with('SignUpSuccess', 'Đăng ký thành công');
             }
