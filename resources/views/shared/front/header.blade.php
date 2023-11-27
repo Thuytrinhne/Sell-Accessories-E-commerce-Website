@@ -93,7 +93,7 @@
                       </div>
                       </li>
                     <li>
-                      <img onclick="redirectOnClick(`cart.html`)" class="nav-item-pointer" src="https://hasaki.vn/images/graphics/icon_header_1.svg" alt="">    
+                      <img onclick="redirectOnClick()" id="button_cart_item" class="nav-item-pointer" src="https://hasaki.vn/images/graphics/icon_header_1.svg" alt="">    
                     </li>
                    
                   </ul>
@@ -105,6 +105,12 @@
         </div>
         @include('shared.front.assort')
      <!-- show main content here -->
+     <script>
+      function redirectOnClick() {
+          var view_screen = document.querySelector('.modal-custom-cart');
+           view_screen.style.display = 'block';
+        }
+    </script>
 </header>
     
 

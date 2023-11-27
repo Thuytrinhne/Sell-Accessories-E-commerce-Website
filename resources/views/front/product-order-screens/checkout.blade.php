@@ -32,7 +32,7 @@
                             </div>
                             <div class="location-detailPlus">
                                 <div class="location-detail">
-                                    <strong>Nguyễn Trung</strong>
+                                    <strong></strong>
                                     -
                                     0961432414
                                 </div>
@@ -40,7 +40,6 @@
                                     Hội Sơn, An Hoà Hải, Tuy An, Phú Yên
                                 </div>
                             </div>
-    
                             <a href="add-location.html">Thay đổi</a>
                         </div>
 
@@ -60,9 +59,12 @@
                         <h3>Sản phẩm</h3>
                         <h3>Tạm tính</h3>
                         <!-- =================  product list  =================== -->
+                        @foreach ($product_item_cart as $item)
+                            
+                        
                         <div class="product_list">
                             <div class="product_name_container">
-                                <p class="product_name">Tên sản phẩm x giá</p>
+                                <p class="product_name">{{ $item->name_product }} x {{ $item->quantity }}</p>
                                 <dl class="variation" >
                                     <dt class="variation_color">Color: </dt>
                                     <dd class="variation_color">
@@ -71,21 +73,8 @@
                                 </dl>
                             </div>
 
-                            <p>130.000đ</p>
-                        </div>
-                            <div class="product_list">
-                            <div class="product_name_container">
-                                <p class="product_name">Tên sản phẩm x giá</p>
-                                <dl class="variation" >
-                                    <dt class="variation_color">Color: </dt>
-                                    <dd class="variation_color">
-                                        <p>Be</p>
-                                    </dd>
-                                </dl>
-                            </div>
-
-                            <p>130.000đ</p>
-                        </div>
+                            <p>{{ $item->quantity * $item->price}}</p>
+                        @endforeach
                         <!-- =================  product list  =================== -->
 
                         <h3>Tạm tính</h3>

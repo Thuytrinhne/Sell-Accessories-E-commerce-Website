@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\user_address;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\CartController;
 class User_AddressController extends Controller
 {
     /**
@@ -12,9 +12,14 @@ class User_AddressController extends Controller
      */
     public function index()
     {
-        //
+        $product_item_cart = CartController::getCartitem();
+        return view('front.customer.address', compact('product_item_cart'));
     }
 
+    public function addAddress() {
+        $product_item_cart = CartController::getCartitem();
+        return view('front.product-order-screens.add-location',compact('product_item_cart'));
+    }
     /**
      * Show the form for creating a new resource.
      */

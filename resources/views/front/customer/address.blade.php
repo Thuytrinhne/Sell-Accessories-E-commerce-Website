@@ -55,7 +55,7 @@
                 </div>
                 <div class="body-user-display-footer">
                   <div>Bạn muốn giao hàng đến địa chỉ khác?</div>
-                  <button class="body-footer-seemore btn-red">Thêm địa chỉ mới</button>
+                  <a href="add-location"><button class="body-footer-seemore btn-red">Thêm địa chỉ mới</button></a>
                 </div>
               </div>
 @endsection

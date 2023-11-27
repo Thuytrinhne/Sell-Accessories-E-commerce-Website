@@ -5,16 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\cart;
 use Illuminate\Http\Request;
 
+use DB;
+
 class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public static function getCartitem() {
+        $product_item = DB::select('SELECT name_product,cart_item.quantity,product_item.price
+                                    FROM cart_item, product_item, product
+                                    WHERE
+                                        cart_item.product_item_id = product_item.id
+                                        and product_item.product_id = product.id
+                                        
+            ');
+        return $product_item;
     }
-
     /**
      * Show the form for creating a new resource.
      */

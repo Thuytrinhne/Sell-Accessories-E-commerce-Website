@@ -12,4 +12,9 @@ class order extends Model
     protected $casts = [
         'date_order' => 'datetime:d/m/Y',
     ];
+
+    public function cart()
+    {
+        return $this->belongsTo(cart::class);
+    }
 }

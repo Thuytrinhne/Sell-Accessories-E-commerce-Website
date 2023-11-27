@@ -2,47 +2,48 @@
 .cart dl {
     margin: 0;
 }
-.modal-custom-cart
-{
+
+.modal-custom-cart {
     display: none;
-    
+
 }
-.cart{
+
+.cart {
     /* background-color: ; */
     width: 100vw;
     height: 100vh;
 
 }
 
-.cart_container{
+.cart_container {
     margin: 48px 33%;
 }
 
-.product_container{
+.product_container {
     height: 500px;
     border-bottom: #e4e4e4 solid 1px;
 }
 
 /* ===========  product box  =========== */
-.product_box{
+.product_box {
     display: grid;
     grid-template-columns: 15% 53% 25% 6%;
     border-bottom: #c7c7c7 dashed 1px;
     padding: 16px 0;
 }
 
-.product_box .product_name{
+.product_box .product_name {
     font-size: 14px;
     color: #333333;
 }
 
 .variation dt,
-.variation dd{
+.variation dd {
     display: inline-block;
     color: #777;
 }
 
-.cancel_btn{
+.cancel_btn {
     border-radius: 50%;
     border: none;
     height: 32px;
@@ -50,26 +51,26 @@
     line-height: 60px;
 }
 
-.cancel_btn img{
+.cancel_btn img {
     height: 32px;
     width: 32px;
 }
+
 /* ===========  product box  =========== */
 
-.total{
+.total {
     display: grid;
     grid-template-columns: 50% 50%;
     margin: 12px 0 36px 0;
 
 }
 
-.total p{
+.total p {
     font-size: 17px;
     color: #777;
 }
 
-.pay_btn
-{
+.pay_btn {
     outline: none;
     text-decoration: none;
     position: relative;
@@ -79,21 +80,21 @@
     background-color: var(--primary-color);
     border-radius: 400px;
     text-align: center;
-    border:solid 4px transparent;
+    border: solid 4px transparent;
     padding: 8px 17px;
     cursor: pointer;
     padding: 20px 64px;
 }
-.pay_btn:hover
-{
+
+.pay_btn:hover {
     color: white;
     background-color: #81D1E5;
     transition: all 0.2s linear;
 }
-.pay_btn::before
-{
+
+.pay_btn::before {
     border-radius: 40px;
-    display:  block;
+    display: block;
     content: "";
     position: absolute;
     z-index: 0;
@@ -105,25 +106,25 @@
 }
 
 
-.pay_button{
+.pay_button {
     text-align: center;
 }
 
 
 /* ===========  buy-amount  ============ */
-.buy-amount_container{
+.buy-amount_container {
     display: inline-block;
     position: relative;
 }
 
-.buy-amount button{
+.buy-amount button {
     height: var(--buy-Amount-Btn-size);
     width: var(--buy-Amount-Btn-size);
     border: #ececec solid 1px;
     cursor: pointer;
 }
 
-.buy-amount button:hover{
+.buy-amount button:hover {
     background-color: #dedede;
 }
 
@@ -135,17 +136,17 @@
     transform: translateY(-50%);
 }
 
-.buy-amount button svg{
+.buy-amount button svg {
 
     color: #909090;
 }
 
-.buy-amount button:hover svg{
+.buy-amount button:hover svg {
     color: #7e7e7e;
 }
 
 
-.buy-amount input{
+.buy-amount input {
     border: #ececec solid 1px;
     width: 54px;
     height: var(--buy-Amount-Btn-size);

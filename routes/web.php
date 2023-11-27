@@ -1,6 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\User_AddressController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,12 +17,12 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-Route::get('/', function () {
-   return view('homepage');
-})->name('front.homepage');
+
+Route::get('/', [HomepageController::class, 'index']
+)->name('front.homepage');
 Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
- })->name('front.account');
+ })->name('front.account');   
 
 
 // router admin
@@ -96,15 +101,9 @@ Route::get('/pass-verify', function () {
 // end router auth
 
 // router product
-Route::get('/checkout', function () {
-    return view('front.product-order-screens.checkout');
- })->name('checkout');
- Route::get('/checkout/choose-location', function () {
-    return view('front.product-order-screens.choose-location');
- })->name('choose-location');
- Route::get('/checkout/add-location', function () {
-    return view('front.product-order-screens.add-location');
- })->name('add-location');
+Route::get('/checkout',[CheckoutController::class, 'index'] )->name('checkout');
+Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
+ Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');
  Route::get('/wishlist', function () {
     return view('front.product-order-screens.wishlist');
  })->name('wishlist');
@@ -124,4 +123,10 @@ Route::get('/checkout', function () {
 
  
 
+
+Route::prefix('/customer/orders')->group(function () {
+   // Hiển thị danh sách các danh mục
+   Route::get('/', [OrderController::class, 'index'])->name('.front.customer.history-orders');
+   
+});
 
