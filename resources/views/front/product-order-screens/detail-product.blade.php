@@ -71,23 +71,10 @@
                   <h4>{{$product->name}}</h4>
               </div>
               <div class="row">  
-                  <span class="color-option" style="background-color:{{$product->value}};">{{$product->value}} </span>
+                  <span class="color-option" style="background-color:{{$product->value}}; color:{{$product->value}}">{{$product->value}} </span>
               </div>
 
-              <div class="row info-number">
-                <div class="col-2 info-number__title">
-                    <h4>Số lượng</h4>
-                </div>
-                <div class="col-4">
 
-                  <div class="input-group mb-3">
-                    <button class="btn btn-outline-secondary" type="button">-</button>
-                    <input type="" class="form-control" placeholder="01" >
-                    <button class="btn btn-outline-secondary" type="button">+</button>
-                  </div>
-                    
-                </div>
-            </div>
 
               <div class="row info-category" style="margin-top: 20px;">
                   <h4>Category: 

@@ -10,4 +10,9 @@ class variation_option extends Model
     use HasFactory;
     protected $table ='variation_option';
 
+    public function variation()
+    {
+        return $this->belongTos(variation::class);
+    }
+
 }

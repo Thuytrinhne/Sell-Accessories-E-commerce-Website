@@ -16,18 +16,15 @@ use App\Http\Controllers\ProductController;
 
 //Qtoan them vao
 Route::group(['prefix' => '/'], function () {
-   Route::get('/', [ProductController::class, 'index'])->name('products.index');
+   
+   Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
+
+   Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
    
 });
 
-   // other routes related to products
-
-
-// Route::get('/', function () {
-//    return view('homepage');
-// })->name('front.homepage');
 
 Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
@@ -44,6 +41,32 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     Route::get('/product', function () {
     return view('admin.product');
     })->name('admin.product');
+   
+   //  Thêm route product
+   Route::prefix('product')->group( function()
+   {
+      // hiển thị sản phẩm
+      Route::get('/', [ProductController::class,'index'])->name('admin.product');
+      // xử lý thêm 
+      Route::post('/add', [ProductController::class,'store'])->name('admin.product.add');
+      // xử lý xóa
+      Route::get('/destroy/{id}', [ProductController::class,'destroy'])->name('admin.product.destroy');
+      
+
+      // hiển thị list chi tiết sản phẩm
+      Route::get('/show/{product}', [ProductController::class,'indexItem'])->name('admin.product.item');
+      //Hiện form thêm chi tiết sản phẩm
+      Route::get('/item/{product}/create', [ProductController::class,'createItem'])->name('admin.product.item.create');
+      // Xử lí thêm 
+      Route::post('/item/{product}/store', [ProductController::class,'storeItem'])->name('admin.product.item.store');
+       //Hiện form sửa sản phẩm
+       Route::get('/item/{product}/edit', [ProductController::class,'editItem'])->name('admin.product.item.edit');
+       // Xử lí thêm 
+       Route::post('/item/{product}/update', [ProductController::class,'updateItem'])->name('admin.product.item.update');
+      
+
+
+   });
 
     Route::get('/order', function () {
     return view('admin.order');
@@ -122,15 +145,10 @@ Route::get('/checkout', function () {
  Route::get('/wishlist', function () {
     return view('front.product-order-screens.wishlist');
  })->name('wishlist');
- Route::get('/filter', function () {
-    return view('front.product-order-screens.filter');
- })->name('filter');
 
 
-//trùng nên cmt lại
-//  Route::get('/detail-product', function () {
-//     return view('front.product-order-screens.detail-product');
-//  })->name('front.account');
+
+
  Route::get('/not-found', function () {
     return view('front.product-order-screens.not-found');
  })->name('front.account');

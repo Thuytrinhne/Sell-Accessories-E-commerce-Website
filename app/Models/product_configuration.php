@@ -10,4 +10,14 @@ class product_configuration extends Model
     use HasFactory;
     protected $table ='product_configuration';
 
+    public function productItem()
+    {
+        return $this->belongsTo(product_item::class);
+    }
+
+    public function variationOptions()
+    {
+        return $this->belongsTo(variation_option::class);
+    }
+
 }
