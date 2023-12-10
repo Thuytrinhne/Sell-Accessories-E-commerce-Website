@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Auth\Access\AuthorizationException;
 
-class ProductRequest extends FormRequest
+class ItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,22 +23,31 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name_product' => 'bail|required|unique:product|max:50',
-
+            'price' => 'bail|required',
+            'quantity' => 'bail|required', 
+            'value' => 'bail|required',    
+            'name' => 'bail|required',    
+               
         ];
     }
     public function messages()
     {
         return [
-            'name_product.required' => ':attribute bắt buộc phải nhập !',
-            'name_product.unique' => ':attribute đã tồn tại !',
-            'name_product.max' => ':attribute tối đa :max ký tự !',
+            'price.required' => ':attribute bắt buộc phải nhập !',
+            'quantity.required' => ':attribute bắt buộc phải nhập !',
+            'value.required' => ':attribute bắt buộc phải nhập !',
+            'name.required' => ':attribute bắt buộc phải nhập !',
+
         ];
     }
     public function attributes()
     {
         return [
-            'name_product' => 'Tên sản phẩm'
+            'price' => 'Giá sản phẩm',
+            'quantity' => 'Số lượng sản phẩm',
+
+            'value' => 'Variation_option',
+            'name' => 'Variation'
         ];
     }
     public function withValidator($validator)

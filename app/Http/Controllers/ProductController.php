@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Service\ProductService;
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ItemRequest;
 use App\Models\product;
 use App\Models\category;
 use App\Models\product_item;
@@ -76,7 +77,7 @@ class ProductController extends Controller
         return ProductService::createItem($product);
     }
 
-    public function storeItem(Request $request,$product)
+    public function storeItem(ItemRequest $request,$product)
     {
         return ProductService::storeItem($request,$product);
     }

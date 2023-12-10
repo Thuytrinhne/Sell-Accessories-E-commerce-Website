@@ -1,5 +1,18 @@
 @extends ('layouts.admin')
 @section ('content')
+
+                @if (session('error'))
+                    <script>
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Xóa thất bại',
+                        text: '{{ session('error') }}',
+                        footer: '<a href="">Bạn vui lòng kiểm tra lại nhé </a>'
+                        })
+
+                    </script>
+                @endif
+
 <div class="content manage">
     <div class="title_manage">
         <h1>Chi tiết sản phẩm</h1>

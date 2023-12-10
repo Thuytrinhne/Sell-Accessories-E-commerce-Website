@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ItemRequest;
 use App\Models\product;
 use App\Models\category;
 use App\Models\product_item;
@@ -59,7 +60,7 @@ class ProductService
 
         // dd($request);
         
-        return redirect()->back()->with('success');
+        return redirect()->back()->with('success', 'Thêm thành công');
     }
     /**
      * Display the specified resource.
@@ -113,7 +114,7 @@ class ProductService
             $product->delete();
 
         }catch (\Exception  $exception) {
-            return back()->withError('Có lỗi xảy ra. Thử lại')->withInput();
+            return back()->withError('Sản phẩm có ID = ' . $id . ' đã thuộc về 1 sản phẩm chi tiết')->withInput();
         };
         
         return redirect()->back()->with('DestroySuccess', 'Xóa thành công');
@@ -152,7 +153,7 @@ class ProductService
         return(view('admin.create-product-item',compact('product')));
     }
 
-    public static function storeItem(Request $request,$product)
+    public static function storeItem(ItemRequest $request,$product)
     {
         $productI = new product_item();
         $variation = new variation();
@@ -215,7 +216,7 @@ class ProductService
             $item = product_item::find($item); 
             $item->delete();
         }catch (\Exception  $exception) {
-            return back()->withError('Có lỗi xảy ra. Thử lại')->withInput();
+            return back()->withError('Sản phẩm chi tiết có ID = ' . $item->id . ' đã thuộc về 1 bảng khác!')->withInput();
         };
         
         return redirect()->back()->with('DestroySuccess', 'Xóa thành công');
