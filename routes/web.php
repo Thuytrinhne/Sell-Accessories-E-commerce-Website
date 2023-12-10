@@ -51,6 +51,10 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::post('/add', [ProductController::class,'store'])->name('admin.product.add');
       // xử lý xóa
       Route::get('/destroy/{id}', [ProductController::class,'destroy'])->name('admin.product.destroy');
+      // Hiện form sửa
+      Route::get('/edit/{id}', [ProductController::class,'edit'])->name('admin.product.edit');
+      // Xử lí sửa
+      Route::post('/update/{id}', [ProductController::class,'update'])->name('admin.product.update');
       
 
       // hiển thị list chi tiết sản phẩm
@@ -60,9 +64,11 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       // Xử lí thêm 
       Route::post('/item/{product}/store', [ProductController::class,'storeItem'])->name('admin.product.item.store');
        //Hiện form sửa sản phẩm
-       Route::get('/item/{product}/edit', [ProductController::class,'editItem'])->name('admin.product.item.edit');
+       Route::get('/item/edit/{item}', [ProductController::class,'editItem'])->name('admin.product.item.edit');
        // Xử lí thêm 
-       Route::post('/item/{product}/update', [ProductController::class,'updateItem'])->name('admin.product.item.update');
+       Route::post('/item/update/{item}', [ProductController::class,'updateItem'])->name('admin.product.item.update');
+       // Xử lí xóa
+       Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
       
 
 

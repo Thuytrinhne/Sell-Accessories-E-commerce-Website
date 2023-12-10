@@ -39,6 +39,16 @@
                             <input type="text" placeholder="Nhập SKU" name="SKU">
                         </div>
 
+                        <div class="nameAdd">
+                            <label>Variation </label>
+                            <input type="text" placeholder="Nhập SKU" name="name">
+                        </div>
+
+                        <div class="nameAdd">
+                            <label>Variation_option </label>
+                            <input type="text" placeholder="Nhập SKU" name="value">
+                        </div>
+
                         <div class="imageAdd">
                             <label>Ảnh sản phẩm: </label>
                             <img src="/Assets/Images/image-add.png" name="image">

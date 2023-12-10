@@ -24,12 +24,12 @@
                     </script>
                 </div>
 
-                @if(Session::has('addsuccess'))  
+                @if(Session::has('success'))  
                     <script>
                         Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: '{{session('addsuccess')}}',
+                        title: '{{session('success')}}',
                         showConfirmButton: false,
                         timer: 2000
                         })
@@ -55,6 +55,8 @@
                     <nav id="product_1" class="product product_1">
                         <img src="/Assets/Images/product_1.jpg">
                         <p> {{$item->name_product}} </p>
+                        
+                        <textarea name="description" disabled style="width: 90%"> {{$item->description}} </textarea>
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
 
@@ -63,9 +65,11 @@
                                 Details
                             </a>
 
+                            <a href="{{route('admin.product.edit',[$item->id])}}">
                             <button class="Edit" >
                                 <ion-icon name="pencil"></ion-icon>
                             Sửa</button>
+                            </a>
 
                             <a class="Delete" href="{{route('admin.product.destroy',[$item->id])}}">
                             <ion-icon name="trash-bin"></ion-icon>
@@ -74,18 +78,26 @@
                         </div>
                     </nav>
                     @endforeach
-                </div>
 
+                    
+                </div>
+                {{ $products->links() }}
+
+                
                 <form action="{{ route('admin.product.add') }}" method="POST" class="selection selection_add" id="addForm">
                    @csrf
                     <div class="addCard">
                         <div class="nameAdd">
                             <label>Tên sản phẩm: </label>
                             <input type="text" placeholder="Tên sản phẩm" name="name_product">
+                            @error('name_product')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="nameAdd">
                             <label  name="description">Mô tả: </label>
-                            <input type="text" placeholder="Mô tả" name="description">
+                            <textarea name="description" placeholder="Nhập mô tả" style="width: 100%"> </textarea>
+                            
                         </div>
                         
                         <div class="tag">
