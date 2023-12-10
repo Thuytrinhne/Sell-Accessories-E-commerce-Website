@@ -72,7 +72,7 @@ class CategoryService
     {
         try
         {
-             CategoryRespository::destroy($id);
+            CategoryRespository::destroy($id);
         }catch (\Exception  $exception) {
             return back()->withError('Category có ID = ' . $id . ' đã thuộc về 1 danh mục khác')->withInput();
         };

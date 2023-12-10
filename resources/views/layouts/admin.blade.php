@@ -88,8 +88,8 @@
         <!-- nav here -->
         @include('shared.admin.nav')
         <div>
-           <!-- content show here -->
-           @yield('content');
+        <!-- content show here -->
+        @yield('content');
         </div>
     </div>
     

@@ -2,6 +2,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\WishlishController;
+use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,21 +43,30 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
    return view('admin.report');
    })->name('admin.report');
 
-      // Route::get('/account', function () {
-      // return view('admin.account');
-      // })->name('admin.account');
-
+   Route::any('/search', [AccountController::class,'search'] ) -> name('admin.search_account');;
    Route::prefix('account')->group( function(){
       // hiển thị danh sách danh mục 
       Route::get('/', [AccountController::class,'index'])->name('admin.account');
       // // xử lý thêm danh mục
-      // Route::get('/create', [AccountController::class,'create'])->name('admin.account.create');
-      Route::get('/add', [AccountController::class,'create'])->name('admin.account.add');
-      // // xử lý xóa danh mục
-      Route::get('/delete', [AccountController::class,'destroy'])->name('admin.account.destroy');
-      // // sửa 1 danh mục
-      Route::get('/edit', [AccountController::class,'edit'])->name('admin.account.edit');
+      Route::prefix('add') -> group(function(){
+         Route::match(['GET','POST'],'/admin', [AccountController::class,'storeAdmin'])->name('store.admin');
+         Route::match(['GET','POST'],'/staff', [AccountController::class,'storeStaff'])->name('store.staff');
+         Route::match(['GET','POST'],'/user', [AccountController::class,'storeUser'])->name('store.user');
+      });
+
+      Route::prefix('delete') -> group(function(){
+         Route::match(['GET','POST'],'/admin/{id}', [AccountController::class,'destroyAdmin'])->name('destroy.admin');
+         Route::match(['GET','POST'],'/staff/{id}', [AccountController::class,'destroyStaff'])->name('destroy.staff');
+         Route::match(['GET','POST'],'/user/{id}', [AccountController::class,'destroyUser'])->name('destroy.user');
+      });
+
+      Route::prefix('edit') -> group(function(){
+         Route::match(['GET','POST'],'/admin/{id}', [AccountController::class,'editAdmin'])->name('edit.admin');
+         Route::match(['GET','POST'],'/staff/{id}', [AccountController::class,'editStaff'])->name('edit.staff');
+         Route::match(['GET','POST'],'/user/{id}', [AccountController::class,'editUser'])->name('edit.user');
+      });
    });
+
 
    Route::prefix('category')->group( function()
    {
@@ -66,7 +78,6 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::get('/delete/{id}', [CategoryController::class,'destroy'])->name('admin.category.destroy');
       // sửa 1 danh mục
       Route::get('/edit', [CategoryController::class,'edit'])->name('admin.category.edit');
-
    }
    );
 });
@@ -118,9 +129,16 @@ Route::get('/checkout', function () {
  Route::get('/checkout/add-location', function () {
     return view('front.product-order-screens.add-location');
  })->name('add-location');
- Route::get('/wishlist', function () {
-    return view('front.product-order-screens.wishlist');
- })->name('wishlist');
+//  Route::get('/wishlist', function () {
+//     return view('front.product-order-screens.wishlist');
+
+
+Route::prefix('/wishlist') -> group(function () {
+   Route::get('/', [WishlishController::class,'index'])->name('wishlist');
+   Route::match(['GET','POST'],'/delete/{id}', [WishlishController::class,'destroy'])->name('destroy.wishlists');
+});
+
+
  Route::get('/filter', function () {
     return view('front.product-order-screens.filter');
  })->name('filter');

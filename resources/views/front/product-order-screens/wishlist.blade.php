@@ -28,9 +28,9 @@
             <!-- ===============   product box  =============== -->
             <div class="product_box">
                 <div class="cancel_button">
-                    <button href="" class="cancel_btn">
+                    <a href="{{ route('destroy.wishlists') }}" class="cancel_btn">
                         <i class="fa-solid fa-circle-xmark"></i>
-                    </button>
+                    </a>
                 </div>
                 <img src="./Assets/Images/product_img.jpeg" alt="">
                 <div class="product_info">

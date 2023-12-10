@@ -40,7 +40,7 @@ class CategoryRespository
             {
                 $category->parent_id=$request->input('parent_id');
             }
-            $category->save();
+        $category->save();
     }
 
     /**

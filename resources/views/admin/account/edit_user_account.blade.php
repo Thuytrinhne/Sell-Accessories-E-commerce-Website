@@ -12,7 +12,7 @@
             </div>
 
             <div class="card-body">
-                <form action="{{route('edit.admin', ['id'=>$admin->id] )}}" method="POST">
+                <form action="{{route('edit.user', ['id'=>$admin->id] )}}" method="POST">
                     @csrf
                     <!-- @method('PUT') -->
                     <div class="row">

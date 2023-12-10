@@ -2,69 +2,190 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AccountRequest;
 use App\Models\user;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use App\Service\AccountService;
+use Illuminate\Support\Facades\Input;
+
+
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $admin = User::select("id", "sex", "full_name", "phone", "email")->get();
-        return view("admin.account.account", compact("admin")) -> with('i');
+        // $id = AccountController::getId();
+        // $i = $id;
+        // $j = 0;
+        // $k = 0;
+        $admin = user::where('role_id', 3)->first();
+        $staff = user::where('role_id', 2)->first();
+        $user = user::where('role_id', 1)->first();
+        return view("admin.account.account", compact("admin", "staff", "user"));
     }
-    // (request()->input('page, 1') -1) *5)
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+// =======================  Thêm xoá sửa admin =========================
+    public function storeAdmin(Request $request)
     {
-        return view("admin.account.create_account");
+        if($request->isMethod('POST')){
+            $validate = $request->validate([
+                'full_name'=> 'required',
+                'sex'=> 'required',
+                'phone'=> 'required|max:10',
+                'email'=> 'required',
+                'password'=> 'required',
+                'birth'=> 'required'
+            ]);
+            $params=$request->except('_token');
+            $params['role_id'] = 3;
+            $admin = user::create($params)->where('role_id', 3)->first();;
+            if($admin->id){
+                return redirect()->route('admin.account')->with('thongbao','Hêm thông tin thành công');
+            }
+            
+        } return view('admin.account.create_account');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    
+    public function editAdmin(Request $request, string $id)
     {
-        AccountController::create($request->all());
-        return redirect()->route("admin.account.acount") -> with('thongbao', 'Thêm tài khoản thành công!');
+        $admin = user::find($id);
+        if($request->isMethod('POST')){ 
+            $validate = $request->validate([
+                'full_name'=> 'required',
+                'sex'=> 'required',
+                'phone'=> 'required',
+                'email'=> 'required',
+                'password'=> 'required',
+                'birth'=> 'required'
+            ]);
+            $params = $request -> except('_token');
+            $result=$admin->update($params);
+            if($result){
+                return redirect()->route('admin.account',['id'=>$id])->with('thongbao','Sửa thông tin thành công');
+            }
+        }return view('admin.account.edit_account', compact('admin'));
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(user $user)
+    
+    public function destroyAdmin(string $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(AccountController $admin)
-    {
-        return view('admin.account.edit_account', compact('admin'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, AccountController $admin)
-    {
-        $admin -> update($request->all());
-        return redirect()->route('admin.account.account') -> with('thongbao','Cập nhật thông tin tài khoản thành công');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(AccountController $admin)
-    {
+        $admin = user::find($id);
         $admin -> delete();
-        return redirect()->route('admin.account.account') -> with('thongbao','Xoá thông tin thành công');
+        return redirect()->route('admin.account') -> with('thongbao','Xoá thông tin thành công');
+    }
+// =======================  END Thêm xoá sửa admin =========================
+
+
+
+// =======================  Thêm xoá sửa staff =========================
+public function storeStaff(Request $request)
+    {
+        if($request->isMethod('POST')){
+            $validate = $request->validate([
+                'full_name'=> 'required',
+                'sex'=> 'required',
+                'phone'=> 'required|max:10',
+                'email'=> 'required',
+                'password'=> 'required',
+                'birth'=> 'required'
+            ]);
+            $params=$request->except('_token');
+            $params['role_id'] = 2;
+
+            $staff = user::create($params)->where('role_id', 2)->first();;
+            if($staff->id){
+                return redirect()->route('admin.account')->with('thongbao','Hêm thông tin thành công');
+            }
+        } return view('admin.account.create_staff_account');
+    }
+    
+    public function editStaff(Request $request, string $id)
+    {
+        $staff = user::find($id);
+        if($request->isMethod('POST')){ 
+            $validate = $request->validate([
+                'full_name'=> 'required',
+                'sex'=> 'required',
+                'phone'=> 'required',
+                'email'=> 'required',
+                'password'=> 'required',
+                'birth'=> 'required'
+            ]);
+            $params = $request -> except('_token');
+            $result=$staff->update($params);
+            if($result){
+                return redirect()->route('admin.account',['id'=>$id])->with('thongbao','Sửa thông tin thành công');
+            }
+        }return view('admin.account.edit_staff_account', compact('staff'));
+    }
+    
+    public function destroyStaff(string $id)
+    {
+        $staff = user::find($id);
+        $staff -> delete();
+        return redirect()->route('admin.account') -> with('thongbao','Xoá thông tin thành công');
+    }
+// =======================  END Thêm xoá sửa staff =========================
+
+
+
+
+// =======================  Thêm xoá sửa user =========================
+public function storeUser(Request $request)
+    {
+        if($request->isMethod('POST')){
+            $validate = $request->validate([
+                'full_name'=> 'required',
+                'sex'=> 'required',
+                'phone'=> 'required|max:10',
+                'email'=> 'required',
+                'password'=> 'required',
+                'birth'=> 'required'
+            ]);
+            $params=$request->except('_token');
+            $params['role_id'] = 1;
+
+            $user = user::create($params)->where('role_id', 1)->first();;
+            if($user->id){
+                return redirect()->route('admin.account.account')->with('thongbao','Hêm thông tin thành công');
+            }
+        } return view('admin.account.create_user_account');
+    }
+    
+    public function editUser(Request $request, string $id)
+    {
+        $user = user::find($id);
+        if($request->isMethod('POST')){ 
+            $validate = $request->validate([
+                'full_name'=> 'required',
+                'sex'=> 'required',
+                'phone'=> 'required',
+                'email'=> 'required',
+                'password'=> 'required',
+                'birth'=> 'required'
+            ]);
+            $params = $request -> except('_token');
+            $result=$user->update($params);
+            if($result){
+                return redirect()->route('admin.account',['id'=>$id])->with('thongbao','Sửa thông tin thành công');
+            }
+        }return view('admin.account.edit_user_account', compact('user'));
+    }
+    
+    public function destroyUser(string $id)
+    {
+        $user = user::find($id);
+        $user -> delete();
+        return redirect()->route('admin.account') -> with('thongbao','Xoá thông tin thành công');
+    }
+// =======================  END Thêm xoá sửa user =========================
+
+    public function search(){
+        $q = input::get('q');
+        $watches = user::where('ten','','LIKE','%' .$q. '%') -> get();
+        if(count($watches) > 0){
+            return view('/account', ['watches' => $watches]);
+        }else {
+            return view('/account', with('thongbao', 'Khong tim thay user'));
+        }
     }
 }

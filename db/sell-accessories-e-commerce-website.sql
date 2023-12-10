@@ -361,7 +361,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `full_name`, `phone`, `email`, `password`, `role_id`, `sex`, `birth`, `created_at`, `updated_at`, `deleted`) VALUES
 (1, 'Nguyễn Trần Công Trung', '0878005489', 'cskh@gmail.com', '123456789', 1, 0, '2002-04-01 00:00:00', '2023-11-06 09:39:35', '2023-11-06 09:39:35', b'0');
 
--- --------------------------------------------------------
+----------------------------------------------------------
 
 --
 -- Table structure for table `user_address`
