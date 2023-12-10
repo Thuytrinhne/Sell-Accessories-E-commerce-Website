@@ -40,6 +40,7 @@ class OrderService {
     }
 
     public static function DetailOrder($id) {
+        $id = $id;
         $product_item_cart = CartController::getCartitem();
 
         $user_order_infor = DB::select("

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\cart;
+use App\Models\cart_item;
 use Illuminate\Http\Request;
 
 use DB;
@@ -13,12 +14,15 @@ class CartController extends Controller
      * Display a listing of the resource.
      */
     public static function getCartitem() {
-        $product_item = DB::select('SELECT product.name_product,cart_item.quantity,product_item.price
+        $id = 1;
+        $product_item = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
                                     FROM cart_item, product_item, product
                                     WHERE
                                         cart_item.product_item_id = product_item.id
                                         and product_item.product_id = product.id
-            ');
+                                        and cart_item.cart_id = '$id'
+                                    
+            ");
         return $product_item;
 
     }
@@ -65,8 +69,11 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(cart $cart)
-    {
-        //
+    public function destroyItem($id)
+    {   
+        $item = cart_item::find($id);
+        $item->delete();
+
+        return redirect()->back();
     }
 }

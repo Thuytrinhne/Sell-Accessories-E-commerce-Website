@@ -1,5 +1,5 @@
 <div class="modal-custom modal-custom-cart">
-        <div class="modal__overlay"></div>
+        <div class="modal__overlay" style="background: white"></div>
         <div class="modal__body modal__body--border">
 
 <div class="cart">
@@ -12,14 +12,14 @@
                     <div class="product_info">
                         
                         
-                        <p class="product_name">{{ $item->name_product }}</p>
+                        <p class="product_name">{{ $item->name_product}}</p>
                         <dl class="variation" >
                             <dt class="variation_color">Color:  </dt>
                             <dd class="variation_color">
                                 <p>Be</p>
                             </dd>
                         </dl>
-                        <p class="product_quantity">{{ $item->quantity }}</p>
+                        <p class="product_price">{{ $item->price }}</p>
                         
                     </div>
                     <!-- ===========  buy-amount  ============ -->
@@ -41,7 +41,7 @@
                     <!-- ===========  buy-amount  ============ -->
 
                     <div class="cancel_button">
-                        <a href="" class="cancel_btn"><img  src="./Assets/Images/close_button.png" alt="" ></a>
+                        <a href="{{ route('cart.destroy',[$item->id]) }}" class="cancel_btn"><img  src="./Assets/Images/close_button.png" alt="" ></a>
                     </div>
                 </div>
                 @endforeach
@@ -49,22 +49,36 @@
 
                 
             </div>
-
+            @php
+                $total_price=0;
+                foreach($product_item_cart as $item) {
+                $total_price += $item->price * $item->quantity;
+                }
+            @endphp
             <div class="payment_container" style="display: inline;">
                 <div class="total">
                     <p>Tổng tiền</p>
-                    <p style="text-align:end;">130.000đ</p>
+                    <p style="text-align:end;">{{ $total_price }}đ</p>
                 </div>
+            
 
                 <div class="pay_button">
                     <a class="pay_btn" href="checkout">Thanh toán</a><br>
                 </div>
             </div>
+            
         </div>
-        <button class="modal__btn-close">
+        <button class="modal__btn-close" onclick="closeCart()">
             X
         </button>
     </div>
     </div>
     </div>
+
+    <script>
+        function closeCart() {
+            var view_screen = document.querySelector('.modal-custom-cart');
+             view_screen.style.display = 'none';
+          }
+      </script>
 </div>

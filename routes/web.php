@@ -122,3 +122,5 @@ Route::prefix('/customer/orders')->group(function () {
    
 });
 
+
+Route::get('/destroy/{id}',[CartController::class, 'destroyItem'])->name('cart.destroy');
