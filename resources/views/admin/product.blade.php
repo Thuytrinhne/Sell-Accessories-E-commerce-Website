@@ -1,6 +1,13 @@
 @extends ('layouts.admin') 
 <!-- extend/ include mặc định các file nằm trong view -->
 @section('content')
+
+@error('msg')
+    <div class="alert alert-danger">
+        <h4 style="text-align: center;">{{$message}}</h4>
+    </div>
+    @enderror
+
 <div class="content product">
                 <div class="product_header">
                     <div class="header_title">
@@ -48,6 +55,18 @@
                         })
                     </script>
                     
+                @endif
+
+                @if (session('error'))
+                    <script>
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Xóa thất bại',
+                        text: '{{ session('error') }}',
+                        footer: '<a href="">Bạn vui lòng kiểm tra lại nhé </a>'
+                        })
+
+                    </script>
                 @endif
 
                 <div class="selection selection_list">
@@ -198,11 +217,15 @@
                     <div class="addCard">
                         <div class="nameAdd">
                             <label>Tên sản phẩm: </label>
-                            <input type="text" placeholder="Tên sản phẩm" name="name_product">
+                            <input type="text" placeholder="Tên sản phẩm" name="name_product" value="{{ old('name_product') }}" >
+                            @error('name_product')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="nameAdd">
                             <label  name="description">Mô tả: </label>
-                            <input type="text" placeholder="Mô tả" name="description">
+                            <textarea name="description" placeholder="Nhập mô tả" style="width: 100%" >{{ old('description') }} </textarea>
+                            
                         </div>
                         
                         <div class="tag">

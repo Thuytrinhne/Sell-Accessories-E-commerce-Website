@@ -1,4 +1,9 @@
 @extends ('layouts.admin')
+    @error('msg')
+        <div class="alert alert-danger">
+            <h4 style="text-align: center;">{{$message}}</h4>
+        </div>
+    @enderror
 @section ('content')
 <div class="content product">
                 <div class="product_header">
@@ -22,21 +27,27 @@
                     <div class="addCard">
                         <div class="priceAdd">
                             <label>Giá sản phẩm: </label>
-                            <input type="text" placeholder="Giá sản phẩm" name="price">
+                            <input type="number" placeholder="Giá sản phẩm" name="price" value="{{ old('price') }}">
+                            @error('price')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
                         </div>
                         
                         <div class="priceAdd">
                             <label>Giá discount</label>
-                            <input type="text" placeholder="Giá discount" name="discount-price">
+                            <input type="number" placeholder="Giá discount" name="discount-price" value="{{ old('discount_price') }}">
                         </div>
                         <div class="amountAdd">
                             <label>Số lượng</label>
-                            <input type="text" placeholder="Số lượng" name="quantity">
+                            <input type="number" placeholder="Số lượng" name="quantity" value="{{ old('value') }}">
+                            @error('quantity')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
                         </div>
 
                         <div class="nameAdd">
                             <label>SKU </label>
-                            <input type="text" placeholder="Nhập SKU" name="SKU">
+                            <input type="text" placeholder="Nhập SKU" name="SKU" value="{{ old('SKU') }}">
                         </div>
 
                         <div class="imageAdd">

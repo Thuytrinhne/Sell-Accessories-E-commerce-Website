@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\ProductService;
+use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ItemRequest;
 use App\Models\product;
 use App\Models\category;
 use App\Models\product_item;
@@ -37,14 +40,14 @@ class ProductController extends Controller
         return(view('admin.product',compact('products','category')));
     }
 
-    public function indexItem($product) 
-    {
-        $items = product_item::join('product', 'product.id', '=', 'product_item.product_id')
-        ->where('product.id','=',$product)
-        ->get();
+    // public function indexItem($product) 
+    // {
+    //     $items = product_item::join('product', 'product.id', '=', 'product_item.product_id')
+    //     ->where('product.id','=',$product)
+    //     ->get();
 
-        return(view('admin.add-item', compact('items','product')));
-    }
+    //     return(view('admin.add-item', compact('items','product')));
+    // }
 
     public function filter(Request $request)
     {
@@ -76,26 +79,23 @@ class ProductController extends Controller
     {
     }
 
-    public function createItem($product)
-    {
-        return(view('admin.create-product-item',compact('product')));
-    }
+  
 
-    public function storeItem(Request $request,$product)
-    {
-        $productI = new product_item();
+    // public function storeItem(Request $request,$product)
+    // {
+    //     $productI = new product_item();
         
-        $productI->price = $request->input('price');
-        $productI->quantity = $request->input('quantity');
-        $productI->product_id = $product;
-        $productI->SKU = $request->input('SKU');
-        $productI->discount_price = $request->input('discount_price');
+    //     $productI->price = $request->input('price');
+    //     $productI->quantity = $request->input('quantity');
+    //     $productI->product_id = $product;
+    //     $productI->SKU = $request->input('SKU');
+    //     $productI->discount_price = $request->input('discount_price');
 
-        // Lưu dữ liệu vào bảng products
-        $productI->save();
+    //     // Lưu dữ liệu vào bảng products
+    //     $productI->save();
         
-        return redirect('admin/product')->with('addsuccess','Thêm thành công');
-    }
+    //     return redirect('admin/product')->with('addsuccess','Thêm thành công');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -150,13 +150,13 @@ class ProductController extends Controller
         //
     }
 
-    public function editItem($product,$item)
-    {
+    // public function editItem($product,$item)
+    // {
         
-        $item = product_item::where('product_item.product_id', '=', $product)->get();
+    //     $item = product_item::where('product_item.product_id', '=', $product)->get();
       
-        return view('admin.edit-item-product',compact('product'))->with(['product' => $product, 'item' => $item]);;
-    }
+    //     return view('admin.edit-item-product',compact('product'))->with(['product' => $product, 'item' => $item]);;
+    // }
 
 
     /**
@@ -197,6 +197,38 @@ class ProductController extends Controller
 
         // Pass the data to the view
         return view('homepage',compact('products'));
+    }
+    // Các hàm xử lí cho product_item
+    public function indexItem($product) 
+    {
+        return ProductService::indexItem($product);
+    }
+
+    public function createItem($product)
+    {
+        return ProductService::createItem($product);
+    }
+
+    public function storeItem(ItemRequest $request,$product)
+    {
+        return ProductService::storeItem($request,$product);
+    }
+
+    public function editItem($itemID)
+    {
+
+        return ProductService::editItem($itemID);
+    }
+
+    public function updateItem(Request $request, $item) 
+    {
+
+        return ProductService::updateItem($request,$item);
+    }
+
+    public function destroyItem($item)
+    {
+        return ProductService::destroyItem($item);
     }
 
 }
