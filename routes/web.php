@@ -22,6 +22,10 @@ Route::group(['prefix' => '/'], function () {
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
    Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+
+   Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
+
+   Route::get('/get-images-by-value/{value}', [ProductController::class, 'getImagesByValue'])->name('get.images.by.value');
    
 });
 

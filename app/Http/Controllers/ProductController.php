@@ -27,6 +27,16 @@ class ProductController extends Controller
         return ProductService::filter($request);
     }
 
+    public function getProductsByValue($value)
+    {
+        return ProductService::getProductsByValue($value);
+    }
+
+    public function getImagesByValue($value)
+    {
+        return ProductService::getImagesByValue($value);
+    }
+
     public function create()
     {
     }
@@ -41,7 +51,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return ProductService::store($id);
+        return ProductService::show($id);
     }
 
     public function edit($id)
