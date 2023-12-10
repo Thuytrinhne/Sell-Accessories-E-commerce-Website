@@ -40,7 +40,7 @@
                                     Hội Sơn, An Hoà Hải, Tuy An, Phú Yên
                                 </div>
                             </div>
-                            <a href="add-location.html">Thay đổi</a>
+                            <a href="checkout/choose-location">Thay đổi</a>
                         </div>
 
                         <div class="info_input">
@@ -59,53 +59,60 @@
                         <h3>Sản phẩm</h3>
                         <h3>Tạm tính</h3>
                         <!-- =================  product list  =================== -->
-                        @foreach ($product_item_cart as $item)
-                            
+                        <form action="{{ route('checkout-success') }}" method="POST" >
+                            @csrf
+                        @foreach ($product_item_cart as $key => $item)
+                        
+                        <input style="display: none" name="idOrder" value="{{ $key+1 }}">
                         
                         <div class="product_list">
                             <div class="product_name_container">
-                                <p class="product_name">{{ $item->name_product }} x {{ $item->quantity }}</p>
-                                <dl class="variation" >
-                                    <dt class="variation_color">Color: </dt>
-                                    <dd class="variation_color">
-                                        <p>Be</p>
-                                    </dd>
-                                </dl>
+                                
+                                    <label class="product_name">
+                                        <input type="text" name="name_product" value="{{ $item->name_product }}" disabled>
+                                        <span>x</span>
+                                        <input type="number" name="quantity" value="{{ $item->quantity }}" disabled>
+                                    </label>
+                                    <label class="variation">
+                                        <span>Color:</span>
+                                        <input type="text" name="variation_value" value=""  disabled>
+                                    </label>
+                                
                             </div>
-
                             <p>{{ $item->quantity * $item->price}}</p>
                         @endforeach
                         <!-- =================  product list  =================== -->
-
+                        <label class="total_cart">
                         <h3>Tạm tính</h3>
-                        <p>130.000đ</p>
+                        <input  value="{{ $total }}" disabled>
+                    </label>
                         <h3>Giao hàng</h3>
                         <p>ĐỒNG GIÁ: 35.000đ</p>
-                        <h3>Tổng</h3>
-                        <p style="font-size: 18px; font-weight: bold; color: black;">165.000đ</p>
+                        <label for="total_price" style="display: flex">
+                            <h3>Tổng</h3>
+                        <input class="total_price" type="number" name="total_price" value="{{ $total + 35000 }}" disabled>
+                        </label>
+                        
 
-                        <div class="payment_methods">
+                        <label class="payment_methods">
                             <h2>Phương thức thanh toán</h2>
-                            <div class="methods">
-                                <form action="">
-                                    <div class="pick_methods">
-                                        <input type="radio" name="" id="" > Chuyển khoản ngân hàng <br>
+                            <label class="methods">
+                                    <label class="pick_methods">
+                                        <input type="radio" name="method_payment" id="" value="Chuyển khoản ngân hàng" > Chuyển khoản ngân hàng <br>
                                         <p>description</p>
-                                    </div>
+                                    </label>
                                     
-                                    <div class="pick_methods">
-                                        <input type="radio" name="" id=""> Thanh toán tiền mặt
+                                    <label class="pick_methods">
+                                        <input type="radio" name="method_payment" value="Thanh toán tiền mặt"> Thanh toán tiền mặt
                                         <p>description</p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                                    </label>  
+                            </label>
+                        </label>
 
                         <p class="privacy">privacy</p>
 
-                        <div class="order_btn">
-                            <a>Đặt hàng</a>
-                        </div>
+                        <button type="summit" class="order_btn">Đặt hàng</button>
+                    </form>
                     </div>
                 </div>
             </div>

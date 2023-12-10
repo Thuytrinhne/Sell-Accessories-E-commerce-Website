@@ -25,21 +25,24 @@
                 </div>
 
                 <div class="selection selection_list">
+                    @foreach ($product_list as $item)
+                        
+                   
                     <nav id="product_1" class="product product_1">
                         <img src="/Assets/Images/product_1.jpg">
-                        <p>Cài tóc</p>
+                        <p>{{ $item->name_product }}</p>
                         <label id="old_price">
-                            <span>199000</span>
+                            <span>{{ $item->price }}</span>
                             <span>₫</span>
                         </label>
                         <label id="discount_price">
-                            <span>188000</span>
+                            <span>{{ $item->discount_price }}</span>
                             <span>₫</span>
                         </label>
-                        <p>Số lượng: 15</p>
+                        <p>Số lượng: {{ $item->quantity }}</p>
                         <div class="sku_code">
                             <span>SKU:</span>
-                            <span>1112312313123</span>
+                            <span>{{ $item->SKU }}</span>
                         </div>
 
 
@@ -53,118 +56,8 @@
                                 Xóa</button>
                         </div>
                     </nav>
-                    <nav id="product_1" class="product product_1">
-                        <img src="/Assets/Images/product_1.jpg">
-                        <p>Cài tóc</p>
-                        <label id="old_price">
-                            <span>199000</span>
-                            <span>₫</span>
-                        </label>
-                        <label id="discount_price">
-                            <span>188000</span>
-                            <span>₫</span>
-                        </label>
-                        <p>Số lượng: 15</p>
-                        <div class="sku_code">
-                            <span>SKU:</span>
-                            <span>1112312313123</span>
-                        </div>
-
-
-                        <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
-                        <div class="Edit-Delete">
-                            <button class="Edit">
-                                <ion-icon name="pencil"></ion-icon>
-                                Sửa</button>
-                            <button class="Delete">
-                                <ion-icon name="trash-bin"></ion-icon>
-                                Xóa</button>
-                        </div>
-                    </nav>
-                    <nav id="product_1" class="product product_1">
-                        <img src="/Assets/Images/product_1.jpg">
-                        <p>Cài tóc</p>
-                        <label id="old_price">
-                            <span>199000</span>
-                            <span>₫</span>
-                        </label>
-                        <label id="discount_price">
-                            <span>188000</span>
-                            <span>₫</span>
-                        </label>
-                        <p>Số lượng: 15</p>
-                        <div class="sku_code">
-                            <span>SKU:</span>
-                            <span>1112312313123</span>
-                        </div>
-
-
-                        <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
-                        <div class="Edit-Delete">
-                            <button class="Edit">
-                                <ion-icon name="pencil"></ion-icon>
-                                Sửa</button>
-                            <button class="Delete">
-                                <ion-icon name="trash-bin"></ion-icon>
-                                Xóa</button>
-                        </div>
-                    </nav>
-                    <nav id="product_1" class="product product_1">
-                        <img src="/Assets/Images/product_1.jpg">
-                        <p>Cài tóc</p>
-                        <label id="old_price">
-                            <span>199000</span>
-                            <span>₫</span>
-                        </label>
-                        <label id="discount_price">
-                            <span>188000</span>
-                            <span>₫</span>
-                        </label>
-                        <p>Số lượng: 15</p>
-                        <div class="sku_code">
-                            <span>SKU:</span>
-                            <span>1112312313123</span>
-                        </div>
-
-
-                        <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
-                        <div class="Edit-Delete">
-                            <button class="Edit">
-                                <ion-icon name="pencil"></ion-icon>
-                                Sửa</button>
-                            <button class="Delete">
-                                <ion-icon name="trash-bin"></ion-icon>
-                                Xóa</button>
-                        </div>
-                    </nav>
-                    <nav id="product_1" class="product product_1">
-                        <img src="/Assets/Images/product_1.jpg">
-                        <p>Cài tóc</p>
-                        <label id="old_price">
-                            <span>199000</span>
-                            <span>₫</span>
-                        </label>
-                        <label id="discount_price">
-                            <span>188000</span>
-                            <span>₫</span>
-                        </label>
-                        <p>Số lượng: 15</p>
-                        <div class="sku_code">
-                            <span>SKU:</span>
-                            <span>1112312313123</span>
-                        </div>
-
-
-                        <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
-                        <div class="Edit-Delete">
-                            <button class="Edit">
-                                <ion-icon name="pencil"></ion-icon>
-                                Sửa</button>
-                            <button class="Delete">
-                                <ion-icon name="trash-bin"></ion-icon>
-                                Xóa</button>
-                        </div>
-                    </nav>
+                    @endforeach
+                   
                 </div>
 
                 <div class="selection selection_add">

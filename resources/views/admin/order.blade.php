@@ -14,18 +14,18 @@
                     <label>Đến</label>
                     <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
                     <button>Tìm kiếm</button>
+                    <form action="{{ route('admin.order.filter') }}" method="GET" >
                     <div class="rangeCost">
                         <div class="sliderValue">
                             <span>Giá đơn hàng:</span>
-                            <span id="span_sliderValue">100</span>
+                            <input type="number" name="price_filter" id="span_sliderValue" value="0">
                             <span>₫</span>
                         </div>
-                        <div class="field">
-                            <div class="value left">0</div>
-                            <input id="input_field" type="range" min="0" max="200" value="100" steps="1">
-                            <div class="value right">200</div>
-                        </div>
+                        
+                    
                     </div>
+                    <button type="submit" style="display:none">
+                </form>
                 </div>
                 <div class="order_list">
                     <table class="content_order">
@@ -34,44 +34,45 @@
                                 <th>STT</th>
                                 <th>Tên tài khoản</th>
                                 <th>SĐT</th>
-                                <th>Địa chỉ</th>
+                                <th>Email</th>
                                 <th>Ngày đặt hàng</th>
                                 <th>Tổng Tiền</th>
                                 <th>Trạng thái</th>
                                 <th></th>
                             </tr>
                         </thead>
+
                         <tbody>
+                            @foreach($order_list as $key => $item)
                             <tr>
-                                <td>1</td>
-                                <td>user</td>
-                                <td>0948346245</td>
-                                <td>Quảng Trị</td>
-                                <td>10/10/2023</td>
-                                <td>100000</td>
-                                <td>Đang xử lý...</td>
-                                <td><button>Chi tiết</button></td>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $item->full_name }}</td>
+                                <td>{{ $item->phone }}</td>
+                                <td>{{ $item->email }}</td>
+                                <td>{{ $item->date_order }}</td>
+                                <td>{{ $item->total_price }}</td>
+                                <td>@switch($item->status)
+                                    @case(1)
+                                        Chờ xác nhận
+                                        @break
+                                    @case(2)
+                                        Đang xử lý
+                                        @break
+                                    @case(3)
+                                        Đang vận chuyển
+                                        @break
+                                    @case(4)
+                                        Thành công
+                                        @break
+                                    @case(5)
+                                        Đã hủy
+                                        @break
+                                        
+                                @endswitch</td>
+                                <td><a href="{{ route('front.order_detail',[$key])}}"><button>Chi tiết</button></a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>user</td>
-                                <td>0948346245</td>
-                                <td>Quảng Trị</td>
-                                <td>10/10/2023</td>
-                                <td>100000</td>
-                                <td>Đang xử lý...</td>
-                                <td><button>Chi tiết</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>user</td>
-                                <td>0948346245</td>
-                                <td>Quảng Trị</td>
-                                <td>10/10/2023</td>
-                                <td>100000</td>
-                                <td>Đang xử lý...</td>
-                                <td><button>Chi tiết</button></td>
-                            </tr>
+                            @endforeach
+                            
                         </tbody>
                     </table>
                 </div>

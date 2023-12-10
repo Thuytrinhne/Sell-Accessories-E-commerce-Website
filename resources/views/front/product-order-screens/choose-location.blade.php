@@ -62,7 +62,7 @@
 
                 <div class="location-add">
                     <div class="location-add_container">
-                        <a href="checkout.html">
+                        <a href="/checkout/add-location">
                             <i class="fa-solid fa-circle-plus" style="margin-right: 2px;"></i>
                             Thêm địa chỉ
                         </a>

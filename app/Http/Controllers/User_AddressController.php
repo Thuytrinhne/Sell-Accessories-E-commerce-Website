@@ -13,7 +13,7 @@ class User_AddressController extends Controller
     public function index()
     {
         $product_item_cart = CartController::getCartitem();
-        return view('front.customer.address', compact('product_item_cart'));
+        return view('front.product-order-screens.choose-location', compact('product_item_cart'));
     }
 
     public function addAddress() {

@@ -7,15 +7,16 @@
         <div class="row title">
             <h1>Chi tiết đơn hàng</h1>
         </div>
+        
         <div class="row infor">
             <div class="col infor_order">
                 <div class="row order_key">
                     <span>Đơn hàng:</span>
-                    <span> #23102477123</span>
+                    <span> #{{ $user_order_infor[0]->id }}</span>
                 </div>
                 <div class="row order_date">
                     <span>Ngày đặt: </span>
-                    <span>27/10/2023</span>
+                    <span>{{ $user_order_infor[0]->date_order }}</span>
                 </div>
                 <div class="row order_confirm">
                     <button>Hoàn tất</button>
@@ -23,9 +24,9 @@
             </div>
             <div class="col location_delivery">
                 <span>Địa chỉ người nhận</span>
-                <p>Nguyễn Thị Thùy Trinh</p>
-                <p>Điện thoại: 0123117301</p>
-                <p>Cổng sau ktx khu B, Đại học quốc gia thành phố hồ chí minh
+                <p>{{ $user_order_infor[0]->full_name }}</p>
+                <p>Điện thoại: {{ $user_order_infor[0]->phone }}</p>
+                <p>{{ $user_order_infor[0]->detail_address }}
                 </p>
             </div>
             <div class="col infor_payment">
@@ -46,7 +47,7 @@
                 <li>Nhận hàng thành công</li>
             </ul>
         </div>
-
+        
         <div class="row details_product">
             <div class="row details_header">
                 <div class="col name_product">
@@ -62,6 +63,7 @@
                     <span>Tạm tính</span>
                 </div>
             </div>
+            @foreach($user_order as $item)
             <div class="row infor_product">
                 <div class="col infor_details_product">
                     <div class="col image_product">
@@ -70,81 +72,30 @@
                     </div>
                     <div class="col name_product">
                         <div class="row brand_product">
-                            <span>L'Oreal</span>
+                            <span>{{ $item->name_product }}</span>
                         </div>
                         <div class="row name_brand_product">
-                            <span>Nước Tẩy Trang L'Oreal Làm Sạch Sâu Trang Điểm 400ml
-                                Micellar Water 3-in-1 Deep Cleansing Even For Sensitive Skin</span>
+                            <span>{{ $item->description }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="col cost_product">
-                    <span>79,000đ</span>
+                    <span>{{ $item->price }}</span>
                 </div>
                 <div class="col count_product">
-                    <span>1</span>
+                    <span>{{ $item->quantity }}</span>
                 </div>
                 <div class="col totals_product">
-                    <span>79,000đ</span>
+                    <span>{{ $item->price * $item->quantity}}</span>
                 </div>
             </div>
-            <div class="row infor_product">
-                <div class="col infor_details_product">
-                    <div class="col image_product">
-                        <img
-                            src="https://media.hcdn.vn/catalog/product/p/r/promotions-auto--205100146-8681-nuoc-tay-trang-l-oreal-3-in-1-lam-sach-sau-400ml_KH4pAbQauf5vGiUY_img_358x358_843626_fit_center.png">
-                    </div>
-                    <div class="col name_product">
-                        <div class="row brand_product">
-                            <span>L'Oreal</span>
-                        </div>
-                        <div class="row name_brand_product">
-                            <span>Nước Tẩy Trang L'Oreal Làm Sạch Sâu Trang Điểm 400ml
-                                Micellar Water 3-in-1 Deep Cleansing Even For Sensitive Skin</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col cost_product">
-                    <span>79,000đ</span>
-                </div>
-                <div class="col count_product">
-                    <span>1</span>
-                </div>
-                <div class="col totals_product">
-                    <span>79,000đ</span>
-                </div>
-            </div>
-            <div class="row infor_product">
-                <div class="col infor_details_product">
-                    <div class="col image_product">
-                        <img
-                            src="https://media.hcdn.vn/catalog/product/p/r/promotions-auto--205100146-8681-nuoc-tay-trang-l-oreal-3-in-1-lam-sach-sau-400ml_KH4pAbQauf5vGiUY_img_358x358_843626_fit_center.png">
-                    </div>
-                    <div class="col name_product">
-                        <div class="row brand_product">
-                            <span>L'Oreal</span>
-                        </div>
-                        <div class="row name_brand_product">
-                            <span>Nước Tẩy Trang L'Oreal Làm Sạch Sâu Trang Điểm 400ml
-                                Micellar Water 3-in-1 Deep Cleansing Even For Sensitive Skin</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col cost_product">
-                    <span>79,000đ</span>
-                </div>
-                <div class="col count_product">
-                    <span>1</span>
-                </div>
-                <div class="col totals_product">
-                    <span>79,000đ</span>
-                </div>
-            </div>
+            @endforeach
+            
 
             <div class="row totals_order">
                 <div class="order_temporary">
                     <span>Tạm tính</span>
-                    <span>237,000đ</span>
+                    <span>{{ $total_price }}đ</span>
                 </div>
                 <div class="order_delivery">
                     <span>Phí vận chuyển</span>
@@ -152,7 +103,7 @@
                 </div>
                 <div class="order_prices">
                     <span>Tổng cộng</span>
-                    <span class="order_prices_text">237,000đ</span>
+                    <span class="order_prices_text">{{ $total_price }}đ</span>
                 </div>
             </div>
         </div>

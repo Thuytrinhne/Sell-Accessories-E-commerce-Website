@@ -29,21 +29,22 @@
         </div>
         <div class="col message">
             <div class="row thanks-message">
-                <p>Chào <span>Phong</span>, </p>
+            
+                <p>Chào <span>{{ $user_infor[0]->full_name }}</span>, </p>
                 <p>Cảm ơn bạn đã đặt hàng tại cửa hàng chúng tôi</p>
             </div>
             <div class="row order-id">
-                <p>Mã đơn hàng của bạn là: <span>21522461</span> Bạn có thể xem chi tiết đơn hàng <a href="#">tại
+                <p>Mã đơn hàng của bạn là: <span>{{ $user_infor[0]->id }}</span> Bạn có thể xem chi tiết đơn hàng <a href="{{ route('front.order_detail',[$user_infor[0]->id])}}">tại
                         đây</a>
                 </p>
             </div>
             <div class="row order-date">
-                <p>Thời gian dự kiến giao hàng vào <span>27/10/2023 17:24 - 27/10/2023 20:00</span>(Không tính CN & ngày
+                <p>Thời gian dự kiến giao hàng vào <span>{{ $user_infor[0]->delivered_date }}</span>(Không tính CN & ngày
                     lễ, không bao gồm sản phẩm đặt hàng trước)</p>
 
             </div>
             <div class="row order-user-contact">
-                <p>Tin nhắn xác nhận đơn hàng đã được gửi vào số điện thoại: <span>0948346245</span></p>
+                <p>Tin nhắn xác nhận đơn hàng đã được gửi vào số điện thoại: <span>{{ $user_infor[0]->phone }}</span></p>
             </div>
             <div class="row order-note">
                 <p>Để việc xử lý đơn hàng nhanh chóng, Chúng tôi có thể không gọi điện xác nhận đơn hàng. Hệ thống tự
@@ -57,7 +58,9 @@
 
     </div>
     <div class="row button-next">
+        <a href="/">
         <button>Tiếp tục mua hàng</button>
+        </a>
     </div>
 
 

@@ -4,8 +4,8 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\User_AddressController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,17 +28,12 @@ Route::get('/aboutUs', function () {
 // router admin
 Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
-    Route::get('/', function () {
-    return view('admin.dashboard');
-    })->name('admin.dashboard');
+   Route::get('/', [AdminController::class, 'DashboardView'])->name('admin.dashboard');
 
-    Route::get('/product', function () {
-    return view('admin.product');
-    })->name('admin.product');
+   Route::get('/product', [AdminController::class, 'ProductView'])->name('admin.product');
 
-    Route::get('/order', function () {
-    return view('admin.order');
-    })->name('admin.order');
+    Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
+    Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
 
     Route::get('/report', function () {
     return view('admin.report');
@@ -78,9 +73,7 @@ Route::get('/customer/address', function () {
    
     return view('front.customer.address');
 })->name('front.address');
-Route::get('/customer/orders/detail', function () {
-    return view('front.customer.detail-order');
-})->name('front.order_detail');
+Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'])->name('front.order_detail');
 // end router customer
 
 
@@ -101,7 +94,8 @@ Route::get('/pass-verify', function () {
 // end router auth
 
 // router product
-Route::get('/checkout',[CheckoutController::class, 'index'] )->name('checkout');
+Route::get('/checkout',[OrderController::class, 'indexCheckout'] )->name('checkout');
+Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
 Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
  Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');
  Route::get('/wishlist', function () {
@@ -116,9 +110,7 @@ Route::get('/checkout/choose-location', [User_AddressController::class, 'index']
  Route::get('/not-found', function () {
     return view('front.product-order-screens.not-found');
  })->name('front.account');
- Route::get('/checkout-success', function () {
-   return view('front.product-order-screens.checkout-success');
-})->name('front.account');
+ Route::get('/checkout-success/{id}', [OrderController::class, 'checkoutSuccess'])->name('front.checkout-success');
 // end router product
 
  

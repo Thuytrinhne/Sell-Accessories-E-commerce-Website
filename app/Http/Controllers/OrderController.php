@@ -6,38 +6,31 @@ use App\Models\order;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Controllers\CartController;
+use App\Service\OrderService;
+use App\Http\Requests\OrderRequest;
+
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $user_payment = DB::select("SELECT *
-                                    FROM 
-                                            `order`, payment
-                                    WHERE 
-                                            `order`.payment_id = payment.id
-                                            and `order`.user_id = 1
-                                            
-                                            ");
-        $user_order = DB::select ("SELECT cart_item.quantity,product.name_product,product_item.price
-                                    FROM
-                                            `order`, cart, cart_item, product_item, product
-                                    WHERE
-                                            `order`.cart_id = cart.id
-                                            and cart_item.cart_id = cart.id
-                                            and cart_item.product_item_id = product_item.id
-                                            and product_item.product_id = product.id
-                                            and `order`.user_id = 1
-                ");  
+        return OrderService::index($request);
+    }
+
+    public function DetailOrder($id) {
+        return OrderService::DetailOrder($id);
+    }
+
+    public function indexCheckout() {
         
-        // $user_order = order::with('cart', 'cart.cartItems', 'cart.cartItems.productItems','cart.cartItems.productItems.product')->get();
-        $product_item_cart = CartController::getCartitem();
-       
-       
-        return view('.front.customer.history-orders',compact('user_payment', 'user_order', 'product_item_cart'));
+        return OrderService::indexCheckout();
+    }
+
+    public function checkoutSuccess($id) {
+        return OrderService::checkoutSuccess($id);
     }
 
     /**
@@ -53,7 +46,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return OrderService::store($request);
     }
 
     /**

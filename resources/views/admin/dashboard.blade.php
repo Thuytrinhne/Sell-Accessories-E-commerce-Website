@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="dashboard_main">
                     <div class="dashboard_details">
                         <h1 class="header_title" style="font-size: 45px;">Thống kê hôm nay</h1>
@@ -30,7 +30,7 @@
                                 <ion-icon name="cash-outline"></ion-icon>
                                 <div class="amount">
                                     <span class="amount_title">Doanh thu hôm nay</span>
-                                    <span class="amount_value">200000</span>
+                                    <span class="amount_value">{{ $count_ship}}</span>
                                 </div>
                             </div>
                             <div class="detail_card .">
