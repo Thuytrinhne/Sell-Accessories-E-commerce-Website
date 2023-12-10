@@ -75,6 +75,16 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function getProductsByValue($value)
+    {
+        return ProductService::getProductsByValue($value);
+    }
+
+    public function getImagesByValue($value)
+    {
+        return ProductService::getImagesByValue($value);
+    }
+
     public function create()
     {
     }
@@ -140,6 +150,7 @@ class ProductController extends Controller
 
 
         return view('front.product-order-screens.detail-product',['product' => $products]);
+        //return ProductService::show($id);
     }
 
     /**

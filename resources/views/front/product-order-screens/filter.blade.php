@@ -4,8 +4,51 @@
 @endsection
 @section('body-main')
 
-
 <div class="container" >
+<script>
+   function showProducts(value) {
+    console.log('Vao dc ham')
+        $.ajax({
+            url: '/get-products-by-value/' + value,
+            type: 'GET',
+            success: function(data) {
+                console.log(data);
+                // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
+                renderProducts(data);
+            },
+            error: function(error) {
+              
+                console.log('Đéo vào đc');
+            }
+        });
+    }
+
+    function renderProducts(products) {
+        // Xóa nội dung hiện tại của #productList
+        $('#productList').empty();
+
+        // Lặp qua danh sách sản phẩm và thêm chúng vào #productList
+        for (let i = 0; i < products.length; i++) {
+            $('#productList').append(
+                '<div class="body-list__item">' +
+                    '<div>' +
+                        '<a class="body-item-link" href="">' +
+                            '<img class="body-item-img" src="' + products[i].image + '" alt="">' +
+                        '</a>' +
+                    '</div>' +
+                    '<div class="body-item-des">' +
+                        '<a class="body-item-link" href="">' + products[i].name_product + '</a>' +
+                        '<div class="body-item-price">' +
+                            '<span>' + products[i].price + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    // ... (Thêm phần còn lại của HTML tùy thuộc vào yêu cầu của bạn)
+                '</div>'
+            );
+        }
+    }
+
+</script>
                  <!-- begin breadcrumbs -->
                 <div class="row__header-filter" >
                     <div class="span">
@@ -82,11 +125,17 @@
 
                  <div class="row filter-widget">
                   @foreach($variation as $name)
-                    <div class="col-3 filter-color">
+                    <div class="col-4 filter-color">
                         <h4>{{$name->name}}</h4>
                         <div class="row">
-                          @foreach($name->varitationOptions as $value)
-                            <span class="color-option" style="background-color: {{$value->value}};"> {{$value->value}} </span>
+                          @foreach($name->varitationOptions as $variation_option)
+
+                           <button  class="color-option" 
+                                    style="background-color: {{$variation_option->value}}; color: {{$variation_option->value}} "
+                                    onclick="showProducts('{{$variation_option->value}}')"> 
+                              {{$variation_option->value}} 
+                            </button>
+
                           @endforeach
                           
                                                  
@@ -94,17 +143,17 @@
                     </div>
                   @endforeach
                  <div class="row">
-                  <div class="body-listProduct">
+                  <div class="body-listProduct" id="productList">
                     <!-- item --> 
                     @foreach($products as $product) 
                     <div class="body-list__item">
                       <div>
-                            <a class="body-item-link" href="">
+                            <a class="body-item-link" href="{{route('products.show',[$product->id])}}">
                               <img class="body-item-img" src="{{$product->image}}" alt="">
                             </a>
                       </div> 
                       <div class="body-item-des">
-                        <a class="body-item-link" href="">{{$product->name}}</a>
+                        <a class="body-item-link" href="{{route('products.show',[$product->id])}}">{{$product->name_product}}</a>
                         <div class="body-item-price">
                           <span>{{$product->price}}</span>
                         </div>
@@ -150,5 +199,7 @@
 
           
 </div>
+
+
      
 @endsection

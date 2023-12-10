@@ -28,7 +28,7 @@
       <div class="row" >
 
           <!-- begin gallery -->
-          <div class="col-5 row-gallery">
+          <div class="col-5 row-gallery" id="productImage">
               <div class="row">
                       <img id="current-image" src="{{$product->image}}" alt="">
               </div>
@@ -51,7 +51,7 @@
           <!-- end gallery -->
 
           <!-- beign info -->
-          <div class="col-7">
+          <div class="col-7" >
               <div class="row info-header">
                   <h1 class="info-header__h1">
                     {{$product->name_product}}
@@ -71,7 +71,13 @@
                   <h4>{{$product->name}}</h4>
               </div>
               <div class="row">  
-                  <span class="color-option" style="background-color:{{$product->value}}; color:{{$product->value}}">{{$product->value}} </span>
+                @foreach($variation_value as $value)
+                <button  class="color-option" 
+                                    style="background-color: {{$value->value}}; color: {{$value->value}} "
+                                    onclick="showProducts('{{$value->id}}')"> 
+                              {{$value->value}} 
+                            </button>
+                @endforeach
               </div>
 
 
@@ -205,5 +211,35 @@
 
 </div>
 </div>  
-      
+<script>
+   function showProducts(product_item_id) {
+    console.log('Vao dc ham')
+        $.ajax({
+            url: '/get-images-by-value/' + product_item_id,
+            type: 'GET',
+            success: function(data) {
+                console.log(data[0].image);
+                // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
+                renderProducts(data);
+            },
+            error: function(error) {
+              
+                console.log('Đéo vào đc');
+            }
+        });
+    }
+
+    function renderProducts(product) {
+    // Xóa nội dung hiện tại của #productList
+    $('#productImage').empty();
+    for (let i = 0; i < product.length; i++) {
+            $('#productImage').append(
+                '<div class="row">'+
+                      '<img id="current-image" src="'+product[i].image+'" alt="">'+
+              '</div>'
+            );
+        }
+}
+
+</script>
 @endsection
