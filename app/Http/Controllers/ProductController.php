@@ -106,8 +106,14 @@ class ProductController extends Controller
         return ProductService::search($request);
     }
 
+    public function report(Request $request)
+    {
+        return ProductService::report($request);
+    }
+
     public function create()
     {
+
     }
 
   

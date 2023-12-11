@@ -59,6 +59,8 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
+    //Thêmm route xử lí report sản phẩm
+    Route::get('/report', [ProductController::class,'report'])->name('admin.report');
    
    //  Thêm route admin product và item
    Route::prefix('product')->group( function()
@@ -76,6 +78,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       // Search sản phẩm
       Route::get('/search', [ProductController::class,'search'])->name('admin.product.search');
       
+      
 
       // hiển thị list chi tiết sản phẩm
       Route::get('/show/{product}', [ProductController::class,'indexItem'])->name('admin.product.item');
@@ -91,16 +94,13 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
        Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
 
 
-
    });
 
     Route::get('/order', function () {
     return view('admin.order');
     })->name('admin.order');
 
-    Route::get('/report', function () {
-    return view('admin.report');
-    })->name('admin.report');
+
 
     Route::get('/account', function () {
     return view('admin.account');
