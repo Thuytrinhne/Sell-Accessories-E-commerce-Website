@@ -42,7 +42,6 @@
                             '<span>' + products[i].price + '</span>' +
                         '</div>' +
                     '</div>' +
-                    // ... (Thêm phần còn lại của HTML tùy thuộc vào yêu cầu của bạn)
                 '</div>'
             );
         }
@@ -87,22 +86,22 @@
                     </div>
 
                     
-                    
-                    <div class="col-6 filter-sort">
+                    <div class="col-3"></div>
+                    <div class="col-3 filter-sort">
                         <span class="filter-sort__sortby">
                             <b>Sort by:</b>
                         </span>
 
-                        <select class="filter-sort__select" onchange="handleSelect()">
-                          <option class="filter-sort__option" value="option1">Thứ tự theo mức độ phổ biến</option>
-                          <option class="filter-sort__option" value="option2">Độ liên quan</option>
-                          <option class="filter-sort__option" value="option3">Thứ tự theo điểm đánh giá</option>
+                        <select class="filter-sort__select" id="sortOptions" onchange="redirectToSelectedRoute()">
+                          <option class="filter-sort__option" value="option1">Thứ tự theo giá: cao xuống thấp</option>
+                          <option class="filter-sort__option" value="option2">Thứ tự theo giá: thấp đến cao</option>
                           <option class="filter-sort__option" value="option3">Mới nhất</option>
-                          <option class="filter-sort__option" value="option3">Thứ tự theo giá: thấp đến cao</option>
-                          <option class="filter-sort__option" value="option3">Thứ tự theo giá: cao xuống thấp</option>
+                          <option class="filter-sort__option" value="option4">Phổ biến</option>
+                          <option class="filter-sort__option" value="option5">Độ liên quan</option>
+                          <option class="filter-sort__option" value="option6">Thứ tự theo điểm đánh giá</option>
                         </select>
 
-                        <span class="filter-sort__sortby" style="margin-left: 50px;">
+                        <!-- <span class="filter-sort__sortby" style="margin-left: 50px;">
                             <b>Show:</b> 
                         </span>
                         <select class="filter-sort__select" onchange="handleSelect()">
@@ -110,13 +109,13 @@
                           <option class="filter-sort__option" value="option2">24</option>
                           <option class="filter-sort__option" value="option3">48</option>
                           <option class="filter-sort__option" value="option3">Show all</option>
-                        </select>
+                        </select> -->
 
 
-                        <button class="filter-sort__btn" style="margin-left: 50px;" onclick="Filter_display()">
+                        <!-- <button class="filter-sort__btn" style="margin-left: 50px;" onclick="Filter_display()">
                             <i class="ti-filter"></i>
                             <b>FILTER</b> 
-                        </button>
+                        </button> -->
                     </div>
 
 
@@ -196,10 +195,28 @@
 
                  <!-- end filter content -->
 
-
-          
 </div>
 
+<script>
+    function redirectToSelectedRoute() {
+        // Lấy giá trị của option được chọn
+        var selectedValue = $("#sortOptions").val();
+
+        // Tùy thuộc vào giá trị chọn, thực hiện chuyển hướng đến route tương ứng
+        switch (selectedValue) {
+            case "option1":
+                window.location.href = "{{ route('get.product.by.desc') }}";
+                break;
+            case "option2":
+                window.location.href = "{{ route('get.product.by.asc') }}";
+                break;
+            case "option3":
+                window.location.href = "{{ route('get.product.by.latest') }}";
+                break;
+            
+        }
+    }
+</script>
 
      
 @endsection

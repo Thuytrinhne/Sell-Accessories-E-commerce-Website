@@ -36,6 +36,21 @@ class ProductController extends Controller
     {
         return ProductService::getImagesByValue($value);
     }
+    
+    public function descProductsByPrice()
+    {
+        return ProductService::descProductsByPrice();
+    }
+
+    public function ascProductsByPrice()
+    {
+        return ProductService::ascProductsByPrice();
+    }
+
+    public function latestProductsByPrice()
+    {
+        return ProductService::latestProductsByPrice();
+    }
 
     public function create()
     {
