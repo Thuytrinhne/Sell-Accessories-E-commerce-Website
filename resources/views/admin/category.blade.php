@@ -36,9 +36,13 @@
                 <div class="category_list">
                     <div>
                         <h2>Tìm kiếm</h2>
-                        <input type="text" placeholder="Nhập tên thể loại">
-                        <button>Tìm kiếm</button>
+                        <form action="{{route('admin.category.search')}}" method="GET">
+                            <input type="text" required placeholder="Nhập tên thể loại" name="search">
+                            <button>Tìm kiếm</button>
+                        </form>
+                        
                     </div>
+                    @if(count($categoryPaginate) > 0)
                     <div>
                         <h2>Danh sách thể loại</h2>
                         <table class="category_table">
@@ -56,7 +60,9 @@
                             @php
                             $stt = 1;
                             @endphp
-                            @foreach($categoryPaginate as $item)
+
+                        
+                        @foreach($categoryPaginate as $item)
                         <tr class="">
                         <td>
                             <form action="{{route('admin.category.destroy',['id' => $item->id])}}">
@@ -81,14 +87,24 @@
                         <td>{{$item->name_category}}</td>
                         <td>{{$item->parent_id}}</td>
                         </tr>
-                            @endforeach
-
-                               
+                        @endforeach
+                 
                             </tbody>
                         </table>
                         <hr>
                        {{$categoryPaginate->links()}}
                     </div>
+                    @else
+                    <script>
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Không có cái nào hết ???',
+                        text: '{{ session('error') }}',
+                        footer: '<a href="{{ route('admin.category') }}">Mình quay lại nhé ???</a>'
+                        })
+
+                    </script>
+                    @endif
                 </div>
             </div>
 

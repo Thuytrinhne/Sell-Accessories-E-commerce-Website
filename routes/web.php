@@ -14,7 +14,7 @@ use App\Http\Controllers\ProductController;
 */
 
 
-//Qtoan them vao
+//Route qtoan them vao
 Route::group(['prefix' => '/'], function () {
    
    Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
@@ -52,7 +52,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     return view('admin.product');
     })->name('admin.product');
    
-   //  Thêm route product
+   //  Thêm route admin product và item
    Route::prefix('product')->group( function()
    {
       // hiển thị sản phẩm
@@ -65,6 +65,8 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::get('/edit/{id}', [ProductController::class,'edit'])->name('admin.product.edit');
       // Xử lí sửa
       Route::post('/update/{id}', [ProductController::class,'update'])->name('admin.product.update');
+      // Search sản phẩm
+      Route::get('/search', [ProductController::class,'search'])->name('admin.product.search');
       
 
       // hiển thị list chi tiết sản phẩm
@@ -79,7 +81,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
        Route::post('/item/update/{item}', [ProductController::class,'updateItem'])->name('admin.product.item.update');
        // Xử lí xóa
        Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
-      
+
 
 
    });
@@ -108,8 +110,9 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::get('edit/{id}', [CategoryController::class,'edit'])->name('admin.category.edit');
       // Xử lý sửa
       Route::post('update/{id}', [CategoryController::class,'update'])->name('admin.category.update');
-
-
+      // Xử lí search
+      Route::get('search', [CategoryController::class,'search'])->name('admin.category.search');
+   
    }
    );
 });

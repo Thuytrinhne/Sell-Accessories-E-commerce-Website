@@ -68,4 +68,9 @@ class CategoryController extends Controller
     {
         return CategoryService::destroy($id);
     }
+
+    public static function search(Request $request)
+    {
+        return CategoryService::search($request);
+    }
 }

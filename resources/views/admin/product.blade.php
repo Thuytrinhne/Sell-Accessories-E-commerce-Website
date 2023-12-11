@@ -15,10 +15,11 @@
                         <h1>Sản phẩm</h1>
                     </div>
                     <div class="header_infor">
-                        <div class="search_box">
+                        <form action="{{route('admin.product.search')}}" class="search_box">
                             <ion-icon name="search-outline"></ion-icon>
-                            <input type="input" placeholder="Tìm kiếm">
-                        </div>
+                            <input type="input" placeholder="Nhập tên sản phẩm" name="search">
+                            <button type="submit"> Tìm kiếm </button>
+                        </form>
                     </div>
                 </div>
 
@@ -26,9 +27,6 @@
                     <button href="#" class="product_list" onclick="showContent('selection_list')">Danh sách sản
                         phẩm</button>
                     <button href="#" class="product_add" onclick="showContent('selection_add')">Thêm sản phẩm</button>
-                    <script>
-
-                    </script>
                 </div>
 
                 @if(Session::has('success'))  
@@ -70,6 +68,7 @@
                 @endif
 
                 <div class="selection selection_list">
+                    @if(count($products) > 0)
                     @foreach($products as $item)
                     <nav id="product_1" class="product product_1">
                         <img src="/Assets/Images/product_1.jpg">
@@ -97,8 +96,17 @@
                         </div>
                     </nav>
                     @endforeach
+                    @else
+                    <script>
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Không tìm thấy',
+                        text: 'Không có rồi bạn ơi ???',
+                        footer: '<a href="{{route('admin.product')}}">Chúng ta quay lại nhé ??? </a>'
+                        })
 
-                    
+                    </script>
+                    @endif
                 </div>
                 {{ $products->links() }}
 

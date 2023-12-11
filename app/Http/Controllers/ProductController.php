@@ -52,6 +52,11 @@ class ProductController extends Controller
         return ProductService::latestProductsByPrice();
     }
 
+    public function search(Request $request)
+    {
+        return ProductService::search($request);
+    }
+
     public function create()
     {
     }
@@ -91,7 +96,11 @@ class ProductController extends Controller
         return ProductService::getProduct();
     }
 
+
+
+    //
     // Các hàm xử lí cho product_item
+    //
     public function indexItem($product) 
     {
         return ProductService::indexItem($product);
