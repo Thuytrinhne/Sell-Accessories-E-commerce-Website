@@ -184,6 +184,40 @@ class ProductService
     }
 
 
+    public static function descProductsByPrice()
+    {
+       
+        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'desc')->get();
+
+        $variation = variation::with('varitationOptions')->get();
+
+        return view('front.product-order-screens.filter', compact('products','variation'));
+        
+    }
+
+    public static function ascProductsByPrice()
+    {
+       
+        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'asc')->get();
+
+        $variation = variation::with('varitationOptions')->get();
+
+        return view('front.product-order-screens.filter', compact('products','variation'));
+        
+    }
+
+    public static function latestProductsByPrice()
+    {
+       
+        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('product.created_at', 'asc')->get();
+
+        $variation = variation::with('varitationOptions')->get();
+
+        return view('front.product-order-screens.filter', compact('products','variation'));
+        
+    }
+
+    // Xử lí item_product
     public static function indexItem($product) 
     {
         $items = product_item::join('product', 'product.id', '=', 'product_item.product_id')
