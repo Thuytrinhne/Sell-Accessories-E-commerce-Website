@@ -75,4 +75,17 @@ class CategoryRespository
         $category = category::find($id);
         $category->delete();
     }
+
+    public static function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $category = category::leftjoin('category as ct', 'category.parent_id', '=', 'ct.id')
+        ->select('category.id','category.name_category', 'ct.name_category as parent_id')
+        ->where('category.name_category','like','%' . $search . '%')
+        ->paginate(5);
+
+        return $category;
+    }
+
 }

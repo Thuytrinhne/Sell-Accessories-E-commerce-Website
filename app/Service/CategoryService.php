@@ -89,4 +89,15 @@ class CategoryService
         
         return redirect()->back()->with('DestroySuccess', 'Xóa thành công');
     }
+
+    public static function search(Request $request)
+    {
+        $categoryPaginate =CategoryRespository::search($request);
+        $category = CategoryRespository::index();
+        $old = $request->old('name_category');
+        $response = response ()
+        ->view('admin.category', compact('categoryPaginate', 'category', 'old'), 200);
+        return $response;
+    }
+
 }

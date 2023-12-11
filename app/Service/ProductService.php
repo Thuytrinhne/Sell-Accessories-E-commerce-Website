@@ -48,7 +48,6 @@ class ProductService
 
     public static function store(ProductRequest $request)
     {
-
         $product = new product;
         
         $product->name_product = $request->input('name_product');
@@ -56,8 +55,6 @@ class ProductService
         $product->category_id = $request->input('category_id');
 
         $product->save();
-
-        // dd($request);
         
         return redirect()->back()->with('success', 'Thêm thành công');
     }
@@ -208,14 +205,22 @@ class ProductService
     }
 
     public static function latestProductsByPrice()
-    {
-       
+    {       
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('product.created_at', 'asc')->get();
 
         $variation = variation::with('varitationOptions')->get();
 
-        return view('front.product-order-screens.filter', compact('products','variation'));
-        
+        return view('front.product-order-screens.filter', compact('products','variation'));      
+    }
+
+    public static function search(Request $request)
+    {
+        $search = $request->input('search');
+
+        $category = category::get();
+        $products = product::where('name_product','like','%'. $search . '%')->paginate(10);
+
+        return(view('admin.product',compact('products','category')));
     }
 
     // Xử lí item_product

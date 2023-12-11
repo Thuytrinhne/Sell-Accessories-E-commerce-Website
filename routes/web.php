@@ -59,6 +59,44 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
+   
+   //  Thêm route admin product và item
+   Route::prefix('product')->group( function()
+   {
+      // hiển thị sản phẩm
+      Route::get('/', [ProductController::class,'index'])->name('admin.product');
+      // xử lý thêm 
+      Route::post('/add', [ProductController::class,'store'])->name('admin.product.add');
+      // xử lý xóa
+      Route::get('/destroy/{id}', [ProductController::class,'destroy'])->name('admin.product.destroy');
+      // Hiện form sửa
+      Route::get('/edit/{id}', [ProductController::class,'edit'])->name('admin.product.edit');
+      // Xử lí sửa
+      Route::post('/update/{id}', [ProductController::class,'update'])->name('admin.product.update');
+      // Search sản phẩm
+      Route::get('/search', [ProductController::class,'search'])->name('admin.product.search');
+      
+
+      // hiển thị list chi tiết sản phẩm
+      Route::get('/show/{product}', [ProductController::class,'indexItem'])->name('admin.product.item');
+      //Hiện form thêm chi tiết sản phẩm
+      Route::get('/item/{product}/create', [ProductController::class,'createItem'])->name('admin.product.item.create');
+      // Xử lí thêm 
+      Route::post('/item/{product}/store', [ProductController::class,'storeItem'])->name('admin.product.item.store');
+       //Hiện form sửa sản phẩm
+       Route::get('/item/edit/{item}', [ProductController::class,'editItem'])->name('admin.product.item.edit');
+       // Xử lí thêm 
+       Route::post('/item/update/{item}', [ProductController::class,'updateItem'])->name('admin.product.item.update');
+       // Xử lí xóa
+       Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
+
+
+
+   });
+
+    Route::get('/order', function () {
+    return view('admin.order');
+    })->name('admin.order');
 
     Route::get('/report', function () {
     return view('admin.report');
@@ -80,8 +118,9 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::get('edit/{id}', [CategoryController::class,'edit'])->name('admin.category.edit');
       // Xử lý sửa
       Route::post('update/{id}', [CategoryController::class,'update'])->name('admin.category.update');
-
-
+      // Xử lí search
+      Route::get('search', [CategoryController::class,'search'])->name('admin.category.search');
+   
    }
    );
 });
