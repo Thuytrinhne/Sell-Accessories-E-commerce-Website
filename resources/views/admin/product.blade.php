@@ -107,9 +107,10 @@
 
                     </script>
                     @endif
+                    
                 </div>
-                {{ $products->links() }}
-
+               
+                        <div style ="margin:0 auto">{{ $products->links() }}</div>
                 
                 <form action="{{ route('admin.product.add') }}" method="POST" class="selection selection_add" id="addForm">
                    @csrf

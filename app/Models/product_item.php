@@ -11,11 +11,14 @@ class product_item extends Model
     use HasFactory;
     protected $table ='product_item';
 
-    
-
     public function product()
     {
         return $this->belongsTo(product::class);
+    }
+
+    public function cart_items()
+    {
+        return $this->hasMany(cart_item::class);
     }
 
 }

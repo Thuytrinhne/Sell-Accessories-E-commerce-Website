@@ -8,7 +8,12 @@ use App\Models\product;
 use App\Models\category;
 use App\Models\product_item;
 use App\Models\variation_option;
-use App\Models\variation;  
+use App\Models\variation;
+use App\Models\order; 
+use App\Models\cart_item; 
+use App\Models\cart; 
+
+
 use Illuminate\Http\Request;
 
 class ProductService
@@ -221,6 +226,26 @@ class ProductService
         $products = product::where('name_product','like','%'. $search . '%')->paginate(10);
 
         return(view('admin.product',compact('products','category')));
+    }
+
+    public static function report(Request $request)
+    {
+        $categories = category::get();
+        $category = $request->input('name_category');
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $products = product::leftjoin('product_item','product.id','=','product_item.product_id')
+        ->leftjoin('category','category.id','=','product.category_id')
+        ->leftjoin('cart_item','product_item.id','=','cart_item.product_item_id')
+        ->leftjoin('cart','cart.id','=','cart_item.cart_id')
+        ->leftjoin('order','order.cart_id','=','cart.id')
+        ->select('category.name_category',
+                 'product.*')
+        ->distinct()
+        ->paginate(10);
+
+        return(view('admin.report',compact('products','categories')));
     }
 
     // Xử lí item_product

@@ -16,9 +16,8 @@
                 // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
                 renderProducts(data);
             },
-            error: function(error) {
-              
-                console.log('Đéo vào đc');
+            error: function(error) {   
+                console.log('eror');
             }
         });
     }
@@ -32,12 +31,12 @@
             $('#productList').append(
                 '<div class="body-list__item">' +
                     '<div>' +
-                        '<a class="body-item-link" href="">' +
+                        '<a class="body-item-link" href="/detail-product/'+ products[i].id + '">' +
                             '<img class="body-item-img" src="' + products[i].image + '" alt="">' +
                         '</a>' +
                     '</div>' +
                     '<div class="body-item-des">' +
-                        '<a class="body-item-link" href="">' + products[i].name_product + '</a>' +
+                        '<a class="body-item-link" href="/detail-product/'+ products[i].id + '">' + products[i].name_product + '</a>' +
                         '<div class="body-item-price">' +
                             '<span>' + products[i].price + '</span>' +
                         '</div>' +
