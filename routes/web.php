@@ -76,8 +76,11 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::post('/add', [CategoryController::class,'store'])->name('admin.category.add');
       // xử lý xóa danh mục
       Route::get('/delete/{id}', [CategoryController::class,'destroy'])->name('admin.category.destroy');
-      // sửa 1 danh mục
-      Route::get('/edit', [CategoryController::class,'edit'])->name('admin.category.edit');
+      // Hiện form sửa
+      Route::get('edit/{id}', [CategoryController::class,'edit'])->name('admin.category.edit');
+      // Xử lý sửa
+      Route::post('update/{id}', [CategoryController::class,'update'])->name('admin.category.update');
+
 
    }
    );

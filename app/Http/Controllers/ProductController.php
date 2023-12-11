@@ -38,6 +38,7 @@ class ProductController extends Controller
         
         // dd($products);
         return(view('admin.product',compact('products','category')));
+        // return ProductService::index();
     }
 
     // public function indexItem($product) 
