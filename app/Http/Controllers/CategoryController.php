@@ -38,7 +38,7 @@ class CategoryController extends Controller
   
 
     /**
-     * Display the specified resource.
+     * Display the specified resource
      */
     public static function show(category $category)
     {
@@ -48,18 +48,17 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public static function edit(category $category)
+    public static function edit($id)
     {
-        
-        dd('edit');
+        return CategoryService::edit($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public static function update(Request $request, category $category)
+    public static function update(Request $request, $id)
     {
-        //
+        return CategoryService::update($request, $id);
     }
 
     /**

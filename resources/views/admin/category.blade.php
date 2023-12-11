@@ -9,7 +9,6 @@
 <div class="content category">
                 <div class="category_header">
                     <div class="header_title">
-                        <span>Trang chính</span>
                         <h1>Quản lý danh sách danh mục</h1>
                     </div>
                 </div>
@@ -68,7 +67,7 @@
                         </span>
                             </button>
                         
-                            <a href="{{route('admin.category.edit',  $item->id)}}">
+                            <a href="{{route('admin.category.edit',['id' => $item->id])}}">
                             <span class="material-symbols-outlined">
                             edit
                             </span>
@@ -92,6 +91,20 @@
                     </div>
                 </div>
             </div>
+
+
+                @if(Session::has('success'))  
+                    <script>
+                        Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: '{{session('success')}}',
+                        showConfirmButton: false,
+                        timer: 2000
+                        })
+                    </script>
+                    
+                @endif
            
            @if(session('DestroySuccess'))
             <script>

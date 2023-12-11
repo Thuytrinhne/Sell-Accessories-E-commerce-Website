@@ -18,7 +18,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return ProductService::indexx();
+        return ProductService::index();
     }
 
 

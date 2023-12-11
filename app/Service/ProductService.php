@@ -104,6 +104,7 @@ class ProductService
         return(view('admin.edit-product',compact('products','category','id')));
     }
 
+
     public static function update(Request $request, $id)
     {
         $product =product::find($id);
@@ -114,7 +115,7 @@ class ProductService
 
         $product->save();
     
-        return redirect('admin/product')->with('success','Sửa thành công');
+        return redirect('admin/product')->with('success','Sửa danh mục thành công');
 
     }
 

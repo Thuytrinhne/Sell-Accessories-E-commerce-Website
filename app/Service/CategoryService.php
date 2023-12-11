@@ -52,17 +52,27 @@ class CategoryService
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(category $category)
+    public static function edit($id)
     {
-        //
+        $categories = CategoryRespository::index();
+        $category = CategoryRespository::index()->find($id); 
+
+        return(view('admin.edit-category',compact('category','categories')));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, category $category)
+    public static function update(Request $request,$id)
     {
-        //
+        $category =category::find($id);
+
+        $category->name_category = $request->input('name_category');
+        $category->parent_id = $request->input('parent_id');
+
+        $category->save();
+    
+        return redirect('admin/category')->with('success','Sửa thành công');
     }
 
     /**
