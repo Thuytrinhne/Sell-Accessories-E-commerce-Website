@@ -3,6 +3,9 @@
 namespace App\Models\Respositories;
 
 use App\Models\user;
+use App\Models\product_item;
+use App\Models\product;
+
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
 
@@ -25,7 +28,7 @@ class AccountRepository
      */
     public function show(user $admin)
     {
-        //
+        
     }
 
     /**

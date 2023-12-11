@@ -135,6 +135,7 @@ Route::get('/checkout', function () {
 
 Route::prefix('/wishlist') -> group(function () {
    Route::get('/', [WishlishController::class,'index'])->name('wishlist');
+   Route::match(['GET','POST'],'/add', [WishlishController::class,'store'])->name('store.wishlists');
    Route::match(['GET','POST'],'/delete/{id}', [WishlishController::class,'destroy'])->name('destroy.wishlists');
 });
 

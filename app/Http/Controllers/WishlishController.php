@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product;
 use App\Models\wishlist_item;
 use Illuminate\Http\Request;
+use App\Service\AccountService;
+
+
 
 class WishlishController extends Controller
 {
@@ -12,8 +16,9 @@ class WishlishController extends Controller
      */
     public function index()
     {
+        $product = AccountService::product();
         $wishlists = wishlist_item::all();
-        return view("front.product-order-screens.wishlist", compact("wishlists"));
+        return view("front.product-order-screens.wishlist", compact("wishlists", "product"));
     }
 
     /**
@@ -21,7 +26,7 @@ class WishlishController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -29,7 +34,7 @@ class WishlishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -59,10 +64,11 @@ class WishlishController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $wishlist_id)
+    public function destroy(string $wishlist_id, string $id)
     {
+        $product = product::find($id);
         $wishlists_id = wishlist_item::find($wishlist_id);
         $wishlists_id -> delete();
-        return redirect()->route('front.product-order-screens.wishlist') -> with('thongbao','Xoá thông tin thành công');
+        return redirect()->route('front.product-order-screens.wishlist')-> compact('') -> with('thongbao','Xoá thông tin thành công');
     }
 }
