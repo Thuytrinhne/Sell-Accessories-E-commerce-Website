@@ -7,6 +7,10 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User_AddressController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
+// trinh use
+use App\Http\Controllers\AccessController;
+// end trinh use
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,13 +45,14 @@ Route::group(['prefix' => '/'], function () {
    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
    
 });
-
+// end route qtoan 
 
 Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
- })->name('front.account');   
-
-
+ })->name('front.account');
+// login for admin 
+Route::get('/admin/login', [AdminController::class,'login'])->name('loginAdmin');
+Route::post('/admin/login', [AdminController::class,'postLoginAdmin'])->name('postLoginAdmin');
 // router admin
 Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
@@ -149,9 +154,16 @@ Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'
 Route::get('/login', function () {
    return view('auth.signin');
 })->name('login');
-Route::get('/signup', function () {
-   return view('auth.signup');
-})->name('signup');
+Route::post('/login', [AccessController::class,'postLogin'])->name('postLogin');
+// logout
+Route::get('/logout', [AccessController::class,'logout'])->name('logout');
+// Signup
+Route::get('/signup', [AccessController::class,'indexSignUp'])->name('signup');
+Route::post('/signup', [AccessController::class,'postUser'])->name('postUser');
+Route::get('/signup/sendOTP/{email}', [AccessController::class,'sendOTP'])->name('sendOTP');
+
+
+
 Route::get('/forgot-pass', function () {
    return view('auth.forgot-pass');
 })->name('forgot-pass');

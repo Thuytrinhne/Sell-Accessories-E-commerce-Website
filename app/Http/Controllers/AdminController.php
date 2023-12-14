@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
+use Auth;
+use App\Service\AdminService ;
 class AdminController extends Controller
 {
     public function OrderView() {
@@ -71,6 +72,15 @@ class AdminController extends Controller
 
         return view('admin.product', compact('product_list'));
     }
+    public static function  login()
+    {
+        AdminService::login();
+    }
+    public static function postLoginAdmin(Request $request)
+    {
+        AdminService::postLoginAdmin($request);
+    }
 }
 
     
+
