@@ -31,6 +31,12 @@
      <script src="./js/header.js"></script>
      <script src="./js/homepage.js" defer></script>
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <!-- link ajax js -->
+     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
+     <!-- link datatables -->
+     <link  href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
 </head>
 <body>
 <div class="app">
@@ -48,4 +54,5 @@
     <!-- yield modal quickview -->
       @yield('quick-view');
    </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </html>

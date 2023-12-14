@@ -23,7 +23,7 @@ use App\Http\Controllers\AccessController;
 */
 Route::get('/aboutUs', function () {
    return view('front.shop.aboutUs');
-})->name('front.account');
+})->name('front.aboutUs');
 
 
 //Route qtoan them vao
@@ -64,6 +64,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
     //Thêmm route xử lí report sản phẩm
+    
     Route::get('/report', [ProductController::class,'report'])->name('admin.report');
    
    //  Thêm route admin product và item
@@ -203,5 +204,7 @@ Route::prefix('/customer/orders')->group(function () {
    
 });
 
+
+Route::get ('/cart',[CartController::class, 'getCartitem'] )->name('cart');
 
 Route::get('/destroy/{id}',[CartController::class, 'destroyItem'])->name('cart.destroy');

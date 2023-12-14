@@ -14,8 +14,9 @@ class CartController extends Controller
      * Display a listing of the resource.
      */
     public static function getCartitem() {
+      
         $id = 1;
-        $product_item = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
+        $product_item_cart = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
                                     FROM cart_item, product_item, product
                                     WHERE
                                         cart_item.product_item_id = product_item.id
@@ -23,7 +24,7 @@ class CartController extends Controller
                                         and cart_item.cart_id = '$id'
                                     
             ");
-        return $product_item;
+        return response()->json($product_item_cart);
 
     }
     /**

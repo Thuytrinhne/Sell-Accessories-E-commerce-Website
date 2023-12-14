@@ -95,7 +95,6 @@ class ProductService
         )
         ->where('product.id', '=', $id )
         ->get();
-
         return view('front.product-order-screens.detail-product',['product' => $products],compact('variation_value'));
     }
 

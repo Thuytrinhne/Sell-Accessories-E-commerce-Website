@@ -9,13 +9,14 @@ use App\Service\AdminService ;
 class AdminController extends Controller
 {
     public function OrderView() {
+        dd("đã vào");
+
         $order_list = DB::select("
             SELECT *
             FROM `order`, user
             WHERE
                 `order`.user_id = user.id
         ");
-
         return view('admin.order', compact('order_list'));
     }
 
