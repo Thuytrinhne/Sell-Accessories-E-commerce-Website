@@ -35,7 +35,8 @@ class AccessController extends Controller
     }
     public static function sendOTP(Request $request)
     {
-        return AccessService::sendOTP();
+       
+        return AccessService::sendOTP($request);
     }
     public static function forgotPassword()
     {
