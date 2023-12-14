@@ -198,10 +198,11 @@ Route::post('/pass-verify/{token}', [AccessController::class,'handlePassVerify']
 // end router auth
 
 // router product
-Route::get('/checkout', function () {
-    return view('front.product-order-screens.checkout');
- })->name('checkout');
- Route::get('/checkout/choose-location', function () {
+Route::get('/checkout',[OrderController::class, 'indexCheckout'] )->name('checkout');
+Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
+Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
+Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');
+Route::get('/checkout/choose-location', function () {
     return view('front.product-order-screens.choose-location');
  })->name('choose-location');
  Route::get('/checkout/add-location', function () {

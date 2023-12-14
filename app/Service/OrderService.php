@@ -84,6 +84,7 @@ foreach($user_order as $item) {
         //Lấy đặt hàng từ giỏ hàng ra checkout
        $total=0;
         foreach($product_item_cart as $item) {
+           
             $total += $item->price * $item->quantity;
         }
         return view('front.product-order-screens.checkout', compact('product_item_cart','total'));
