@@ -39,7 +39,12 @@
                           <div class="header-auth">
                   
                             <div class="header-auth-logined">
-                            <div class="nav-link-black nav-link-subLogin">Chào {{Auth::user()->full_name}},</div>
+                            <?php
+                    $fullName = Auth::user()->full_name;
+                    $lastName = explode(' ', $fullName);
+                    $lastName = end($lastName);
+                            ?>
+                            <div class="nav-link-black nav-link-subLogin">Chào {{$lastName}},</div>
                             <div class ="nav-link-subLogin-user">
                               <div class="nav-link-black nav-link-subLogin">Tài khoản
                                   <i class="fa-solid fa-caret-down"></i>

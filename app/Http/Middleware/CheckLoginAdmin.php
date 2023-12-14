@@ -16,7 +16,8 @@ class CheckLoginAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check()&&Auth::user()->status = 2)
+
+        if(Auth::check()&&Auth::user()->role_id = 3)
         {
             return $next($request);
         } 

@@ -8,7 +8,10 @@
 .user_infor {
     position: relative;
 }
-
+.logout-link
+{
+    text-decoration: none;
+}
 
 
 .dashboard_header {

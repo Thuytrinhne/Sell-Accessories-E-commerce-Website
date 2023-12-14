@@ -974,8 +974,8 @@
 .nav-link-subLogin-user::before
 {
     content: "";
-    width: 200px;
-    height: 24px;
+    width: 210px;
+    height: 40px;
     background-color: transparent;
     position: absolute;
     right: -72%;

@@ -74,11 +74,12 @@ class AdminController extends Controller
     }
     public static function  login()
     {
-        AdminService::login();
+        return AdminService::login();
     }
     public static function postLoginAdmin(Request $request)
     {
-        AdminService::postLoginAdmin($request);
+       return  AdminService::postLoginAdmin($request);
+    
     }
 }
 

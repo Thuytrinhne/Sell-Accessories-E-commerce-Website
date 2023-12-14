@@ -13,7 +13,8 @@ class AdminService
     }
     public static function postLoginAdmin(Request $request)
     {
-       if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role_id'=>2])) {
+       if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role_id'=>3])) 
+        {
             return redirect()-> route('admin.dashboard');
         }
         else
