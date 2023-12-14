@@ -59,6 +59,8 @@
     border: none;
     color: white;
     background-color: #e05994;
+    text-align: center;
+    padding-top: 6px;
 }
 
 .verified button:hover{

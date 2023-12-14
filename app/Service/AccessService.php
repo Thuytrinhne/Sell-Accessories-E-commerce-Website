@@ -8,6 +8,12 @@ use App\Models\user;
 use Auth;
 use App\Models\email_verification;
 use App\Http\Requests\AccessRequest;
+use App\Http\Requests\PasswordChangeRequest;
+use Mail;
+use App\Mail\ForgotPassword;
+use App\Mail\SendEmailCode;
+
+use Str;
 
 
 class AccessService 
@@ -61,8 +67,8 @@ class AccessService
     public static function postLogin(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()-> route('front.homepage');
-            dd("thành công");
+            return redirect()-> route('front.homepage')->with("loginSuccess", "Đăng nhập thành công");
+           
 
         }
         else
@@ -76,6 +82,71 @@ class AccessService
         Auth::logout();
         return redirect()->back();
     }
+    public static function forgotPassword()
+    {
+        return view('auth.forgot-pass');
+    }
+    public static function handleForgotPass(Request $request)
+    {
+        $user = user::where('email', '=', $request->email)->first();
+        if($user)
+        {
+            $user->remember_token = Str::random(30);
+            $user->save();
+            Mail::to($user->email)->send(new ForgotPassword($user));
+            return redirect()->back()->with('success', 'Vui lòng kiểm tra email và đặt lại mật khẩu bạn nhé');
 
+        }
+        else
+        {
+            $request->flash();
+            return redirect()->back()->with('error', 'Email không tồn tại trong hệ thống');
+        }
+    }
+    public static function sendOTP(Request $request)
+    {
+        // send OTP here
+        $otp = rand (100000, 999999);
+        email_verification::updateOrCreate(
+            ['email' => $request->email],
+            [   'email' => $request->email,
+                'otp'=> $otp,
+            ]
+        );
+        try {
+  
+            $data = [
+                'otp' => $otp
+            ];
+             
+            Mail::to($request->email)->send(new SendEmailCode($data));
+    
+        } catch (Exception $e) {
+            info("Error: ". $e->getMessage());
+        }
+        return redirect()->back()->with('sendOTP', $request->email)
+        ->with('sendOTPSuccess', 'TShopping đã gửi mã xác thực vào Email của bạn vui lòng kiểm tra lại nhé');
+    }
+    public static function reset($token)
+    {
+        $user = user::where('remember_token', '=', $token)->first();
+        if($user)
+            return view('auth.pass-verify', compact('user'));
+        else
+        return abort(404);
+    }
+    public static function handlePassVerify($token, PasswordChangeRequest $request)
+    {
+        $user = user::where ('remember_token', '=', $token)->first();
+        if($user)
+        {
+            $user->password = Hash::make($request->password);
+            $user->remember_token = "";
+            $user->save();
+            return redirect()->route("login")->with("forgotPass", 'Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại nhé');
+        }
+        else
+            return abort(404);
+    }
    
 }

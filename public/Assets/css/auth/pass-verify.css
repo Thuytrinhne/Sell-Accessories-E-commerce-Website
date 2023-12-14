@@ -34,14 +34,16 @@
     margin: 45px 52px;
 
 }
-
+.forgot-pass_body-input 
+{
+    margin-bottom: 16px;
+}
 .forgot-pass_body-input label{
     font-size: 16px; 
     color: rgb(90, 90, 90);
 }
 
 .forgot-pass_body-input input{
-    margin-bottom: 16px;
     border: rgb(195, 191, 191) solid 1px;
     padding: 7px 15px;
     border-radius: 7px;
@@ -50,6 +52,7 @@
 
 .forgot-pass_btn
 {
+    width: 100%;
     outline: none;
     text-decoration: none;
     position: relative;

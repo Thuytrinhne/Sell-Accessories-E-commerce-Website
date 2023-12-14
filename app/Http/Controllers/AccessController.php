@@ -11,6 +11,8 @@ use Auth;
 use Mail;
 use App\Mail\SendEmailCode;
 use App\Http\Requests\AccessRequest;
+use App\Http\Requests\PasswordChangeRequest;
+
 class AccessController extends Controller
 {
     public static function indexSignUp(Request $request)
@@ -33,34 +35,25 @@ class AccessController extends Controller
     }
     public static function sendOTP(Request $request)
     {
-        // send OTP here
-        $otp = rand (100000, 999999);
-        email_verification::updateOrCreate(
-            ['email' => $request->email],
-            [   'email' => $request->email,
-                'otp'=> $otp,
-            ]
-        );
-        try {
-  
-            $data = [
-                'otp' => $otp
-            ];
-             
-            Mail::to($request->email)->send(new SendEmailCode($data));
-    
-        } catch (Exception $e) {
-            info("Error: ". $e->getMessage());
-        }
-        return redirect()->back()->with('sendOTP', $request->email)
-        ->with('sendOTPSuccess', 'TShopping đã gửi mã xác thực vào Email của bạn vui lòng kiểm tra lại nhé');
+        return AccessService::sendOTP();
     }
     public static function forgotPassword()
     {
-        return view('auth.forgot-pass');
+        return AccessService::forgotPassword();
     }
     public static function handleForgotPass(Request $request)
     {
-        dd($request);
+        return AccessService::handleForgotPass($request);
+        
+    }
+    public static function reset($token)
+    {
+        return AccessService::reset($token);
+
+    }
+    public static function handlePassVerify($token, PasswordChangeRequest $request)
+    {
+        return AccessService::reset($token, $request);
+
     }
 }

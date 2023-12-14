@@ -1,5 +1,23 @@
 @extends('layouts.app')
 @section('body-main')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- code trinh  -->
+@if (session ('loginSuccess'))
+            {
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('loginSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            }
+@endif
+
+<!-- end code trinh  -->
 <div class="body-main">
             <div class="body-banner-container grid">
                 <div class="body-banner">

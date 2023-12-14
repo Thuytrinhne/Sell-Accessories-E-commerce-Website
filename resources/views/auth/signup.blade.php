@@ -220,7 +220,7 @@
                     </form>
                        
                     <div class="signup_have-an-account">
-                        <p>Bạn đã có tài khoản? <a href="signin.html">Đăng nhập</a></p>
+                        <p>Bạn đã có tài khoản? <a href="{{route('login')}}">Đăng nhập</a></p>
                     </div>
                 </div>
             </div>

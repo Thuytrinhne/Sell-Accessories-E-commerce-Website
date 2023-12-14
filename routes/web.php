@@ -24,12 +24,12 @@ Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
  })->name('front.account');
 // login for admin 
-Route::get('/admin/login', function()
-{return view('admin.login');})->name('loginAdmin');
+Route::get('/admin/login', [AdminController::class,'login'])->name('loginAdmin');
 Route::post('/admin/login', [AdminController::class,'postLoginAdmin'])->name('postLoginAdmin');
 // router admin
 Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
+   
     Route::get('/', function () {
     return view('admin.dashboard');
     })->name('admin.dashboard');
@@ -102,10 +102,9 @@ Route::get('/signup/sendOTP/{email}', [AccessController::class,'sendOTP'])->name
 Route::get('/forgot-pass', [AccessController::class,'forgotPassword'])->name('forgot-pass');
 Route::post('/forgot-pass', [AccessController::class,'handleForgotPass'])->name('handleForgot-pass');
 
-Route::get('/pass-verify', function () {
-    return view('auth.pass-verify');
- })->name('pass-verify');
- 
+Route::get('/pass-verify/{token}', [AccessController::class,'reset'])->name('pass-verify');
+Route::post('/pass-verify/{token}', [AccessController::class,'handlePassVerify'])->name('handle-pass-verify');
+
 // end router auth
 
 // router product

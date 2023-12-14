@@ -16,7 +16,7 @@
                             <img src="/Assets/Images/user-icon.jpg" alt="Ảnh đại diện">
                             <div class="logout">
                                 <ion-icon name="log-in"></ion-icon>
-                                <label>Đăng xuất</label>
+                                <a class="logout-link" href="{{route('logout')}}">Đăng xuất</a>
                             </div>
                         </div>
                     </div>

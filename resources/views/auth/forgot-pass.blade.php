@@ -3,6 +3,16 @@
 <link rel="stylesheet" href="{{asset('Assets/css/auth/forgot-pass.css')}}">
 @endsection
 @section('content')
+    @if (session('error'))
+    <div class="alert alert-danger" role="alert">  
+        <h4 style="text-align: center;">{{ session('error') }}</h4>    
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success" role="alert">  
+        <h4 style="text-align: center;">{{ session('success') }}</h4>    
+    </div>
+    @endif
 <div class="forgot-pass">
         <!-- ================ Forgot-pass header ================ -->
         <div class="forgot-pass_header">
@@ -26,7 +36,7 @@
                     <div class="forgot-pass_body-input">
                         <label for="" style="margin-bottom: 6px; font-size: 13px; color: rgb(129, 129, 129);">Vui lòng nhập địa chỉ email. 
                             Bạn sẽ nhận được một liên kết tạo mật khẩu mới qua email.</label>  <br>
-                        <input name="email" type="text" placeholder="Nhập email"><br>
+                        <input name="email" type="text" placeholder="Nhập email" value="{{ old('email') }}"><br>
                     </div>
 
 

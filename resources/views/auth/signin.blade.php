@@ -1,7 +1,19 @@
 @extends('layouts.auth')
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+           
+            @if(session('forgotPass'))
+                        <script>
+                           Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: '{{ session('forgotPass') }}',
+                            showConfirmButton: true,
+                            showCancelButton: false,
+                            confirmButtonText: 'OK',
+                        });
+                        </script>
+                        @endif
             @if(session('SignUpSuccess'))
             <script>
                 Swal.fire({
@@ -46,12 +58,12 @@
 
                     <div class="loginandremember">
                         <button type="submit" class="signin_btn" onclick="sigInOnclick()">Đăng nhập</button><br>
-                        <a class="forgot-pass" href="Forgot-pass.html">Quên mật khẩu?</a><br>
+                        <a class="forgot-pass" href="{{route('forgot-pass')}}">Quên mật khẩu?</a><br>
                     </div>
                     </form>
                     
                     <div class="signin-newbie">
-                        <p>Bạn mới biết đến T&P? <a href="signup.html">Đăng ký</a></p>
+                        <p>Bạn mới biết đến T&P? <a href="{{route('signup')}}">Đăng ký</a></p>
                     </div>
                 </div>
             </div>
