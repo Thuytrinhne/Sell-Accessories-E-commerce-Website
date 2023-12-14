@@ -23,10 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
      
-    {
-        $topCategories = Category::whereNull('parent_id')->get();
-        view()->share('topCategories', $topCategories);
-    }
+    
 
         Paginator::useBootstrap();
     }

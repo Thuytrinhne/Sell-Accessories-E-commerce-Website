@@ -6,6 +6,7 @@ use App\Models\category;
 use Illuminate\Http\Request;
 use App\Models\Respositories\CategoryRespository;
 use App\Http\Requests\CategoryRequest;
+
 class CategoryService 
 {
     /**

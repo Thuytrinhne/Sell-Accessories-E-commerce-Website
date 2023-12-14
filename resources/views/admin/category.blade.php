@@ -91,8 +91,8 @@
                             </tbody>
                         </table>
                         <hr>
-                       {{$categoryPaginate->links()}}
-                    </div>
+                        {{ $categoryPaginate->links() }}                   
+                     </div>
                     @else
                     <script>
                         Swal.fire({
