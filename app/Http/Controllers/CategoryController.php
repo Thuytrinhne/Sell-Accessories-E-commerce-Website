@@ -17,9 +17,8 @@ class CategoryController extends Controller
     public static function index(Request $request)
     {
         return CategoryService::index($request);
-      
     }
-   
+
     /**
      * Show the form for creating a new resource.
      */
@@ -32,10 +31,10 @@ class CategoryController extends Controller
      */
     public static function store(CategoryRequest $request)
     {
-       return CategoryService::store($request); 
+        return CategoryService::store($request);
     }
-   
-  
+
+
 
     /**
      * Display the specified resource

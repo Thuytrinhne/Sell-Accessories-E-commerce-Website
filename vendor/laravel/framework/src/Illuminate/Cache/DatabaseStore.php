@@ -8,7 +8,10 @@ use Illuminate\Contracts\Cache\Store;
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\PostgresConnection;
 use Illuminate\Database\QueryException;
+<<<<<<< HEAD
 use Illuminate\Database\SqlServerConnection;
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
 use Illuminate\Support\InteractsWithTime;
 use Illuminate\Support\Str;
 
@@ -115,7 +118,11 @@ class DatabaseStore implements LockProvider, Store
         // item from the cache. Then we will return a null value since the cache is
         // expired. We will use "Carbon" to make this comparison with the column.
         if ($this->currentTime() >= $cache->expiration) {
+<<<<<<< HEAD
             $this->forgetIfExpired($key);
+=======
+            $this->forget($key);
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
 
             return;
         }
@@ -150,14 +157,18 @@ class DatabaseStore implements LockProvider, Store
      */
     public function add($key, $value, $seconds)
     {
+<<<<<<< HEAD
         if (! is_null($this->get($key))) {
             return false;
         }
 
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         $key = $this->prefix.$key;
         $value = $this->serialize($value);
         $expiration = $this->getTime() + $seconds;
 
+<<<<<<< HEAD
         $doesntSupportInsertOrIgnore = [SqlServerConnection::class];
 
         if (! in_array(get_class($this->getConnection()), $doesntSupportInsertOrIgnore)) {
@@ -171,6 +182,19 @@ class DatabaseStore implements LockProvider, Store
         }
 
         return false;
+=======
+        try {
+            return $this->table()->insert(compact('key', 'value', 'expiration'));
+        } catch (QueryException) {
+            return $this->table()
+                ->where('key', $key)
+                ->where('expiration', '<=', $this->getTime())
+                ->update([
+                    'value' => $value,
+                    'expiration' => $expiration,
+                ]) >= 1;
+        }
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     }
 
     /**
@@ -317,6 +341,7 @@ class DatabaseStore implements LockProvider, Store
     }
 
     /**
+<<<<<<< HEAD
      * Remove an item from the cache if it is expired.
      *
      * @param  string  $key
@@ -333,6 +358,8 @@ class DatabaseStore implements LockProvider, Store
     }
 
     /**
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * Remove all items from the cache.
      *
      * @return bool

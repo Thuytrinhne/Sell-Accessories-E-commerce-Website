@@ -13,7 +13,17 @@ class AccountRequest extends FormRequest
     {
         return false;
     }
-
+    public function messages()
+    {
+        return [
+            'full_name'=> 'Vui lòng nhập họ tên',
+            'sex'=> 'Vui lòng nhập giới tính',
+            'phone'=> 'Vui lòng nhập số điện thoại',
+            'email'=> 'Vui lòng nhập email',
+            'password'=> 'Vui lòng nhập mật khẩu',
+            'birth'=> 'Vui lòng nhập ngày sinh'
+        ];
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +32,12 @@ class AccountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'full_name'=> 'required',
+                'sex'=> 'required',
+                'phone'=> 'required|max:10',
+                'email'=> 'required',
+                'password'=> 'required',
+                'birth'=> 'required'
         ];
     }
 }

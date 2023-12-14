@@ -11,7 +11,11 @@ final class DataSet
     private array $data;
     private string $encoded;
 
+<<<<<<< HEAD
     /** @param mixed[] $data */
+=======
+    /** @param array<string, mixed> $data */
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     public function __construct(array $data, string $encoded)
     {
         $this->data    = $data;
@@ -33,7 +37,11 @@ final class DataSet
         return array_key_exists($name, $this->data);
     }
 
+<<<<<<< HEAD
     /** @return mixed[] */
+=======
+    /** @return array<string, mixed> */
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     public function all(): array
     {
         return $this->data;

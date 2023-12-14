@@ -798,6 +798,7 @@ class Stringable implements JsonSerializable, ArrayAccess
     }
 
     /**
+<<<<<<< HEAD
      * Transliterate a string to its closest ASCII representation.
      *
      * @param  string|null  $unknown
@@ -810,6 +811,8 @@ class Stringable implements JsonSerializable, ArrayAccess
     }
 
     /**
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * Convert the given string to title case for each word.
      *
      * @return static

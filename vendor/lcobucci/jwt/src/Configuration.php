@@ -80,6 +80,10 @@ final class Configuration
         );
     }
 
+<<<<<<< HEAD
+=======
+    /** @deprecated Deprecated since v4.3 */
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     public static function forUnsecuredSigner(
         ?Encoder $encoder = null,
         ?Decoder $decoder = null

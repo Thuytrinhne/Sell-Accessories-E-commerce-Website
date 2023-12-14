@@ -269,7 +269,11 @@ class Password implements Rule, DataAwareRule, ValidatorAwareRule
     /**
      * Specify additional validation rules that should be merged with the default rules during validation.
      *
+<<<<<<< HEAD
      * @param  \Closure|string|array  $rules
+=======
+     * @param  string|array  $rules
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * @return $this
      */
     public function rules($rules)
@@ -301,6 +305,7 @@ class Password implements Rule, DataAwareRule, ValidatorAwareRule
             }
 
             if ($this->mixedCase && ! preg_match('/(\p{Ll}+.*\p{Lu})|(\p{Lu}+.*\p{Ll})/u', $value)) {
+<<<<<<< HEAD
                 $validator->addFailure($attribute, 'password.mixed');
             }
 
@@ -314,6 +319,33 @@ class Password implements Rule, DataAwareRule, ValidatorAwareRule
 
             if ($this->numbers && ! preg_match('/\pN/u', $value)) {
                 $validator->addFailure($attribute, 'password.numbers');
+=======
+                $validator->errors()->add(
+                    $attribute,
+                    $this->getErrorMessage('validation.password.mixed')
+                );
+            }
+
+            if ($this->letters && ! preg_match('/\pL/u', $value)) {
+                $validator->errors()->add(
+                    $attribute,
+                    $this->getErrorMessage('validation.password.letters')
+                );
+            }
+
+            if ($this->symbols && ! preg_match('/\p{Z}|\p{S}|\p{P}/u', $value)) {
+                $validator->errors()->add(
+                    $attribute,
+                    $this->getErrorMessage('validation.password.symbols')
+                );
+            }
+
+            if ($this->numbers && ! preg_match('/\pN/u', $value)) {
+                $validator->errors()->add(
+                    $attribute,
+                    $this->getErrorMessage('validation.password.numbers')
+                );
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             }
         });
 
@@ -325,9 +357,13 @@ class Password implements Rule, DataAwareRule, ValidatorAwareRule
             'value' => $value,
             'threshold' => $this->compromisedThreshold,
         ])) {
+<<<<<<< HEAD
             $validator->addFailure($attribute, 'password.uncompromised');
 
             return $this->fail($validator->messages()->all());
+=======
+            return $this->fail($this->getErrorMessage('validation.password.uncompromised'));
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         }
 
         return true;
@@ -344,6 +380,32 @@ class Password implements Rule, DataAwareRule, ValidatorAwareRule
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Get the translated password error message.
+     *
+     * @param  string  $key
+     * @return string
+     */
+    protected function getErrorMessage($key)
+    {
+        if (($message = $this->validator->getTranslator()->get($key)) !== $key) {
+            return $message;
+        }
+
+        $messages = [
+            'validation.password.mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
+            'validation.password.letters' => 'The :attribute must contain at least one letter.',
+            'validation.password.symbols' => 'The :attribute must contain at least one symbol.',
+            'validation.password.numbers' => 'The :attribute must contain at least one number.',
+            'validation.password.uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
+        ];
+
+        return $messages[$key];
+    }
+
+    /**
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * Adds the given failures, and return false.
      *
      * @param  array|string  $messages
@@ -351,7 +413,15 @@ class Password implements Rule, DataAwareRule, ValidatorAwareRule
      */
     protected function fail($messages)
     {
+<<<<<<< HEAD
         $this->messages = array_merge($this->messages, Arr::wrap($messages));
+=======
+        $messages = collect(Arr::wrap($messages))->map(function ($message) {
+            return $this->validator->getTranslator()->get($message);
+        })->all();
+
+        $this->messages = array_merge($this->messages, $messages);
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
 
         return false;
     }

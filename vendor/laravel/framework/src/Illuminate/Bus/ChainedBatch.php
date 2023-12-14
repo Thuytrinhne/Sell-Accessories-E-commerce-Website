@@ -72,6 +72,7 @@ class ChainedBatch implements ShouldQueue
      */
     public function handle()
     {
+<<<<<<< HEAD
         $this->attachRemainderOfChainToEndOfBatch(
             $this->toPendingBatch()
         )->dispatch();
@@ -85,6 +86,9 @@ class ChainedBatch implements ShouldQueue
     public function toPendingBatch()
     {
         $batch = Container::getInstance()->make(Dispatcher::class)->batch($this->jobs);
+=======
+        $batch = new PendingBatch(Container::getInstance(), $this->jobs);
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
 
         $batch->name = $this->name;
         $batch->options = $this->options;
@@ -97,6 +101,11 @@ class ChainedBatch implements ShouldQueue
             $batch->onConnection($this->connection);
         }
 
+<<<<<<< HEAD
+=======
+        $this->dispatchRemainderOfChainAfterBatch($batch);
+
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         foreach ($this->chainCatchCallbacks ?? [] as $callback) {
             $batch->catch(function (Batch $batch, ?Throwable $exception) use ($callback) {
                 if (! $batch->allowsFailures()) {
@@ -105,16 +114,26 @@ class ChainedBatch implements ShouldQueue
             });
         }
 
+<<<<<<< HEAD
         return $batch;
+=======
+        $batch->dispatch();
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     }
 
     /**
      * Move the remainder of the chain to a "finally" batch callback.
      *
      * @param  \Illuminate\Bus\PendingBatch  $batch
+<<<<<<< HEAD
      * @return \Illuminate\Bus\PendingBatch
      */
     protected function attachRemainderOfChainToEndOfBatch(PendingBatch $batch)
+=======
+     * @return
+     */
+    protected function dispatchRemainderOfChainAfterBatch(PendingBatch $batch)
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     {
         if (! empty($this->chained)) {
             $next = unserialize(array_shift($this->chained));
@@ -136,7 +155,10 @@ class ChainedBatch implements ShouldQueue
 
             $this->chained = [];
         }
+<<<<<<< HEAD
 
         return $batch;
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     }
 }

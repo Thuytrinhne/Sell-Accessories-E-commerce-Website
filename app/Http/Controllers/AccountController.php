@@ -2,64 +2,86 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AccountRequest;
 use App\Models\user;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
+use App\Service\AccountService;
+use Illuminate\Support\Facades\Input;
+
 
 class AccountController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // $id = AccountController::getId();
+        // $i = $id;
+        // $j = 0;
+        // $k = 0;
+        $admin = user::all();
+        $staff = user::all();
+        $user = user::all();
+        return view("admin.account.account", compact("admin", "staff", "user"));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+// =======================  Thêm xoá sửa admin =========================
+    public function storeAdmin(Request $request)
     {
-        //
+        return AccountService::storeAdmin($request);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    
+    public function editAdmin(Request $request, string $id)
     {
-        //
+        return AccountService::editAdmin($request,$id);
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(user $user)
+    
+    public function destroyAdmin(string $id)
     {
-        //
+        return AccountService::destroyAdmin($id);
+
     }
+// =======================  END Thêm xoá sửa admin =========================
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(user $user)
+
+
+// =======================  Thêm xoá sửa staff =========================
+public function storeStaff(Request $request)
     {
-        //
+        return AccountService::storeStaff($request);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, user $user)
+    
+    public function editStaff(Request $request, string $id)
     {
-        //
+        return AccountService::editStaff($request,$id);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(user $user)
+    
+    public function destroyStaff(string $id)
     {
-        //
+        return AccountService::destroyStaff($id);
+    }
+// =======================  END Thêm xoá sửa staff =========================
+
+
+
+
+// =======================  Thêm xoá sửa user =========================
+public function storeUser(Request $request)
+    {
+        return AccountService::storeUser($request);
+    }
+    
+    public function editUser(Request $request, string $id)
+    {
+        return AccountService::editUser($request,$id);
+    }
+    
+    public function destroyUser(string $id)
+    {
+        return AccountService::destroyUser($id);
+    }
+// =======================  END Thêm xoá sửa user =========================
+
+    public function search(){
+        return AccountService::search();
     }
 }

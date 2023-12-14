@@ -1201,6 +1201,7 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
             "version": "v10.33.0",
             "version_normalized": "10.33.0.0",
             "source": {
@@ -1212,6 +1213,19 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
                 "reference": "4536872e3e5b6be51b1f655dafd12c9a4fa0cfe8",
+=======
+            "version": "v10.32.1",
+            "version_normalized": "10.32.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "b30e44f20d244f7ba125283e14a8bbac167f4e5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/b30e44f20d244f7ba125283e14a8bbac167f4e5b",
+                "reference": "b30e44f20d244f7ba125283e14a8bbac167f4e5b",
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
                 "shasum": ""
             },
             "require": {
@@ -1358,7 +1372,11 @@
                 "symfony/postmark-mailer": "Required to enable support for the Postmark mail transport (^6.2).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0)."
             },
+<<<<<<< HEAD
             "time": "2023-11-21T14:49:31+00:00",
+=======
+            "time": "2023-11-14T22:57:08+00:00",
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1535,6 +1553,7 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< HEAD
             "version": "v1.26.1",
             "version_normalized": "1.26.1.0",
             "source": {
@@ -1546,6 +1565,19 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/7a82f5aa364dbee3fd9c52fc464cf0bdd11150ed",
                 "reference": "7a82f5aa364dbee3fd9c52fc464cf0bdd11150ed",
+=======
+            "version": "v1.26.0",
+            "version_normalized": "1.26.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "c60fe037004e272efd0d81f416ed2bfc623d70b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/c60fe037004e272efd0d81f416ed2bfc623d70b4",
+                "reference": "c60fe037004e272efd0d81f416ed2bfc623d70b4",
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
                 "shasum": ""
             },
             "require": {
@@ -1559,7 +1591,11 @@
                 "orchestra/testbench": "^7.0|^8.0|^9.0",
                 "phpstan/phpstan": "^1.10"
             },
+<<<<<<< HEAD
             "time": "2023-11-20T15:56:47+00:00",
+=======
+            "time": "2023-10-18T13:57:15+00:00",
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             "bin": [
                 "bin/sail"
             ],
@@ -1807,6 +1843,7 @@
         },
         {
             "name": "lcobucci/clock",
+<<<<<<< HEAD
             "version": "2.3.0",
             "version_normalized": "2.3.0.0",
             "source": {
@@ -1818,11 +1855,28 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/lcobucci/clock/zipball/c7aadcd6fd97ed9e199114269c0be3f335e38876",
                 "reference": "c7aadcd6fd97ed9e199114269c0be3f335e38876",
+=======
+            "version": "3.0.0",
+            "version_normalized": "3.0.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/clock.git",
+                "reference": "039ef98c6b57b101d10bd11d8fdfda12cbd996dc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/clock/zipball/039ef98c6b57b101d10bd11d8fdfda12cbd996dc",
+                "reference": "039ef98c6b57b101d10bd11d8fdfda12cbd996dc",
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
                 "shasum": ""
             },
             "require": {
                 "php": "~8.1.0 || ~8.2.0",
+<<<<<<< HEAD
                 "stella-maris/clock": "^0.1.7"
+=======
+                "psr/clock": "^1.0"
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             },
             "provide": {
                 "psr/clock-implementation": "1.0"
@@ -1837,7 +1891,11 @@
                 "phpstan/phpstan-strict-rules": "^1.4.4",
                 "phpunit/phpunit": "^9.5.27"
             },
+<<<<<<< HEAD
             "time": "2022-12-19T14:38:11+00:00",
+=======
+            "time": "2022-12-19T15:00:24+00:00",
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -1858,7 +1916,11 @@
             "description": "Yet another clock abstraction",
             "support": {
                 "issues": "https://github.com/lcobucci/clock/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/lcobucci/clock/tree/2.3.0"
+=======
+                "source": "https://github.com/lcobucci/clock/tree/3.0.0"
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             },
             "funding": [
                 {
@@ -1874,6 +1936,7 @@
         },
         {
             "name": "lcobucci/jwt",
+<<<<<<< HEAD
             "version": "4.0.4",
             "version_normalized": "4.0.4.0",
             "source": {
@@ -1913,6 +1976,45 @@
                     "dev-master": "4.0-dev"
                 }
             },
+=======
+            "version": "4.3.0",
+            "version_normalized": "4.3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lcobucci/jwt.git",
+                "reference": "4d7de2fe0d51a96418c0d04004986e410e87f6b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lcobucci/jwt/zipball/4d7de2fe0d51a96418c0d04004986e410e87f6b4",
+                "reference": "4d7de2fe0d51a96418c0d04004986e410e87f6b4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-hash": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-openssl": "*",
+                "ext-sodium": "*",
+                "lcobucci/clock": "^2.0 || ^3.0",
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "infection/infection": "^0.21",
+                "lcobucci/coding-standard": "^6.0",
+                "mikey179/vfsstream": "^1.6.7",
+                "phpbench/phpbench": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^1.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/php-invoker": "^3.1",
+                "phpunit/phpunit": "^9.5"
+            },
+            "time": "2023-01-02T13:28:00+00:00",
+            "type": "library",
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
@@ -1937,7 +2039,11 @@
             ],
             "support": {
                 "issues": "https://github.com/lcobucci/jwt/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/lcobucci/jwt/tree/4.0.4"
+=======
+                "source": "https://github.com/lcobucci/jwt/tree/4.3.0"
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             },
             "funding": [
                 {
@@ -2302,6 +2408,7 @@
             "install-path": "../league/flysystem-local"
         },
         {
+<<<<<<< HEAD
             "name": "league/fractal",
             "version": "0.20.1",
             "version_normalized": "0.20.1.0",
@@ -2375,6 +2482,8 @@
             "install-path": "../league/fractal"
         },
         {
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             "name": "league/mime-type-detection",
             "version": "1.14.0",
             "version_normalized": "1.14.0.0",
@@ -5865,6 +5974,7 @@
             "install-path": "../spatie/laravel-ignition"
         },
         {
+<<<<<<< HEAD
             "name": "stella-maris/clock",
             "version": "0.1.7",
             "version_normalized": "0.1.7.0",
@@ -5915,6 +6025,8 @@
             "install-path": "../stella-maris/clock"
         },
         {
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             "name": "symfony/console",
             "version": "v6.3.8",
             "version_normalized": "6.3.8.0",
@@ -8744,6 +8856,7 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "install-path": "../webmozart/assert"
+<<<<<<< HEAD
         },
         {
             "name": "yajra/laravel-datatables",
@@ -9202,6 +9315,8 @@
                 }
             ],
             "install-path": "../yajra/laravel-datatables-oracle"
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         }
     ],
     "dev": true,

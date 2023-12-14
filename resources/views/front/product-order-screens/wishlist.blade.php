@@ -22,10 +22,49 @@
         <div class="product_box-container">
             <i class="fa-regular fa-face-grin-hearts" style="" ></i>
             <h1>
-                
                 MY WISHLIST
             </h1>
-            <!-- ===============   product box  =============== -->
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        @foreach($product as $items)
+                            <tr>
+                                <td></td>
+                                <td><img src="{{ Assets::url($items -> image) }}" width="50" alt=""></td>
+                                <td>{{ $items -> product_name }}</td>
+                                <td>{{ $items -> price }}</td>
+                                <td>{{ $items -> state }}</td>
+                                <td><a href="">Thêm vào giỏ hàng</a></td>
+                                <td></td>
+                            </tr>
+                        @endforeach
+                    </thead>
+                </table>
+            </div>
+            <!-- <div class="product_box">
+                <div class="cancel_button">
+                    <a href="{{ route('destroy.wishlists') }}" class="cancel_btn">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </a>
+                </div>
+                <img src="./Assets/Images/product_img.jpeg" alt="">
+                <div class="product_info">
+                    <a class="product_name">Cài tóc phối lưới</a>
+                </div>
+                
+                <div class="product_info">
+                    <p class="product_name">65.000đ</p>
+                </div>
+
+                <div class="product_info">
+                    <p class="product_name">In Stock</p>
+                </div>
+
+                <div class="product_info">
+                    <a class="product_name">Thêm vào giỏ hàng</a>
+                </div>
+            </div>
+
             <div class="product_box">
                 <div class="cancel_button">
                     <button href="" class="cancel_btn">
@@ -48,33 +87,8 @@
                 <div class="product_info">
                     <a class="product_name">Thêm vào giỏ hàng</a>
                 </div>
-            </div>
-            <!-- ===============   product box  =============== -->
-            <!-- ===============   product box  =============== -->
-            <div class="product_box">
-                <div class="cancel_button">
-                    <button href="" class="cancel_btn">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </button>
-                </div>
-                <img src="./Assets/Images/product_img.jpeg" alt="">
-                <div class="product_info">
-                    <a class="product_name">Cài tóc phối lưới</a>
-                </div>
-                
-                <div class="product_info">
-                    <p class="product_name">65.000đ</p>
-                </div>
+            </div> -->
 
-                <div class="product_info">
-                    <p class="product_name">In Stock</p>
-                </div>
-
-                <div class="product_info">
-                    <a class="product_name">Thêm vào giỏ hàng</a>
-                </div>
-            </div>
-            <!-- ===============   product box  =============== -->
         </div>
     </div>
 @endsection

@@ -33,7 +33,10 @@ use Illuminate\Support\Testing\Fakes\BusFake;
  * @method static void assertNotDispatchedAfterResponse(string|\Closure $command, callable|null $callback = null)
  * @method static void assertChained(array $expectedChain)
  * @method static void assertDispatchedWithoutChain(string|\Closure $command, callable|null $callback = null)
+<<<<<<< HEAD
  * @method static \Illuminate\Support\Testing\Fakes\ChainedBatchTruthTest chainedBatch(\Closure $callback)
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
  * @method static void assertBatched(callable $callback)
  * @method static void assertBatchCount(int $count)
  * @method static void assertNothingBatched()

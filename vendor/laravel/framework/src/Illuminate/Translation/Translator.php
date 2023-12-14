@@ -66,6 +66,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     protected $stringableHandlers = [];
 
     /**
+<<<<<<< HEAD
      * The callback that is responsible for handling missing translation keys.
      *
      * @var callable|null
@@ -80,6 +81,8 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     protected $handleMissingTranslationKeys = true;
 
     /**
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * Create a new translator instance.
      *
      * @param  \Illuminate\Contracts\Translation\Loader  $loader
@@ -167,10 +170,13 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
                     return $line;
                 }
             }
+<<<<<<< HEAD
 
             $key = $this->handleMissingTranslationKey(
                 $key, $replace, $locale, $fallback
             );
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         }
 
         // If the line doesn't exist, we will return back the key which was requested as
@@ -327,6 +333,7 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     }
 
     /**
+<<<<<<< HEAD
      * Handle a missing translation key.
      *
      * @param  string  $key
@@ -369,6 +376,8 @@ class Translator extends NamespacedItemResolver implements TranslatorContract
     }
 
     /**
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * Add a new namespace to the loader.
      *
      * @param  string  $namespace

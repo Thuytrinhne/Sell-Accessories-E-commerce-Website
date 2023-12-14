@@ -517,7 +517,11 @@ elif [ "$1" == "root-shell" ] || [ "$1" == "root-bash" ]; then
     shift 1
 
     if [ "$EXEC" == "yes" ]; then
+<<<<<<< HEAD
         ARGS+=(exec -u root)
+=======
+        ARGS+=(exec)
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         [ ! -t 0 ] && ARGS+=(-T)
         ARGS+=("$APP_SERVICE" bash "$@")
     else

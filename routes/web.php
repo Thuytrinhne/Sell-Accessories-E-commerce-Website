@@ -10,6 +10,9 @@ use App\Http\Controllers\ProductController;
 // trinh use
 use App\Http\Controllers\AccessController;
 // end trinh use
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\WishlishController;
+use Illuminate\Support\Facades\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +53,7 @@ Route::get('/aboutUs', function () {
 })->name('front.aboutUs');
 
 
+
 //Route qtoan them vao
 Route::group(['prefix' => '/'], function () {
    
@@ -81,9 +85,9 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
    Route::get('/', [AdminController::class, 'DashboardView'])->name('admin.dashboard');
 
-    Route::get('/product', function () {
-    return view('admin.product');
-    })->name('admin.product');
+   Route::get('/product', function () {
+   return view('admin.product');
+   })->name('admin.product');
 
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
@@ -131,10 +135,39 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     })->name('admin.order');
 
 
+// anh Trung route
+   Route::get('/order', function () {
+   return view('admin.order');
+   })->name('admin.order');
 
-    Route::get('/account', function () {
-    return view('admin.account');
-        })->name('admin.account');
+   Route::get('/report', function () {
+   return view('admin.report');
+   })->name('admin.report');
+
+   Route::any('/search', [AccountController::class,'search'] ) -> name('admin.search_account');;
+   Route::prefix('account')->group( function(){
+      // hiển thị danh sách danh mục 
+      Route::get('/', [AccountController::class,'index'])->name('admin.account');
+      // // xử lý thêm danh mục
+      Route::prefix('add') -> group(function(){
+         Route::match(['GET','POST'],'/admin', [AccountController::class,'storeAdmin'])->name('store.admin');
+         Route::match(['GET','POST'],'/staff', [AccountController::class,'storeStaff'])->name('store.staff');
+         Route::match(['GET','POST'],'/user', [AccountController::class,'storeUser'])->name('store.user');
+      });
+
+      Route::prefix('delete') -> group(function(){
+         Route::match(['GET','POST'],'/admin/{id}', [AccountController::class,'destroyAdmin'])->name('destroy.admin');
+         Route::match(['GET','POST'],'/staff/{id}', [AccountController::class,'destroyStaff'])->name('destroy.staff');
+         Route::match(['GET','POST'],'/user/{id}', [AccountController::class,'destroyUser'])->name('destroy.user');
+      });
+
+      Route::prefix('edit') -> group(function(){
+         Route::match(['GET','POST'],'/admin/{id}', [AccountController::class,'editAdmin'])->name('edit.admin');
+         Route::match(['GET','POST'],'/staff/{id}', [AccountController::class,'editStaff'])->name('edit.staff');
+         Route::match(['GET','POST'],'/user/{id}', [AccountController::class,'editUser'])->name('edit.user');
+      });
+   });
+
 
    Route::prefix('category')->group( function()
    {
@@ -161,7 +194,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 // router customer
 Route::get('/customer/account', function () {
    
-    return view('front.customer.account');
+   return view('front.customer.account');
 })->name('front.account');
 Route::get('/customer/orders', function () {
    
@@ -208,13 +241,23 @@ Route::get('/checkout/choose-location', function () {
  Route::get('/checkout/add-location', function () {
     return view('front.product-order-screens.add-location');
  })->name('add-location');
- Route::get('/wishlist', function () {
-    return view('front.product-order-screens.wishlist');
- })->name('wishlist');
+//  Route::get('/wishlist', function () {
+//     return view('front.product-order-screens.wishlist');
 
 
+Route::prefix('/wishlist') -> group(function () {
+   Route::get('/', [WishlishController::class,'index'])->name('wishlist');
+   Route::match(['GET','POST'],'/add', [WishlishController::class,'store'])->name('store.wishlists');
+   Route::match(['GET','POST'],'/delete/{id}', [WishlishController::class,'destroy'])->name('destroy.wishlists');
+});
 
 
+ Route::get('/filter', function () {
+    return view('front.product-order-screens.filter');
+ })->name('filter');
+ Route::get('/detail-product', function () {
+    return view('front.product-order-screens.detail-product');
+ })->name('front.account');
  Route::get('/not-found', function () {
     return view('front.product-order-screens.not-found');
  })->name('front.account');

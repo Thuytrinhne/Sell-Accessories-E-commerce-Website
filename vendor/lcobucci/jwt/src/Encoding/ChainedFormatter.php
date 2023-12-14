@@ -20,6 +20,14 @@ final class ChainedFormatter implements ClaimsFormatter
         return new self(new UnifyAudience(), new MicrosecondBasedDateConversion());
     }
 
+<<<<<<< HEAD
+=======
+    public static function withUnixTimestampDates(): self
+    {
+        return new self(new UnifyAudience(), new UnixTimestampDates());
+    }
+
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     /** @inheritdoc */
     public function formatClaims(array $claims): array
     {

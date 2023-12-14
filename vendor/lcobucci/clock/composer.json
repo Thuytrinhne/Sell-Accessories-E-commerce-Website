@@ -11,7 +11,11 @@
     ],
     "require": {
         "php": "~8.1.0 || ~8.2.0",
+<<<<<<< HEAD
         "stella-maris/clock": "^0.1.7"
+=======
+        "psr/clock": "^1.0"
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     },
     "require-dev": {
         "infection/infection": "^0.26",

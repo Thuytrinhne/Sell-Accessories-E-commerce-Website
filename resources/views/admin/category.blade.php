@@ -26,10 +26,9 @@
                                 <option value="NULL">Danh mục cha</option>
                                 @foreach($category as $item)
                                 <option value="{{$item->id}}">{{$item->name_category}}</option>
-                              
+                            
                                 @endforeach
                             </select>
-                  
                     <button id="myBtn"  class="frmAdd-fitContent" type="submit">Xác nhận</button>
                     </form>
                 </div>

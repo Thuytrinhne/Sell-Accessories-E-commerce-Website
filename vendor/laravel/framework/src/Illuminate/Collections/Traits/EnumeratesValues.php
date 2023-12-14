@@ -352,7 +352,11 @@ trait EnumeratesValues
      *
      * @template TMapSpreadValue
      *
+<<<<<<< HEAD
      * @param  callable(mixed...): TMapSpreadValue  $callback
+=======
+     * @param  callable(mixed): TMapSpreadValue  $callback
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * @return static<TKey, TMapSpreadValue>
      */
     public function mapSpread(callable $callback)

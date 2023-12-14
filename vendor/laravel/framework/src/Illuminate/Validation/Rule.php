@@ -34,7 +34,11 @@ class Rule
     }
 
     /**
+<<<<<<< HEAD
      * Apply the given rules if the given condition is truthy.
+=======
+     * Create a new conditional rule set.
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      *
      * @param  callable|bool  $condition
      * @param  array|string|\Closure  $rules
@@ -47,6 +51,7 @@ class Rule
     }
 
     /**
+<<<<<<< HEAD
      * Apply the given rules if the given condition is falsy.
      *
      * @param  callable|bool  $condition
@@ -60,6 +65,8 @@ class Rule
     }
 
     /**
+=======
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * Create a new nested rule set.
      *
      * @param  callable  $callback

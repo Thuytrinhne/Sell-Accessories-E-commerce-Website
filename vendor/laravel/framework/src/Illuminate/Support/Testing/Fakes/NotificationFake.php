@@ -306,10 +306,17 @@ class NotificationFake implements Fake, NotificationDispatcher, NotificationFact
                     $notifiableChannels,
                     fn ($channel) => $notification->shouldSend($notifiable, $channel) !== false
                 );
+<<<<<<< HEAD
             }
 
             if (empty($notifiableChannels)) {
                 continue;
+=======
+
+                if (empty($notifiableChannels)) {
+                    continue;
+                }
+>>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
             }
 
             $this->notifications[get_class($notifiable)][$notifiable->getKey()][get_class($notification)][] = [
