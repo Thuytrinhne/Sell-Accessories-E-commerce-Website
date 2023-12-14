@@ -67,7 +67,7 @@ class AccessService
     public static function postLogin(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()-> route('front.homepage')->with("loginSuccess", "Đăng nhập thành công");
+            return redirect()-> route('homepage')->with("loginSuccess", "Đăng nhập thành công");
            
 
         }

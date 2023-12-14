@@ -21,14 +21,15 @@ use App\Http\Controllers\AccessController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/aboutUs', function () {
+   return view('front.shop.aboutUs');
+})->name('front.account');
 
 
-Route::get('/', [HomepageController::class, 'index']
-)->name('front.homepage');
-//Qtoan them vao
+//Route qtoan them vao
 Route::group(['prefix' => '/'], function () {
    
-   Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
+   Route::get('/', [ProductController::class, 'getProduct'])->name('homepage');
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
@@ -45,15 +46,13 @@ Route::group(['prefix' => '/'], function () {
    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
    
 });
-// end route qtoan 
+// route Product  (qtoan)
 
-Route::get('/aboutUs', function () {
-    return view('front.shop.aboutUs');
- })->name('front.account');
+// start admin 
 // login for admin 
 Route::get('/admin/login', [AdminController::class,'login'])->name('loginAdmin');
 Route::post('/admin/login', [AdminController::class,'postLoginAdmin'])->name('postLoginAdmin');
-// router admin
+// route function admin
 Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
    Route::get('/', [AdminController::class, 'DashboardView'])->name('admin.dashboard');
@@ -132,6 +131,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 // end router admin
 
 
+
 // router customer
 Route::get('/customer/account', function () {
    
@@ -149,7 +149,8 @@ Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'
 // end router customer
 
 
-// router auth
+
+// start router auth
 // login
 Route::get('/login', function () {
    return view('auth.signin');
@@ -171,10 +172,15 @@ Route::post('/pass-verify/{token}', [AccessController::class,'handlePassVerify']
 // end router auth
 
 // router product
-Route::get('/checkout',[OrderController::class, 'indexCheckout'] )->name('checkout');
-Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
-Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
- Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');
+Route::get('/checkout', function () {
+    return view('front.product-order-screens.checkout');
+ })->name('checkout');
+ Route::get('/checkout/choose-location', function () {
+    return view('front.product-order-screens.choose-location');
+ })->name('choose-location');
+ Route::get('/checkout/add-location', function () {
+    return view('front.product-order-screens.add-location');
+ })->name('add-location');
  Route::get('/wishlist', function () {
     return view('front.product-order-screens.wishlist');
  })->name('wishlist');

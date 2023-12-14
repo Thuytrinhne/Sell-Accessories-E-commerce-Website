@@ -38,7 +38,7 @@
                     '<div class="body-item-des">' +
                         '<a class="body-item-link" href="/detail-product/'+ products[i].id + '">' + products[i].name_product + '</a>' +
                         '<div class="body-item-price">' +
-                            '<span>' + products[i].price + '</span>' +
+                            '<span>' + products[i].price  + '</span>' +
                         '</div>' +
                     '</div>' +
                 '</div>'

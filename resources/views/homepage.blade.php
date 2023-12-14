@@ -22,14 +22,14 @@
             <div class="body-banner-container grid">
                 <div class="body-banner">
                    <div class="body-banner-item1">
-                        <img class="body-banner-img" src="https://hipposhop.vn/wp-content/uploads/2023/07/z4392051012379_ce6d2d4cb5ffa0d77e2535eac0591a1d.jpg" alt="">
+                        <img class="body-banner-img" src="https://hippo.vn/wp-content/uploads/2023/12/z4969498874307_3583551e026d751e975a625dd66fd282.jpg" alt="">
                    </div>
                    
                    <div class="body-banner-item2">
-                        <img class="body-banner-img" src="https://hipposhop.vn/wp-content/uploads/2023/07/extra-banner-1.jpg" alt="">
+                        <img class="body-banner-img" src="https://hippo.vn/wp-content/uploads/2023/07/z4510107506488_2ab891ba9c2958c43b378f602408957b-1-2.jpg" alt="">
                    </div>
                    <div class="body-banner-item3">
-                    <img class="body-banner-img" src="https://hipposhop.vn/wp-content/uploads/2023/07/z4510107506488_2ab891ba9c2958c43b378f602408957b-1-2.jpg" alt="">
+                    <img class="body-banner-img" src="https://hippo.vn/wp-content/uploads/2023/11/z4930258586038_01449549f1f9c4eb587d791af0672a4f.jpg" alt="">
                </div>
               
                 </div>
@@ -53,6 +53,7 @@
                               {{$item->name_product}}</a>
                         <div class="body-item-price">
                           <span>{{$item->discount_price}}₫</span>
+                          
                         </div>
                       </div>
       
