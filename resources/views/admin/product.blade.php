@@ -29,12 +29,12 @@
                     <button href="#" class="product_add" onclick="showContent('selection_add')">Thêm sản phẩm</button>
                 </div>
 
-                @if(Session::has('addsuccess'))  
+                @if(Session::has('success'))  
                     <script>
                         Swal.fire({
                         position: 'center',
                         icon: 'success',
-                        title: '{{session('addsuccess')}}',
+                        title: '{{session('success')}}',
                         showConfirmButton: false,
                         timer: 2000
                         })
@@ -72,30 +72,27 @@
                     @foreach($products as $item)
                     <nav id="product_1" class="product product_1">
                         <img src="/Assets/Images/product_1.jpg">
-                        <p>Cài tóc</p>
-                        <label id="old_price">
-                            <span>199000</span>
-                            <span>₫</span>
-                        </label>
-                        <label id="discount_price">
-                            <span>188000</span>
-                            <span>₫</span>
-                        </label>
-                        <p>Số lượng: 15</p>
-                        <div class="sku_code">
-                            <span>SKU:</span>
-                            <span>1112312313123</span>
-                        </div>
-
-
+                        <p> {{$item->name_product}} </p>
+                        
+                        <textarea name="description" disabled style="width: 90%"> {{$item->description}} </textarea>
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
-                            <button class="Edit">
+
+                            <a class="Add" href="{{route('admin.product.item',[$item->id])}}">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                                Details
+                            </a>
+
+                            <a href="{{route('admin.product.edit',[$item->id])}}">
+                            <button class="Edit" >
                                 <ion-icon name="pencil"></ion-icon>
-                                Sửa</button>
-                            <button class="Delete">
-                                <ion-icon name="trash-bin"></ion-icon>
-                                Xóa</button>
+                            Sửa</button>
+                            </a>
+
+                            <a class="Delete" href="{{route('admin.product.destroy',[$item->id])}}">
+                            <ion-icon name="trash-bin"></ion-icon>
+                                Xóa
+                            </a>
                         </div>
                     </nav>
                     @endforeach

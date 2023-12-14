@@ -23,7 +23,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public static function create()
     {
         //
     }
@@ -40,7 +40,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource
      */
-    public function show(category $category)
+    public static function show(category $category)
     {
         //
     }
@@ -64,7 +64,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public static function destroy($id)
     {
         return CategoryService::destroy($id);
     }

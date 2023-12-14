@@ -45,7 +45,7 @@
                     <div class="body-list__item" onclick="list__itemOnCick()" >
                       <div>
                             <a class="body-item-link" href="{{ route('products.show', ['id' => $item->id]) }}">
-                              <img onclick="list__itemOnCick()" class="body-item-img" src="https://hippo.vn/wp-content/uploads/2023/07/z4490475751990_4ea966aab4661080d3e0ea6a71814dc1-600x600.jpg" alt="{{$item->name_product}}">
+                              <img onclick="list__itemOnCick()" class="body-item-img" src="{{$item->image}}" alt="{{$item->name_product}}">
                             </a>
                       </div> 
                       <div class="body-item-des">

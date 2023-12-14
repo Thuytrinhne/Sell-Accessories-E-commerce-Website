@@ -50,6 +50,22 @@
                             <input type="text" placeholder="Nhập SKU" name="SKU" value="{{ old('SKU') }}">
                         </div>
 
+                        <div class="nameAdd">
+                            <label>Variation </label>
+                            <input type="text" placeholder="Nhập name" name="name" value="{{ old('name') }}">
+                            @error('name')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
+                        </div>
+
+                        <div class="nameAdd">
+                            <label>Variation_option </label>
+                            <input type="text" placeholder="Nhập value" name="value" value="{{ old('value') }}">
+                            @error('value')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
+                        </div>
+
                         <div class="imageAdd">
                             <label>Ảnh sản phẩm: </label>
                             <img src="/Assets/Images/image-add.png" name="image">

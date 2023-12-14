@@ -21,6 +21,30 @@ use App\Http\Controllers\AccessController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+//Route qtoan them vao
+Route::group(['prefix' => '/'], function () {
+   
+   Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
+   
+   Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
+
+   Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+
+   Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
+
+   Route::get('/get-images-by-value/{value}', [ProductController::class, 'getImagesByValue'])->name('get.images.by.value');
+   
+   Route::get('/get-product-desc}', [ProductController::class, 'descProductsByPrice'])->name('get.product.by.desc');
+
+   Route::get('/get-product-asc}', [ProductController::class, 'ascProductsByPrice'])->name('get.product.by.asc');
+   
+   Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
+   
+});
+
+
 Route::get('/aboutUs', function () {
    return view('front.shop.aboutUs');
 })->name('front.aboutUs');
@@ -65,6 +89,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
     //Thêmm route xử lí report sản phẩm
     
+    //Thêmm route xử lí report sản phẩm
     Route::get('/report', [ProductController::class,'report'])->name('admin.report');
    
    //  Thêm route admin product và item

@@ -16,9 +16,6 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         return ProductService::index();
@@ -141,4 +138,23 @@ class ProductController extends Controller
     {
         return ProductService::destroyItem($item);
     }
+    
+
+   
+
+
+
+    //
+    // Các hàm xử lí cho product_item
+    //
+   
+
+   
+   
+
+
+   
+
+   
+
 }
