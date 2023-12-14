@@ -10,5 +10,9 @@ class variation extends Model
     use HasFactory;
     protected $table ='variation';
 
+    public function varitationOptions()
+    {
+        return $this->hasMany(variation_option::class);
+    }
 
 }

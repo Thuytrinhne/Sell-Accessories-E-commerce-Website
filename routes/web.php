@@ -23,18 +23,15 @@ Route::get('/', [HomepageController::class, 'index']
 )->name('front.homepage');
 //Qtoan them vao
 Route::group(['prefix' => '/'], function () {
-   Route::get('/', [ProductController::class, 'index'])->name('products.index');
+   
+   Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
+
+   Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
    
 });
 
-   // other routes related to products
-
-
-// Route::get('/', function () {
-//    return view('homepage');
-// })->name('front.homepage');
 
 Route::get('/aboutUs', function () {
     return view('front.shop.aboutUs');
@@ -46,7 +43,9 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 {
    Route::get('/', [AdminController::class, 'DashboardView'])->name('admin.dashboard');
 
-   Route::get('/product', [AdminController::class, 'ProductView'])->name('admin.product');
+    Route::get('/product', function () {
+    return view('admin.product');
+    })->name('admin.product');
 
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
@@ -117,15 +116,10 @@ Route::get('/checkout/choose-location', [User_AddressController::class, 'index']
  Route::get('/wishlist', function () {
     return view('front.product-order-screens.wishlist');
  })->name('wishlist');
- Route::get('/filter', function () {
-    return view('front.product-order-screens.filter');
- })->name('filter');
 
 
-//trùng nên cmt lại
-//  Route::get('/detail-product', function () {
-//     return view('front.product-order-screens.detail-product');
-//  })->name('front.account');
+
+
  Route::get('/not-found', function () {
     return view('front.product-order-screens.not-found');
  })->name('front.account');
