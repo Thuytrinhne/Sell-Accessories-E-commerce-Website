@@ -6,17 +6,16 @@ use App\Models\product;
 use App\Models\wishlist_item;
 use Illuminate\Http\Request;
 use App\Service\AccountService;
-
-
+use App\Service\WishlistService;
 
 class WishlishController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $product = AccountService::product();
+        $product = WishlistService::product($request);
         $wishlists = wishlist_item::all();
         return view("front.product-order-screens.wishlist", compact("wishlists", "product"));
     }

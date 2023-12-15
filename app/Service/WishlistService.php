@@ -5,8 +5,8 @@ namespace App\Service;
 use App\Models\product;
 use App\Models\product_item;
 use Illuminate\Http\Request;
-use App\Models\Respositories\AccountRespository;
-use App\Http\Requests\AccountRequest;
+use App\Models\Respositories\WishlistRepository;
+
 class WishlistService 
 {
     public function product(Request $request){
