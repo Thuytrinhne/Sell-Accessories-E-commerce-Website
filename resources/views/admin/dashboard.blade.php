@@ -30,28 +30,28 @@
                                 <ion-icon name="cash-outline"></ion-icon>
                                 <div class="amount">
                                     <span class="amount_title">Doanh thu hôm nay</span>
-                                    <span class="amount_value">{{ $count_ship}}</span>
+                                    <span class="amount_value">{{ $sum_total_price_today}}đ</span>
                                 </div>
                             </div>
                             <div class="detail_card .">
                                 <ion-icon name="gift" style="background-color: aqua;"></ion-icon>
                                 <div class="amount">
                                     <span class="amount_title">Giao hàng thành công</span>
-                                    <span class="amount_value">1555</span>
+                                    <span class="amount_value">{{ $count_report_done}}</span>
                                 </div>
                             </div>
                             <div class="detail_card">
                                 <ion-icon name="cart-outline" style="background-color: greenyellow;"></ion-icon>
                                 <div class="amount">
                                     <span class="amount_title">Số lượng đặt hàng</span>
-                                    <span class="amount_value">59</span>
+                                    <span class="amount_value">{{ $count_order }}</span>
                                 </div>
                             </div>
                             <div class="detail_card">
                                 <ion-icon name="subway-outline" style="background-color: pink;"></ion-icon>
                                 <div class="amount">
                                     <span class="amount_title">Đơn đang vận chuyển</span>
-                                    <span class="amount_value">10</span>
+                                    <span class="amount_value">{{ $count_ship}}</span>
                                 </div>
                             </div>
                         </div>

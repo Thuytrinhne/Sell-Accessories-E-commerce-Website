@@ -69,7 +69,7 @@
                                         @break
                                         
                                 @endswitch</td>
-                                <td><a href="{{ route('front.order_detail',[$key])}}"><button>Chi tiết</button></a></td>
+                                <td><a href="{{ route('front.order_detail',[$key+1])}}"><button>Chi tiết</button></a></td>
                             </tr>
                             @endforeach
                             
