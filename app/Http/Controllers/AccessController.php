@@ -54,11 +54,16 @@ class AccessController extends Controller
     }
     public static function handlePassVerify($token, PasswordChangeRequest $request)
     {
-        return AccessService::reset($token, $request);
+        return AccessService::handlePassVerify($token, $request);
 
     }
     public static function updatePassword ()
     {
         return AccessService::updatePassword();
+    }
+    public static function handleUpdatePassword(PasswordChangeRequest $request)
+    {
+        return AccessService::handleUpdatePassword($request);
+
     }
 }

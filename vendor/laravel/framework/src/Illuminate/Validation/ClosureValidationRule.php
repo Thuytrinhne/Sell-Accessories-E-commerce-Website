@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\Rule as RuleContract;
 use Illuminate\Contracts\Validation\ValidatorAwareRule;
 use Illuminate\Translation\CreatesPotentiallyTranslatedStrings;
 
+
 class ClosureValidationRule implements RuleContract, ValidatorAwareRule
 {
     use CreatesPotentiallyTranslatedStrings;
@@ -64,11 +65,7 @@ class ClosureValidationRule implements RuleContract, ValidatorAwareRule
             $this->failed = true;
 
             return $this->pendingPotentiallyTranslatedString($attribute, $message);
-<<<<<<< HEAD
         }, $this->validator);
-=======
-        });
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
 
         return ! $this->failed;
     }

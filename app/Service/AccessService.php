@@ -12,6 +12,7 @@ use App\Http\Requests\PasswordChangeRequest;
 use Mail;
 use App\Mail\ForgotPassword;
 use App\Mail\SendEmailCode;
+use App\Models\Respositories\AccountRespository;
 
 use Str;
 
@@ -140,8 +141,8 @@ class AccessService
         $user = user::where ('remember_token', '=', $token)->first();
         if($user)
         {
-            
-            AccountRespository::updatePassword($user,$request->password);
+            $newPassword = $request->password;
+            AccountRespository::updatePassword($user,$newPassword);
             return redirect()->route("login")->with("forgotPass", 'Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại nhé');
         }
         else

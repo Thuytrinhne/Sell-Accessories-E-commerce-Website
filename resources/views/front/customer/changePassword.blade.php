@@ -26,33 +26,50 @@
                 </div>
                 <hr class="body-user-display-line">
                 <div class="body-user-display-container1 body-user-display-container2">
-                    <form class="body-user-display-frm" action="">
+                    <form class="body-user-display-frm" action="{{route('handleUpdatePassword')}}" method="POST">
+                      @csrf
                       <table class="body-user-display-tbl">
                         <tr class="body-user-display-tr">
                           <td  class="body-user-display-td-label">
                             <label for="text">Nhập mật khẩu hiện tại</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input class="body-user-display-input"type="password" value="">
+                            <input name="oldPass" class="body-user-display-input"type="password" value="">
+                            @error('oldPass')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                           </td>
+                          
+                        
                         </tr>
+                        
                         <tr class="body-user-display-tr">
                           <td  class="body-user-display-td-label">
                             <label for="text">Nhập mật khẩu mới</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input class="body-user-display-input"type="password" value="">
+                            <input name="password" class="body-user-display-input"type="password" value="">
+                            @error('password')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                           </td>
                         </tr>
+                        
                         <tr class="body-user-display-tr">
                           <td  class="body-user-display-td-label">
                             <label for="text">Nhập lại mật khẩu</label>
                           </td>
                           <td class="body-user-display-td-input">
                             <input class="body-user-display-input"type="password" value="">
+                            @error('confirmPass')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                           </td>
                         </tr>
-                   
+                        
                       
                     
                       </table>
