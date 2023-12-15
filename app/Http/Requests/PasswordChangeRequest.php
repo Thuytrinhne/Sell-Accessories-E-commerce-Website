@@ -22,7 +22,7 @@ class PasswordChangeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
+            'oldPass' =>'require',
             'password' => 'bail|required|min:6|same:confirmPass',
             'confirmPass' => 'bail|required',
           
@@ -31,6 +31,7 @@ class PasswordChangeRequest extends FormRequest
     public function messages()
     {
         return [
+
             'password.min' => 'Mật khẩu ít nhất có 6 ký tự !',
             'password.required' => 'Trường này bắt buộc phải nhập !',
             'confirmPass.required' => 'Trường này bắt buộc phải nhập !',

@@ -22,9 +22,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-     
-    
+ 
+        {
+            $topCategories = Category::whereNull('parent_id')->get();
+            view()->share('topCategories', $topCategories);
+        }
 
-        Paginator::useBootstrap();
+             Paginator::useBootstrap();
+           
+
     }
 }

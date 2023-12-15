@@ -57,4 +57,8 @@ class AccessController extends Controller
         return AccessService::reset($token, $request);
 
     }
+    public static function updatePassword ()
+    {
+        return AccessService::updatePassword();
+    }
 }

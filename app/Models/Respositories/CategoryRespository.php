@@ -9,6 +9,7 @@ use App\Http\Requests\CategoryRequest;
 
 class CategoryRespository 
 {
+    
     /**
      * Display a listing of the resource.
      */

@@ -25,7 +25,7 @@ class OrderController extends Controller
     }
 
     public function indexCheckout() {
-        
+      
         return OrderService::indexCheckout();
     }
 

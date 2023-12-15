@@ -1,5 +1,4 @@
-
-.progress{
+.progress {
     padding: 20px 0;
     height: 112px;
     background: white;
@@ -9,10 +8,8 @@
     padding: 10px;
 }
 
-
 .container {
     padding: 20px;
-
 }
 
 .title {
@@ -36,7 +33,6 @@
     text-align: center;
     border-bottom: 5px solid #e71f76;
 }
-
 
 .infor_product {
     display: grid;
@@ -78,8 +74,6 @@
     font-weight: bold;
 }
 
-
-
 .details_header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -91,7 +85,7 @@
     height: 50px;
     align-items: center;
     border-top-left-radius: 10px;
-    border-top-right-radius: 10px
+    border-top-right-radius: 10px;
 }
 
 .infor_details_product {
@@ -122,14 +116,12 @@
 
 .order_prices span:first-child {
     font-weight: bold;
-
 }
 
 .order_prices span:last-child {
     color: red;
     font-weight: bold;
 }
-
 
 .progress-lists {
     display: flex;
@@ -149,7 +141,7 @@
 }
 
 .progress-lists li:before {
-    content: '\2713';
+    content: "\2713";
     width: 50px;
     height: 50px;
     line-height: 50px;
@@ -187,6 +179,9 @@
     color: green;
 }
 
-.progress-lists li.active+li:after {
+.progress-lists li.active + li:after {
     background-color: green;
+}
+.body-user-feature-item a {
+    all: unset;
 }

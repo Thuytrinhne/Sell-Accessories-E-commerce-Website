@@ -1,5 +1,5 @@
-:root{
-    --white-color:#fff;
+:root {
+    --white-color: #fff;
     --black-color: #000;
     --text-color: #333;
     --border-color: rgb(189, 189, 189);
@@ -12,60 +12,45 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
-  
-html
-{
-    font-size: 10px;   /* 100%: 16px, 62.5%: 10px */
-    line-height: 1.6rem;  
-    font-family: 'Roboto', sans-serif;    /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
+
+html {
+    font-size: 10px; /* 100%: 16px, 62.5%: 10px */
+    line-height: 1.6rem;
+    font-family: "Roboto", sans-serif; /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
     box-sizing: border-box;
 }
-.grid{
+.grid {
     /* website: >1200px => width: 1200px; <1200px => width: tùy chỉnh bằng width đó */
     width: 1300px;
     max-width: 100%;
     margin: 0 auto; /* tự động căn giữa khi nằm trong 1 khối khác */
-  
-    
-}.body-footer-seemore.btn-red
-{
+}
+.body-footer-seemore.btn-red {
     background-color: #ff8087;
     padding: 10px 22px;
-   
 }
-.body-footer-seemore.btn-red.btn-bottom
-{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-.body-footer-seemore
-{
+
+.body-footer-seemore {
     outline: none;
     text-decoration: none;
     position: relative;
     color: var(--white-color);
     font-size: 1.4rem;
     font-weight: 500;
-    background-color: #81D1E5;
+    background-color: #81d1e5;
     border-radius: 25px;
     text-align: center;
-    border:solid 4px transparent;
+    border: solid 4px transparent;
     padding: 8px 17px;
-   
-
 }
-.body-footer-seemore:hover
-{
+.body-footer-seemore:hover {
     color: white;
     background-color: var(--primary-color);
 }
-.body-footer-seemore::before
-{
+.body-footer-seemore::before {
     border-radius: 25px;
-    display:  block;
+    display: block;
     content: "";
     position: absolute;
     z-index: 0;
@@ -75,33 +60,28 @@ html
     right: 0px;
     border: 2px dashed var(--white-color);
 }
-.modal-custom
-{
+.modal-custom {
     display: flex;
-    position:fixed;
-    top:0;
-    right:0;
+    position: fixed;
+    top: 0;
+    right: 0;
     bottom: 0;
-    left:0;
+    left: 0;
     z-index: 500;
 }
-.modal__overlay
-{
-    position:absolute;
+.modal__overlay {
+    position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
-.modal__body
-{
+.modal__body {
     background-color: var(--white-color);
-    margin:auto;
+    margin: auto;
     z-index: 1;
-   
 }
-.msg-error
-{
-    color:red;
+.msg-error {
+    color: red;
     font-weight: 100;
     font-size: 14px;
 }

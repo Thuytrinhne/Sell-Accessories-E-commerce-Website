@@ -56,13 +56,13 @@
                                   <span class="material-symbols-outlined header-auth-subLogin-icon">
                                     manage_accounts
                                     </span>                        
-                                    <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('account')">Tài khoản của bạn</a>
+                                    <a class="header-auth-subLogin-link" href="{{route('front.account')}}" onclick="">Tài khoản của bạn</a>
                                 </div>
                                 <div class="header-auth-subLogin-item">
                                   <span class="material-symbols-outlined header-auth-subLogin-icon">
                                     list_alt
                                     </span>                         
-                                  <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('orders')">Quản lý đơn hàng</a>
+                                  <a class="header-auth-subLogin-link" href="{{route('.front.customer.history-orders')}}" onclick="">Quản lý đơn hàng</a>
                                 </div>
                                 <!-- <div class="header-auth-subLogin-item">
                                   <span class="material-symbols-outlined header-auth-subLogin-icon">
@@ -74,7 +74,7 @@
                                   <span class="material-symbols-outlined header-auth-subLogin-icon">
                                     location_on
                                     </span>                          
-                                    <a class="header-auth-subLogin-link" href="#" onclick="changeMainPageOnClick('location')">Địa chỉ giao hàng</a>
+                                    <a class="header-auth-subLogin-link" href="{{route('front.address')}}" onclick="">Địa chỉ giao hàng</a>
                                 </div>
                                 <div class="header-auth-subLogin-item">
                                   <span class="material-symbols-outlined header-auth-subLogin-icon">
@@ -121,27 +121,27 @@
         </div>
         @include('shared.front.assort')
      <!-- show main content here -->
+     <!-- xử lý cart ajax  -->
+     
      <script>
+     
       function redirectOnClick(event) {
         event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
 
           var view_screen = document.querySelector('.modal-custom-cart');
            view_screen.style.display = 'block';
-        //  ajax
+        //  ajax xử lý cart
       
       $.ajax({
         url: $('.cart-click').attr('href'),
         type:"get",
         dataType: 'json',
-
           success: function(res){
             console.log(res);
 
            handleCartData(res);
-
           }
           });
-
       }
         function handleCartData(res)
         {

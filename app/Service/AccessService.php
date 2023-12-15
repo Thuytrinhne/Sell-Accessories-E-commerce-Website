@@ -80,7 +80,7 @@ class AccessService
     public static function logout()
     {
         Auth::logout();
-        return redirect()->back();
+        return redirect()->route('homepage');
     }
     public static function forgotPassword()
     {
@@ -140,13 +140,21 @@ class AccessService
         $user = user::where ('remember_token', '=', $token)->first();
         if($user)
         {
-            $user->password = Hash::make($request->password);
-            $user->remember_token = "";
-            $user->save();
+            
+            AccountRespository::updatePassword($user,$request->password);
             return redirect()->route("login")->with("forgotPass", 'Thay đổi mật khẩu thành công. Vui lòng đăng nhập lại nhé');
         }
         else
             return abort(404);
     }
    
+    public static function updatePassword()
+    {
+        return view('front.customer.changePassword');
+    }
+    public static function handleUpdatePassword(PasswordChangeRequest $request)
+    {
+        AccountRespository::updatePassword($user,$request->password);
+        return redirect()->back()->with('updatePassSuccess', 'Thay đổi mật khẩu thành công');
+    }
 }

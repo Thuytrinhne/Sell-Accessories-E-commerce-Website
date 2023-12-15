@@ -17,7 +17,7 @@
                             <label for="text">Họ và tên</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input class="body-user-display-input"type="text" value="Nguyễn Thùy Trinh">
+                            <input class="body-user-display-input"type="text" value="{{ Auth::user()->full_name}}">
                           </td>
                         </tr>
                         <tr class="body-user-display-tr">
@@ -25,20 +25,23 @@
                             <label for="text">Giới tính</label>
                           </td>
                           <td  class="body-user-display-td-input">
-                            <input class="body-user-display-rdo" type="radio">
+                            <input class="body-user-display-rdo" type="radio" name="gender" value="0" {{  Auth::user()->sex == '0' ? 'checked' : '' }}>
                             <span class="body-user-display-rdo-text" >Nam</span>
-                            <input class="body-user-display-rdo" type="radio">
+                            <input class="body-user-display-rdo" type="radio" name="gender"  value="1" {{  Auth::user()->sex == '1' ? 'checked' : '' }}>
                             <span class="body-user-display-rdo-text">Nữ</span>
-                            <input class="body-user-display-rdo" type="radio">
+                            <input class="body-user-display-rdo" type="radio" name="gender" value="2" {{  Auth::user()->sex == '2' ? 'checked' : '' }}>
                             <span class="body-user-display-rdo-text">Khác</span>
                           </td>
                         </tr>
+        
                         <tr class="body-user-display-tr">
                           <td class="body-user-display-td-label">
                             <label for="text">Ngày sinh</label>
                           </td>
+                         
+
                           <td  class="body-user-display-td-input">
-                            <input class="body-user-display-input" type="date">
+                            <input class="body-user-display-input" type="date" value="{{Auth::user()->birth}}" >
   
                           </td>
                         </tr>
@@ -47,7 +50,7 @@
                             <label for="text">Email</label>
                           </td>
                           <td  class="body-user-display-td-input">
-                            <input  class="body-user-display-input"  type="email" value="21522719@gm.uit.edu.vn">
+                            <input  class="body-user-display-input"  type="email" value="{{Auth::user()->email}}">
                           </td>
                         </tr>
                         <tr class="body-user-display-tr">
@@ -55,46 +58,57 @@
                             <label for="text">Số điện thoại</label>
                           </td>
                           <td  class="body-user-display-td-input">
-                            <input  class="body-user-display-input" type="phone" value="0987282918">
+                            <input  class="body-user-display-input" type="phone" value="{{Auth::user()->phone}}">
                           </td>
                         </tr>
                       </table>
+                      <button class="body-footer-seemore btn-red btn-bottom">LƯU THAY ĐỔI</button>
+
                     </form>
-                    <div class="body-user-display-btn">
-                    <fieldset class="body-user-display-fieldset">
-                      <legend class="body-user-display-legend">THAY ĐỔI MẬT KHẨU</legend>
-                      <table class="body-user-display-tbl">
-                        <tr class="body-user-display-tr">
-                          <td class="body-user-display-td-label">
-                            <label for="text">Mật khẩu hiện tại</label>
-                          </td>
-                          <td  class="body-user-display-td-input">
-                            <input  class="body-user-display-input" type="password">
-                          </td>
-                        </tr>
-                        <tr class="body-user-display-tr">
-                          <td class="body-user-display-td-label">
-                            <label for="text">Mật khẩu mới</label>
-                          </td>
-                          <td  class="body-user-display-td-input">
-                            <input  class="body-user-display-input" type="password">
-                          </td>
-                        </tr>
-                        <tr class="body-user-display-tr">
-                          <td class="body-user-display-td-label">
-                            <label for="text">Xác nhận mật khẩu mới</label>
-                          </td>
-                          <td  class="body-user-display-td-input">
-                            <input  class="body-user-display-input" type="password">
-                          </td>
-                        </tr>
+                    <div class="line"></div>
+                    <div class="security">
+                      <div>
+                      <h2>Số điện thoại và email</h2>
+                      <div class="security-login__phone">
+                                <img src="https://hasaki.vn/images/icons/icon_call.svg" alt="">
+                                <div class="security-login__text">
+                                  <p>Số điện thoại </p>
+                                  <p>Cập nhật số điện thoại</p>
+                                </div>
+                                <button class="btn btn-primary">Cập nhật</button>
+                      </div>
+                      <div class="security-login__phone">
+                                <img src="https://hasaki.vn/images/icons/icon_email.svg" alt="">
+                                <div class="security-pass__text" >
+                                  <p>Email</p>
+                                  <p>Cập nhật email</p>
+                                </div>
+                                <button class="btn btn-primary">Cập nhật</button>
+                      </div>
+                      </div>
+                      <div><h2>Bảo mật</h2>
+                      <div class="security-login__phone">
+                                <img src="https://hasaki.vn/images/icons/icon_key.svg" alt="">
+                                <div class="security-pass__text">
+                                  <p>Đổi mật khẩu</p>
+                                </div>
+                                <button onclick="generateURL()" class="btn btn-primary btn-changePass">Cập nhật</button>
+                      </div>
+                      </div>
                       
+                    </div>
+                    
+                </div>
+                </div>
+                <script>
+                  function generateURL() {
                         
-                      </table>
-                    </fieldset>
-                    <button class="body-footer-seemore btn-red btn-bottom">LƯU THAY ĐỔI</button>
-                  </div>
-                </div>
-                </div>
+                        var url = "{{ route('updatePassword') }}";
+                     
+                        window.location.href = url;
+                        }
+                        
+                </script>
+
 @endsection
              

@@ -256,13 +256,10 @@ class Validator implements ValidatorContract
         'RequiredWithAll',
         'RequiredWithout',
         'RequiredWithoutAll',
-<<<<<<< HEAD
         'PresentIf',
         'PresentUnless',
         'PresentWith',
         'PresentWithAll',
-=======
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         'Prohibited',
         'ProhibitedIf',
         'ProhibitedUnless',
@@ -1111,11 +1108,7 @@ class Validator implements ValidatorContract
      * @param  string  $attribute
      * @return mixed
      */
-<<<<<<< HEAD
     public function getValue($attribute)
-=======
-    protected function getValue($attribute)
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
     {
         return Arr::get($this->data, $attribute);
     }

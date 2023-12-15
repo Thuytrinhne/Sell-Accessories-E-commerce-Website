@@ -9,7 +9,6 @@ use App\Service\AdminService ;
 class AdminController extends Controller
 {
     public function OrderView() {
-        dd("đã vào");
 
         $order_list = DB::select("
             SELECT *

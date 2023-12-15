@@ -54,4 +54,12 @@ class AccountRepository
     {
         // return $this->db->delete("admin", ["id"=> $id]);
     }
+    // trinh add
+    public static function updatePassword($user, $newPassword)
+    {
+        $user->password = Hash::make($newPassword);
+        $user->remember_token = "";
+        $user->save();
+    }
+    // end Trinh add
 }

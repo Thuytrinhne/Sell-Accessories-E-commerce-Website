@@ -1271,7 +1271,6 @@ trait ValidatesAttributes
     }
 
     /**
-<<<<<<< HEAD
      * Validate that an attribute is a valid HEX color.
      *
      * @param  string  $attribute
@@ -1284,8 +1283,6 @@ trait ValidatesAttributes
     }
 
     /**
-=======
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
      * Validate the MIME type of a file is an image MIME type.
      *
      * @param  string  $attribute
@@ -1758,11 +1755,7 @@ trait ValidatesAttributes
         [$values, $other] = $this->parseDependentRuleParameters($parameters);
 
         if (in_array($other, $values, is_bool($other) || is_null($other))) {
-<<<<<<< HEAD
             return $this->validatePresent($attribute, $value);
-=======
-            return $this->validatePresent($attribute, $value, $parameters);
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         }
 
         return true;
@@ -1783,11 +1776,7 @@ trait ValidatesAttributes
         [$values, $other] = $this->parseDependentRuleParameters($parameters);
 
         if (! in_array($other, $values, is_bool($other) || is_null($other))) {
-<<<<<<< HEAD
             return $this->validatePresent($attribute, $value);
-=======
-            return $this->validatePresent($attribute, $value, $parameters);
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         }
 
         return true;
@@ -1806,11 +1795,7 @@ trait ValidatesAttributes
         $this->requireParameterCount(1, $parameters, 'present_with');
 
         if (Arr::hasAny($this->data, $parameters)) {
-<<<<<<< HEAD
             return $this->validatePresent($attribute, $value);
-=======
-            return $this->validatePresent($attribute, $value, $parameters);
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         }
 
         return true;
@@ -1829,11 +1814,7 @@ trait ValidatesAttributes
         $this->requireParameterCount(1, $parameters, 'present_with_all');
 
         if (Arr::has($this->data, $parameters)) {
-<<<<<<< HEAD
             return $this->validatePresent($attribute, $value);
-=======
-            return $this->validatePresent($attribute, $value, $parameters);
->>>>>>> b441e5959d50a39b05a1a825e9ad1577d76e40bb
         }
 
         return true;

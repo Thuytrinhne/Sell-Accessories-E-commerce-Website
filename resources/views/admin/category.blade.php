@@ -91,7 +91,8 @@
                             </tbody>
                         </table>
                         <hr>
-                        {{ $categoryPaginate->links() }}                   
+                        {{$categoryPaginate->links()}}     
+                                      
                      </div>
                     @else
                     <script>

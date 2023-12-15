@@ -130,19 +130,17 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
    });
 
-    Route::get('/order', function () {
-    return view('admin.order');
-    })->name('admin.order');
+   //  Route::get('/order', function () {
+   //  return view('admin.order');
+   //  })->name('admin.order');
 
 
 // anh Trung route
-   Route::get('/order', function () {
-   return view('admin.order');
-   })->name('admin.order');
+   // Route::get('/order', function () {
+   // return view('admin.order');
+   // })->name('admin.order');
 
-   Route::get('/report', function () {
-   return view('admin.report');
-   })->name('admin.report');
+  
 
    Route::any('/search', [AccountController::class,'search'] ) -> name('admin.search_account');;
    Route::prefix('account')->group( function(){
@@ -193,19 +191,18 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
 // router customer
 Route::get('/customer/account', function () {
-   
    return view('front.customer.account');
 })->name('front.account');
-Route::get('/customer/orders', function () {
-   
-    return view('front.customer.history-orders');
-})->name('front.orders');
+
 Route::get('/customer/address', function () {
    
     return view('front.customer.address');
 })->name('front.address');
 Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'])->name('front.order_detail');
 // end router customer
+// cập nhật lại mật khẩu 
+Route::get ('/customer/account/changePassWord',  [AccessController::class,'updatePassword'])->name('updatePassword');
+Route::post ('/customer/account/changePassWord',  [AccessController::class,'handleUpdatePassword'])->name('handleUpdatePassword');
 
 
 
@@ -257,10 +254,10 @@ Route::prefix('/wishlist') -> group(function () {
  })->name('filter');
  Route::get('/detail-product', function () {
     return view('front.product-order-screens.detail-product');
- })->name('front.account');
+ })->name('');
  Route::get('/not-found', function () {
     return view('front.product-order-screens.not-found');
- })->name('front.account');
+ })->name('');
  Route::get('/checkout-success/{id}', [OrderController::class, 'checkoutSuccess'])->name('front.checkout-success');
 // end router product
 
