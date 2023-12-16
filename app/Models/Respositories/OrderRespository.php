@@ -32,13 +32,15 @@ class OrderRespository
             case "Thanh toán tiền mặt":
                 $order->payment_id = 1;
                 break;
+            case "Chuyển khoản ngân hàng":
+                $order->payment_id = 2;
+                break;
             
         }
         $order->save(); 
+
+        return $order->id;
     }
 
-    public static function getIdOrder(Request $request) {
-        $getId = $request->input('idOrder');
-        return $getId;
-    }
+   
 }

@@ -62,8 +62,7 @@ class OrderService {
         FROM
                 `order`, cart, cart_item, product_item, product, user
         WHERE
-                `order`.cart_id = cart.id
-                and cart_item.cart_id = cart.id
+                `order`.cart_id = cart_item.cart_id
                 and cart_item.product_item_id = product_item.id
                 and product_item.product_id = product.id
                 and `order`.user_id = user.id
@@ -84,7 +83,7 @@ foreach($user_order as $item) {
         //Lấy đặt hàng từ giỏ hàng ra checkout
        $total=0;
         foreach($product_item_cart as $item) {
-            $total += $item->price * $item->quantity;
+            $total += $item->price * $item->quantity;   
         }
         return view('front.product-order-screens.checkout', compact('product_item_cart','total'));
     }
@@ -106,8 +105,7 @@ foreach($user_order as $item) {
 
     public static  function store(Request $request)
     {
-        OrderRespository::store($request);
-        $getIdOrder = OrderRespository::getIdOrder($request);
+        $getIdOrder = OrderRespository::store($request);
         return redirect() -> route('front.checkout-success', ['id' => $getIdOrder]);
     }
     

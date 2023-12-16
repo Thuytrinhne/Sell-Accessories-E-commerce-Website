@@ -63,7 +63,7 @@
                             @csrf
                         @foreach ($product_item_cart as $key => $item)
                         
-                        <input style="display: none" name="idOrder" value="{{ $key+1 }}">
+                        <input style="display: none" name="idOrder" value="{{ $item->id }}">
                         
                         <div class="product_list">
                             <div class="product_name_container">
