@@ -13,7 +13,7 @@ use DB;
 class OrderService {
     public static function index(Request $request)
     {
-        $user_payment = DB::select("SELECT `order`.id, payment.name_method, `order`.date_order
+        $user_payment = DB::select("SELECT `order`.id, payment.name_method, `order`.date_order,`order`.status
                                     FROM 
                                             `order`, payment
                                     WHERE 
@@ -21,6 +21,7 @@ class OrderService {
                                             and `order`.user_id = 1
                                             ");
         $user_order = DB::select ("SELECT distinct cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id
+                                                    
                                     FROM
                                             `order`, cart, cart_item, product_item, product
                                     WHERE
@@ -29,6 +30,37 @@ class OrderService {
                                             and cart_item.product_item_id = product_item.id
                                             and product_item.product_id = product.id
                                             and `order`.user_id = 1
+                                        
+                ");  
+        
+        // $user_order = order::with('cart', 'cart.cartItems', 'cart.cartItems.productItems','cart.cartItems.productItems.product')->get();
+        $product_item_cart = CartController::getCartitem();
+       
+       
+        return view('.front.customer.history-orders',compact('user_payment', 'user_order', 'product_item_cart'));
+    }
+
+    public static function indexFilter($id)
+    {
+        $user_payment = DB::select("SELECT `order`.id, payment.name_method, `order`.date_order,`order`.status
+                                    FROM 
+                                            `order`, payment
+                                    WHERE 
+                                            `order`.payment_id = payment.id
+                                            and `order`.user_id = 1
+                                            and `order`.status = '$id'
+                                            ");
+        $user_order = DB::select ("SELECT distinct cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id
+                                                    
+                                    FROM
+                                            `order`, cart, cart_item, product_item, product
+                                    WHERE
+                                            `order`.cart_id = cart.id
+                                            and cart_item.cart_id = cart.id
+                                            and cart_item.product_item_id = product_item.id
+                                            and product_item.product_id = product.id
+                                            and `order`.user_id = 1
+                                            and `order`.status = '$id'
                                         
                 ");  
         
@@ -85,6 +117,7 @@ foreach($user_order as $item) {
         foreach($product_item_cart as $item) {
             $total += $item->price * $item->quantity;   
         }
+        
         return view('front.product-order-screens.checkout', compact('product_item_cart','total'));
     }
 

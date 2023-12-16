@@ -120,7 +120,7 @@ Route::get('/checkout/choose-location', [User_AddressController::class, 'index']
 Route::prefix('/customer/orders')->group(function () {
    // Hiển thị danh sách các danh mục
    Route::get('/', [OrderController::class, 'index'])->name('.front.customer.history-orders');
-   
+   Route::get('/{id}', [OrderController::class, 'indexFilter'])->name('filter.history-order');
 });
 
 

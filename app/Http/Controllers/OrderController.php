@@ -20,6 +20,10 @@ class OrderController extends Controller
         return OrderService::index($request);
     }
 
+    public function indexFilter($id) {
+        return OrderService::indexFilter($id);
+    }
+
     public function DetailOrder($id) {
         return OrderService::DetailOrder($id);
     }

@@ -5,12 +5,12 @@
 @section('content')
 <div class="body-user-display-myaccount">
                 <div class="body-user-display-header">
-                    <a href="" class="body-footer-seemore body-footer-seemore-Active">Tất cả</a>
-                    <a href="" class="body-footer-seemore">Mới đặt</a>
-                    <a href="" class="body-footer-seemore">Đã xác nhận</a>
-                    <a href="" class="body-footer-seemore">Đang giao hàng</a>
-                    <a href="" class="body-footer-seemore">Thành công</a>
-                    <a href="" class="body-footer-seemore">Đã hủy</a>
+                    <a href="{{ route('.front.customer.history-orders')}}" class="body-footer-seemore body-footer-seemore-Active">Tất cả</a>
+                    <a href="{{ route('filter.history-order', 1) }}" class="body-footer-seemore">Mới đặt</a>
+                    <a href="{{ route('filter.history-order', 2) }}" class="body-footer-seemore">Đã xác nhận</a>
+                    <a href="{{ route('filter.history-order', 3) }}" class="body-footer-seemore">Đang giao hàng</a>
+                    <a href="{{ route('filter.history-order', 4) }}" class="body-footer-seemore">Thành công</a>
+                    <a href="{{ route('filter.history-order', 5) }}" class="body-footer-seemore">Đã hủy</a>
                 </div>
                 <hr class="body-user-display-line">
                 <div class="body-user-display-container">
@@ -28,7 +28,24 @@
                            
                           </div>
                           <div>
-                            <span class="item_order-status">Hoàn tất</span>
+                            <span class="item_order-status">@switch($item->status)
+                              @case(1)
+                                  Mới đặt
+                                  @break
+                              @case(2)
+                                  Đã xác nhận
+                                  @break
+                              @case(3)
+                                  Đang giao hàng
+                                  @break
+                              @case(4)
+                                  Thành công
+                                  @break
+                              @case(5)
+                                  Đã hủy
+                                  @break
+                                  
+                          @endswitch</span>
                             <strong>Xem chi tiết</strong>
                           </div>
                           
