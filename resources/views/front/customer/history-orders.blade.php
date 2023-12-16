@@ -27,7 +27,7 @@
                             <span>{{ $item->name_method }}</span>
                            
                           </div>
-                          <div>
+                          <div class="item_order-status">
                             <span class="item_order-status">@switch($item->status)
                               @case(1)
                                   Mới đặt
@@ -46,7 +46,7 @@
                                   @break
                                   
                           @endswitch</span>
-                            <strong>Xem chi tiết</strong>
+                            <a style="" href="{{ route('front.order_detail',$item->id)}}">Xem chi tiết</a>
                           </div>
                           
                         </a>
