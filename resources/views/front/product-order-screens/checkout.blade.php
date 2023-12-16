@@ -62,8 +62,7 @@
                         <form action="{{ route('checkout-success') }}" method="POST" >
                             @csrf
                         @foreach ($product_item_cart as $key => $item)
-                        
-                        <input style="display: none" name="idOrder" value="{{ $item->id }}">
+                        <input style="display: none" name="idOrder" value="{{ $item->id}}">
                         
                         <div class="product_list">
                             <div class="product_name_container">

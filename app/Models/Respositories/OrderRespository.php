@@ -27,6 +27,7 @@ class OrderRespository
         $order->shipping_cost = 35000;
         $order->user_id = 1;
         $order->date_order = $currentDateTime;
+        $order->cart_id = $product_item_cart[0]->cart_id;
 
         switch($request->input('method_payment')) {
             case "Thanh toán tiền mặt":

@@ -29,6 +29,10 @@ class OrderController extends Controller
         return OrderService::indexCheckout();
     }
 
+    public function ReCheckout($id) {
+        return OrderService::ReCheckout($id);
+    }
+
     public function checkoutSuccess($id) {
         return OrderService::checkoutSuccess($id);
     }

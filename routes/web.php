@@ -95,6 +95,7 @@ Route::get('/pass-verify', function () {
 
 // router product
 Route::get('/checkout',[OrderController::class, 'indexCheckout'] )->name('checkout');
+Route::get('/checkout/{id}', [OrderController::class, 'ReCheckout'])->name('re-checkout');
 Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
 Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
  Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');

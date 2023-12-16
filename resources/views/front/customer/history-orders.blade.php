@@ -21,8 +21,8 @@
                           
                           <div>
                             Mã đơn hàng: 
-                            <span>{{ $key+1 }}</span> | Đặt ngày: 
-                            <span>{{ $item->created_at }}</span>
+                            <span>{{ $item->id }}</span> | Đặt ngày: 
+                            <span>{{ $item->date_order }}</span>
                             | Thanh toán:
                             <span>{{ $item->name_method }}</span>
                            
@@ -33,6 +33,7 @@
                           </div>
                           
                         </a>
+                  
                         </div>
                         <div class="item_order-list">
                           @foreach($user_order as $key => $item)
@@ -52,7 +53,7 @@
                             @endforeach
                         </div>
                         <div class="item_order-btn">
-                           <a href="" class="body-footer-seemore body-footer-reorder">Mua lại</a>
+                           <a href="{{ route('re-checkout',[$item->cart_id])}}" class="body-footer-seemore body-footer-reorder">Mua lại</a>
                       </div>
                       @endforeach
                     </div>

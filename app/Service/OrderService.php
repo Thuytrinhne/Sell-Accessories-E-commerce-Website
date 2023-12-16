@@ -13,15 +13,14 @@ use DB;
 class OrderService {
     public static function index(Request $request)
     {
-        $user_payment = DB::select("SELECT *
+        $user_payment = DB::select("SELECT `order`.id, payment.name_method, `order`.date_order
                                     FROM 
                                             `order`, payment
                                     WHERE 
                                             `order`.payment_id = payment.id
                                             and `order`.user_id = 1
-                                            
                                             ");
-        $user_order = DB::select ("SELECT distinct cart_item.quantity,product.name_product,product_item.price
+        $user_order = DB::select ("SELECT distinct cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id
                                     FROM
                                             `order`, cart, cart_item, product_item, product
                                     WHERE
@@ -30,6 +29,7 @@ class OrderService {
                                             and cart_item.product_item_id = product_item.id
                                             and product_item.product_id = product.id
                                             and `order`.user_id = 1
+                                        
                 ");  
         
         // $user_order = order::with('cart', 'cart.cartItems', 'cart.cartItems.productItems','cart.cartItems.productItems.product')->get();
@@ -82,6 +82,23 @@ foreach($user_order as $item) {
         $product_item_cart = CartController::getCartitem();
         //Lấy đặt hàng từ giỏ hàng ra checkout
        $total=0;
+        foreach($product_item_cart as $item) {
+            $total += $item->price * $item->quantity;   
+        }
+        return view('front.product-order-screens.checkout', compact('product_item_cart','total'));
+    }
+
+    public static function ReCheckout($id) {
+        $id = $id;
+        $product_item_cart = DB::select("
+        SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
+                                    FROM cart_item, product_item, product
+                                    WHERE
+                                        cart_item.product_item_id = product_item.id
+                                        and product_item.product_id = product.id
+                                        and cart_item.cart_id = '$id'
+        ");
+        $total=0;
         foreach($product_item_cart as $item) {
             $total += $item->price * $item->quantity;   
         }

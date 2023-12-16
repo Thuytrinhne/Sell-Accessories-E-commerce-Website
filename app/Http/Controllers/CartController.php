@@ -15,7 +15,7 @@ class CartController extends Controller
      */
     public static function getCartitem() {
         $id = 1;
-        $product_item = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
+        $product_item = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id,cart_item.cart_id
                                     FROM cart_item, product_item, product
                                     WHERE
                                         cart_item.product_item_id = product_item.id
@@ -23,6 +23,7 @@ class CartController extends Controller
                                         and cart_item.cart_id = '$id'
                                     
             ");
+            
         return $product_item;
 
     }
