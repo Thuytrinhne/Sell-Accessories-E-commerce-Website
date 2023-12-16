@@ -28,6 +28,7 @@ class OrderRespository
         $order->user_id = 1;
         $order->date_order = $currentDateTime;
         $order->cart_id = $product_item_cart[0]->cart_id;
+        $order->note = $request->input('order_note');
 
         switch($request->input('method_payment')) {
             case "Thanh toán tiền mặt":

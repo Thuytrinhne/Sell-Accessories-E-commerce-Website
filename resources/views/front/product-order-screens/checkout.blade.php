@@ -42,10 +42,11 @@
                             </div>
                             <a href="checkout/choose-location">Thay đổi</a>
                         </div>
-
+                        <form action="{{ route('checkout-success') }}" method="POST" >
+                            @csrf
                         <div class="info_input">
                             <label for="">GHI CHÚ ĐƠN HÀNG</label><br>
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Ghi chú vào đây..."></textarea>
+                            <textarea name="order_note" id="" cols="30" rows="10" placeholder="Ghi chú vào đây..." value=""></textarea>
                         </div>
                     </div>
                     
@@ -59,8 +60,8 @@
                         <h3>Sản phẩm</h3>
                         <h3>Tạm tính</h3>
                         <!-- =================  product list  =================== -->
-                        <form action="{{ route('checkout-success') }}" method="POST" >
-                            @csrf
+                        
+                           
                         @foreach ($product_item_cart as $key => $item)
                         <input style="display: none" name="idOrder" value="{{ $item->id}}">
                         
