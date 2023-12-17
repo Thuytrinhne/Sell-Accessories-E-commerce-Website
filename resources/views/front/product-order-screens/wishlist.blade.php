@@ -31,7 +31,9 @@
                         <thead>
                             @foreach($product as $items)
                                 <tr>
-                                    <td></td>
+                                    <td>
+                                        <a style="border-radius:50%" href="{{ route('destroy.wishlists', ['id' => $items->id]) }}" class="btn btn-danger">X</a>
+                                    </td>
                                     <td><img src="{{ Assets::url($items -> image) }}" width="50" alt=""></td>
                                     <td>{{ $items -> product_name }}</td>
                                     <td>{{ $items -> price }}</td>
