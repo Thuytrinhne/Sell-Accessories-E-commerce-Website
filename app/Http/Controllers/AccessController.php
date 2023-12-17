@@ -12,6 +12,8 @@ use Mail;
 use App\Mail\SendEmailCode;
 use App\Http\Requests\AccessRequest;
 use App\Http\Requests\PasswordChangeRequest;
+use App\Http\Requests\PasswordUpdate;
+
 
 class AccessController extends Controller
 {
@@ -61,9 +63,14 @@ class AccessController extends Controller
     {
         return AccessService::updatePassword();
     }
-    public static function handleUpdatePassword(PasswordChangeRequest $request)
+    public static function handleUpdatePassword(PasswordUpdate $request)
     {
+
         return AccessService::handleUpdatePassword($request);
 
+    }
+    public static function updateInforUser(Request $request)
+    {
+        return AccessService::updateInforUser($request);
     }
 }

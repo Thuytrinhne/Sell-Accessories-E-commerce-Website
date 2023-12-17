@@ -61,5 +61,14 @@ class AccountRespository
         $user->remember_token = "";
         $user->save();
     }
+    public static function  updateInfor ($full_name, $sex, $birth)
+    {
+      
+        $user->full_name = $full_name;
+        $user->sex = $sex;
+        $user->birth = $birth;
+
+        $user->save();
+    }
     // end Trinh add
 }

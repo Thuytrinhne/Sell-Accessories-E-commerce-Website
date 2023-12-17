@@ -12,19 +12,14 @@
 
                 
             </div>
-            @if(6==7)
-            @php
-                $total_price=0;
-                foreach($product_item_cart as $item) {
-                $total_price += $item->price * $item->quantity;
-                }
-            @endphp
+          
+          
             <div class="payment_container" style="display: inline;">
                 <div class="total">
                     <p>Tổng tiền</p>
-                    <p style="text-align:end;">{{ $total_price }}đ</p>
+                    <p class="payment_container--total"style="text-align:end;"></p>
                 </div>
-                @endif
+               
 
                 <div class="pay_button">
                     <a class="pay_btn" href="checkout">Thanh toán</a><br>

@@ -297,7 +297,6 @@ class ProductService
         ->leftjoin('variation','variation_option.variation_id','=','variation.id')
         ->where('product_item.id','=',$itemID)
         ->get();
-
         return view('admin.edit-item-product',compact('item','itemID'));
     }
 

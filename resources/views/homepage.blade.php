@@ -4,7 +4,7 @@
 
 <!-- code trinh  -->
 @if (session ('loginSuccess'))
-            {
+            
                 <script>
                      Swal.fire({
                 position: 'center',
@@ -14,7 +14,7 @@
                 timer: 2000
                 })
                 </script>
-            }
+            
 @endif
 
 <!-- end code trinh  -->

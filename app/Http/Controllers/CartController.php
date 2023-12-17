@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\cart;
 use App\Models\cart_item;
 use Illuminate\Http\Request;
-
+use Auth;
 use DB;
 
 class CartController extends Controller
@@ -13,6 +13,28 @@ class CartController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public static function getCartitemJSon() {
+    
+
+        // trinh get card id mới nhất
+        $id = cart::where('user_id', Auth::user()->id)
+        ->orderBy('created_at', 'desc')
+        ->first()
+        ->id;
+        
+        // code Phong 
+        $product_item_cart = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
+        FROM cart_item, product_item, product
+        WHERE
+            cart_item.product_item_id = product_item.id
+            and product_item.product_id = product.id
+            and cart_item.cart_id = '$id'
+        
+                        ");
+                       
+        return response()->json($product_item_cart, 200);
+
+    }
     public static function getCartitem() {
       
         $id = 1;
@@ -24,9 +46,10 @@ class CartController extends Controller
                                         and cart_item.cart_id = '$id'
                                     
             ");
-        return response()->json($product_item_cart);
+        return $product_item_cart ;
 
     }
+
     /**
      * Show the form for creating a new resource.
      */

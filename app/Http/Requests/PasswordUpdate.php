@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 use Hash;
-class PasswordChangeRequest extends FormRequest
+class PasswordUpdate extends FormRequest
 {
      /**
      * Determine if the user is authorized to make this request.
@@ -21,11 +21,13 @@ class PasswordChangeRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {          
-       
-         
-       
+    {                  
         $rules = [
+          'oldPass' => ['bail', 'required', function ($attribute, $value, $fail) {
+           if (!Hash::check($value, Auth::user()->password) ) {
+               $fail('Mật khẩu cũ không chính xác!');
+          }
+        }],
             'password' => 'bail|required|min:6|same:confirmPass',
             'confirmPass' => 'bail|required',
         ];

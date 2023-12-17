@@ -5,8 +5,10 @@
 
 @endsection;
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @if (session ('updatePassSuccess'))
-            {
+            
                 <script>
                      Swal.fire({
                 position: 'center',
@@ -16,7 +18,7 @@
                 timer: 2000
                 })
                 </script>
-            }
+            
 @endif
 
 <div class="body-user-display-myaccount">
@@ -62,7 +64,7 @@
                             <label for="text">Nhập lại mật khẩu</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input class="body-user-display-input"type="password" value="">
+                            <input name = "confirmPass" class="body-user-display-input"type="password" value="">
                             @error('confirmPass')
                             <br>
                                 <span class="msg-error">{{$message}}</span>

@@ -3,6 +3,19 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/account.css')}}"> 
 @endsection;
 @section('content')
+@if (session ('updateInforSuccess'))
+            {
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('updateInforSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            }
+@endif
 <div class="body-user-display-myaccount">
                 <div class="body-user-display-header1">
                   <div class="body-user-display-title1">Tài Khoản Của Tôi</div>
@@ -10,14 +23,15 @@
                 </div>
                 <hr class="body-user-display-line">
                 <div class="body-user-display-container1">
-                    <form class="body-user-display-frm" action="">
-                      <table class="body-user-display-tbl">
+                    <form class="body-user-display-frm" action="{{route('updateInforUser')}}" method="POST">
+                      @csrf
+                    <table class="body-user-display-tbl">
                         <tr class="body-user-display-tr">
                           <td  class="body-user-display-td-label">
                             <label for="text">Họ và tên</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input class="body-user-display-input"type="text" value="{{ Auth::user()->full_name}}">
+                            <input name="full_name" class="body-user-display-input"type="text" value="{{ Auth::user()->full_name}}">
                           </td>
                         </tr>
                         <tr class="body-user-display-tr">
@@ -41,28 +55,14 @@
                          
 
                           <td  class="body-user-display-td-input">
-                            <input class="body-user-display-input" type="date" value="{{Auth::user()->birth}}" >
+                            <input name="birth"  class="body-user-display-input" type="date" value="{{Auth::user()->birth}}" >
   
                           </td>
                         </tr>
-                        <tr class="body-user-display-tr">
-                          <td class="body-user-display-td-label">
-                            <label for="text">Email</label>
-                          </td>
-                          <td  class="body-user-display-td-input">
-                            <input  class="body-user-display-input"  type="email" value="{{Auth::user()->email}}">
-                          </td>
-                        </tr>
-                        <tr class="body-user-display-tr">
-                          <td class="body-user-display-td-label">
-                            <label for="text">Số điện thoại</label>
-                          </td>
-                          <td  class="body-user-display-td-input">
-                            <input  class="body-user-display-input" type="phone" value="{{Auth::user()->phone}}">
-                          </td>
-                        </tr>
+                       
+                   
                       </table>
-                      <button class="body-footer-seemore btn-red btn-bottom">LƯU THAY ĐỔI</button>
+                      <button class="body-footer-seemore btn-red btn-bottom" type="submit">LƯU THAY ĐỔI</button>
 
                     </form>
                     <div class="line"></div>

@@ -193,17 +193,21 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 Route::get('/customer/account', function () {
    return view('front.customer.account');
 })->name('front.account');
+// địa chỉ customer
+Route::get('/customer/address', [User_AddressController::class,'index'])->name('front.address');
+Route::get('/customer/address/add', [User_AddressController::class,'create'])->name('front.add-address');
+Route::post('/customer/address/add', [User_AddressController::class,'store'])->name('front.handle-add-address');
 
-Route::get('/customer/address', function () {
-   
-    return view('front.customer.address');
-})->name('front.address');
+
+// end địa chỉ customer
 Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'])->name('front.order_detail');
 // end router customer
 // cập nhật lại mật khẩu 
+
 Route::get ('/customer/account/changePassWord',  [AccessController::class,'updatePassword'])->name('updatePassword');
 Route::post ('/customer/account/changePassWord',  [AccessController::class,'handleUpdatePassword'])->name('handleUpdatePassword');
-
+// chỉnh sửa thông tin cá nhân 
+Route::post ('/customer/account/updateProfile',  [AccessController::class,'updateInforUser'])->name('updateInforUser');
 
 
 // start router auth
@@ -271,6 +275,8 @@ Route::prefix('/customer/orders')->group(function () {
 });
 
 
-Route::get ('/cart',[CartController::class, 'getCartitem'] )->name('cart');
+Route::get ('/cart',[CartController::class, 'getCartitemJSon'] )->name('cart');
 
 Route::get('/destroy/{id}',[CartController::class, 'destroyItem'])->name('cart.destroy');
+
+Route::get('/test',[CartController::class, 'getCartitemJSon']);

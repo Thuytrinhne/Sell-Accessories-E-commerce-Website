@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <div class="grid">                 
               <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{route('homepage')}}">
                     <img onclick="redirectOnClick(`index.html`)" class="header-logo" src="https://mossvn.com/images/logo-moss-remake1.png" alt="Logo cửa hàng">
                 </a>
     
@@ -130,8 +130,9 @@
 
           var view_screen = document.querySelector('.modal-custom-cart');
            view_screen.style.display = 'block';
+           console.log('hi');
+
         //  ajax xử lý cart
-      
       $.ajax({
         url: $('.cart-click').attr('href'),
         type:"get",
@@ -145,13 +146,13 @@
       }
         function handleCartData(res)
         {
-          console.log(res[0].id);
-          console.log(res.length);
+          let total=0; 
           let product_item_cart = res;
           let listDOM = document.querySelector(".product_container");
 					listDOM.innerHTML = "";
 
           product_item_cart.forEach(function(item) {
+            total += item.price * item.quantity;
             listDOM.innerHTML +=
             `<div class="product_box">
         <img src="./Assets/Images/product_img.jpeg" alt="" style="width: 60px; height: auto;">
@@ -194,8 +195,12 @@
     myLink.href = hrefCancel;
 
           });
-
-
+          // tổng tiền 
+          let totalElement = document.querySelector('.payment_container--total'); 
+          console.log(total);
+          console.log(totalElement);
+          totalElement.innerText = total + 'đ';
+          
         }
 
         

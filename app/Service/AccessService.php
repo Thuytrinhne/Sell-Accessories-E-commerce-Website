@@ -9,6 +9,8 @@ use Auth;
 use App\Models\email_verification;
 use App\Http\Requests\AccessRequest;
 use App\Http\Requests\PasswordChangeRequest;
+use App\Http\Requests\PasswordUpdate;
+
 use Mail;
 use App\Mail\ForgotPassword;
 use App\Mail\SendEmailCode;
@@ -67,10 +69,9 @@ class AccessService
     }
     public static function postLogin(Request $request)
     {
+       
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()-> route('homepage')->with("loginSuccess", "Đăng nhập thành công");
-           
-
         }
         else
         {
@@ -153,9 +154,18 @@ class AccessService
     {
         return view('front.customer.changePassword');
     }
-    public static function handleUpdatePassword(PasswordChangeRequest $request)
+    public static function handleUpdatePassword(PasswordUpdate $request)
     {
+        $user =  Auth::user();
         AccountRespository::updatePassword($user,$request->password);
         return redirect()->back()->with('updatePassSuccess', 'Thay đổi mật khẩu thành công');
     }
+    public static function updateInforUser(Request $request)
+    {
+        AccountRespository::updateInfor($request->full_name, $request->sex, $request->birth);
+
+        return redirect()->back()->with('updateInforSuccess', 'Thay đổi mật khẩu thành công');
+
+    }
+
 }

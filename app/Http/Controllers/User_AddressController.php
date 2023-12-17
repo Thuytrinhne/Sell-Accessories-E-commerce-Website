@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\user_address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CartController;
+use App\Service\User_AddressService;
 class User_AddressController extends Controller
 {
     /**
@@ -12,8 +14,9 @@ class User_AddressController extends Controller
      */
     public function index()
     {
-        $product_item_cart = CartController::getCartitem();
-        return view('front.product-order-screens.choose-location', compact('product_item_cart'));
+        return User_AddressService::index();
+        // $product_item_cart = CartController::getCartitem();
+        // return view('front.product-order-screens.choose-location', compact('product_item_cart'));
     }
 
     public function addAddress() {
@@ -25,7 +28,7 @@ class User_AddressController extends Controller
      */
     public function create()
     {
-        //
+        return User_AddressService::create();
     }
 
     /**
@@ -33,7 +36,8 @@ class User_AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return User_AddressService::store($request);
+
     }
 
     /**
