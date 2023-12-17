@@ -25,21 +25,23 @@
                 MY WISHLIST
             </h1>
             <div class="card-body">
-                <table class="table">
-                    <thead>
-                        @foreach($product as $items)
-                            <tr>
-                                <td></td>
-                                <td><img src="{{ Assets::url($items -> image) }}" width="50" alt=""></td>
-                                <td>{{ $items -> product_name }}</td>
-                                <td>{{ $items -> price }}</td>
-                                <td>{{ $items -> state }}</td>
-                                <td><a href="">Thêm vào giỏ hàng</a></td>
-                                <td></td>
-                            </tr>
-                        @endforeach
-                    </thead>
-                </table>
+                <form action="route{{ 'storeproduct_item_id.wishlists' }}" method="post">
+                    @csrf
+                    <table class="table">
+                        <thead>
+                            @foreach($product as $items)
+                                <tr>
+                                    <td></td>
+                                    <td><img src="{{ Assets::url($items -> image) }}" width="50" alt=""></td>
+                                    <td>{{ $items -> product_name }}</td>
+                                    <td>{{ $items -> price }}</td>
+                                    <td>{{ $items -> state }}</td>
+                                    <td><a href="{{ route('storeproduct_item_id.wishlists', $product_item->id) }}" class="btn btn-primary">{{ checkWishlistType($wishlist_item) }}</a></td>
+                                </tr>
+                            @endforeach
+                        </thead>
+                    </table>
+                </form>
             </div>
             <!-- <div class="product_box">
                 <div class="cancel_button">
