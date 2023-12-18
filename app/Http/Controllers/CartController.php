@@ -37,8 +37,12 @@ class CartController extends Controller
     }
     public static function getCartitem() {
       
-        $id = 1;
-        $product_item_cart = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
+          // trinh get card id mới nhất
+          $id = cart::where('user_id', Auth::user()->id)
+          ->orderBy('created_at', 'desc')
+          ->first()
+          ->id;
+        $product_item = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id,cart_item.cart_id
                                     FROM cart_item, product_item, product
                                     WHERE
                                         cart_item.product_item_id = product_item.id
@@ -46,7 +50,8 @@ class CartController extends Controller
                                         and cart_item.cart_id = '$id'
                                     
             ");
-        return $product_item_cart ;
+            
+        return $product_item;
 
     }
 

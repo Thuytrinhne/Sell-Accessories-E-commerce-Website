@@ -233,6 +233,7 @@ Route::post('/pass-verify/{token}', [AccessController::class,'handlePassVerify']
 
 // router product
 Route::get('/checkout',[OrderController::class, 'indexCheckout'] )->name('checkout');
+Route::get('/checkout/{id}', [OrderController::class, 'ReCheckout'])->name('re-checkout');
 Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
 Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
 Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');
@@ -271,7 +272,7 @@ Route::prefix('/wishlist') -> group(function () {
 Route::prefix('/customer/orders')->group(function () {
    // Hiển thị danh sách các danh mục
    Route::get('/', [OrderController::class, 'index'])->name('.front.customer.history-orders');
-   
+   Route::get('/{id}', [OrderController::class, 'indexFilter'])->name('filter.history-order');
 });
 
 

@@ -30,7 +30,7 @@
           <!-- begin gallery -->
           <div class="col-5 row-gallery" id="productImage">
               <div class="row">
-                      <img id="current-image" src="{{$product->image}}" alt="">
+                      <img id="current-image" src="https://hippo.vn/wp-content/uploads/2023/07/z4490453481402_5d3820c1148b6163e130b262d7c02117-300x300.jpg" alt="">
               </div>
               <div class="row" >
                   <div class="col-2-4">
@@ -240,6 +240,5 @@
             );
         }
 }
-
 </script>
 @endsection

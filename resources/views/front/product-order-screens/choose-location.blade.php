@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <a href="checkout.html">Sửa</a>
+                        <a href="">Sửa</a>
                     </div>
                     <!-- =============  end list  ============ -->
                     

@@ -45,7 +45,7 @@
                     <div class="body-list__item" onclick="list__itemOnCick()" >
                       <div>
                             <a class="body-item-link" href="{{ route('products.show', ['id' => $item->id]) }}">
-                              <img onclick="list__itemOnCick()" class="body-item-img" src="{{$item->image}}" alt="{{$item->name_product}}">
+                              <img onclick="list__itemOnCick()" class="body-item-img" src="https://hippo.vn/wp-content/uploads/2023/07/z4490483330315_64b6f2340864e7bb11693475f0b74822-300x300.jpg" alt="{{$item->name_product}}">
                             </a>
                       </div> 
                       <div class="body-item-des">
@@ -98,31 +98,31 @@
                       <div class="body-category-list">
                         <div class="body-category-item">
                           <a href="" class="body-category-link">
-                           <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
+                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
                            <h3 class="body-category-name">LY SỨ (09)</h3>
                           </a>
                         </div>
                         <div class="body-category-item">
                           <a href="" class="body-category-link">
-                           <img src="https://hipposhop.vn/wp-content/uploads/2023/09/z4695989175899_435b8c28c9233a5a0ebe70abb1b6b8b1-300x300.jpg" alt="" class="body-category-img">
+                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
                            <h3 class="body-category-name">DỤNG CỤ HỌC TẬP (109)</h3>
                           </a>
                         </div>
                         <div class="body-category-item">
                           <a href="" class="body-category-link">
-                           <img src="https://hipposhop.vn/wp-content/uploads/2023/09/z4695885289564_2bcc658538dea52f977c7ac5a917ec84-300x300.jpg" alt="" class="body-category-img">
+                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
                            <h3 class="body-category-name">ĐỒ CHƠI (26)</h3>
                           </a>
                         </div>
                         <div class="body-category-item">
                           <a href="" class="body-category-link">
-                           <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
+                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
                            <h3 class="body-category-name">LY SỨ (09)</h3>
                           </a>
                         </div>
                         <div class="body-category-item">
                           <a href="" class="body-category-link">
-                           <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4498074345012_7f24f6b6d73062e768da20d394b037ad-300x300.jpg" alt="" class="body-category-img">
+                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
                            <h3 class="body-category-name">QUẠT CẦM TAY MINI (209)</h3>
                           </a>
                         </div>

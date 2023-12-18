@@ -5,12 +5,12 @@
 @section('content')
 <div class="body-user-display-myaccount">
                 <div class="body-user-display-header">
-                    <a href="" class="body-footer-seemore body-footer-seemore-Active">Tất cả</a>
-                    <a href="" class="body-footer-seemore">Mới đặt</a>
-                    <a href="" class="body-footer-seemore">Đã xác nhận</a>
-                    <a href="" class="body-footer-seemore">Đang giao hàng</a>
-                    <a href="" class="body-footer-seemore">Thành công</a>
-                    <a href="" class="body-footer-seemore">Đã hủy</a>
+                    <a href="{{ route('.front.customer.history-orders')}}" class="body-footer-seemore body-footer-seemore-Active">Tất cả</a>
+                    <a href="{{ route('filter.history-order', 1) }}" class="body-footer-seemore">Mới đặt</a>
+                    <a href="{{ route('filter.history-order', 2) }}" class="body-footer-seemore">Đã xác nhận</a>
+                    <a href="{{ route('filter.history-order', 3) }}" class="body-footer-seemore">Đang giao hàng</a>
+                    <a href="{{ route('filter.history-order', 4) }}" class="body-footer-seemore">Thành công</a>
+                    <a href="{{ route('filter.history-order', 5) }}" class="body-footer-seemore">Đã hủy</a>
                 </div>
                 <hr class="body-user-display-line">
                 <div class="body-user-display-container">
@@ -21,18 +21,36 @@
                           
                           <div>
                             Mã đơn hàng: 
-                            <span>{{ $key+1 }}</span> | Đặt ngày: 
-                            <span>{{ $item->created_at }}</span>
+                            <span>{{ $item->id }}</span> | Đặt ngày: 
+                            <span>{{ $item->date_order }}</span>
                             | Thanh toán:
                             <span>{{ $item->name_method }}</span>
                            
                           </div>
-                          <div>
-                            <span class="item_order-status">Hoàn tất</span>
-                            <strong>Xem chi tiết</strong>
+                          <div class="item_order-status">
+                            <span class="item_order-status">@switch($item->status)
+                              @case(1)
+                                  Mới đặt
+                                  @break
+                              @case(2)
+                                  Đã xác nhận
+                                  @break
+                              @case(3)
+                                  Đang giao hàng
+                                  @break
+                              @case(4)
+                                  Thành công
+                                  @break
+                              @case(5)
+                                  Đã hủy
+                                  @break
+                                  
+                          @endswitch</span>
+                            <a style="" href="{{ route('front.order_detail',$item->id)}}">Xem chi tiết</a>
                           </div>
                           
                         </a>
+                  
                         </div>
                         <div class="item_order-list">
                           @foreach($user_order as $key => $item)
@@ -52,7 +70,7 @@
                             @endforeach
                         </div>
                         <div class="item_order-btn">
-                           <a href="" class="body-footer-seemore body-footer-reorder">Mua lại</a>
+                           <a href="{{ route('re-checkout',[$item->cart_id])}}" class="body-footer-seemore body-footer-reorder">Mua lại</a>
                       </div>
                       @endforeach
                     </div>

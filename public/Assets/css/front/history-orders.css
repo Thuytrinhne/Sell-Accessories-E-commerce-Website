@@ -46,10 +46,14 @@
     padding: 10px;
     border: 1px solid #f2f1f6;
 }
+
 .item_order-title {
     background-color: #f7f7f7;
     padding: 15px;
+    display: flex;
+    justify-content: space-between;
 }
+
 .body-user-display-container {
     padding-top: 0;
     display: flex;
@@ -71,4 +75,15 @@
 }
 .body-user-feature-item a {
     all: unset;
+}
+
+.item_order-status {
+    display: flex;
+    align-items: center;
+}
+
+.item_order-status a {
+    text-decoration: none;
+    color: #111;
+    font-size: 1.5em;
 }

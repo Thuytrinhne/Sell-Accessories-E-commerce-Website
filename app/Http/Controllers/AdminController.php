@@ -33,10 +33,12 @@ class AdminController extends Controller
     }
     public function DashboardView() {
         $report_today_price = DB::select("
-            SELECT sum(total_price)
+            SELECT total_price
             FROM `order`
-            GROUP BY
-                DATE(date_order)
+        ");
+        $report_today_order = DB::select("
+            SELECT *
+            FROM `order`
         ");
         $report_today_onship = DB::select("
             SELECT status
@@ -51,14 +53,26 @@ class AdminController extends Controller
                 status = 4
         ");
         $count_ship = 0;
-        foreach($report_today_done as $item) {
+        foreach($report_today_onship as $item) {
             $count_ship += 1;
+        }
+        $count_report_done = 0;
+        foreach($report_today_done as $item) {
+            $count_report_done += 1;
+        }
+        $sum_total_price_today = 0;
+        foreach($report_today_price as $item ) {
+            $sum_total_price_today += $item->total_price;
+        }
+        $count_order = 0;
+        foreach($report_today_order as $item) {
+            $count_order++;
         }
         // dd($report_today_onship);
         
         //CURRENT_DATE() =  DATE(date_order) ['count' => $count[0]->count]
 
-        return view('admin.dashboard', compact('report_today_price','count_ship','report_today_done'));
+        return view('admin.dashboard', compact('sum_total_price_today','count_ship','count_report_done', 'count_order'));
     }
 
     public function ProductView() {

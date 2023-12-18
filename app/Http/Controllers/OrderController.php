@@ -20,6 +20,10 @@ class OrderController extends Controller
         return OrderService::index($request);
     }
 
+    public function indexFilter($id) {
+        return OrderService::indexFilter($id);
+    }
+
     public function DetailOrder($id) {
         return OrderService::DetailOrder($id);
     }
@@ -27,6 +31,10 @@ class OrderController extends Controller
     public function indexCheckout() {
       
         return OrderService::indexCheckout();
+    }
+
+    public function ReCheckout($id) {
+        return OrderService::ReCheckout($id);
     }
 
     public function checkoutSuccess($id) {

@@ -121,13 +121,10 @@
         </div>
         @include('shared.front.assort')
      <!-- show main content here -->
-     <!-- xử lý cart ajax  -->
-     
+     <!-- xử lý cart ajax  -->   
      <script>
-     
       function redirectOnClick(event) {
         event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
-
           var view_screen = document.querySelector('.modal-custom-cart');
            view_screen.style.display = 'block';
            console.log('hi');

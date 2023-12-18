@@ -72,6 +72,7 @@
                     <div class="col-5 price-range-container">
 
                       <form action="{{ route('products.filter') }}" method="get">
+                      
                         <label for="min_price" class="price-range-title">Giá từ:</label>
                         <input class="price-input" type="number" name="min_price" id="min_price" value="{{ request('min_price') }}" placeholder="Min Price">
 
