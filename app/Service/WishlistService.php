@@ -11,7 +11,7 @@ use App\Models\Respositories\Wishlist_ItemRespository;
 
 class WishlistService 
 {
-    public function index()
+    public static function index()
     {
         $product = Wishlist_ItemRespository::product();
         $wishlists = wishlist_item::all();

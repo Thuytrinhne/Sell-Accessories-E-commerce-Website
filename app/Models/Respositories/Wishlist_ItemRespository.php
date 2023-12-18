@@ -2,13 +2,16 @@
 
 namespace App\Models\Respositories;
 
+use  App\Models\wishlist;
 use App\Models\product;
 use App\Models\product_item;
 use Illuminate\Http\Request;
 use App\Http\Requests\AccountRequest;
 use App\Http\Requests\WishlistRequest;
+use DB;
+use Auth;
 
-class CategoryRespository 
+class Wishlist_ItemRespository 
 {
     /**
      * Display a listing of the resource.
@@ -18,6 +21,17 @@ class CategoryRespository
     /**
      * Store a newly created resource in storage.
      */
+    public static function product()
+    {
+        $id =  Auth::user()->id;
+       return  $wishlistItems=  DB::select
+       ("select * from wishlist join wishlist_item 
+       on wishlist.id = wishlist_item.whislist_id 
+       left join product_item on product_item.id = wishlist_item.product_item_id 
+       left join product 
+       on product.id = wishlist_item.product_id or product.id = product_item.product_id
+       where wishlist.user_id = '$id'");
+    }
     public static function store($product)
     {
         $product = product_item::join('product', 'product_item.product_id', '=', 'product.id')->get();

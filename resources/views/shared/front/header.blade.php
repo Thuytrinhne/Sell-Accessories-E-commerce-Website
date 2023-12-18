@@ -103,7 +103,9 @@
                     </li>
                     <li>
                       <div class="nav-item-frame nav-item-pointer">
-                        <i class="fa-solid fa-heart nav-item__icon"></i>                                
+                          <a href="{{route('wishlist')}}">
+                        <i class="fa-solid fa-heart nav-item__icon"></i>     
+                        </a>                           
                       </div>
                       </li>
                     <li>

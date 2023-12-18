@@ -22,53 +22,13 @@
         <div class="product_box-container">
             <i class="fa-regular fa-face-grin-hearts" style="" ></i>
             <h1>
+                
                 MY WISHLIST
             </h1>
-            <div class="card-body">
-                <form action="route{{ 'storeproduct_item_id.wishlists' }}" method="post">
-                    @csrf
-                    <table class="table">
-                        <thead>
-                            @foreach($product as $items)
-                                <tr>
-                                    <td>
-                                        <a style="border-radius:50%" href="{{ route('destroy.wishlists', ['id' => $items->id]) }}" class="btn btn-danger">X</a>
-                                    </td>
-                                    <td><img src="{{ Assets::url($items -> image) }}" width="50" alt=""></td>
-                                    <td>{{ $items -> product_name }}</td>
-                                    <td>{{ $items -> price }}</td>
-                                    <td>{{ $items -> state }}</td>
-                                    <td><a href="{{ route('storeproduct_item_id.wishlists', $product_item->id) }}" class="btn btn-primary">{{ checkWishlistType($wishlist_item) }}</a></td>
-                                </tr>
-                            @endforeach
-                        </thead>
-                    </table>
-                </form>
-            </div>
-            <!-- <div class="product_box">
-                <div class="cancel_button">
-                    <a href="{{ route('destroy.wishlists') }}" class="cancel_btn">
-                        <i class="fa-solid fa-circle-xmark"></i>
-                    </a>
-                </div>
-                <img src="./Assets/Images/product_img.jpeg" alt="">
-                <div class="product_info">
-                    <a class="product_name">Cài tóc phối lưới</a>
-                </div>
-                
-                <div class="product_info">
-                    <p class="product_name">65.000đ</p>
-                </div>
+            <!-- ===============   product box  =============== -->
+            @foreach ($product as $item)
 
-                <div class="product_info">
-                    <p class="product_name">In Stock</p>
-                </div>
-
-                <div class="product_info">
-                    <a class="product_name">Thêm vào giỏ hàng</a>
-                </div>
-            </div>
-
+          
             <div class="product_box">
                 <div class="cancel_button">
                     <button href="" class="cancel_btn">
@@ -77,22 +37,37 @@
                 </div>
                 <img src="./Assets/Images/product_img.jpeg" alt="">
                 <div class="product_info">
-                    <a class="product_name">Cài tóc phối lưới</a>
+                    <a class="product_name">{{$item->name_product}}</a>
                 </div>
                 
                 <div class="product_info">
-                    <p class="product_name">65.000đ</p>
+                    <p class="product_name">{{$item->price}}</p>
                 </div>
-
+                @if($item->quantity>0)
                 <div class="product_info">
                     <p class="product_name">In Stock</p>
                 </div>
-
+                @else  
                 <div class="product_info">
-                    <a class="product_name">Thêm vào giỏ hàng</a>
+                    <p class="product_name">Out Of Stock</p>
                 </div>
-            </div> -->
+                @endif
+                
+                @if(!($item->product_item_id == NULL))
+                <div class="product_info">
+                    <a class="product_name" >Thêm vào giỏ hàng</a>
+                </div>
+                @else
+                <div class="product_info">
+                    <a href=""
+                     class="product_name">
+                     Lựa chọn các tùy chọn</a>
+                </div>
+                @endif
 
+            </div>
+            @endforeach
+            <!-- ===============   product box  =============== -->
         </div>
     </div>
 @endsection
