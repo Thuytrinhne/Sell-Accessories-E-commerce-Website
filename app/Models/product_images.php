@@ -5,10 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class variation_option extends Model
+class product_images extends Model
 {
     use HasFactory;
-    protected $table ='variation_option';
 
-   
+    public function product()
+    {
+        return $this->belongsTo(product::class);
+    }
 }

@@ -18,10 +18,14 @@ use App\Http\Controllers\ProductController;
 Route::group(['prefix' => '/'], function () {
    
    Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
+
+   Route::get('/product-category/{category}',[ProductController::class,'getProductsByCategory'])->name('get.products.by.category');
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
    Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+
+   Route::post('/test', [ProductController::class, 'test'])->name('products.test');
 
    Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
 
@@ -52,10 +56,10 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     return view('admin.product');
     })->name('admin.product');
 
-    //Thêmm route xử lí report sản phẩm
+    //QToan Thêm route xử lí report sản phẩm
     Route::get('/report', [ProductController::class,'report'])->name('admin.report');
    
-   //  Thêm route admin product và item
+   //Qtoan  Thêm route admin product và item
    Route::prefix('product')->group( function()
    {
       // hiển thị sản phẩm
@@ -86,7 +90,6 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
        // Xử lí xóa
        Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
 
-
    });
 
     Route::get('/order', function () {
@@ -113,7 +116,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::post('update/{id}', [CategoryController::class,'update'])->name('admin.category.update');
       // Xử lí search
       Route::get('search', [CategoryController::class,'search'])->name('admin.category.search');
-   
+      
    }
    );
 });

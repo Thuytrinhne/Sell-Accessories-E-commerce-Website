@@ -16,6 +16,11 @@ class product_item extends Model
         return $this->belongsTo(product::class);
     }
 
+    public function product_configuration()
+    {
+        return $this->hasOne(product_configuration::class);
+    }
+
     public function cart_items()
     {
         return $this->hasMany(cart_item::class);

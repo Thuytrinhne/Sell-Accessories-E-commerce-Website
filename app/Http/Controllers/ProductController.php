@@ -10,6 +10,7 @@ use App\Models\category;
 use App\Models\product_item;
 use App\Models\variation_option;
 use App\Models\variation;   
+use App\Models\product_images;   
 
 
 use Illuminate\Http\Request;
@@ -25,6 +26,11 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         return ProductService::filter($request);
+    }
+
+    public function test(Request $request)
+    {
+        return ProductService::test($request);
     }
 
     public function getProductsByValue($value)
@@ -102,6 +108,10 @@ class ProductController extends Controller
         return ProductService::getProduct();
     }
 
+    public function getProductsByCategory($category)
+    {
+        return ProductService::getProductsByCategory($category);
+    }
 
 
     //

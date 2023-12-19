@@ -40,7 +40,7 @@ class ProductService
                 return $query->where('price', '<=', $maxPrice);
             })
             ->get();
-            $variation = variation::with('varitationOptions')->get();
+             $variation = variation::with('product_configurations')->get();
 
         return view('front.product-order-screens.filter', compact('products','variation'));
     }
@@ -71,12 +71,11 @@ class ProductService
         $products = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->join('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
-        ->join('variation','variation_option.variation_id','=','variation.id')
+        ->join('variation','variation.id','=','product_configuration.variation_id')
         ->select( 
-            'product.name_product', 'product.id',
-            'product_item.price', 'product_item.discount_price','product_item.SKU','product_item.image',
-            'variation_option.value',
+            'product.name_product', 'product.id', 'product.default_image',
+            'product_item.price', 'product_item.discount_price','product_item.SKU',
+            'product_configuration.variation_value',
             'variation.name',
             'category.name_category',
         )
@@ -87,11 +86,10 @@ class ProductService
         $variation_value = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->join('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
-        ->join('variation','variation_option.variation_id','=','variation.id')
+        ->join('variation','product_configuration.variation_id','=','variation.id')
         ->select( 
-            'variation_option.value',
-            'product_item.id'
+            'product_configuration.variation_value',
+            'product_item.id',
         )
         ->where('product.id', '=', $id )
         ->get();
@@ -138,33 +136,61 @@ class ProductService
 
     public static function getProduct()
     {
-        $products= product::join('product_item', 'product.id', '=', 'product_item.product_id')
-        ->select(
-            'product.name_product','product.id',
-            'product_item.price', 'product_item.discount_price','product_item.image',
-        )
-        ->get();    
 
-        return view('homepage',compact('products'));
+        // Lấy 10 sản phẩm mới tạo gần đấy nhất hiện thị trong sản phẩm mới
+        $products= product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->orderBy('product.created_at','desc')
+        ->select(
+            'product.name_product','product.id', 'product.default_image',
+            'product_item.price', 'product_item.discount_price',
+        )
+        ->take(10)
+        ->get();   
+
+        $categories = category::take(5)->get();
+        
+        return view('homepage',compact('products','categories'));
     }
+
+
+    public static function getProductsByCategory($category)
+    {
+        $products = product::join('category', 'category.id', '=','product.category_id')
+        ->join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->where('category.id','=',$category)
+        ->get();
+
+        $variation = variation::with('product_configurations')->get();
+
+        return view('front.product-order-screens.filter', compact('products','variation'));
+    }
+
 
     public static function getProductsByValue($value)
     {
+
         $products = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->join('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
-        ->join('variation','variation_option.variation_id','=','variation.id')
+        ->join('variation','product_configuration.variation_id','=','variation.id')
         ->select(
             'product.name_product', 'product.id',
-            'product_item.price', 'product_item.discount_price','product_item.SKU','product_item.image',
-            'variation_option.value',
+            'product_item.price', 'product_item.discount_price','product_item.SKU',
+            'product.default_image',
             'variation.name',
             'category.name_category',
         )
-        ->where('variation_option.value', '=', $value )->get();
+        ->where('product_configuration.variation_value', '=', $value )->get();
 
         return $products;
+    }
+
+    public static function test(Request $request)
+    {
+
+        dd($request);
+        return $request;
+        
     }
 
     public static function getImagesByValue($value)
@@ -172,12 +198,11 @@ class ProductService
         $products = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->join('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
-        ->join('variation','variation_option.variation_id','=','variation.id')
+        ->join('variation','product_configuration.variation_id','=','variation.id')
         ->select(
             'product.name_product', 'product.id',
             'product_item.price', 'product_item.discount_price','product_item.SKU','product_item.image',
-            'variation_option.value',
+            'product_configuration.variation_value',
             'variation.name',
             'category.name_category',
         )
@@ -192,7 +217,7 @@ class ProductService
        
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'desc')->get();
 
-        $variation = variation::with('varitationOptions')->get();
+         $variation = variation::with('product_configurations')->get();
 
         return view('front.product-order-screens.filter', compact('products','variation'));
         
@@ -203,7 +228,7 @@ class ProductService
        
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'asc')->get();
 
-        $variation = variation::with('varitationOptions')->get();
+         $variation = variation::with('product_configurations')->get();
 
         return view('front.product-order-screens.filter', compact('products','variation'));
         
@@ -213,7 +238,7 @@ class ProductService
     {       
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('product.created_at', 'asc')->get();
 
-        $variation = variation::with('varitationOptions')->get();
+         $variation = variation::with('product_configurations')->get();
 
         return view('front.product-order-screens.filter', compact('products','variation'));      
     }

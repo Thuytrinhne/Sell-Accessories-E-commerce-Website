@@ -1,23 +1,28 @@
 @extends ('layouts.app')
 @section('css')
 <link rel="stylesheet" href="{{asset('Assets/css/front/filter.css')}}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('body-main')
 
 <div class="container" >
 <script>
    function showProducts(value) {
-    console.log('Vao dc ham')
+
+    // encode # sang %23
+    var encodeValue = encodeURIComponent(value);
+
+    console.log(encodeValue);
         $.ajax({
-            url: '/get-products-by-value/' + value,
-            type: 'GET',
+            url: '/get-products-by-value/' + encodeValue,
+            type: 'get',
             success: function(data) {
                 console.log(data);
                 // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
                 renderProducts(data);
             },
             error: function(error) {   
-                console.log('eror');
+                console.log('Bị loi roi');
             }
         });
     }
@@ -32,7 +37,7 @@
                 '<div class="body-list__item">' +
                     '<div>' +
                         '<a class="body-item-link" href="/detail-product/'+ products[i].id + '">' +
-                            '<img class="body-item-img" src="' + products[i].image + '" alt="">' +
+                            '<img class="body-item-img" src="' + products[i].default_image + '" alt="">' +
                         '</a>' +
                     '</div>' +
                     '<div class="body-item-des">' +
@@ -126,17 +131,17 @@
                     <div class="col-4 filter-color">
                         <h4>{{$name->name}}</h4>
                         <div class="row">
-                          @foreach($name->varitationOptions as $variation_option)
+                          @foreach($name->product_configurations as $product_configuration)
 
                            <button  class="color-option" 
-                                    style="background-color: {{$variation_option->value}}; color: {{$variation_option->value}} "
-                                    onclick="showProducts('{{$variation_option->value}}')"> 
-                              {{$variation_option->value}} 
+                                    style="background-color: {{$product_configuration->variation_value}}; color: {{$product_configuration->variation_value}} "
+                                    onclick="showProducts('{{$product_configuration->variation_value}}')"> 
+                              {{$product_configuration->variation_value}} 
                             </button>
 
                           @endforeach
                           
-                                                 
+                                                  
                         </div>
                     </div>
                   @endforeach
@@ -147,7 +152,7 @@
                     <div class="body-list__item">
                       <div>
                             <a class="body-item-link" href="{{route('products.show',[$product->id])}}">
-                              <img class="body-item-img" src="{{$product->image}}" alt="">
+                              <img class="body-item-img" src="{{$product->default_image}}" alt="">
                             </a>
                       </div> 
                       <div class="body-item-des">
@@ -211,8 +216,7 @@
                 break;
             case "option3":
                 window.location.href = "{{ route('get.product.by.latest') }}";
-                break;
-            
+                break;   
         }
     }
 </script>

@@ -30,7 +30,7 @@
           <!-- begin gallery -->
           <div class="col-5 row-gallery" id="productImage">
               <div class="row">
-                      <img id="current-image" src="{{$product->image}}" alt="">
+                      <img id="current-image" src="{{$product->default_image}}" alt="">
               </div>
               <div class="row" >
                   <div class="col-2-4">
@@ -58,7 +58,7 @@
                   </h1>
               </div>
 
-              <div class="row info-price">
+              <div class="row info-price" id = "price">
                   <div class="col-1 info-price--default">
                       <p>{{$product->price}}</p>
                   </div>
@@ -213,7 +213,6 @@
 </div>  
 <script>
    function showProducts(product_item_id) {
-    console.log('Vao dc ham')
         $.ajax({
             url: '/get-images-by-value/' + product_item_id,
             type: 'GET',
@@ -222,8 +221,7 @@
                 // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
                 renderProducts(data);
             },
-            error: function(error) {
-              
+            error: function(error) {            
                 console.log('Đéo vào đc');
             }
         });
@@ -232,13 +230,25 @@
     function renderProducts(product) {
     // Xóa nội dung hiện tại của #productList
     $('#productImage').empty();
+    $('#price').empty();
     for (let i = 0; i < product.length; i++) {
             $('#productImage').append(
                 '<div class="row">'+
                       '<img id="current-image" src="'+product[i].image+'" alt="">'+
               '</div>'
             );
+
+            $('#price').append(
+                '<div class="col-1 info-price--default">'+
+                      '<p>'+ product[i].price +'</p>'+
+                  '</div>'+
+                  '<div class="col-2 info-price--sale">'+product[i].discount_price+'</div>'+
+                 
+                  '<div class="col-7"></div>'
+            );
+            
         }
+
 }
 
 </script>
