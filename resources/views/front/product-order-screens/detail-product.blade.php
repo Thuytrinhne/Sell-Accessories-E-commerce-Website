@@ -131,21 +131,13 @@
 
               <div class="tab-description">
                   <div class="row ">
-                      <div class="col-3">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>
-
-                      <div class="col-3 ">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>
-
-                      <div class="col-3">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>
-
-                      <div class="col-3">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>  
+                      <textarea name="description" 
+                      id="description" 
+                      cols="10" rows="5"
+                      style="font-size:20px;"
+                      disabled>
+                      {{$product->description}}
+                      </textarea>
                   </div>
               </div>
               
@@ -161,48 +153,61 @@
            <div class="row">
             <div class="body-catogory grid">
               <div class="body-category-list" style="margin:0;">
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/09/z4695989175899_435b8c28c9233a5a0ebe70abb1b6b8b1-300x300.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/09/z4695885289564_2bcc658538dea52f977c7ac5a917ec84-300x300.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4498074345012_7f24f6b6d73062e768da20d394b037ad-300x300.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
 
-               
+             @foreach($relatedProduct as $item)
+                    <div class="body-list__item" >
+                      <div>
+                            <a class="body-item-link" href="{{ route('products.show', ['id' => $item->id]) }}">
+                              <img class="body-item-img" src="{{$item->default_image}}" alt="{{$item->name_product}}">
+                            </a>
+                      </div> 
+                      
+      
+                      <div class="container">
+                        <div class="element">
+                          <div class="content">
+                      <div class="body-item-links">
+            
+                          <a href="" class="body-links-detail">
+                            <div class="body-circle body-circle--red">
+                              <span class="material-symbols-outlined body-icon-white">
+                                local_mall
+                                </span>
+                              </div>   
+                            </a>  
+
+                            <span href="" class="body-links-detail">
+                              <div class="body-circle">
+                                <button class="material-symbols-outlined body-icon-black body-icon-black--large" 
+                                id="quickview" 
+                                style="backgroud:none; border:none"
+                                data-product-id="{{ $item->id }}">
+                                  visibility
+                                </button>    
+                              </div>   
+                            </span>  
+                            
+                              <a href="" class="body-links-detail">
+                                <div class="body-circle">
+                                  <i class="fa-regular fa-heart body-icon-black"></i>  
+                                </div>   
+                                </a>         
+                           </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    @endforeach
 
               </div>
-              <div class="body-category-nav">
+              <!-- <div class="body-category-nav">
                 <button class="body-nav-btn" type="button">
                   <i class="fa-solid fa-angle-left body-nav-icon"></i>
                 </button>
                   <button class="body-nav-btn btn-left" type="button">
                     <i class="fa-solid fa-angle-right body-nav-icon "></i>
                   </button>
-              </div>
+              </div> -->
         </div> 
            </div>
          
@@ -222,7 +227,7 @@
                 renderProducts(data);
             },
             error: function(error) {            
-                console.log('Đéo vào đc');
+                console.log('lỗi');
             }
         });
     }

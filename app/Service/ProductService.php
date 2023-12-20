@@ -73,7 +73,7 @@ class ProductService
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
         ->join('variation','variation.id','=','product_configuration.variation_id')
         ->select( 
-            'product.name_product', 'product.id', 'product.default_image',
+            'product.name_product', 'product.id', 'product.default_image','product.description',
             'product_item.price', 'product_item.discount_price','product_item.SKU',
             'product_configuration.variation_value',
             'variation.name',
@@ -94,7 +94,23 @@ class ProductService
         ->where('product.id', '=', $id )
         ->get();
 
-        return view('front.product-order-screens.detail-product',['product' => $products],compact('variation_value'));
+        $category_id = product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->join('category','product.category_id','=','category.id')
+        ->select( 
+            'category.id',
+        )
+        ->where('product.id', '=', $id )
+        ->first();
+
+        $relatedProduct = product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->select( 
+            'product.name_product', 'product.id', 'product.default_image',
+        )
+        ->where('product.category_id', '=', $category_id->id )
+        ->take(5)
+        ->get();
+
+        return view('front.product-order-screens.detail-product',['product' => $products],compact('variation_value','relatedProduct'));
     }
 
     public static function edit($id)
