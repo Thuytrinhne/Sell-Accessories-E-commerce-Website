@@ -185,12 +185,37 @@ class ProductService
         return $products;
     }
 
-    public static function test(Request $request)
+    public static function getModalProduct($product)
     {
 
-        dd($request);
-        return $request;
+        $products = product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->join('category','product.category_id','=','category.id')
+        ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
+        ->join('variation','variation.id','=','product_configuration.variation_id')
+        ->select( 
+            'product.name_product', 'product.id', 'product.default_image',
+            'product_item.price', 'product_item.discount_price','product_item.SKU',
+            'product_configuration.variation_value',
+            'variation.name',
+            'category.name_category',
+        )
+        ->where('product.id', '=', $product )
+        ->first();
         
+
+        $variation_value = product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->join('category','product.category_id','=','category.id')
+        ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
+        ->join('variation','product_configuration.variation_id','=','variation.id')
+        ->select( 
+            'product_configuration.variation_value',
+            'product_item.id',
+            'variation.name',
+        )
+        ->where('product.id', '=', $product )
+        ->get();
+
+        return response()->json([$products,$variation_value]);
     }
 
     public static function getImagesByValue($value)

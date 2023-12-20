@@ -28,9 +28,9 @@ class ProductController extends Controller
         return ProductService::filter($request);
     }
 
-    public function test(Request $request)
+    public function getModalProduct($product)
     {
-        return ProductService::test($request);
+        return ProductService::getModalProduct($product);
     }
 
     public function getProductsByValue($value)

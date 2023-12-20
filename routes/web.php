@@ -35,6 +35,8 @@ Route::group(['prefix' => '/'], function () {
 
    Route::get('/get-product-asc}', [ProductController::class, 'ascProductsByPrice'])->name('get.product.by.asc');
    
+   Route::get('/get-product/{product}', [ProductController::class, 'getModalProduct'])->name('get.modal.product');
+
    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
    
 });

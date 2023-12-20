@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('body-main')
 <div class="body-main">
+  
             <div class="body-banner-container grid">
                 <div class="body-banner">
                    <div class="body-banner-item1">
@@ -24,10 +25,10 @@
                   <div class="body-listProduct">
                     <!-- item -->      
                     @foreach($products as $item)
-                    <div class="body-list__item" onclick="list__itemOnCick()" >
+                    <div class="body-list__item" >
                       <div>
                             <a class="body-item-link" href="{{ route('products.show', ['id' => $item->id]) }}">
-                              <img onclick="list__itemOnCick()" class="body-item-img" src="{{$item->default_image}}" alt="{{$item->name_product}}">
+                              <img class="body-item-img" src="{{$item->default_image}}" alt="{{$item->name_product}}">
                             </a>
                       </div> 
                       <div class="body-item-des">
@@ -50,13 +51,18 @@
                                 </span>
                               </div>   
                             </a>  
-                            <a href="" class="body-links-detail">
+
+                            <span href="" class="body-links-detail">
                               <div class="body-circle">
-                                <span class="material-symbols-outlined body-icon-black body-icon-black--large">
+                                <button class="material-symbols-outlined body-icon-black body-icon-black--large" 
+                                id="quickview" 
+                                style="backgroud:none; border:none"
+                                data-product-id="{{ $item->id }}">
                                   visibility
-                                </span>    
+                                </button>    
                               </div>   
-                            </a>  
+                            </span>  
+                            
                               <a href="" class="body-links-detail">
                                 <div class="body-circle">
                                   <i class="fa-regular fa-heart body-icon-black"></i>  
@@ -96,7 +102,10 @@
                       </div>
             </div> 
           </div> 
-          
+
+
+
+      
 @endsection
     <!-- modal quickview-->  
 @section ('quick-view')
