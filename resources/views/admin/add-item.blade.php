@@ -44,7 +44,7 @@
                                         <th>Số lượng</th>
                                         <th>SKU</th>
                                         <th>Variation</th>
-                                        <th>Variation_option</th>
+                                        <th>Variation value</th>
                                         <th>Ảnh</th>                                   
                                         <th></th>
                                     </tr>
@@ -62,7 +62,7 @@
                                         <td> {{$item->quantity}} </td>
                                         <td> {{$item->SKU}}  </td>
                                         <td> {{$item->name}}  </td>
-                                        <td> {{$item->value}}  </td>
+                                        <td> {{$item->variation_value}}  </td>
                                         <td class = "table_img-wrapper"> <img src="{{$item->image}} " alt=" {{$item->id}}" class="table_img">  </td>
                                     
                                         <td>

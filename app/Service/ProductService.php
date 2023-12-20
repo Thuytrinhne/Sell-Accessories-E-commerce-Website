@@ -33,7 +33,6 @@ class ProductService
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
 
-
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->when($minPrice, function ($query) use ($minPrice) {
                 return $query->where('price', '>=', $minPrice);
             })
@@ -344,12 +343,11 @@ class ProductService
     {
         $items = product_item::join('product', 'product.id', '=', 'product_item.product_id')
         ->leftjoin('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->leftjoin('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
-        ->leftjoin('variation','variation_option.variation_id','=','variation.id')
+        ->leftjoin('variation','product_configuration.variation_id','=','variation.id')
         ->where('product_item.product_id','=',$product)
-        ->select('product_item.id','product_item.price','product_item.discount_price','product_item.quantity','product_item.SKU','variation.name','variation_option.value')
+        ->select('product_item.id','product_item.price','product_item.discount_price','product_item.quantity','product_item.SKU','variation.name',
+                'product_configuration.variation_value')
         ->get();
-
 
         return(view('admin.add-item', compact('items','product')));
     }
@@ -361,11 +359,13 @@ class ProductService
 
     public static function storeItem(ItemRequest $request,$product)
     {
+
+        dd($request);
         $productI = new product_item();
         $variation = new variation();
-        $variation_option = new variation_option();
+        $product_configuration = new product_configuration();
         
-        $variation_option->value = $request->input('value');
+        $product_configuration->variation_value = $request->input('value');
         $variation->name =$request->input('name');
         $productI->price = $request->input('price');
         $productI->quantity = $request->input('quantity');
@@ -376,7 +376,7 @@ class ProductService
         // Lưu dữ liệu vào bảng products
         $productI->save();
         $variation->save();
-        $variation_option->save();
+        $product_configuration->save();
         
         return redirect('admin/product')->with('success','Thêm thành công');
     }
@@ -385,16 +385,18 @@ class ProductService
     {
 
         $item = product_item::leftjoin('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->leftjoin('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
-        ->leftjoin('variation','variation_option.variation_id','=','variation.id')
+        ->leftjoin('variation','product_configuration.variation_id','=','variation.id')
         ->where('product_item.id','=',$itemID)
         ->get();
 
-        return view('admin.edit-item-product',compact('item','itemID'));
+        $variation = variation::with('product_configurations')->get();
+
+        return view('admin.edit-item-product',compact('item','itemID','variation'));
     }
 
     public static function updateItem(Request $request, $item) 
     {
+        dd($request);
 
         $items = product_item::join('product', 'product.id', '=', 'product_item.product_id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
