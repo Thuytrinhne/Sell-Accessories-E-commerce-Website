@@ -63,6 +63,11 @@ class ProductController extends Controller
         return ProductService::search($request);
     }
 
+    public function searchProduct(Request $request)
+    {
+        return ProductService::searchProduct($request);
+    }
+
     public function report(Request $request)
     {
         return ProductService::report($request);

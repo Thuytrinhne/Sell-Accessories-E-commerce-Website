@@ -145,6 +145,8 @@
                         </div>
                     </div>
                   @endforeach
+
+                  
                  <div class="row">
                   <div class="body-listProduct" id="productList">
                     <!-- item --> 
@@ -192,11 +194,16 @@
                       </div>
                       </div>    
                     </div>
+                    
                     @endforeach
-      </div>
+                    
+                    </div>
+                    <div style="margin-left:50px">{{ $products->links() }}</div>
                   </div>
+                 
                  </div>
-
+                
+                
                  <!-- end filter content -->
 
 </div>

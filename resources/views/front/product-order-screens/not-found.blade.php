@@ -24,8 +24,14 @@
             <span class="body-content-title">
                 Không tìm thấy sản phẩm nào phù hợp với tìm kiếm của bạn.
             </span>
-            <img class="body-content-img" src="https://hipposhop.vn/wp-content/themes/babystreet/image/search-no-results.jpg" alt="">
+            <img class="body-content-img" src="https://hippo.vn/wp-content/themes/babystreet/image/search-no-results.jpg" alt="">
+            <a href="{{route('products.filter')}}">
+            <button action="">Trở về nơi bắt đầu.?</button>
+        </a>
         </div>
+
+        
+    </div>
 
     </div>
 @endsection

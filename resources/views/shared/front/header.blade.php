@@ -22,9 +22,9 @@
                     <img onclick="redirectOnClick(`index.html`)" class="header-logo" src="https://mossvn.com/images/logo-moss-remake1.png" alt="Logo cửa hàng">
                 </a>
     
-                <form class="container-search" role="search">
+                <form class="container-search" method="get" action="{{route('products.search')}}">
                   <div class="search-header">
-                  <input class="container-search-text" type="search" placeholder="Tìm kiếm sản phẩm">
+                    <input class="container-search-text" name="searchProduct" type="search" placeholder="Tìm kiếm sản phẩm" name="searchProduct">
                   </div>
                   <button type="submit" class="search-button">
                     <i class="fa fa-search"></i>

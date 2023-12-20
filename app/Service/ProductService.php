@@ -33,13 +33,14 @@ class ProductService
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
 
+
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->when($minPrice, function ($query) use ($minPrice) {
                 return $query->where('price', '>=', $minPrice);
             })
             ->when($maxPrice, function ($query) use ($maxPrice) {
                 return $query->where('price', '<=', $maxPrice);
             })
-            ->get();
+            ->paginate(10);
              $variation = variation::with('product_configurations')->get();
 
         return view('front.product-order-screens.filter', compact('products','variation'));
@@ -174,7 +175,12 @@ class ProductService
         $products = product::join('category', 'category.id', '=','product.category_id')
         ->join('product_item', 'product.id', '=', 'product_item.product_id')
         ->where('category.id','=',$category)
-        ->get();
+        ->paginate(10);
+
+        if($products->isEmpty())
+        {
+            return response()->view('front.product-order-screens.not-found', [], 404);
+        }
 
         $variation = variation::with('product_configurations')->get();
 
@@ -258,7 +264,7 @@ class ProductService
        
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'desc')->get();
 
-         $variation = variation::with('product_configurations')->get();
+         $variation = variation::with('product_configurations')->paginate(10);
 
         return view('front.product-order-screens.filter', compact('products','variation'));
         
@@ -267,7 +273,7 @@ class ProductService
     public static function ascProductsByPrice()
     {
        
-        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'asc')->get();
+        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'asc')->paginate(10);
 
          $variation = variation::with('product_configurations')->get();
 
@@ -277,11 +283,30 @@ class ProductService
 
     public static function latestProductsByPrice()
     {       
-        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('product.created_at', 'asc')->get();
+        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('product.created_at', 'asc')->paginate(10);
 
          $variation = variation::with('product_configurations')->get();
 
         return view('front.product-order-screens.filter', compact('products','variation'));      
+    }
+
+    public static function searchProduct(Request $request)
+    {
+        $search = $request->input('searchProduct');
+
+
+        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')
+        ->where('name_product','like','%'. $search . '%')->paginate(10);
+
+        $variation = variation::with('product_configurations')->get();
+
+        if($products->isEmpty())
+        {
+            return view('front.product-order-screens.not-found', compact('products','variation'));
+        }
+
+    
+        return view('front.product-order-screens.filter', compact('products','variation'));    
     }
 
     public static function search(Request $request)

@@ -25,7 +25,7 @@ Route::group(['prefix' => '/'], function () {
 
    Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
 
-   Route::post('/test', [ProductController::class, 'test'])->name('products.test');
+   Route::get('/search-product', [ProductController::class,'searchProduct'])->name('products.search');
 
    Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
 
