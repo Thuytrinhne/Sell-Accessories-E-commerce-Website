@@ -51,24 +51,27 @@ class User_AddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user_address $user_address)
+    public function edit($id)
     {
-        //
+        return User_AddressService::edit($id);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, user_address $user_address)
+    public function update(Request $request)
     {
-        //
+        return User_AddressService::update($request);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user_address $user_address)
+    public function destroy($id)
     {
-        //
+       
+        return User_AddressService::destroy($id);
+
     }
 }

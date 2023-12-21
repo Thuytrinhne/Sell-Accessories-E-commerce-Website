@@ -197,6 +197,10 @@ Route::get('/customer/account', function () {
 Route::get('/customer/address', [User_AddressController::class,'index'])->name('front.address');
 Route::get('/customer/address/add', [User_AddressController::class,'create'])->name('front.add-address');
 Route::post('/customer/address/add', [User_AddressController::class,'store'])->name('front.handle-add-address');
+Route::get('/customer/address/delete/{id}', [User_AddressController::class,'destroy'])->name('front.handle-delete-address');
+Route::get('/customer/address/edit/{id}', [User_AddressController::class,'edit'])->name('front.edit-address');
+Route::post('/customer/address/edit', [User_AddressController::class,'update'])->name('front.handle-edit-address');
+
 
 
 // end địa chỉ customer

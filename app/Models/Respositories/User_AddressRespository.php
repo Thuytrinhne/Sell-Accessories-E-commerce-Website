@@ -59,4 +59,27 @@ class User_AddressRespository
 
 
       }
+      public static  function destroy($id)
+      {
+        $user_address = user_address::find($id);
+        $user_address->delete();
+      }
+      public static  function getUserAddressById($id)
+      {
+        return  user_address::select('user_address.*','address.*' )
+        ->join('address', 'user_address.address_id', '=', 'address.id')
+        ->where('user_address.id', $id)
+        ->get();        
+      }
+      public static function update(Request $request)
+      {
+        $userAddress = user_address::find($request->id);
+        dd($request);
+        // $userAddress->update([
+        //     'full_name' => $request->full_name,
+        //     'phone' =>$request->phone,
+        //     'city' =>
+        //     // Các trường dữ liệu khác...
+        // ]);
+      }
 }

@@ -22,5 +22,23 @@ class User_AddressService
             User_AddressRespository::store($request);
             return redirect()->route('front.address')->with('addAddressSuccess', 'Thêm địa chỉ mới thành công');
         }
+        public static  function destroy($id)
+        {
+            User_AddressRespository::destroy($id);
+            return redirect()->route('front.address')->with('deleteAddressSuccess', 'Xóa địa chỉ thành công');
+
+
+        }
+        public static function edit($id)
+        {
+            $user_address = User_AddressRespository::getUserAddressById($id);
+             return view('front.customer.customer_address.edit-address', compact('user_address'));
+
+        }
+        public static function update(Request $request)
+        {
+            User_AddressRespository::update($request);
+        }
+
 
 }

@@ -162,9 +162,9 @@ class AccessService
     }
     public static function updateInforUser(Request $request)
     {
-        AccountRespository::updateInfor($request->full_name, $request->sex, $request->birth);
-
-        return redirect()->back()->with('updateInforSuccess', 'Thay đổi mật khẩu thành công');
+        $user =  Auth::user();
+        AccountRespository::updateInfor($user,$request->full_name, $request->gender, $request->birth);
+        return redirect()->back()->with('updateInforSuccess', 'Thay đổi thông tin thành công');
 
     }
 

@@ -65,7 +65,7 @@ class AccessController extends Controller
     }
     public static function handleUpdatePassword(PasswordUpdate $request)
     {
-
+    
         return AccessService::handleUpdatePassword($request);
 
     }
