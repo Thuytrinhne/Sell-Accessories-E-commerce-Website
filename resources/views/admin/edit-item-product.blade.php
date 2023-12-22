@@ -17,7 +17,7 @@
                     <button href="#" class="product_list" onclick="showContent('selection_list')">Danh sách chi tiết sản phẩm</button>
                 </div>
                 @foreach($item as $item)
-                <form action="{{route('admin.product.item.update',[$itemID])}}" method="POST" class="selection selection_add" id="addForm" style= "display:block">
+                <form action="{{route('admin.product.item.update',[$itemID])}}" method="POST" class="selection selection_add" id="addForm" style= "display:block" enctype="multipart/form-data" >
                    @csrf
                    
                     <div class="addCard">
@@ -56,18 +56,18 @@
                         @if($item->name == 'màu')
                             <div class="nameAdd" id="colorPickerContainer" style="display:flex;">
                                 <label for="exampleColorInput" class="form-label">Variation value: </label>
-                                <input type="color" class="form-control form-control-color" name="value" value=" {{$item->variation_value}}"  title="Choose your color">
+                                <input type="color" class="form-control form-control-color" name="variation_value" value=" {{$item->variation_value}}"  title="Choose your color">
                             </div>
                         @else
                             <div class="nameAdd" id="sizeInputContainer" style="display:flex;">
                                 <label for="exampleColorInput" class="form-label">Variation value: </label>
-                                <input type="text"  name="value" value=" {{$item->variation_value}}"  title="Choose your size">
+                                <input type="text"  name="variation_value" value=" {{$item->variation_value}}"  title="Choose your size">
                             </div>
                         @endif
 
                         <div class="imageAdd">
                             <label>Ảnh sản phẩm: </label>
-                            <img src="/Assets/Images/image-add.png" name="image">
+                            <input type="file"  name="image" value=" {{$item->image}}"  title="Choose your image">
                         </div>
                         
                         <input type="submit" class="confirmAdd">

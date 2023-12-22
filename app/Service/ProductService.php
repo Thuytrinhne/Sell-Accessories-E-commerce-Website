@@ -378,20 +378,17 @@ class ProductService
         $productI->SKU = $request->input('SKU');
         $productI->discount_price = $request->input('discount_price');
 
-        // Lưu dữ liệu vào bảng products
+        // Lưu dữ liệu vào bảng product_item; variation
         $productI->save();
         $variation->save();
         
-       // Create a new ProductConfiguration and associate it with Variation and ProductItem
+        // Create a new ProductConfiguration and associate it with Variation and ProductItem
         $product_configuration = new product_configuration();
         $product_configuration->variation_value = $request->input('value');
-
         // Associate with Variation (n-1 relationship)
         $product_configuration->variation()->associate($variation);
-
         // Associate with ProductItem (1-1 relationship)
         $product_configuration->productItem()->associate($productI);
-
         $product_configuration->save();
 
         
@@ -400,7 +397,6 @@ class ProductService
 
     public static function editItem($itemID)
     {
-
         $item = product_item::leftjoin('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
         ->leftjoin('variation','product_configuration.variation_id','=','variation.id')
         ->where('product_item.id','=',$itemID)
@@ -413,24 +409,29 @@ class ProductService
 
     public static function updateItem(Request $request, $item) 
     {
-        dd($request);
+        
+        if($request->hasFile('image'))
+        {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('Assets/Images'), $imageName);
+        }
 
-        $items = product_item::join('product', 'product.id', '=', 'product_item.product_id')
-        ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->join('variation_option', 'product_configuration.variation_option_id', '=', 'variation_option.id')
-        ->join('variation','variation_option.variation_id','=','variation.id')
-        ->find($item);
+        $items = product_item::find($item);
 
-        $items->name = $request->input('name');
-        $items->value = $request-input('value');
+        $product_configuration = product_configuration::where('product_configuration.id','=',$item)
+        ->first();
+    
         $items->price = $request->input('price');
         $items->quantity = $request->input('quantity');
         $items->SKU = $request->input('SKU');
         $items->discount_price = $request->input('discount_price');
+        $items->image = $imageName;
+
+        $product_configuration->variation_value = $request->input('variation_value');
 
         // Lưu dữ liệu vào bảng products
         $items->save();
-
+        $product_configuration->save();
         return redirect('admin/product')->with('success','Sửa thành công');
     }
 
