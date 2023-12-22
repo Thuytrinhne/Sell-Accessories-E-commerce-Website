@@ -37,7 +37,7 @@
 
                 
                 @foreach($products as $item)
-                <form action="{{ route('admin.product.update',[$id]) }}" method="POST" class="selection selection_add" id="addForm" style="display:block">
+                <form action="{{ route('admin.product.update',[$id]) }}" method="POST" class="selection selection_add" id="addForm" style="display:block" enctype="multipart/form-data">
                    @csrf
                     <div class="addCard">
                         <div class="nameAdd">
@@ -57,8 +57,11 @@
                                 <option value="{{ $cate->id }}">{{ $cate->name_category }}</option>
                                 @endforeach
                             </select>
+                        </div>
 
-                            <button onclick="AddNewTag()">+</button>
+                        <div class="nameAdd">
+                            <label  name="image">Ảnh mặc định: </label>
+                            <input type="file" name = "image" value="{{$item->default_image}}">
                         </div>
                         
                         <input type="submit" class="confirmAdd">

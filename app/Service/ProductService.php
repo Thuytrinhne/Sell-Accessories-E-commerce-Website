@@ -20,8 +20,11 @@ class ProductService
 {
     public static function index()
     {
+
+       
         $category = category::get();
         $products = product::paginate(10);
+
         
         return(view('admin.product',compact('products','category')));
     }
@@ -53,11 +56,18 @@ class ProductService
 
     public static function store(ProductRequest $request)
     {
+        if($request->hasFile('image'))
+        {
+            $imageName = time() . '.' . $request->default_image->extension();
+            $request->default_image->move(public_path('Product_images'), $imageName);
+        }
+
         $product = new product;
         
         $product->name_product = $request->input('name_product');
         $product->description = $request->input('description');
         $product->category_id = $request->input('category_id');
+        $product->default_image = $imageName;
 
         $product->save();
         
@@ -363,7 +373,7 @@ class ProductService
         if($request->hasFile('image'))
         {
             $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('Assets/Images'), $imageName);
+            $request->image->move(public_path('Product_item_images'), $imageName);
         }
 
         $productI = new product_item();
