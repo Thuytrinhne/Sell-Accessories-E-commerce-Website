@@ -7,7 +7,7 @@ use App\Http\Requests\ItemRequest;
 use App\Models\product;
 use App\Models\category;
 use App\Models\product_item;
-use App\Models\variation_option;
+use App\Models\product_configuration;
 use App\Models\variation;
 use App\Models\order; 
 use App\Models\cart_item; 
@@ -358,15 +358,20 @@ class ProductService
     }
 
     public static function storeItem(ItemRequest $request,$product)
-    {
+    {   
 
-        dd($request);
+        if($request->hasFile('image'))
+        {
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('Assets/Images'), $imageName);
+        }
+
         $productI = new product_item();
         $variation = new variation();
-        $product_configuration = new product_configuration();
         
-        $product_configuration->variation_value = $request->input('value');
+        
         $variation->name =$request->input('name');
+        $productI->image = $imageName;
         $productI->price = $request->input('price');
         $productI->quantity = $request->input('quantity');
         $productI->product_id = $product;
@@ -376,7 +381,19 @@ class ProductService
         // Lưu dữ liệu vào bảng products
         $productI->save();
         $variation->save();
+        
+       // Create a new ProductConfiguration and associate it with Variation and ProductItem
+        $product_configuration = new product_configuration();
+        $product_configuration->variation_value = $request->input('value');
+
+        // Associate with Variation (n-1 relationship)
+        $product_configuration->variation()->associate($variation);
+
+        // Associate with ProductItem (1-1 relationship)
+        $product_configuration->productItem()->associate($productI);
+
         $product_configuration->save();
+
         
         return redirect('admin/product')->with('success','Thêm thành công');
     }

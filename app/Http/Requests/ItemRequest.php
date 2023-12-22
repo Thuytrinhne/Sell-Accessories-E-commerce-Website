@@ -24,10 +24,9 @@ class ItemRequest extends FormRequest
     {
         return [
             'price' => 'bail|required',
-            'quantity' => 'bail|required', 
-            'value' => 'bail|required',    
+            'quantity' => 'bail|required',    
             'name' => 'bail|required',    
-               
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg' 
         ];
     }
     public function messages()
@@ -35,9 +34,9 @@ class ItemRequest extends FormRequest
         return [
             'price.required' => ':attribute bắt buộc phải nhập !',
             'quantity.required' => ':attribute bắt buộc phải nhập !',
-            'value.required' => ':attribute bắt buộc phải nhập !',
             'name.required' => ':attribute bắt buộc phải nhập !',
-
+            'image.required' => ':attribute bắt buộc phải nhập !',
+            'image.mimes' => ':attribute chỉ nhập ảnh định dạng jpeg,png,jpg,gif,svg!!!',
         ];
     }
     public function attributes()
@@ -45,8 +44,7 @@ class ItemRequest extends FormRequest
         return [
             'price' => 'Giá sản phẩm',
             'quantity' => 'Số lượng sản phẩm',
-
-            'value' => 'Variation_option',
+            'image' => 'Ảnh',
             'name' => 'Variation'
         ];
     }
