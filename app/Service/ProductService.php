@@ -238,7 +238,16 @@ class ProductService
         $categories = category::get();
         $category = $request->input('name_category');
 
+        if(!$category)
+        {   
+            $categories = category::get();
 
+            $products = Product::join('category','category.id','=','product.category_id')->whereBetween('product.created_at', [$startDate, $endDate])
+            ->orWhereBetween('product.updated_at', [$startDate, $endDate])
+            ->paginate(10);
+
+            return(view('admin.report',compact('products','categories')));
+        }
 
         $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
         ->where(function ($query) use ($startDate, $endDate, $category) {
@@ -246,7 +255,7 @@ class ProductService
                 ->orWhereBetween('product.updated_at', [$startDate, $endDate]);
         })
         ->where('product.category_id', '=', $category)
-        ->get();
+        ->paginate(10);
 
         if($products->isEmpty())
         {
