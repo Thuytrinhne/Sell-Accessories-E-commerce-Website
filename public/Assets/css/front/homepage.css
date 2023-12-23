@@ -411,12 +411,15 @@
     border-radius: 10px;
 }
 .body-listProduct {
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between; */
     margin: 0 25px;
     gap: 10px;
     z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit , minmax(200px, 1fr));
+    column-gap: 32px;
 }
 .body-title {
     color: var(--primary-color);
