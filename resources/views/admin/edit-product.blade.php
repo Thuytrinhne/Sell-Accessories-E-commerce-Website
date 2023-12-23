@@ -60,8 +60,8 @@
                         </div>
 
                         <div class="nameAdd">
-                            <label  name="image">Ảnh mặc định: </label>
-                            <input type="file" name = "image" value="{{$item->default_image}}">
+                            <label  name="default_image">Ảnh mặc định: </label>
+                            <input type="file" name = "default_image" value="{{$item->default_image}}">
                         </div>
                         
                         <input type="submit" class="confirmAdd">

@@ -216,6 +216,20 @@ class ProductService
         return $products;
     }
 
+    public static function reportProductByDate(Request $request)
+    {   
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $products = Product::whereBetween('created_at', [$startDate, $endDate])
+            ->orWhereBetween('updated_at', [$startDate, $endDate])
+            ->get();
+        
+        
+
+        return $products;
+    }
+
     public static function getModalProduct($product)
     {
 
@@ -272,8 +286,6 @@ class ProductService
     {
        
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'desc')->get();
-
-         $variation = variation::with('product_configurations')->paginate(10);
 
         return view('front.product-order-screens.filter', compact('products','variation'));
         
@@ -332,8 +344,6 @@ class ProductService
     {
         $categories = category::get();
         $category = $request->input('name_category');
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
 
         $products = product::leftjoin('product_item','product.id','=','product_item.product_id')
         ->leftjoin('category','category.id','=','product.category_id')

@@ -38,6 +38,8 @@ Route::group(['prefix' => '/'], function () {
    Route::get('/get-product/{product}', [ProductController::class, 'getModalProduct'])->name('get.modal.product');
 
    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
+
+   Route::match(['get', 'post'], '/report-product-by-date', [ProductController::class, 'reportProductByDate']);
    
 });
 
@@ -60,7 +62,8 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
     //QToan Thêm route xử lí report sản phẩm
     Route::get('/report', [ProductController::class,'report'])->name('admin.report');
-   
+    
+
    //Qtoan  Thêm route admin product và item
    Route::prefix('product')->group( function()
    {

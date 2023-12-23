@@ -21,7 +21,7 @@
                         <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
                         <label>Đến</label>
                         <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
-                        <button>Xác nhận</button>
+                        <!-- <button>Xác nhận</button> -->
                     </div>
                     <table class="content_report">
                         <thead>
@@ -46,19 +46,21 @@
                 </div>
 
                 <div class="selection_product">
-                    <form action=" {{route('admin.report')}} " method="GET" class="search_product">
+                    <form action="" method="POST" class="search_product">
+                        @csrf
                         <h2>Tìm kiếm</h2>
                         <label>Bắt đầu</label>
-                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09" name="start_date">
+                        <input type="date" data-date="" id="datepicker1" data-date-format="DD MMMM YYYY" value="2015-08-09">
                         <label>Đến</label>
-                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09" name="end_date">
+                        <input type="date" data-date="" id="datepicker2" data-date-format="DD MMMM YYYY" value="2015-08-09">
                         <label>Thể loại</label>
                         <select name="name_category">
+                            <option value="">Tất cả</option>
                             @foreach($categories as $cate)
-                            <option value="{{$cate->id}}">{{$cate->name_products}}</option>
+                            <option value="{{$cate->id}}">{{$cate->name_category}}</option>
                             @endforeach
                         </select>
-                        <button type="submit">Xác nhận</button>
+                        <button type="submit" id="btn-submit-datepicker">Xác nhận</button>
                     </form>
 
                     <table class="content_report">
@@ -66,9 +68,9 @@
                             <tr>
                                 <th>STT</th>
                                 <th>Sản phẩm</th>
-                                <th>Loại</th>
-                                <th>Được mua</th>
-                                <th>Tổng tiền thu được</th>
+                                <th>Danh mục</th>
+                                <th>Số lượng</th>
+                                <th>Ngày cập nhật</th>
                             </tr>
                         </thead>
                         @php
@@ -80,8 +82,8 @@
                                 <td>{{++$stt}}</td>
                                 <td>{{ $item->name_product }}</td>
                                 <td>{{ $item->name_category }}</td>
-                                <td>Hok có ý tưởng</td>
-                                <td>Hok có ý tưởng</td>
+                                <td>{{ $item->productItems->sum('quantity') }} Product Item</td>
+                                <td>{{ $item->updated_at }}</td>
                             </tr>
                         </tbody>
                         @endforeach
@@ -92,4 +94,46 @@
 
                 
 </div>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+  <script>
+    $(document).ready(function() {
+       
+
+        $('#btn-submit-datepicker').click(function(e) {
+            e.preventDefault();
+
+            // Lấy dữ liệu từ form
+            var formData = {
+                _token: $('input[name="_token"]').val(),
+                start_date: $('#datepicker1').val(),
+                end_date: $('#datepicker2').val(),
+            };
+
+            // Thực hiện AJAX request
+            $.ajax({
+                url: '/report-product-by-date',
+                type: 'POST', // Sử dụng phương thức POST nếu bạn đang gửi dữ liệu đến server
+                dataType: 'json',
+                data: formData,
+                success: function(data) {
+                    alert(data);
+                    console.log(data);
+                    // Xử lý dữ liệu trả về từ server nếu cần
+                },
+                error: function(error) {
+                    console.log('Lỗi:', error);
+                    // Xử lý lỗi nếu có
+                }
+            });
+
+            // Thêm alert sau AJAX request để đảm bảo rằng mã chạy đến cuối cùng
+            alert("Đã chạy đến cuối hàm");
+        });
+    });
+</script>
+
 @endsection
