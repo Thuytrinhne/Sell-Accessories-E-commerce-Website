@@ -40,7 +40,7 @@
                                     Hội Sơn, An Hoà Hải, Tuy An, Phú Yên
                                 </div>
                             </div>
-                            <a href="checkout/choose-location">Thay đổi</a>
+                            <a class="change" href="checkout/choose-location">Thay đổi</a>
                         </div>
                         <form action="{{ route('checkout-success') }}" method="POST" >
                             @csrf
@@ -58,7 +58,7 @@
                 <div class="payment_total_container">
                     <div class="payment_preview">
                         <h3>Sản phẩm</h3>
-                        <h3>Tạm tính</h3>
+                        <h3 class="tamtinh">Tạm tính</h3>
                         <!-- =================  product list  =================== -->
                         
                            
@@ -84,7 +84,7 @@
                         <!-- =================  product list  =================== -->
                         <label class="total_cart">
                         <h3>Tạm tính</h3>
-                        <input  value="{{ $total }}" disabled>
+                        <input class="input-total" value="{{ $total }}" disabled>
                     </label>
                         <h3>Giao hàng</h3>
                         <p>ĐỒNG GIÁ: 35.000đ</p>
