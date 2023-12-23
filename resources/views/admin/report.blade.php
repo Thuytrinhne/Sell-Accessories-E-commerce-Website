@@ -3,7 +3,18 @@
 @php
  $stt=0;
 @endphp
+
 <div class="content report">
+                @if (session('Notfound'))
+                    <script>
+                        Swal.fire({
+                        icon: 'error',
+                        title: 'Kết quả: ',
+                        text: '{{ session('Notfound') }}',
+                        })
+
+                    </script>
+                @endif   
                 <div class="title_report">
                     <h1>Thống kê</h1>
                 </div>
@@ -46,13 +57,13 @@
                 </div>
 
                 <div class="selection_product">
-                    <form action="" method="POST" class="search_product">
+                    <form action="{{ route('admin.filterReport') }}" method="POST" class="search_product">
                         @csrf
                         <h2>Tìm kiếm</h2>
                         <label>Bắt đầu</label>
-                        <input type="date" data-date="" id="datepicker1" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <input type="date" data-date="" name="start_date"  data-date-format="DD MMMM YYYY" value="2015-08-09">
                         <label>Đến</label>
-                        <input type="date" data-date="" id="datepicker2" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <input type="date" data-date="" name="end_date"  data-date-format="DD MMMM YYYY" value="2015-08-09">
                         <label>Thể loại</label>
                         <select name="name_category">
                             <option value="">Tất cả</option>
@@ -89,17 +100,13 @@
                         @endforeach
                         
                     </table>
-                    <div style ="margin:0 auto">{{ $products->links() }}</div>
+                    
                 </div>
 
                 
 </div>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
-  <script>
+  <!-- <script>
     $(document).ready(function() {
        
 
@@ -120,7 +127,6 @@
                 dataType: 'json',
                 data: formData,
                 success: function(data) {
-                    alert(data);
                     console.log(data);
                     // Xử lý dữ liệu trả về từ server nếu cần
                 },
@@ -134,6 +140,6 @@
             alert("Đã chạy đến cuối hàm");
         });
     });
-</script>
+</script> -->
 
 @endsection

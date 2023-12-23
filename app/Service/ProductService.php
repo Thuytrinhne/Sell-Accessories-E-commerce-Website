@@ -216,18 +216,44 @@ class ProductService
         return $products;
     }
 
-    public static function reportProductByDate(Request $request)
-    {   
+    // public static function reportProductByDate(Request $request)
+    // {   
+    //     $startDate = $request->input('start_date');
+    //     $endDate = $request->input('end_date');
+
+    //     $products = Product::whereBetween('created_at', [$startDate, $endDate])
+    //         ->orWhereBetween('updated_at', [$startDate, $endDate])
+    //         ->get();
+        
+        
+
+    //     return $products;   
+    // }
+
+    public static function filterReport(Request $request)
+    {
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
-        $products = Product::whereBetween('created_at', [$startDate, $endDate])
-            ->orWhereBetween('updated_at', [$startDate, $endDate])
-            ->get();
-        
-        
+        $categories = category::get();
+        $category = $request->input('name_category');
 
-        return $products;
+
+
+        $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
+        ->where(function ($query) use ($startDate, $endDate, $category) {
+            $query->whereBetween('product.created_at', [$startDate, $endDate])
+                ->orWhereBetween('product.updated_at', [$startDate, $endDate]);
+        })
+        ->where('product.category_id', '=', $category)
+        ->get();
+
+        if($products->isEmpty())
+        {
+            return redirect()->back()->with('Notfound', 'Không có sản phẩm nào phù hợp!!!');
+        }
+        
+        return(view('admin.report',compact('products','categories')));
     }
 
     public static function getModalProduct($product)
