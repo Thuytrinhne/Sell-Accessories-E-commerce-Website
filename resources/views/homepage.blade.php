@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('body-main')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- code trinh  -->
 @if (session ('loginSuccess'))
@@ -57,7 +58,7 @@
                         </div>
                       </div>
       
-                      <div class="container">
+                      <div class="container-bla">
                         <div class="element">
                           <div class="content">
                       <div class="body-item-links">
