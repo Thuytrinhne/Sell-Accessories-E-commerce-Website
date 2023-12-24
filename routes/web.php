@@ -30,10 +30,14 @@ use Illuminate\Support\Facades\Input;
 Route::group(['prefix' => '/'], function () {
    
    Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
+
+   Route::get('/product-category/{category}',[ProductController::class,'getProductsByCategory'])->name('get.products.by.category');
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
    Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+
+   Route::get('/search-product', [ProductController::class,'searchProduct'])->name('products.search');
 
    Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
 
@@ -43,6 +47,8 @@ Route::group(['prefix' => '/'], function () {
 
    Route::get('/get-product-asc}', [ProductController::class, 'ascProductsByPrice'])->name('get.product.by.asc');
    
+   Route::get('/get-product/{product}', [ProductController::class, 'getModalProduct'])->name('get.modal.product');
+
    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
    
 });
@@ -61,7 +67,7 @@ Route::group(['prefix' => '/'], function () {
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
-   Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+    Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
 
    Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
 
@@ -94,9 +100,10 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     //Thêmm route xử lí report sản phẩm
     
     //Thêmm route xử lí report sản phẩm
+    //QToan Thêm route xử lí report sản phẩm
     Route::get('/report', [ProductController::class,'report'])->name('admin.report');
    
-   //  Thêm route admin product và item
+   //Qtoan  Thêm route admin product và item
    Route::prefix('product')->group( function()
    {
       // hiển thị sản phẩm
@@ -126,7 +133,6 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
        Route::post('/item/update/{item}', [ProductController::class,'updateItem'])->name('admin.product.item.update');
        // Xử lí xóa
        Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
-
 
    });
 
@@ -181,7 +187,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::post('update/{id}', [CategoryController::class,'update'])->name('admin.category.update');
       // Xử lí search
       Route::get('search', [CategoryController::class,'search'])->name('admin.category.search');
-   
+      
    }
    );
 });

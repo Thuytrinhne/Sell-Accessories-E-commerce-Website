@@ -7,6 +7,8 @@ use App\Models\user_address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CartController;
 use App\Service\User_AddressService;
+use App\Http\Requests\User_AddressRequest;
+
 class User_AddressController extends Controller
 {
     /**
@@ -34,7 +36,7 @@ class User_AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(User_AddressRequest $request)
     {
         return User_AddressService::store($request);
 
@@ -60,7 +62,7 @@ class User_AddressController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(User_AddressRequest $request)
     {
         return User_AddressService::update($request);
     }

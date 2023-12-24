@@ -7,19 +7,7 @@
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-@if (session ('addAddressSuccess'))
-            
-                <script>
-                     Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: '{{session('addAddressSuccess')}}',
-                showConfirmButton: false,
-                timer: 2000
-                })
-                </script>
-            
-@endif
+
 
 <div class="body-user-display-myaccount">
                 <div class="body-user-display-header1">
@@ -38,7 +26,7 @@
                           </td>
                           <td class="body-user-display-td-input">
                             <input name="full_name" class="body-user-display-input"type="text" value="">
-                            @error('oldPass')
+                            @error('full_name')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
                                 @enderror
@@ -53,7 +41,7 @@
                           </td>
                           <td class="body-user-display-td-input">
                             <input name="phone" class="body-user-display-input"type="phone" value="">
-                            @error('password')
+                            @error('phone')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
                                 @enderror
@@ -72,16 +60,14 @@
                             <label for="text">Tỉnh/ Thành phố</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <select  class="body-user-display-input" name="city"  required>
+                            <select  id="city-select"  class="body-user-display-input" name="city"  >
                                 <option value="">Chọn khu vực</option>
-                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Cà Mau">Cà Mau</option>
+                                
                             </select>
-                            @error('oldPass')
+                            @error('city')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
-                                @enderror
+                            @enderror
                           </td>
                           
                         
@@ -92,13 +78,11 @@
                             <label for="text">Quận/ Huyện</label>
                           </td>
                           <td class="body-user-display-td-input">
-                          <select  class="body-user-display-input" name="district"  required>
+                          <select id="district-select" class="body-user-display-input" name="district"  >
                                 <option value="">Chọn khu vực</option>
-                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Cà Mau">Cà Mau</option>
+                                
                             </select>
-                            @error('password')
+                            @error('district')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
                                 @enderror
@@ -110,13 +94,11 @@
                             <label for="text">Phường/ Xã</label>
                           </td>
                           <td class="body-user-display-td-input">
-                          <select  class="body-user-display-input" name="village"  required>
+                          <select id="ward-select"  class="body-user-display-input" name="village"  >
                                 <option value="">Chọn khu vực</option>
-                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Cà Mau">Cà Mau</option>
+                                
                             </select>
-                            @error('confirmPass')
+                            @error('village')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
                                 @enderror
@@ -129,7 +111,7 @@
                           </td>
                           <td class="body-user-display-td-input">
                             <input name = "detail_address" class="body-user-display-input"type="text" value="">
-                            @error('confirmPass')
+                            @error('detail_address')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
                                 @enderror
@@ -150,4 +132,8 @@
                     </div>
                 </div>
                 </div>
+
+<!-- link js -->
+  <script src="{{asset('Assets/js/address.js')}}"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection

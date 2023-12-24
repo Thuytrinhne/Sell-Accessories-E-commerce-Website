@@ -4,6 +4,7 @@ namespace App\Models\Respositories;
 use App\Models\user_address;
 use App\Models\address;
 use Illuminate\Http\Request;
+use App\Http\Requests\User_AddressRequest;
 
 
 class User_AddressRespository 
@@ -26,15 +27,15 @@ class User_AddressRespository
         ->get();
 
       }
-      public static function store(Request $request)
+      public static function store(User_AddressRequest $request)
       {
         // kiểm tra địa chỉ đó đã có chưa 
         // nếu chưa thì tạo address
 
         $address = new address;
        
-        $address->city=$request->input('city');
-        $address->district=$request->input('district');
+        $address->city=$request->city;
+        $address->district=$request->district;
         $address->village=$request->input('village');
         $address->detail_address=$request->input('detail_address');
         $address->save();
@@ -47,18 +48,24 @@ class User_AddressRespository
         $user_address->address_id =  $address->id;
         if (($request->input('default')=== '1'))
         {
-          // gỡ địa chỉ mặc định địa chỉ trước đó nếu có 
-          $userAddress = user_address::where('is_default', 1)
-          ->where('user_id',Auth()->user()->id)
-          ->update(['is_default' => 0]);
-          // set địa chỉ mới thành mặc định
-          $user_address->is_default= 1;
-          $user_address->save();
+            User_AddressRespository::setAddressDefault($user_address);
         }
           $user_address->save();
 
 
       }
+      public static function setAddressDefault($user_address)
+      {
+        // gỡ địa chỉ mặc định địa chỉ trước đó nếu có 
+         user_address::where('is_default', 1)
+        ->where('user_id',Auth()->user()->id)
+        ->update(['is_default' => 0]);
+        // set địa chỉ mới thành mặc định
+        
+        $user_address->is_default= 1;
+        $user_address->save();
+      }
+
       public static  function destroy($id)
       {
         $user_address = user_address::find($id);
@@ -71,15 +78,19 @@ class User_AddressRespository
         ->where('user_address.id', $id)
         ->get();        
       }
-      public static function update(Request $request)
+      public static function update(User_AddressRequest $request)
       {
+
         $userAddress = user_address::find($request->id);
-        dd($request);
-        // $userAddress->update([
-        //     'full_name' => $request->full_name,
-        //     'phone' =>$request->phone,
-        //     'city' =>
-        //     // Các trường dữ liệu khác...
-        // ]);
+        $userAddress->update([
+            'full_name' => $request->full_name,
+            'phone' =>$request->phone,
+        ]);
+        if($request->has('default') &&$request->default=="1")
+        {
+          User_AddressRespository::setAddressDefault($userAddress);
+        }
+
+
       }
 }

@@ -10,6 +10,7 @@ use App\Models\category;
 use App\Models\product_item;
 use App\Models\variation_option;
 use App\Models\variation;   
+use App\Models\product_images;   
 
 
 use Illuminate\Http\Request;
@@ -25,6 +26,11 @@ class ProductController extends Controller
     public function filter(Request $request)
     {
         return ProductService::filter($request);
+    }
+
+    public function getModalProduct($product)
+    {
+        return ProductService::getModalProduct($product);
     }
 
     public function getProductsByValue($value)
@@ -55,6 +61,11 @@ class ProductController extends Controller
     public function search(Request $request)
     {
         return ProductService::search($request);
+    }
+
+    public function searchProduct(Request $request)
+    {
+        return ProductService::searchProduct($request);
     }
 
     public function report(Request $request)
@@ -102,6 +113,10 @@ class ProductController extends Controller
         return ProductService::getProduct();
     }
 
+    public function getProductsByCategory($category)
+    {
+        return ProductService::getProductsByCategory($category);
+    }
 
 
     //

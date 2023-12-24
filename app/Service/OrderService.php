@@ -7,19 +7,21 @@ use Illuminate\Http\Request;
 use App\Models\Respositories\OrderRespository;
 use App\Http\Controllers\CartController;
 use App\Http\Requests\OrderRequest;
-
+use Auth;
 use DB;
 
 class OrderService {
     public static function index(Request $request)
     {
+        $id = Auth::user()->id;
         $user_payment = DB::select("SELECT `order`.id, payment.name_method, `order`.date_order,`order`.status
                                     FROM 
                                             `order`, payment
                                     WHERE 
                                             `order`.payment_id = payment.id
-                                            and `order`.user_id = 1
+                                            and `order`.user_id = '$id'
                                             ");
+
         $user_order = DB::select ("SELECT distinct cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id
                                                     
                                     FROM
@@ -29,14 +31,13 @@ class OrderService {
                                             and cart_item.cart_id = cart.id
                                             and cart_item.product_item_id = product_item.id
                                             and product_item.product_id = product.id
-                                            and `order`.user_id = 1
+                                            and `order`.user_id = '$id'
                                         
                 ");  
         
         // $user_order = order::with('cart', 'cart.cartItems', 'cart.cartItems.productItems','cart.cartItems.productItems.product')->get();
         $product_item_cart = CartController::getCartitem();
-       
-       
+        
         return view('.front.customer.history-orders',compact('user_payment', 'user_order', 'product_item_cart'));
     }
 
