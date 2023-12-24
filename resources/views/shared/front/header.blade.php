@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <div class="grid">                 
               <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <a class="navbar-brand" href="{{route('homepage')}}">
+                <a class="navbar-brand" href="{{route('products.getProduct')}}">
                     <img onclick="redirectOnClick(`index.html`)" class="header-logo" src="https://mossvn.com/images/logo-moss-remake1.png" alt="Logo cửa hàng">
                 </a>
     

@@ -82,8 +82,8 @@
                               </div>   
                             </span>  
                             
-                              <a href="" class="body-links-detail">
-                                <div class="body-circle">
+                              <a onclick="addToWishlistClick({{$item->id}}, event, )" href="#" class="body-links-detail">
+                                <div class="body-circle" >
                                   <i class="fa-regular fa-heart body-icon-black"></i>  
                                 </div>   
                                 </a>         
@@ -124,7 +124,29 @@
 
 
 
-      
+      <script>
+        function addToWishlistClick(id, event)
+        {
+          event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ a
+         
+          var url = "{{ route('wishlist.add') }}";
+
+          var form = document.createElement('form');
+          form.method = 'POST';
+          form.action = url;
+
+          var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+          var csrfInput = document.createElement('input');
+          csrfInput.type = 'hidden';
+          csrfInput.name = '_token';
+          csrfInput.value = csrfToken;
+
+          form.appendChild(csrfInput);
+          document.body.appendChild(form);
+
+          form.submit();
+        }
+      </script>
 @endsection
     <!-- modal quickview-->  
 @section ('quick-view')

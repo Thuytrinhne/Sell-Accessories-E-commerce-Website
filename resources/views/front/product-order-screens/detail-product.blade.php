@@ -73,7 +73,7 @@
               <div class="row">  
                 @foreach($variation_value as $value)
                 <button  class="color-option" 
-                                    style="background-color: {{$value->value}}; color: {{$value->value}} "
+                                    style="background-color: {{$value->variation_value}}; color: {{$value->variation_value}} "
                                     onclick="showProducts('{{$value->id}}')"> 
                               {{$value->value}} 
                             </button>

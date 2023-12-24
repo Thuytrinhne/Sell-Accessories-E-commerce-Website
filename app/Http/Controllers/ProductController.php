@@ -42,6 +42,16 @@ class ProductController extends Controller
     {
         return ProductService::getImagesByValue($value);
     }
+
+    // public function reportProductByDate(Request $request)
+    // {
+    //     return ProductService::reportProductByDate($request);
+    // }
+
+    public function filterReport(Request $request)
+    {
+        return ProductService::filterReport($request);
+    }
     
     public function descProductsByPrice()
     {

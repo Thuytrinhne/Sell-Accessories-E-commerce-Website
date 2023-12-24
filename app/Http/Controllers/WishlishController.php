@@ -19,10 +19,13 @@ class WishlishController extends Controller
         return WishlistService::storefromproduct_item_id($request, $product_item_id);
     }
 
-    public function storefromproduct_id(Request $request, $product_id)
+    public function storefromproduct_id( Request $request)
     {
-        return WishlistService::storeformproduct_id($request, $product_id);
+        // chuyển đến route post
+        dd("Đã vào nè");
+        return WishlistService::storefromproduct_id($request, $product_id);
     }
+   
 
     public function destroy(string $wishlist_id, string $id)
     {

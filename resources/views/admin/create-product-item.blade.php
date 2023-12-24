@@ -22,7 +22,7 @@
                     <button href="#" class="product_list" onclick="showContent('selection_list')">Danh sách chi tiết sản phẩm</button>
                 </div>
                 
-                <form action="{{ route('admin.product.item.store',[$product]) }}" method="POST" class="selection selection_add" id="addForm" style= "display:block">
+                <form action="{{ route('admin.product.item.store',[$product]) }}" method="POST" class="selection selection_add" id="addForm" style= "display:block" enctype="multipart/form-data">
                    @csrf
                     <div class="addCard">
                         <div class="priceAdd">
@@ -39,7 +39,7 @@
                         </div>
                         <div class="amountAdd">
                             <label>Số lượng</label>
-                            <input type="number" placeholder="Số lượng" name="quantity" value="{{ old('value') }}">
+                            <input type="number" placeholder="Số lượng" name="quantity" value="{{ old('variation_value') }}">
                             @error('quantity')
                                 <span style="color:red;">{{$message}}</span>
                             @enderror
@@ -88,8 +88,8 @@
                         </div> -->
 
                         <div class="mb-3">
-                        <label for="formFileMultiple" class="form-label">Multiple files input example</label>
-                        <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
+                        <label for="image" class="form-label">Multiple files input example</label>
+                       <input type="file" name="image">
                         </div>
                         
                         <input type="submit" class="confirmAdd">
