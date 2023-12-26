@@ -74,12 +74,21 @@
                                         <input type="number" name="quantity" value="{{ $item->quantity }}" disabled>
                                     </label>
                                     <label class="variation">
-                                        <span>Color:</span>
-                                        <input type="text" name="variation_value" value=""  disabled>
+                                        <span>Color:
+                                        </span>
+                                        
+                                        <input type="text" name="variation_value" value=" "  disabled>
                                     </label>
                                 
                             </div>
-                            <p>{{ $item->quantity * $item->price}}</p>
+                            <p>@if($item->variation_id == 1)
+                                      
+                                {{ $item->name_color }}
+                              
+                              @else 
+                                {{ $item->variation_name }}
+                              
+                              @endif</p>
                         @endforeach
                         <!-- =================  product list  =================== -->
                         <label class="total_cart">
@@ -90,7 +99,7 @@
                         <p>ĐỒNG GIÁ: 35.000đ</p>
                         <label for="total_price" style="display: flex">
                             <h3>Tổng</h3>
-                        <input class="total_price" type="number" name="total_price" value="{{ $total + 35000 }}" >
+                        <input class="total_price" type="text" name="total_price" value="{{ $total + 35000 }}" style="background-color: transparent" readonly>
                         </label>
                         
 

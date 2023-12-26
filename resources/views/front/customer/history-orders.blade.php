@@ -60,7 +60,7 @@
                                 <div>
                                     <strong class="item_order-infor-name">{{ $item->name_product}}</strong>
                                     <div class="item_order-infor-sort">Phân loại hàng:
-                                      @if($item->variation_id)
+                                      @if($item->variation_id == 1)
                                       
                                         {{ $item->name_color }}
                                       
@@ -79,6 +79,9 @@
                            
                         </div>
                         <div class="item_order-btn">
+                          @if($item->status == 1)
+                          <a href="{{ route('admin.order.destroy',[$item->id])}}" class="body-footer-seemore body-footer-delete">Hủy đơn</a>
+                          @endif
                            <a href="{{ route('re-checkout',[$item->cart_id])}}" class="body-footer-seemore body-footer-reorder">Mua lại</a>
                       </div>
                       @endforeach

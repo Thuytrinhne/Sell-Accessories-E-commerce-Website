@@ -23,14 +23,17 @@ class CartController extends Controller
         ->id;
         
         // code Phong 
-        $product_item_cart = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id
-        FROM cart_item, product_item, product
+        $product_item_cart = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id,
+        product_configuration.name_color,product_configuration.variation_value, product_configuration.variation_id
+        FROM cart_item, product_item, product,product_configuration
         WHERE
             cart_item.product_item_id = product_item.id
             and product_item.product_id = product.id
+            and product_configuration.product_item_id = product_item.id
             and cart_item.cart_id = '$id'
         
                         ");
+                        dd($product_item_cart);
                        
         return response()->json($product_item_cart, 200);
 
@@ -42,11 +45,13 @@ class CartController extends Controller
           ->orderBy('created_at', 'desc')
           ->first()
           ->id;
-        $product_item = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id,cart_item.cart_id
-                                    FROM cart_item, product_item, product
+        $product_item = DB::select("SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id,cart_item.cart_id,
+        product_configuration.name_color,product_configuration.variation_value, product_configuration.variation_id
+                                    FROM cart_item, product_item, product,product_configuration
                                     WHERE
                                         cart_item.product_item_id = product_item.id
                                         and product_item.product_id = product.id
+                                        and product_configuration.product_item_id = product_item.id
                                         and cart_item.cart_id = '$id'
                                     
             ");

@@ -91,8 +91,8 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(order $order)
+    public function destroy($id)
     {
-        //
+        return OrderService::destroy($id);
     }
 }

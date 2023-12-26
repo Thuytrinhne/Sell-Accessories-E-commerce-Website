@@ -200,6 +200,7 @@ Route::post('/customer/address/add', [User_AddressController::class,'store'])->n
 
 
 // end địa chỉ customer
+Route::get('customer/orders/delete/{id}', [OrderController::class,'destroy'])->name('admin.order.destroy');
 Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'])->name('front.order_detail');
 // end router customer
 // cập nhật lại mật khẩu 
