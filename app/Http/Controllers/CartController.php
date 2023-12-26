@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product_item;
 use App\Models\cart;
 use App\Models\cart_item;
 use Illuminate\Http\Request;
@@ -66,9 +67,33 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+
+    public function store(Request $request,$item)
     {
-        //
+
+        // Lấy ra cart mới nhất;
+        $cart = cart::where('user_id', '=', Auth()->user()->id)->latest('created_at')->select('cart.id')->first();
+      
+        $product_item = product_item::find($item);
+        $item_in_cart = cart_item::with('cart')->where('cart_item.product_item_id','=',$item)->latest('created_at')->first();
+
+        // Nếu đã có tăng số lượng
+        if($item_in_cart)
+        {
+            $item_in_cart->quantity += $request->quantity;
+         
+        } else // Nếu không thêm mới
+        {
+            $cartItem = new cart_item;
+            $cartItem->quantity = $request->quantity;
+            $cartItem->product_item_id = $item;
+            $cartItem->price = $product_item->discount_price;
+            $cartItem->total_money = $cartItem->quantity * $cartItem->price;
+            $cartItem->cart_id =  $cart->id;
+            $cartItem->save();  
+        }
+        
+        return response()->json($item_in_cart);
     }
 
     /**

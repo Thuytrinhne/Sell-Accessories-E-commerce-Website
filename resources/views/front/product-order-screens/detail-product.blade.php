@@ -95,7 +95,19 @@
                 @endforeach
               </div>
 
-
+              <div class="input-group" style="margin: 20px">
+                <!-- <span class="input-group-btn">
+                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quantity">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </span> -->
+                <input type="number" name="quantity" id="input-number" value="" min="1" max="10000">
+                <!-- <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quantity">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </span> -->
+            </div>
 
               <div class="row info-category" style="margin-top: 20px;">
                   <h4>Category: 
@@ -118,7 +130,7 @@
 
               <div class="row info-buy">           
                   <div class="col-6 ">
-                      <button class="info-buy__btn">Thêm vào giỏ hàng</button>
+                      <button onclick="addToCartAjax('{{ $product->id }}')" class="info-buy__btn">Thêm vào giỏ hàng</button>
                   </div>
                   <div class="col-6">
                       <button class="info-buy__btn">Mua ngay sản phẩm</button>
@@ -232,15 +244,56 @@
 </div>
 </div>  
 <script>
+  let inputQuantity = 0;
 
-  var itemChoosed = 0;
-   function showProducts(product_item_id) {
+  document.addEventListener('DOMContentLoaded', function () {
+        var inputElement = document.getElementById('input-number');
+        
+        inputElement.addEventListener('input', function () {
+          inputQuantity = inputElement.value;
+        });
+    });
+  
+  let product_item_id = 0;
+
+  
+  function addToCartAjax() {
+    alert(inputQuantity);
+        // Thực hiện AJAX request
+            $.ajax({
+                url: '/cart/add/' + product_item_id,
+                type: 'GET',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'quantity': inputQuantity,
+                },
+                success: function(data) {
+                  Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Đã thêm vào giỏ hàng !',
+                      showConfirmButton: false,
+                      timer: 2000
+                      })
+                       
+                },
+                error: function(error) {
+                    console.log('Lỗi:', error);
+                    // Xử lý lỗi nếu có
+                }
+            });
+  }
+
+
+   function showProducts(item_id) {
+    
         $.ajax({
-            url: '/get-images-by-value/' + product_item_id,
+            url: '/get-images-by-value/' + item_id,
             type: 'GET',
-            success: function(data) { 
-                itemChoosed = data[0].id;
-                // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
+            success: function(data) {
+                console.log(data[0].id);
+                product_item_id = data[0].id;
+
                 renderProducts(data);
             },
             error: function(error) {            
@@ -275,7 +328,7 @@
      function addToWishlistClick()
       {
         
-          if (itemChoosed==0)
+          if (product_item_id==0)
           {
               addProductIntoWishList("{{ route('wishlist.add') }}");
           }
