@@ -15,7 +15,7 @@
                 <hr class="body-user-display-line">
                 <div class="body-user-display-container">
                     <div class="item_order grid">
-                      @foreach ( $user_payment as $key => $item)
+                      @foreach($user_order as $key => $item)
                         <div class="item_order-title">
                         <a class="item_order-title-link" href="">
                           
@@ -53,13 +53,22 @@
                   
                         </div>
                         <div class="item_order-list">
-                          @foreach($user_order as $key => $item)
+                          
                             <div class="item_order-detail">
                               <div class="item_order-infor">
                                 <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llygp6dq2ean69_tn" alt="">
                                 <div>
                                     <strong class="item_order-infor-name">{{ $item->name_product}}</strong>
-                                    <div class="item_order-infor-sort">Phân loại hàng: Màu be</div>
+                                    <div class="item_order-infor-sort">Phân loại hàng:
+                                      @if($item->variation_id)
+                                      
+                                        {{ $item->name_color }}
+                                      
+                                      @else 
+                                        {{ $item->variation_name }}
+                                      
+                                      @endif
+                                    </div>
                                     <div class="item_order-infor-sort" >x{{ $item->quantity }}</div>
                                 </div>
                               </div>
@@ -67,7 +76,7 @@
                                   {{ $item->price}}đ
                                 </div>
                             </div>
-                            @endforeach
+                           
                         </div>
                         <div class="item_order-btn">
                            <a href="{{ route('re-checkout',[$item->cart_id])}}" class="body-footer-seemore body-footer-reorder">Mua lại</a>
