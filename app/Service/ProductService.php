@@ -309,7 +309,7 @@ class ProductService
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
         ->join('variation','product_configuration.variation_id','=','variation.id')
         ->select(
-            'product.name_product', 'product.id',
+            'product.name_product', 'product_item.id',
             'product_item.price', 'product_item.discount_price','product_item.SKU','product_item.image',
             'product_configuration.variation_value',
             'variation.name',

@@ -292,6 +292,8 @@ Route::prefix('/customer/orders')->group(function () {
 
 
 Route::get ('/cart',[CartController::class, 'getCartitemJSon'] )->name('cart');
+//Thêm vào giỏ hàng
+Route::match (['get','post'],'/cart/add/{item}',[CartController::class, 'store'] )->name('cart')->name('cart.add');
 
 Route::get('/destroy/{id}',[CartController::class, 'destroyItem'])->name('cart.destroy');
 
