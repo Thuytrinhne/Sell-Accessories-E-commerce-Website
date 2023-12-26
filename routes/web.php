@@ -245,6 +245,9 @@ Route::get('/checkout/choose-location', function () {
  })->name('add-location');
 //  Route::get('/wishlist', function () {
 //     return view('front.product-order-screens.wishlist');
+//Cổng thanh toán điện tử
+// Route::post('/checkout/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay-payment');
+
 
 
 Route::prefix('/wishlist') -> group(function () {

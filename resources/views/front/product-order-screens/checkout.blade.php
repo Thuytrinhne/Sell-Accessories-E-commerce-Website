@@ -90,7 +90,7 @@
                         <p>ĐỒNG GIÁ: 35.000đ</p>
                         <label for="total_price" style="display: flex">
                             <h3>Tổng</h3>
-                        <input class="total_price" type="number" name="total_price" value="{{ $total + 35000 }}" disabled>
+                        <input class="total_price" type="number" name="total_price" value="{{ $total + 35000 }}" >
                         </label>
                         
 
@@ -111,8 +111,10 @@
 
                         <p class="privacy">privacy</p>
 
-                        <button type="summit" class="order_btn">Đặt hàng</button>
+                        <button type="summit" class="order_btn" name="redirect" >Đặt hàng</button>
+                        {{-- <button type="submit" name="redirect">Thanh toán bằng thẻ</button> --}}
                     </form>
+                    
                     </div>
                 </div>
             </div>
