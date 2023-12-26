@@ -3,6 +3,21 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/product.css')}}">
 @endsection
 @section('body-main')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session ('addWishSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('addWishSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <div class="container">
 
   <!-- begin breadcrumbs -->
@@ -95,7 +110,7 @@
 
               <div class="row info-whistlist" style="margin: 20px 0px;">
                   <div class="col-5 info-whistlist-wrapper">                 
-                      <button onclick="addToCart()" class="info-whistlist-btn" > 
+                      <button onclick="addToWishlistClick()" class="info-whistlist-btn" > 
                         <i class="fa fa-heart" aria-hidden="true">  Add to whistlist</i>
                       </button>
                   </div>
@@ -217,12 +232,14 @@
 </div>
 </div>  
 <script>
+
+  var itemChoosed = 0;
    function showProducts(product_item_id) {
         $.ajax({
             url: '/get-images-by-value/' + product_item_id,
             type: 'GET',
-            success: function(data) {
-                console.log(data[0].image);
+            success: function(data) { 
+                itemChoosed = data[0].id;
                 // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
                 renderProducts(data);
             },
@@ -253,6 +270,49 @@
             );
             
         }
-}
+    }
+      // theem vao wish list 
+     function addToWishlistClick()
+      {
+        
+          if (itemChoosed==0)
+          {
+              addProductIntoWishList("{{ route('wishlist.add') }}");
+          }
+          else
+          {
+              addProductIntoWishList("{{ route('wishlist.addProductItem') }}");
+          }
+      }
+       function  addProductIntoWishList(url)
+      {
+    
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = url;
+        // truyền token
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = csrfToken;
+
+        form.appendChild(csrfInput);
+        document.body.appendChild(form);
+        // truyền product id 
+        var ProductIdInput = document.createElement('input');
+        ProductIdInput.type = 'hidden';
+        ProductIdInput.name = 'productId';
+        ProductIdInput.value = {{$product->id}};
+
+        form.appendChild(ProductIdInput);
+        document.body.appendChild(form);
+
+
+
+        form.submit();
+      }
+
+
 </script>
 @endsection

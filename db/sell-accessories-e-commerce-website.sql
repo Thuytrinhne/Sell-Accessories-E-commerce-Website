@@ -594,7 +594,7 @@ INSERT INTO `wishlist` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `wishlist_item` (
   `id` int(11) NOT NULL,
-  `whislist_id` int(11) DEFAULT NULL,
+  `wislist_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT -1,
   `product_item_id` int(11) DEFAULT -1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),

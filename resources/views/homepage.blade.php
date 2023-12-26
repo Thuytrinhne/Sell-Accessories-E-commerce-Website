@@ -16,7 +16,19 @@
                 </script>
             
 @endif
-
+@if (session ('addWishSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('addWishSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <!-- end code trinh  -->
 <div class="body-main">
   
@@ -134,15 +146,25 @@
           var form = document.createElement('form');
           form.method = 'POST';
           form.action = url;
-
+          // truyền token
           var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
           var csrfInput = document.createElement('input');
           csrfInput.type = 'hidden';
           csrfInput.name = '_token';
           csrfInput.value = csrfToken;
-
+        
           form.appendChild(csrfInput);
           document.body.appendChild(form);
+          // truyền product id 
+          var ProductIdInput = document.createElement('input');
+          ProductIdInput.type = 'hidden';
+          ProductIdInput.name = 'productId';
+          ProductIdInput.value = id;
+        
+          form.appendChild(ProductIdInput);
+          document.body.appendChild(form);
+
+
 
           form.submit();
         }

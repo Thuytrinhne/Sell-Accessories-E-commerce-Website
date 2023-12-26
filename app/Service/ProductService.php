@@ -87,6 +87,7 @@ class ProductService
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
         ->join('variation','variation.id','=','product_configuration.variation_id')
         ->select( 
+           
             'product.name_product', 'product.id', 'product.default_image','product.description',
             'product_item.price', 'product_item.discount_price','product_item.SKU',
             'product_configuration.variation_value',
@@ -309,14 +310,15 @@ class ProductService
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
         ->join('variation','product_configuration.variation_id','=','variation.id')
         ->select(
-            'product.name_product', 'product.id',
+            'product_item.id',
+            'product.name_product', 
             'product_item.price', 'product_item.discount_price','product_item.SKU','product_item.image',
             'product_configuration.variation_value',
             'variation.name',
             'category.name_category',
         )
         ->where('product_item.id', '=', $value )->get();
-
+       
         return $products;
     }
 

@@ -14,21 +14,20 @@ class WishlishController extends Controller
         return WishlistService::index();
     }
 
-    public function storefromproduct_item_id(Request $request, $product_item_id)
+    public function storefromproduct_item_id(Request $request)
     {
-        return WishlistService::storefromproduct_item_id($request, $product_item_id);
+        return WishlistService::storefromproduct_item_id($request);
     }
 
     public function storefromproduct_id( Request $request)
     {
-        // chuyển đến route post
-        dd("Đã vào nè");
-        return WishlistService::storefromproduct_id($request, $product_id);
+        
+        return WishlistService::storefromproduct_id($request);
     }
    
 
-    public function destroy(string $wishlist_id, string $id)
+    public function destroy($id)
     {
-        return WishlistService::destroy();
+        return WishlistService::destroy($id);
     }
 }

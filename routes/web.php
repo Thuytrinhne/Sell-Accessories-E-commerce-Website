@@ -31,7 +31,7 @@ Route::get('/filter', [ProductController::class, 'filter'])->name('products.filt
 //Route qtoan them vao
 Route::group(['prefix' => '/'], function () {
    
-   Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
+   Route::get('/', [ProductController::class, 'getProduct'])->name('homepage');
 
    Route::get('/product-category/{category}',[ProductController::class,'getProductsByCategory'])->name('get.products.by.category');
    
@@ -264,7 +264,10 @@ Route::get('/checkout/choose-location', function () {
 
 Route::prefix('/wishlist') -> group(function () {
    Route::get('/', [WishlishController::class,'index'])->name('wishlist');
-   Route::post ('/add', [WishlishController::class,'storefromproduct_id'])->name('wishlist.add');
+   Route::post ('/addProduct', [WishlishController::class,'storefromproduct_id'])->name('wishlist.add');
+   Route::post ('/addProductItem', [WishlishController::class,'storefromproduct_item_id'])->name('wishlist.addProductItem');
+   Route::get ('/deleteWishlistItem/{idWishlistItem}', [WishlishController::class,'destroy'])->name('wishlist.delete');
+
    // Route::match(['GET','POST'],'/add/{id}', [WishlishController::class,'storeformproduct_item_id'])->name('storeproduct_item_id.wishlists');
    // Route::match(['GET','POST'],'/add/{id}', [WishlishController::class,'storeformproduct_id'])->name('storeproduct_id.wishlists');
    // Route::match(['GET','POST'],'/delete/{id}', [WishlishController::class,'destroy'])->name('destroy.wishlists');
