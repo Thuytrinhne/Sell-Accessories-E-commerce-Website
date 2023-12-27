@@ -3,6 +3,21 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/product.css')}}">
 @endsection
 @section('body-main')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session ('addWishSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('addWishSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <div class="container">
 
   <!-- begin breadcrumbs -->
@@ -30,7 +45,7 @@
           <!-- begin gallery -->
           <div class="col-5 row-gallery" id="productImage">
               <div class="row">
-                      <img id="current-image" src="https://hippo.vn/wp-content/uploads/2023/07/z4490453481402_5d3820c1148b6163e130b262d7c02117-300x300.jpg" alt="">
+                      <img id="current-image" src="{{$product->default_image}}" alt="">
               </div>
               <div class="row" >
                   <div class="col-2-4">
@@ -58,7 +73,7 @@
                   </h1>
               </div>
 
-              <div class="row info-price">
+              <div class="row info-price" id = "price">
                   <div class="col-1 info-price--default">
                       <p>{{$product->price}}</p>
                   </div>
@@ -73,14 +88,26 @@
               <div class="row">  
                 @foreach($variation_value as $value)
                 <button  class="color-option" 
-                                    style="background-color: {{$value->value}}; color: {{$value->value}} "
+                                    style="background-color: {{$value->variation_value}}; color: {{$value->variation_value}} "
                                     onclick="showProducts('{{$value->id}}')"> 
                               {{$value->value}} 
                             </button>
                 @endforeach
               </div>
 
-
+              <div class="input-group" style="margin: 20px">
+                <!-- <span class="input-group-btn">
+                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quantity">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </span> -->
+                <input type="number" name="quantity" id="input-number" value="" min="1" max="10000">
+                <!-- <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quantity">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </span> -->
+            </div>
 
               <div class="row info-category" style="margin-top: 20px;">
                   <h4>Category: 
@@ -95,7 +122,7 @@
 
               <div class="row info-whistlist" style="margin: 20px 0px;">
                   <div class="col-5 info-whistlist-wrapper">                 
-                      <button onclick="addToCart()" class="info-whistlist-btn" > 
+                      <button onclick="addToWishlistClick()" class="info-whistlist-btn" > 
                         <i class="fa fa-heart" aria-hidden="true">  Add to whistlist</i>
                       </button>
                   </div>
@@ -103,7 +130,7 @@
 
               <div class="row info-buy">           
                   <div class="col-6 ">
-                      <button class="info-buy__btn">Thêm vào giỏ hàng</button>
+                      <button onclick="addToCartAjax('{{ $product->id }}')" class="info-buy__btn">Thêm vào giỏ hàng</button>
                   </div>
                   <div class="col-6">
                       <button class="info-buy__btn">Mua ngay sản phẩm</button>
@@ -131,21 +158,13 @@
 
               <div class="tab-description">
                   <div class="row ">
-                      <div class="col-3">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>
-
-                      <div class="col-3 ">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>
-
-                      <div class="col-3">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>
-
-                      <div class="col-3">
-                          <img class="tab-description__img" src="Assets/Images/keptoc3.jpg" alt="">
-                      </div>  
+                      <textarea name="description" 
+                      id="description" 
+                      cols="10" rows="5"
+                      style="font-size:20px;"
+                      disabled>
+                      {{$product->description}}
+                      </textarea>
                   </div>
               </div>
               
@@ -161,48 +180,61 @@
            <div class="row">
             <div class="body-catogory grid">
               <div class="body-category-list" style="margin:0;">
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/09/z4695989175899_435b8c28c9233a5a0ebe70abb1b6b8b1-300x300.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/09/z4695885289564_2bcc658538dea52f977c7ac5a917ec84-300x300.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
-                <div class="body-category-item">
-                  <a href="" class="body-category-link">
-                   <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4498074345012_7f24f6b6d73062e768da20d394b037ad-300x300.jpg" alt="" class="body-category-img">
-                   
-                  </a>
-                </div>
 
-               
+             @foreach($relatedProduct as $item)
+                    <div class="body-list__item" >
+                      <div>
+                            <a class="body-item-link" href="{{ route('products.show', ['id' => $item->id]) }}">
+                              <img class="body-item-img" src="{{$item->default_image}}" alt="{{$item->name_product}}">
+                            </a>
+                      </div> 
+                      
+      
+                      <div class="container">
+                        <div class="element">
+                          <div class="content">
+                      <div class="body-item-links">
+            
+                          <a href="" class="body-links-detail">
+                            <div class="body-circle body-circle--red">
+                              <span class="material-symbols-outlined body-icon-white">
+                                local_mall
+                                </span>
+                              </div>   
+                            </a>  
+
+                            <span href="" class="body-links-detail">
+                              <div class="body-circle">
+                                <button class="material-symbols-outlined body-icon-black body-icon-black--large" 
+                                id="quickview" 
+                                style="backgroud:none; border:none"
+                                data-product-id="{{ $item->id }}">
+                                  visibility
+                                </button>    
+                              </div>   
+                            </span>  
+                            
+                              <a href="" class="body-links-detail">
+                                <div class="body-circle">
+                                  <i class="fa-regular fa-heart body-icon-black"></i>  
+                                </div>   
+                                </a>         
+                           </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    @endforeach
 
               </div>
-              <div class="body-category-nav">
+              <!-- <div class="body-category-nav">
                 <button class="body-nav-btn" type="button">
                   <i class="fa-solid fa-angle-left body-nav-icon"></i>
                 </button>
                   <button class="body-nav-btn btn-left" type="button">
                     <i class="fa-solid fa-angle-right body-nav-icon "></i>
                   </button>
-              </div>
+              </div> -->
         </div> 
            </div>
          
@@ -212,19 +244,60 @@
 </div>
 </div>  
 <script>
-   function showProducts(product_item_id) {
-    console.log('Vao dc ham')
+  let inputQuantity = 0;
+
+  document.addEventListener('DOMContentLoaded', function () {
+        var inputElement = document.getElementById('input-number');
+        
+        inputElement.addEventListener('input', function () {
+          inputQuantity = inputElement.value;
+        });
+    });
+  
+  let product_item_id = 0;
+
+  
+  function addToCartAjax() {
+    alert(inputQuantity);
+        // Thực hiện AJAX request
+            $.ajax({
+                url: '/cart/add/' + product_item_id,
+                type: 'GET',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'quantity': inputQuantity,
+                },
+                success: function(data) {
+                  Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Đã thêm vào giỏ hàng !',
+                      showConfirmButton: false,
+                      timer: 2000
+                      })
+                       
+                },
+                error: function(error) {
+                    console.log('Lỗi:', error);
+                    // Xử lý lỗi nếu có
+                }
+            });
+  }
+
+
+   function showProducts(item_id) {
+    
         $.ajax({
-            url: '/get-images-by-value/' + product_item_id,
+            url: '/get-images-by-value/' + item_id,
             type: 'GET',
             success: function(data) {
-                console.log(data[0].image);
-                // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
+                console.log(data[0].id);
+                product_item_id = data[0].id;
+
                 renderProducts(data);
             },
-            error: function(error) {
-              
-                console.log('Đéo vào đc');
+            error: function(error) {            
+                console.log('lỗi');
             }
         });
     }
@@ -232,13 +305,67 @@
     function renderProducts(product) {
     // Xóa nội dung hiện tại của #productList
     $('#productImage').empty();
+    $('#price').empty();
     for (let i = 0; i < product.length; i++) {
             $('#productImage').append(
                 '<div class="row">'+
                       '<img id="current-image" src="'+product[i].image+'" alt="">'+
               '</div>'
             );
+
+            $('#price').append(
+                '<div class="col-1 info-price--default">'+
+                      '<p>'+ product[i].price +'</p>'+
+                  '</div>'+
+                  '<div class="col-2 info-price--sale">'+product[i].discount_price+'</div>'+
+                 
+                  '<div class="col-7"></div>'
+            );
+            
         }
-}
+    }
+      // theem vao wish list 
+     function addToWishlistClick()
+      {
+        
+          if (product_item_id==0)
+          {
+              addProductIntoWishList("{{ route('wishlist.add') }}");
+          }
+          else
+          {
+              addProductIntoWishList("{{ route('wishlist.addProductItem') }}");
+          }
+      }
+       function  addProductIntoWishList(url)
+      {
+    
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = url;
+        // truyền token
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = csrfToken;
+
+        form.appendChild(csrfInput);
+        document.body.appendChild(form);
+        // truyền product id 
+        var ProductIdInput = document.createElement('input');
+        ProductIdInput.type = 'hidden';
+        ProductIdInput.name = 'productId';
+        ProductIdInput.value = {{$product->id}};
+
+        form.appendChild(ProductIdInput);
+        document.body.appendChild(form);
+
+
+
+        form.submit();
+      }
+
+
 </script>
 @endsection

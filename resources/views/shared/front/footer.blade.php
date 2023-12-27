@@ -48,7 +48,7 @@
         </a>
       </div>
     </div>
-    <div class="footer-list">
+    <div class="footer-list" style="margin-bottom: 24px;">
       <span>
         <img class="footer-logo" src="https://mossvn.com/images/logo-moss-remake-R.png" alt="">
       </span>

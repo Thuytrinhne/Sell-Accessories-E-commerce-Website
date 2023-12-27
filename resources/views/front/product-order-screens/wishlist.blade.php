@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 @section('css')
 <link rel="stylesheet" href="{{asset('Assets/css/front/wishlist.css')}}">
-@endsection;
+@endsection
 @section('body-main')
 <div class="checkout">
         <div class="checkout_container">
@@ -20,7 +20,7 @@
     <div class="checkout_detail">
         
         <div class="product_box-container">
-            <i class="fa-regular fa-face-grin-hearts" style="" ></i>
+            <i class="fa-regular fa-face-grin-hearts"  ></i>
             <h1>
                 
                 MY WISHLIST

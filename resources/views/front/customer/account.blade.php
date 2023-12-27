@@ -1,7 +1,7 @@
 @extends('front.customer.index')
 @section('css')
 <link rel="stylesheet" href="{{asset('Assets/css/front/account.css')}}"> 
-@endsection;
+@endsection
 @section('content')
 @if (session ('updateInforSuccess'))
             {
@@ -59,8 +59,6 @@
   
                           </td>
                         </tr>
-                       
-                   
                       </table>
                       <button class="body-footer-seemore btn-red btn-bottom" type="submit">LƯU THAY ĐỔI</button>
 
@@ -71,7 +69,8 @@
                       <h2>Số điện thoại và email</h2>
                       <div class="security-login__phone">
                                 <img src="https://hasaki.vn/images/icons/icon_call.svg" alt="">
-                                <div class="security-login__text">
+                                <!-- <div class="security-login__text"> -->
+                                <div class="security-pass__text">
                                   <p>Số điện thoại </p>
                                   <p>Cập nhật số điện thoại</p>
                                 </div>

@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 @section('css')
 <link rel="stylesheet" href="{{asset('Assets/css/front/add-location.css')}}"> 
-@endsection;
+@endsection
 @section('body-main')
 <div class="checkout-main">
 <div class="checkout">

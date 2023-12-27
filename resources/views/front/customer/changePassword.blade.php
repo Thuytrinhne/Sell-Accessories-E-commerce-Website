@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/account.css')}}"> 
 <link rel="stylesheet" href="{{asset('Assets/css/front/changePassword.css')}}"> 
 
-@endsection;
+@endsection
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

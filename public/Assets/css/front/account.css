@@ -1,5 +1,6 @@
 .body-user-display-container1 {
     display: flex;
+    /* width: 1091px; */
 }
 .body-user-flex {
     display: flex;
@@ -16,6 +17,7 @@
 }
 .body-user-feature-header {
     display: flex;
+
 }
 .body-user-infor {
     font-size: 1.5rem;
@@ -84,9 +86,11 @@
     margin-top: 30px;
     margin-left: 27px;
     background-color: white;
-    width: 1091px;
+    max-width: 900px;
+    /* width: auto; */
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
     padding: 12px 15px;
+    /* display: flex; */
 }
 /* custom */
 .body-user-display-container {
@@ -107,25 +111,28 @@
 }
 .body-user-display-frm {
     display: block;
-    flex-basis: 60%;
+    flex-basis: 55%;
+    /* margin-right: 84px; */
 }
 .body-user-display-line {
     width: 100%;
     color: rgba(0, 0, 0, 0.4);
 }
 .body-user-display-td-label {
-    text-align: right;
+    text-align: left;
     padding-bottom: 30px;
     font-size: 1.4rem;
     color: rgba(85, 85, 85, 0.8);
+    width: 25%;
 }
 .body-user-display-td-input {
-    padding-left: 30px;
+    padding-left: 20px;
     padding-bottom: 30px;
+    width: 75%;
 }
 .body-user-display-input {
     padding: 8px;
-    width: 400px;
+    width: 100%;
     font-size: 1.4rem;
 }
 .body-user-display-rdo {
@@ -191,3 +198,126 @@
     border-right: solid 1px rgba(0, 0, 0, 0.3);
     height: 100%;
 }
+
+.account-container{
+    margin-top: 16px;
+}
+/* iphone 14 promax */
+@media screen and (max-width: 430px) {
+    .body-user-feature-footer{
+        width: 41vh;
+
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin: 24px;
+    }
+
+    .body-user-display-myaccount, .body-user-display-container1, .body-user-flex{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .body-user-display-myaccount{
+        max-width: 400px;
+    }
+
+    .body-user-display{
+        width: 90%;
+        margin: auto;
+    }
+
+    .body-user{
+        display: block;
+    }
+
+    .security-login__phone{
+        display: grid;
+        grid-template-columns: 10% 55% 34%;
+    }
+
+
+    .body-user-feature-header{
+        justify-content: center;
+        width: 430px;
+    }
+
+    .security-login__text, .security-pass__text {
+        margin: 0;
+    }
+    
+    .security{
+        margin-top: 18px;
+    }
+    .btn-primary{
+        padding: 0;
+        max-width: 100px;
+    }
+
+    /* .body-user-display-rdo-text{
+        margin: 0;
+    } */
+}
+
+/* ipad air */
+@media screen and (max-width: 995px) and (min-width: 431px) {
+    .body-user {
+        margin: 0 12px;
+    }
+
+    
+    .body-user-display-myaccount, .body-user-display-container1{
+        display: flex;
+        flex-direction: column;
+    }
+    .body-user-display-myaccount{
+        /* max-width: 800px; */
+    }
+
+    .body-user-display{
+        max-width: 500px;
+    }
+
+    .security-login__phone{
+        display: grid;
+        grid-template-columns: 10% 60% 29%;
+    }
+
+    .security{
+        margin-top: 18px;
+    }
+
+    .footer-container{
+        grid-template-columns: 30% 40% 30%;
+
+    }
+    .footer-container .footer-list:last-child{
+        display: none;
+    }
+
+    .security-login__text, .security-pass__text {
+        margin: 0;
+    }
+
+    .body-user-display-tbl{
+        display: block;
+    }
+
+}
+/* pc */
+@media screen and (max-width: 2000px) and (min-width: 995px) {
+    
+    .security-login__text{
+        margin-right: 400px;
+    }
+    .security-login__phone{
+        display: grid;
+        grid-template-columns: 10% 50% 39%;
+    }
+
+    .security-pass__text {
+        margin: 0;
+    }
+
+    
+}
+

@@ -3,10 +3,7 @@
 }
 
 /* =======  check out  ====== */
-.checkout_detail p,
-.checkout_detail dl {
-    margin: 0;
-}
+
 
 .checkout {
     height: 209px;
@@ -64,7 +61,7 @@
 
 
 .location-list_container {
-    margin: 48px 32px 48px 0;
+    margin: 0 32px 48px 0;
     height: 80%;
 }
 
@@ -79,6 +76,8 @@
 
 .location-detail {
     font-size: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .location-tick {
@@ -104,7 +103,7 @@
 
 .location-info {
     display: grid;
-    grid-template-columns: 5% 85% 10%;
+    grid-template-columns: 10% 90%;
     margin-bottom: 24px;
 }
 
@@ -125,6 +124,9 @@
 }
 
 
+.change{
+    display: inline-block;
+}
 
 .location-list {
     margin-bottom: 16px;
@@ -132,6 +134,7 @@
     border-radius: 10px;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    /* width: 100%; */
 }
 
 .location-list a {
@@ -152,7 +155,7 @@
 /* =============  total payment  =========== */
 .payment_total {
     background-color: rgb(242 242 242);
-    height: 800px;
+    max-height: 700px;
     border-radius: 10px;
 }
 
@@ -160,38 +163,39 @@
     padding: 40px;
 }
 
-.payment_preview h3 {
-    width: 49.2%;
-    display: inline-block;
+
+.product-cal{
+    display: flex;
+    justify-content: space-between;
 }
-
-
 
 
 
 /* ===================  product list  ================== */
 .product_list {
-    margin: 24px 0 12px 0;
-    border-bottom: #e1e1e1 dashed 1px;
+    margin: 12px 0 12px 0;
+
 }
 
-.product_name_container,
-.product_list>p {
-    width: 49.3%;
-    display: inline-block;
-    font-size: 13px;
-    color: #777;
+.product_list h3{
+    margin: 8px 0;
+    font-size: 1.5rem;
 }
 
+
+.product_name_container{
+    padding-bottom: 12px;
+    border-bottom: #dadada solid 1px;
+}
 .product_list .product_name {
-    font-size: 13px;
+    font-size: 1.1rem;
     color: #333333;
 }
 
-.variation dt,
-.variation dd {
-    display: inline-block;
-    color: #777;
+
+.variation{
+    display: flex;
+    justify-content: space-between;
 }
 
 /* ===================  product list  ================== */
@@ -201,6 +205,11 @@
     font-size: 13px;
     color: #777;
     margin-bottom: 16px;
+}
+
+.methods{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .payment_methods h2 {
@@ -213,13 +222,15 @@
     border-bottom: #e5e5e5 solid 1px;
     margin-bottom: 18px;
     padding: 8px;
+    width: 100%;
 }
 
-.payment_methods .privacy {
-    font-size: 13px;
+.privacy {
+    font-size: 1.2rem;
     color: #777;
     padding: 8px;
-    margin: 13px 0;
+    margin: 8px 0;
+    text-align: justify;
 }
 
 
@@ -265,26 +276,32 @@
 
 /* ===============  end checkout detail  ================ */
 
-.product_name {
-    display: flex;
-}
 
 .product_name input {
-    font-size: 13px;
+    font-size: 1.2rem;
     color: #777;
     font-weight: bold;
     border: none;
     outline: none;
+    width: 30%;
 }
 
-
+.name_product{
+    width: 30%;
+}
 
 .variation {
     display: flex;
 }
 
+.variation span,
+.variation input,
+.variation p{
+    font-size: 1.2rem;
+    margin: 0;
+}
+
 .variation span {
-    font-size: 13px;
     color: #777;
     font-weight: bold;
 }
@@ -292,75 +309,84 @@
 .variation input {
     border: none;
     outline: none;
+    width: 60%;
 }
 
 .total_cart {
     display: flex;
+    justify-content: space-between;
 }
 
 .total_cart input {
-    font-size: 13px;
+    font-size: 1.3rem;
     color: #111;
     font-weight: bold;
     border: none;
     outline: none;
 }
 
-.total_price {
-    font-size: 18px;
+.total_price-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+input.total_price {
     font-weight: bold;
     color: black;
     outline: none;
     border: none;
+    font-size: 2rem;
+    text-align: end;
+
 
 }
 
 .input-total, .total_price{
-    display: inline;
     text-align: end;
-    width: 75%;
+    width: 40%;
+}
+
+.deliver{
+    display: flex;
+    justify-content: space-between;
+}
+
+.deliver p{
+    margin: auto 0;
+    font-size: 1.2rem;
 }
 
 .tamtinh{
     text-align: end;
 }
 
-.change{
-
-}
-
-/* tabblet  */
-@media screen  and (max-width: 821px) {
-    .tamtinh{
-        display: none;
+@media screen and (max-width: 430px) {
+    .payment_info{
+        display: flex;
+        flex-direction: column;
     }
 
+    .location-list_container, .payment_total{
+        width: 100%;
+    }
+}
+
+/* ipad air */
+@media screen and (max-width: 995px) and (min-width: 431px) {
     .checkout_detail{
         width: 90%;
     }
 
-    .payment_preview h3{
-        display: block;
-        width: 100%;
-    }
-
-    .input-total, .total_price{
-        display: inline;
-        text-align: end;
-        width: 75%;
-    }
-
     .payment_info{
-        display: flex;
-        flex-wrap: wrap;
+        grid-template-columns: 60% 40%;
     }
 
-    .location-list_container{
-        margin-right: 0;
-        width: 100%;
+}
+/* pc */
+@media screen and (max-width: 2000px) and (min-width: 995px) {
+    
+    
 
+    
 }
 
-@media screen  and (max-width: 430px) {
-
-}

@@ -3,12 +3,15 @@
 {
     height:530px;
     border-top: 4px solid var(--partial-color);
+
 }
 .footer-container{
     display: grid;
     grid-template-columns: 168px 400px auto auto;
     column-gap: 20px;
     background-color: var(--white-color);
+    margin-top: 64px;
+
 }
 .footer-list
 {

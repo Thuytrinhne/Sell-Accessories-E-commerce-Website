@@ -27,27 +27,31 @@
                             <span>{{ $item->name_method }}</span>
                            
                           </div>
-                          <div class="item_order-status">
-                            <span class="item_order-status">@switch($item->status)
-                              @case(1)
-                                  Mới đặt
-                                  @break
-                              @case(2)
-                                  Đã xác nhận
-                                  @break
-                              @case(3)
-                                  Đang giao hàng
-                                  @break
-                              @case(4)
-                                  Thành công
-                                  @break
-                              @case(5)
-                                  Đã hủy
-                                  @break
-                                  
-                          @endswitch</span>
-                            <a style="" href="{{ route('front.order_detail',$item->id)}}">Xem chi tiết</a>
+
+                          <div class="item_order-status-container">
+                            <div class="item_order-status">
+                              <span class="item_order-status">@switch($item->status)
+                                @case(1)
+                                    Mới đặt
+                                    @break
+                                @case(2)
+                                    Đã xác nhận
+                                    @break
+                                @case(3)
+                                    Đang giao hàng
+                                    @break
+                                @case(4)
+                                    Thành công
+                                    @break
+                                @case(5)
+                                    Đã hủy
+                                    @break
+                                    
+                            @endswitch</span>
+                              <a style="" href="{{ route('front.order_detail',$item->id)}}">Xem chi tiết</a>
+                            </div>
                           </div>
+                          
                           
                         </a>
                   

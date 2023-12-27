@@ -10,16 +10,31 @@
     color: rgba(85, 85, 85, 0.9);
 }
 .body-user-display-input {
-    width: 385px;
+    width: 100%;
 }
 .add-address-section1 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 50%;
+}
+
+.add-address-container div:nth-child(2){
+    width: 50%;
 }
 .btnChangeContainer {
     text-align: end;
 }
 .checkbox-defaultAddress {
     font-size: 1.4rem;
+}
+
+@media screen and (max-width:430px) {
+    .add-address-container{
+        flex-direction: column;
+    }
+
+    .add-address-container div:nth-child(2), .add-address-section1{
+        width: 100%;
+    }
 }

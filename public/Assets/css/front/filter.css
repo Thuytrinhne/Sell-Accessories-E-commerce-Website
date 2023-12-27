@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+body, html{
+    height: 100%;
+}
 .row__header-filter {
     color: #3eafcb;
 }
@@ -332,4 +335,151 @@ a.breadcrumbs__a--active {
 .page-item
 {
     z-index: 0;
+}
+
+@media screen and (max-width:430px) {
+    .filter__content{
+        flex-direction: column;
+    }
+    .price-range-container{
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .price-range-container form{
+        display: flex;
+        justify-content: center;
+    }
+
+    .price-input{
+        margin: 0;
+    }
+
+    .filter-sort{
+        margin: 0;
+        display: flex;
+        justify-content: start;
+        width: 70%;
+        margin: auto;
+        margin-top: 12px;
+
+    }
+
+    .filter__tittle{
+        font-size: 3rem;
+    }
+
+    .filter-color{
+        width: 50%;
+    }
+
+    .color-option{
+        height: 40px;
+        width: 40px;
+    }
+    .price-range-title{
+        margin: auto 6px;
+    }
+    .price-search-btn{
+        margin-left: 6px;
+    }
+    .body-listProduct{
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    .body-list__item{
+        width: 45%;
+        height: 50%;
+
+    }
+
+    .body-item-img{
+        height: 168px;
+        width: 168px;
+    }
+
+    .filter-widget{
+        height: 100%;
+        margin-bottom: 200px;
+    }
+}
+
+
+@media screen and (max-width:820px) and (min-width:431px) {
+    .filter__tittle{
+        font-size: 3rem;
+        margin-left: 21px;
+    }
+    .price-range-container{
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .price-range-container form{
+        display: flex;
+        justify-content: center;
+    }
+
+    .price-input{
+        margin: 0;
+    }
+
+    .filter-sort{
+        margin: 0;
+        display: flex;
+        justify-content: start;
+        width: 70%;
+        margin: auto;
+        margin-top: 12px;
+
+    }
+    .price-search-btn{
+        margin-left: 6px;
+    }
+
+    .filter-color{
+        width: 50%;
+    }
+
+    .color-option{
+        height: 40px;
+        width: 40px;
+    }
+    .price-range-title{
+        margin: auto 6px;
+    }
+
+    .body-listProduct{
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0;
+    }
+
+    .body-list__item{
+        width: 45%;
+        height: 50%;
+
+    }
+
+    .body-item-img{
+        height: 210px;
+        width: 210px;
+    }
+
+    .filter-widget{
+        height: 100%;
+        margin-bottom: 200px;
+    }
 }
