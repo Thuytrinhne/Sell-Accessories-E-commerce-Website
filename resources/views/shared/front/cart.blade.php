@@ -22,7 +22,7 @@
                
 
                 <div class="pay_button">
-                    <a class="pay_btn" href="checkout">Thanh toán</a><br>
+                    <a class="pay_btn" href="{{route('checkout')}}">Thanh toán</a><br>
                 </div>
             </div>
             

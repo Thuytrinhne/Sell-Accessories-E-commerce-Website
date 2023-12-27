@@ -215,6 +215,7 @@ Route::post('/customer/address/edit', [User_AddressController::class,'update'])-
 
 
 // end địa chỉ customer
+Route::get('customer/orders/delete/{id}', [OrderController::class,'destroy'])->name('admin.order.destroy');
 Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'])->name('front.order_detail');
 // end router customer
 // cập nhật lại mật khẩu 
@@ -260,6 +261,9 @@ Route::get('/checkout/choose-location', function () {
  })->name('add-location');
 //  Route::get('/wishlist', function () {
 //     return view('front.product-order-screens.wishlist');
+//Cổng thanh toán điện tử
+// Route::post('/checkout/vnpay_payment', [PaymentController::class, 'vnpay_payment'])->name('vnpay-payment');
+
 
 
 Route::prefix('/wishlist') -> group(function () {
