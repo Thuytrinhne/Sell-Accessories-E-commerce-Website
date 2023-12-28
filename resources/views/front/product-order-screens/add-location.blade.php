@@ -20,55 +20,79 @@
         <div class="payment_info">
             <div class="info">
                 <h1>Thêm địa chỉ mới</h1>
-                <form class="form_info" action="">
+                <form class="form_info" action="{{route('handle-add-location-checkout')}}" method="POST">
+                    @csrf
                     <div class="info_input">
                         <label for="">Họ và tên</label><br>
-                        <input type="text">
+                        <input name="full_name" type="text">
+                        @error('full_name')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                     </div>
 
                     <div class="info_input">
                         <label for="">Số điện thoại <span style="color: red;">*</span></label><br>
-                        <input type="tel" required>
+                        <input name="phone" type="tel" >
+                        @error('phone')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                        @enderror
                     </div>
 
-                    <div class="info_input">
-                        <label for="">Địa chỉ email</label><br>
-                        <input type="email">
-                    </div>
-
+            
                     <div class="Location">
                         <div class="info_input">
-                            <label for="">Vui lòng chọn khu vực <span style="color: red;">*</span></label><br>
-                            <select name="area" id="area" required>
+                            <label for="">Tỉnh/ Thành phố <span style="color: red;">*</span></label><br>
+                            <select id="city-select"  name="city" >
                                 <option value="">Chọn khu vực</option>
-                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Cà Mau">Cà Mau</option>
+                                
                             </select>
+                            @error('city')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                            @enderror
                         </div>
 
                         <div class="info_input">
-                            <label for="">Phường xã <span style="color: red;">*</span></label><br>
-                            <select name="area" id="area" required>
-                                <option value="">Chọn phường xã</option>
-                                <option value="TP Hồ Chí Minh">TP Hồ Chí Minh</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Cà Mau">Cà Mau</option>
+                            <label for="">Quận/ Huyện <span style="color: red;">*</span></label><br>
+                            <select  id="district-select" name="district">
+                                <option value="">Chọn khu vực</option>
+                             
                             </select>
+                            @error('district')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
+                        </div>
+                        <div class="info_input">
+                            <label for="">Phường/ Xã <span style="color: red;">*</span></label><br>
+                            <select id="ward-select"  name="village" >
+                                <option value="">Chọn phường xã</option>
+                             
+                            </select>
+                            @error('village')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                         </div>
                     </div>
                     
                     <div class="info_input">
                         <label for="">Số nhà, tên đường <span style="color: red;">*</span></label><br>
-                        <input type="text" required>
+                        <input name = "detail_address" type="text" >
+                        @error('detail_address')
+                            <br>
+                                <span class="msg-error">{{$message}}</span>
+                                @enderror
                     </div>
 
                     <div class="info_input default-address" >
-                        <input type="radio" required >
+                        <input name="default" value ="1" type="radio" >
                         <label for="">Đặt làm địa chỉ mặc định</label><br>
                     </div>
                     <div>
-                    <button type="" class="addLocation-btn">
+                    <button type="button" onclick="backClick()" class="addLocation-btn">
                         Trở lại 
                     </button>
                     <button type="submit" class="addLocation-btn">
@@ -89,4 +113,29 @@
     </div>
 
     </div>
+    <script src="{{asset('Assets/js/address.js')}}"></script>
+    <script>
+        function backClick()
+        {
+           
+            var idUserAddressChoosed = getIDUserAddressFromCookie();    
+            var url = "{{ route('back-choose-location', ['id' => '14']) }}";
+            url = url.replace('14',idUserAddressChoosed);       
+            window.location.href = url;
+        }
+        function getIDUserAddressFromCookie()
+        {
+            var cookies = document.cookie.split("; ");
+
+            var idUserAddressChoosed = "";
+            for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].split("=");
+            if (cookie[0] === "idUserAddressChoosed") {
+                idUserAddressChoosed = decodeURIComponent(cookie[1]);
+                break;
+            }
+            }
+            return idUserAddressChoosed;
+        }
+    </script>
 @endsection

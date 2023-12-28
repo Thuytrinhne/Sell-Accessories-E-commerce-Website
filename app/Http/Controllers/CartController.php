@@ -78,8 +78,6 @@ class CartController extends Controller
         $item_in_cart = cart_item::with('cart')->where('cart_item.product_item_id','=',$item)->where('cart_item.cart_id', '=',$cart->id )
         ->latest('created_at')->first();
       
-
-       
         // Nếu đã có tăng số lượng
         if($item_in_cart)
         {

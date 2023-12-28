@@ -9,9 +9,9 @@ use App\Service\AdminService ;
 class AdminController extends Controller
 {
     public function OrderView() {
-
+       
         $order_list = DB::select("
-            SELECT *
+            SELECT * 
             FROM `order`, user
             WHERE
                 `order`.user_id = user.id

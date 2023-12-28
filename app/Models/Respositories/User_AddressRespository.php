@@ -19,6 +19,7 @@ class User_AddressRespository
           ->get();
           
       }
+      
       public static function getUserAddressDefault()
       {
        
@@ -28,6 +29,7 @@ class User_AddressRespository
           ->where('user_address.is_default', 1)
           ->first();
       }
+     
       public static function getUserAddressNotDefault()
       {
       
@@ -87,7 +89,9 @@ class User_AddressRespository
         return  user_address::select('user_address.*','address.*' )
         ->join('address', 'user_address.address_id', '=', 'address.id')
         ->where('user_address.id', $id)
-        ->get();        
+        ->get() 
+        ->first();
+      
       }
       public static function update(User_AddressRequest $request)
       {

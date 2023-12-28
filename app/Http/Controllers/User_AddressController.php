@@ -11,6 +11,10 @@ use App\Http\Requests\User_AddressRequest;
 
 class User_AddressController extends Controller
 {
+    public function backChooseLocation($id)
+    {
+        return User_AddressService::backChooseLocation($id);
+    }
     // display page choose-address when check out 
     public function changeCheckoutAddress($id)
     {
@@ -45,7 +49,11 @@ class User_AddressController extends Controller
         return User_AddressService::store($request);
 
     }
+    public function storeAddressCheckout(User_AddressRequest $request)
+    {
+        return User_AddressService:: storeAddressCheckout($request);
 
+    }
     /**
      * Display the specified resource.
      */
@@ -83,5 +91,10 @@ class User_AddressController extends Controller
     public function addCheckoutAddress()
     {
         return User_AddressService::addCheckoutAddress();
+    }
+    public function handleChangeCheckoutAddress($id)
+    {
+        return User_AddressService::handleChangeCheckoutAddress($id);
+
     }
 }

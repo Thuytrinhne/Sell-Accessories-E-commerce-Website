@@ -22,7 +22,9 @@ class PaymentController extends Controller
         // $order->date_order = $currentDateTime;
         $order->cart_id = $data['idCart'];
         $order->note = $request->input('order_note');
-        $order->payment_id = 2;                 
+        $order->payment_id = 2;     
+        $order->address_shipping_id= $request->input('idUserAddress');               
+            
         $order->save(); 
         // tạo order xong thì tạo cart mới 
         CartRespository::store();

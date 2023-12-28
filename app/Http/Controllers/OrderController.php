@@ -16,9 +16,10 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        return OrderService::index($request);
+       
+        return OrderService::index();
     }
 
     public function indexFilter($id) {

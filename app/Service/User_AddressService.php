@@ -64,6 +64,26 @@ class User_AddressService
         {
             return view('front.product-order-screens.add-location');
         }
+        public static function handleChangeCheckoutAddress($id)
+        {
+            $defaultAddress=User_AddressRespository::getUserAddressById($id);
+            return OrderService::handleIndexCheckout($defaultAddress);
+
+        }
+        public static function storeAddressCheckout(User_AddressRequest $request)
+        {
+            $request->city =  User_AddressService::splitStringByDash($request->city);
+            $request->district = User_AddressService::splitStringByDash($request->district);
+            
+            User_AddressRespository::store($request);
+
+            return redirect()->back();
+        }
+        public static  function backChooseLocation($id)
+        {
+            return redirect()->route('choose-location-checkout', ['id' => $id]);
+
+        }
 
 
 }

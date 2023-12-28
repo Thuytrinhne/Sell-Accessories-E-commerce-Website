@@ -13,27 +13,23 @@ use App\Models\Respositories\CartRespository;
 use  App\Models\Respositories\User_AddressRespository;
 
 class OrderService {
-    public static function index(Request $request)
+    public static function index()
     {
-        $userId = Auth()->user()->id;
-        $user_order = DB::select ("SELECT cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id, `order`.id, payment.name_method, `order`.date_order,`order`.status,
-                                        product_configuration.name_color,product_configuration.variation_value, product_configuration.variation_id 
-                                    FROM
-                                            `order`, cart_item, product_item, product,product_configuration, payment
-                                    WHERE
-                                            `order`.cart_id = cart_item.cart_id  
-                                          
-                                            and cart_item.product_item_id = product_item.id
-                                            and product_item.product_id = product.id
-                                            and `order`.user_id =$userId
-                                            and `order`.payment_id = payment.id
-                                            and product_configuration.product_item_id = product_item.id
-                                        
-                ");  
+        // đếm số lượng đơn hang
+        $user_order = [];
+        $orderCount = OrderRespository::countOrderOfUser();
+        foreach ( $orderCount as $order) {
+           
+            $order =OrderRespository::getInforOrderById($order->id);
+            $user_order[] = $order;
+
+
+        }
+        // dd( $user_order);
+    
         
         // $user_order = order::with('cart', 'cart.cartItems', 'cart.cartItems.productItems','cart.cartItems.productItems.product')->get();
-        $product_item_cart = CartController::getCartitem();
-        return view('.front.customer.history-orders',compact('user_order', 'product_item_cart'));
+        return view('.front.customer.history-orders',compact('user_order'));
     }
 
     public static function indexFilter($id)
@@ -63,6 +59,7 @@ class OrderService {
     }
 
     public static function DetailOrder($id) {
+        dd($id);
         $id = $id;
         $product_item_cart = CartController::getCartitem();
 
@@ -105,7 +102,10 @@ class OrderService {
     public static function indexCheckout() {
         // lấy địa chỉ mặc định 
         $defaultAddress = User_AddressRespository::getUserAddressDefault();
-        
+        return OrderService::handleIndexCheckout($defaultAddress);
+    }
+    public static function handleIndexCheckout ($defaultAddress)
+    {
         $product_item_cart = CartController::getCartitem();
         //Lấy đặt hàng từ giỏ hàng ra checkout
        $total=0;

@@ -253,7 +253,10 @@ Route::get('/checkout/{id}', [OrderController::class, 'ReCheckout'])->name('re-c
 Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
 
 Route::get('/change-location/{id}', [User_AddressController::class, 'changeCheckoutAddress'])->name('choose-location-checkout');
+Route::get('/handleChange-location/{id}', [User_AddressController::class, 'handleChangeCheckoutAddress'])->name('handle-choose-location-checkout');
 Route::get('/add-location', [User_AddressController::class, 'addCheckoutAddress'])->name('add-location-checkout');
+Route::post('/add-location', [User_AddressController::class, 'storeAddressCheckout'])->name('handle-add-location-checkout');
+Route::get('/back/{id}', [User_AddressController::class, 'backChooseLocation'])->name('back-choose-location');
 
 
 //  Route::get('/wishlist', function () {
