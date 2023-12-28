@@ -33,7 +33,7 @@ class CartController extends Controller
             and cart_item.cart_id = '$id'
         
                         ");
-                        dd($product_item_cart);
+                        
                        
         return response()->json($product_item_cart, 200);
 
