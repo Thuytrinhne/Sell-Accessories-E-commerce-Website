@@ -366,7 +366,7 @@ input.total_price {
         flex-direction: column;
     }
 
-    .location-list_container, .payment_total{
+    .location-list_container, .payment_total,.payment_info{
         width: 100%;
     }
 }

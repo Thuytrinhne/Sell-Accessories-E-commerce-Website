@@ -43,48 +43,38 @@
                 MY WISHLIST
             </h1>
             <!-- ===============   product box  =============== -->
-            @foreach ($product as $item)
-
-          
             <div class="product_box">
                 <div class="cancel_button">
-                    <a href="{{route('wishlist.delete',  ['idWishlistItem' => $item->id])}}" class="cancel_btn">
+                    <a href="" class="cancel_btn">
                         <i class="fa-solid fa-circle-xmark"></i>
                     </a>
                 </div>
                 <img src="./Assets/Images/product_img.jpeg" alt="">
                 <div class="product_info">
-                    <a class="product_name">{{$item->name_product}}</a>
+                    <a class="product_name">cài tóc</a>
                 </div>
                 
                 <div class="product_info">
-                    <p class="product_name">{{$item->price}}</p>
+                    <p class="product_name">30000</p>
                 </div>
-                @if($item->quantity>0)
-                <div class="product_info">
-                    <p class="product_name">In Stock</p>
-                </div>
-                @else  
+                
+                
+                 
                 <div class="product_info">
                     <p class="product_name">Out Of Stock</p>
                 </div>
-                @endif
                 
-                @if(($item->product_id == -1))
+                
+
                 <div class="product_info">
                     <a class="product_name" >Thêm vào giỏ hàng</a>
                 </div>
-                @else
 
-                <div class="product_info">
-                    <a href=""
-                     class="product_name">
-                     Lựa chọn các tùy chọn</a>
-                </div>
-                @endif
+
+                
+
 
             </div>
-            @endforeach
             <!-- ===============   product box  =============== -->
         </div>
     </div>

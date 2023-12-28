@@ -213,3 +213,25 @@
     right: 0px;
     border: 2px dashed var(--white-color);
 }
+
+@media screen and (max-width: 820px) and (min-width: 431px) {
+    .checkout_detail{
+        width: 85%;
+    }
+}
+
+
+@media screen and (max-width: 430px) {
+    .checkout_detail{
+        width: 90%;
+    }
+
+    .form_info .addLocation-btn {
+        width: 50%;
+    }
+
+    .form_info > div:last-child{
+        display: flex;
+        justify-content: space-around;
+    }
+}

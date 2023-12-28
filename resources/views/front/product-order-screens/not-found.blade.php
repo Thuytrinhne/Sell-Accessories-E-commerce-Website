@@ -26,7 +26,7 @@
             </span>
             <img class="body-content-img" src="https://hippo.vn/wp-content/themes/babystreet/image/search-no-results.jpg" alt="">
             <a href="{{route('products.filter')}}">
-            <button action="">Trở về nơi bắt đầu.?</button>
+            <button action="" class="body-footer-seemore">Trở về nơi bắt đầu.?</button>
         </a>
         </div>
 

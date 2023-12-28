@@ -47,6 +47,7 @@
                     @endforeach
                     <!-- =============  end list  ============ -->
                     
+                    
                    
                 </div>
 
@@ -58,12 +59,12 @@
                         </a>
                     </div>
                 </div>
-                <div >
+                
+            </div>
+            <div class="choose-location-btn">
                     <a class="body-footer-seemore" href="">TRỞ LẠI</a>
                     <a class="body-footer-seemore" href="">TIẾP TỤC</a>
-
                 </div>
-            </div>
 
          
         </div>
