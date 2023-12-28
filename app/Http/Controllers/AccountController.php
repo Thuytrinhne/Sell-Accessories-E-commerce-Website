@@ -81,7 +81,7 @@ public function storeUser(Request $request)
     }
 // =======================  END Thêm xoá sửa user =========================
 
-    public function search(){
-        return AccountService::search();
+    public function search(Request $request){
+        return AccountService::search($request);
     }
 }

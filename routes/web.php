@@ -150,10 +150,10 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
   
 
-   Route::any('/search', [AccountController::class,'search'] ) -> name('admin.search_account');;
+   Route::match(['get','post'],'/search', [AccountController::class,'search'] ) -> name('admin.search_account');;
    Route::prefix('account')->group( function(){
       // hiển thị danh sách danh mục 
-      Route::get('/', [AccountController::class,'index'])->name('admin.account');
+      Route::any('/', [AccountController::class,'index'])->name('admin.account');
       // // xử lý thêm danh mục
       Route::prefix('add') -> group(function(){
          Route::match(['GET','POST'],'/admin', [AccountController::class,'storeAdmin'])->name('store.admin');
@@ -208,7 +208,6 @@ Route::post('/customer/address/add', [User_AddressController::class,'store'])->n
 Route::get('/customer/address/delete/{id}', [User_AddressController::class,'destroy'])->name('front.handle-delete-address');
 Route::get('/customer/address/edit/{id}', [User_AddressController::class,'edit'])->name('front.edit-address');
 Route::post('/customer/address/edit', [User_AddressController::class,'update'])->name('front.handle-edit-address');
-
 
 
 // end địa chỉ customer

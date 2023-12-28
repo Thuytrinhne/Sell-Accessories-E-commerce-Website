@@ -120,7 +120,7 @@ class ProductService
             'product.name_product', 'product.id', 'product.default_image','product_item.discount_price',
         )
         ->where('product.category_id', '=', $category->id )
-        ->take(32)
+        ->take(5)
         ->get();
 
         return view('front.product-order-screens.detail-product',['product' => $products,'category' => $products],compact('variation_value','relatedProduct'));
@@ -172,7 +172,7 @@ class ProductService
             'product.name_product','product.id', 'product.default_image',
             'product_item.price', 'product_item.discount_price',
         )
-        ->take(10)
+        ->take(32)
         ->get();   
 
         $categories = category::get();
@@ -275,7 +275,7 @@ class ProductService
             ->orWhereBetween('product.updated_at', [$startDate, $endDate])
             ->paginate(10);
 
-            return(view('admin.report',compact('products','categories')));
+            return(view('admin.report',compact('products','categories'))->with('product_report'));
         }
 
         $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
@@ -290,8 +290,8 @@ class ProductService
         {
             return redirect()->back()->with('Notfound', 'Không có sản phẩm nào phù hợp!!!');
         }
-        
-        return(view('admin.report',compact('products','categories')));
+
+        return(view('admin.report',compact('products','categories'))->with('product_report'));
     }
 
     public static function getModalProduct($product)

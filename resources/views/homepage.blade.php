@@ -117,7 +117,7 @@
                   @foreach($categories as $item)
                   <div class="body-category-item">
                       <a href="{{ route('get.products.by.category',[$item->id]) }}" class="body-category-link">
-                          <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
+                          <img src="{{ $item->image_category }}" alt="" class="body-category-img">
                           <h3 class="body-category-name">{{ $item->name_category }}</h3>
                       </a>
                   </div>

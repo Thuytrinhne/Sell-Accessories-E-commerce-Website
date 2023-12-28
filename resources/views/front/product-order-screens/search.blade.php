@@ -1,10 +1,9 @@
 @extends ('layouts.app')
 @section('css')
-<link rel="stylesheet" hrex="{{asset('Assets/css/front/filter.css')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('body-main')
-
+<link rel="stylesheet" href="{{asset('Assets/css/front/filter.css')}}">
 <div class="container" >
                  <!-- begin breadcrumbs -->
                 <div class="row__header-filter" >
@@ -12,7 +11,7 @@
                         <div class="breadcrumbs" >
                             <a href="" class="breadcrumbs__a">Trang chủ</a>
                             <spand class="breadcrumbs__slash" >/</spand>
-                            <a href="" class="breadcrumbs__a breadcrumbs__a--active">Shop   </a>
+                            <a href="" class="breadcrumbs__a breadcrumbs__a--active">Shop </a>
                         </div>
                     </div>
                       <h1 class="filter__tittle">

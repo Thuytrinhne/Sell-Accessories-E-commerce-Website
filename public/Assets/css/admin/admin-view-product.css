@@ -69,7 +69,7 @@
     width: 200px;
 }
 
-.selection_list nav {
+.selection_list > nav {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +80,14 @@
     border-radius: 10px;
 }
 
-.selection_list nav p {
+.product_paginate {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translate(50%,50%);
+}
+
+.selection_list > nav p {
     font-size: 18px;
     text-align: center;
     justify-content: center;
@@ -104,7 +111,7 @@
 }
 
 
-.selection_list nav button {
+.selection_list > nav button {
     font-size: 14px;
     width: 70px;
     white-space: nowrap;
