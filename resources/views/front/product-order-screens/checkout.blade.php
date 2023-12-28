@@ -22,7 +22,6 @@
                 <div class="location-list_container">
                     <div class="order-info">
                         <h1>Thông tin nhận hàng</h1>
-                        <!-- <a href="choose-location.html">Thay đổi</a> -->
                     </div>
                     <!-- =============  location list  ============ -->
                     <div class="location-list">
@@ -32,18 +31,17 @@
                             </div>
                             <div class="location-detailPlus">
                                 <div class="location-detail">
-                                    <strong></strong>
-                                    -
-                                    0961432414
+                                    <strong>{{$defaultAddress->full_name}} </strong>
+                                    - {{$defaultAddress->phone}}
                                 </div>
                                 <div class="area">
-                                    Hội Sơn, An Hoà Hải, Tuy An, Phú Yên
+                                {{$defaultAddress->city}}, {{$defaultAddress->district}}, {{$defaultAddress->village}}, {{$defaultAddress->detail_address}}
                                 </div>
                             </div>
-                            <a href="checkout/choose-location">Thay đổi</a>
-                        </div>
-            <form action="{{ route('checkout-success') }}" method="POST" >
+                            <a href="{{ route('choose-location-checkout', ['id' => $defaultAddress->id]) }}">Thay đổi</a>                        </div>
+                            <form action="{{ route('checkout-success') }}" method="POST" >
                             @csrf
+                        <input style="display: none" name="idUserAddress" value="{{$defaultAddress->id}}">
                         <div class="info_input">
                             <label for="">GHI CHÚ ĐƠN HÀNG</label><br>
                             <textarea name="order_note" id="" cols="30" rows="10" placeholder="Ghi chú vào đây..." value=""></textarea>

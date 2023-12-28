@@ -10,6 +10,15 @@ use Auth;
 
 class User_AddressRespository 
 {
+      public static function getAllUserAddress()
+      {
+      
+      return   user_address::select('user_address.id','user_address.full_name', 'user_address.phone', 'address.city', 'address.district', 'address.village', 'address.detail_address')
+          ->join('address', 'user_address.address_id', '=', 'address.id')
+          ->where('user_address.user_id', Auth()->user()->id)
+          ->get();
+          
+      }
       public static function getUserAddressDefault()
       {
        

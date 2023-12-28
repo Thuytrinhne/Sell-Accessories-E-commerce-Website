@@ -13,7 +13,6 @@ class User_AddressService
               $addressDefault = User_AddressRespository::getUserAddressDefault();
               $addressNotDefault = User_AddressRespository::getUserAddressNotDefault();
               return view('front.customer.customer_address.address', compact('addressDefault', 'addressNotDefault'));
-
         }
         public static  function create ()
         {
@@ -54,6 +53,16 @@ class User_AddressService
             User_AddressRespository::update($request);
             return redirect()->back()->with('updateAddressSuccess', 'Chỉnh sửa địa chỉ mới thành công');
 
+        }
+        public static function changeCheckoutAddress($id)
+        {
+            $listUserAddress = User_AddressRespository::getAllUserAddress();
+            return view('front.product-order-screens.choose-location', compact('listUserAddress', 'id'));
+ 
+        }
+        public static  function addCheckoutAddress()
+        {
+            return view('front.product-order-screens.add-location');
         }
 
 

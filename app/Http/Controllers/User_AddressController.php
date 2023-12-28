@@ -11,14 +11,18 @@ use App\Http\Requests\User_AddressRequest;
 
 class User_AddressController extends Controller
 {
+    // display page choose-address when check out 
+    public function changeCheckoutAddress($id)
+    {
+        return User_AddressService::changeCheckoutAddress($id);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return User_AddressService::index();
-        // $product_item_cart = CartController::getCartitem();
-        // return view('front.product-order-screens.choose-location', compact('product_item_cart'));
+       
     }
 
     public function addAddress() {
@@ -75,5 +79,9 @@ class User_AddressController extends Controller
        
         return User_AddressService::destroy($id);
 
+    }
+    public function addCheckoutAddress()
+    {
+        return User_AddressService::addCheckoutAddress();
     }
 }
