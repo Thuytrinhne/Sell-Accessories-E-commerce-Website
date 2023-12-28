@@ -17,7 +17,7 @@
                     <button href="#" class="product_list" onclick="showContent('selection_list')">Danh sách chi tiết sản phẩm</button>
                 </div>
                 @foreach($item as $item)
-                <form action="{{route('admin.product.item.update',[$itemID])}}" method="POST" class="selection selection_add" id="addForm" style= "display:block">
+                <form action="{{route('admin.product.item.update',[$itemID])}}" method="POST" class="selection selection_add" id="addForm" style= "display:block" enctype="multipart/form-data" >
                    @csrf
                    
                     <div class="addCard">
@@ -40,19 +40,34 @@
                             <input type="text" placeholder="Nhập SKU" name="SKU" value=" {{$item->SKU}} ">
                         </div>
 
-                        <div class="amountAdd">
-                            <label>Variation:</label>
-                            <input type="text" placeholder="Số lượng" name="name" value=" {{$item->name}} ">
+                        <div class="amountAdd" style="display:flex;">
+                            <label>Variation name:</label>
+                            <select style="font-size: 15px" id ="options"
+                                    class="form-select" aria-label="Default select example" 
+                                    name="name" value=" {{$item->name}}" disabled>
+                                @foreach($variation as $variation)
+                                    <option value="{{$variation->name}}">{{$variation->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        <div class="nameAdd">
-                            <label>Variation_option: </label>
-                            <input type="text" placeholder="Nhập SKU" name="value" value=" {{$item->value}} ">
-                        </div>
+                        
+
+                        @if($item->name == 'màu')
+                            <div class="nameAdd" id="colorPickerContainer" style="display:flex;">
+                                <label for="exampleColorInput" class="form-label">Variation value: </label>
+                                <input type="color" class="form-control form-control-color" name="variation_value" value=" {{$item->variation_value}}"  title="Choose your color">
+                            </div>
+                        @else
+                            <div class="nameAdd" id="sizeInputContainer" style="display:flex;">
+                                <label for="exampleColorInput" class="form-label">Variation value: </label>
+                                <input type="text"  name="variation_value" value=" {{$item->variation_value}}"  title="Choose your size">
+                            </div>
+                        @endif
 
                         <div class="imageAdd">
                             <label>Ảnh sản phẩm: </label>
-                            <img src="/Assets/Images/image-add.png" name="image">
+                            <input type="file"  name="image" value=" {{$item->image}}"  title="Choose your image">
                         </div>
                         
                         <input type="submit" class="confirmAdd">
@@ -61,5 +76,22 @@
                     
                 </form>
                 @endforeach
+                <!-- <script>
+                    // Lắng nghe sự kiện thay đổi của select
+                    document.getElementById('options').addEventListener('change', function () {
+                        var selectedValue = this.value;
+
+                        document.getElementById('colorPickerContainer').style.display = 'none';
+                        document.getElementById('sizeInputContainer').style.display = 'none';
+                        
+                        if (selectedValue === 'màu') {
+                            document.getElementById('colorPickerContainer').style.display = 'block';
+                        } else if (selectedValue === 'size') {
+                            document.getElementById('sizeInputContainer').style.display = 'block';
+                        }
+                    });
+                </script> -->
+                
             </div>
 @endsection
+

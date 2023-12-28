@@ -8,6 +8,7 @@ use DB;
 use App\Http\Controllers\CartController;
 use App\Service\OrderService;
 use App\Http\Requests\OrderRequest;
+use App\Http\Controllers\PaymentController;
 
 
 class OrderController extends Controller
@@ -53,8 +54,13 @@ class OrderController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        return OrderService::store($request);
+    {   
+        if($request->input('method_payment') == "Thanh toán tiền mặt"){
+            return OrderService::store($request);
+        }
+        else {
+            return PaymentController::vnpay_payment($request);
+        }
     }
 
     /**
@@ -84,8 +90,8 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(order $order)
+    public function destroy($id)
     {
-        //
+        return OrderService::destroy($id);
     }
 }

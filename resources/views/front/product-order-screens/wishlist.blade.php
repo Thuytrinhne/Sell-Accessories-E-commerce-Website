@@ -3,6 +3,23 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/wishlist.css')}}">
 @endsection
 @section('body-main')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- code trinh  -->
+@if (session ('deleteSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('deleteSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <div class="checkout">
         <div class="checkout_container">
             <div class="backhome" style="font-size: 12px;">
@@ -31,9 +48,9 @@
           
             <div class="product_box">
                 <div class="cancel_button">
-                    <button href="" class="cancel_btn">
+                    <a href="{{route('wishlist.delete',  ['idWishlistItem' => $item->id])}}" class="cancel_btn">
                         <i class="fa-solid fa-circle-xmark"></i>
-                    </button>
+                    </a>
                 </div>
                 <img src="./Assets/Images/product_img.jpeg" alt="">
                 <div class="product_info">
@@ -53,11 +70,12 @@
                 </div>
                 @endif
                 
-                @if(!($item->product_item_id == NULL))
+                @if(($item->product_id == -1))
                 <div class="product_info">
                     <a class="product_name" >Thêm vào giỏ hàng</a>
                 </div>
                 @else
+
                 <div class="product_info">
                     <a href=""
                      class="product_name">

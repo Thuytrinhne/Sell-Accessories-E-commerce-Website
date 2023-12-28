@@ -67,86 +67,25 @@
                         <input type="radio" required >
                         <label for="">Đặt làm địa chỉ mặc định</label><br>
                     </div>
-
+                    <div>
+                    <button type="" class="addLocation-btn">
+                        Trở lại 
+                    </button>
                     <button type="submit" class="addLocation-btn">
                         Thêm địa chỉ 
                     </button>
+                  
+                    </div>
                 </form>
-
+               
                 
 
 
             </div>
-
-            <div class="payment_total">
-                <div class="payment_total_container">
-                    <div class="payment_preview">
-                        <h3>Sản phẩm</h3>
-                        <h3>Tạm tính</h3>
-                        <!-- =================  product list  =================== -->
-                        <div class="product_list">
-                            <div class="product_name_container">
-                                <p class="product_name">Tên sản phẩm x giá</p>
-                                <dl class="variation" >
-                                    <dt class="variation_color">Color: </dt>
-                                    <dd class="variation_color">
-                                        <p>Be</p>
-                                    </dd>
-                                </dl>
-                            </div>
-
-                            <p>130.000đ</p>
-                        </div>
-                        
-
-                        <div class="product_list">
-                            <div class="product_name_container">
-                                <p class="product_name">Tên sản phẩm x giá</p>
-                                <dl class="variation" >
-                                    <dt class="variation_color">Color: </dt>
-                                    <dd class="variation_color">
-                                        <p>Be</p>
-                                    </dd>
-                                </dl>
-                            </div>
-
-                            <p>130.000đ</p>
-                        </div>
-                        <!-- =================  product list  =================== -->
-
-                        <h3>Tạm tính</h3>
-                        <p>130.000đ</p>
-                        <h3>Giao hàng</h3>
-                        <p>ĐỒNG GIÁ: 35.000đ</p>
-                        <h3>Tổng</h3>
-                        <p style="font-size: 18px; font-weight: bold; color: black;">165.000đ</p>
-
-                        <div class="payment_methods">
-                            <h2>Phương thức thanh toán</h2>
-                            <div class="methods">
-                                <form action="">
-                                    <div class="pick_methods">
-                                        <input type="radio" name="" id="" > Chuyển khoản ngân hàng <br>
-                                        <p>description</p>
-                                    </div>
-                                    
-                                    <div class="pick_methods">
-                                        <input type="radio" name="" id=""> Thanh toán tiền mặt
-                                        <p>description</p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <p class="privacy">privacy</p>
-
-                        <div class="order_btn">
-                            <a>Đặt hàng</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
+           
         </div>
+       
     </div>
 
     </div>

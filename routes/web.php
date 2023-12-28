@@ -251,14 +251,11 @@ Route::post('/pass-verify/{token}', [AccessController::class,'handlePassVerify']
 Route::get('/checkout',[OrderController::class, 'indexCheckout'] )->name('checkout');
 Route::get('/checkout/{id}', [OrderController::class, 'ReCheckout'])->name('re-checkout');
 Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
-Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
-Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');
-Route::get('/checkout/choose-location', function () {
-    return view('front.product-order-screens.choose-location');
- })->name('choose-location');
- Route::get('/checkout/add-location', function () {
-    return view('front.product-order-screens.add-location');
- })->name('add-location');
+
+Route::get('/change-location/{id}', [User_AddressController::class, 'changeCheckoutAddress'])->name('choose-location-checkout');
+Route::get('/add-location', [User_AddressController::class, 'addCheckoutAddress'])->name('add-location-checkout');
+
+
 //  Route::get('/wishlist', function () {
 //     return view('front.product-order-screens.wishlist');
 //Cổng thanh toán điện tử

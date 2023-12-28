@@ -81,8 +81,13 @@ class AccessService
     }
     public static function logout()
     {
+        $role = Auth::user()->role_id;
         Auth::logout();
+        if($role==1)
         return redirect()->route('homepage');
+        else if($role==3)
+        return redirect()->route('loginAdmin');
+
     }
     public static function forgotPassword()
     {
@@ -162,9 +167,9 @@ class AccessService
     }
     public static function updateInforUser(Request $request)
     {
-        AccountRespository::updateInfor($request->full_name, $request->sex, $request->birth);
-
-        return redirect()->back()->with('updateInforSuccess', 'Thay đổi mật khẩu thành công');
+        $user =  Auth::user();
+        AccountRespository::updateInfor($user,$request->full_name, $request->gender, $request->birth);
+        return redirect()->back()->with('updateInforSuccess', 'Thay đổi thông tin thành công');
 
     }
 

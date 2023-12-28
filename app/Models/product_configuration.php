@@ -15,9 +15,9 @@ class product_configuration extends Model
         return $this->belongsTo(product_item::class);
     }
 
-    public function variationOptions()
+    public function variation()
     {
-        return $this->belongsTo(variation_option::class);
+        return $this->belongsTo(variation::class);
     }
 
 }

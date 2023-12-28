@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class user_address extends Model
+class product_images extends Model
 {
     use HasFactory;
-    protected $table ='user_address';
-    protected $fillable = ['full_name','phone']; 
+
+    public function product()
+    {
+        return $this->belongsTo(product::class);
+    }
 }

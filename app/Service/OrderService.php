@@ -10,6 +10,7 @@ use App\Http\Requests\OrderRequest;
 use Auth;
 use DB;
 use App\Models\Respositories\CartRespository;
+use  App\Models\Respositories\User_AddressRespository;
 
 class OrderService {
     public static function index(Request $request)
@@ -102,6 +103,9 @@ class OrderService {
     
 
     public static function indexCheckout() {
+        // lấy địa chỉ mặc định 
+        $defaultAddress = User_AddressRespository::getUserAddressDefault();
+        
         $product_item_cart = CartController::getCartitem();
         //Lấy đặt hàng từ giỏ hàng ra checkout
        $total=0;
@@ -109,7 +113,7 @@ class OrderService {
             $total += $item->price * $item->quantity;   
         }
         
-        return view('front.product-order-screens.checkout', compact('product_item_cart','total'));
+        return view('front.product-order-screens.checkout', compact('product_item_cart','total', 'defaultAddress'));
     }
 
     public static function ReCheckout($id) {
