@@ -96,7 +96,6 @@ class ProductService
         ->where('product.id', '=', $id )
         ->first();
         
-
         $variation_value = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
@@ -108,23 +107,23 @@ class ProductService
         ->where('product.id', '=', $id )
         ->get();
 
-        $category_id = product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        $category = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->select( 
-            'category.id',
+            'category.id','category.name_category'
         )
         ->where('product.id', '=', $id )
         ->first();
 
         $relatedProduct = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->select( 
-            'product.name_product', 'product.id', 'product.default_image',
+            'product.name_product', 'product.id', 'product.default_image','product_item.discount_price',
         )
-        ->where('product.category_id', '=', $category_id->id )
+        ->where('product.category_id', '=', $category->id )
         ->take(32)
         ->get();
 
-        return view('front.product-order-screens.detail-product',['product' => $products],compact('variation_value','relatedProduct'));
+        return view('front.product-order-screens.detail-product',['product' => $products,'category' => $products],compact('variation_value','relatedProduct'));
     }
 
     public static function edit($id)
@@ -166,7 +165,6 @@ class ProductService
 
     public static function getProduct()
     {
-
         // Lấy 10 sản phẩm mới tạo gần đấy nhất hiện thị trong sản phẩm mới
         $products= product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->orderBy('product.created_at','desc')
@@ -177,8 +175,8 @@ class ProductService
         ->take(10)
         ->get();   
 
-        $categories = category::take(5)->get();
-        
+        $categories = category::get();
+
         return view('homepage',compact('products','categories'));
     }
 

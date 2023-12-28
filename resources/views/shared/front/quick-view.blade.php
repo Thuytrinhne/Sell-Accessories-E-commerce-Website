@@ -21,7 +21,7 @@
               <div class="row" id="variation_value">  
               </div>
 
-              <input type="number" name="quantity" id="input-number" value="" min="1" max="10000">
+              <input type="number" name="quantity" id="input-number" value="1" min="1" max="10000">
 
               <div class="row info-category" style="margin-top: 20px;" id="name_category">
               </div>
@@ -152,7 +152,7 @@
         });
     });
 
-    let inputQuantity = 0;
+    let inputQuantity = 1;
 
     document.addEventListener('DOMContentLoaded', function () {
         var inputElement = document.getElementById('input-number');
