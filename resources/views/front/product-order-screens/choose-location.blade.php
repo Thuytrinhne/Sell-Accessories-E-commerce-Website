@@ -1,7 +1,7 @@
 @extends ('layouts.app')
 @section('css')
 <link rel="stylesheet" href="{{asset('Assets/css/front/choose-location.css')}}">
-@endsection
+@endsection;
 @section('body-main')
 <div class="checkout-main">
 <div class="checkout">
@@ -26,9 +26,9 @@
                     <div class="location-list">
                         <div class="location-tick">
                             @if($id==$item->id)
-                            <input type="radio" name="location-info" id="location-info" checked>
+                            <input value ="{{$item->id}}" type="radio" name="location-info" id="location-info" checked>
                             @else                        
-                            <input type="radio" name="location-info" id="location-info">
+                            <input value = "{{$item->id}}" type="radio" name="location-info" id="location-info">
 
                             @endif
                         </div>
@@ -47,7 +47,6 @@
                     @endforeach
                     <!-- =============  end list  ============ -->
                     
-                    
                    
                 </div>
 
@@ -59,15 +58,40 @@
                         </a>
                     </div>
                 </div>
-                
-            </div>
-            <div class="choose-location-btn">
-                    <a class="body-footer-seemore" href="">TRỞ LẠI</a>
-                    <a class="body-footer-seemore" href="">TIẾP TỤC</a>
+                <div >
+                    <a class="body-footer-seemore" href="#" onclick="generateURLBack(event)" >TRỞ LẠI</a>
+                    <a class="body-footer-seemore" href="#" onclick="generateURL(event)">TIẾP TỤC</a>
+
                 </div>
+            </div>
 
          
         </div>
     </div>
     </div>
+    <script>
+                    var idUserAddressChoosed = document.querySelector('input[name="location-info"]:checked').value;
+                    document.cookie = "idUserAddressChoosed=" + encodeURIComponent(idUserAddressChoosed) + "; path=/; expires=Thu, 01 Jan 2024 00:00:00 UTC;"
+                    function generateURL(event) {
+                        event.preventDefault()
+                        var idUserAddress = document.querySelector('input[name="location-info"]:checked').value;
+                        var url = "{{ route('handle-choose-location-checkout', ['id' => '14']) }}";
+                        url = url.replace('14',idUserAddress);
+                        window.location.href = url;
+                        
+                   
+                    }
+                    function generateURLBack(event) {
+                        event.preventDefault()
+                        var idUserAddress = document.querySelector('input[name="location-info"]:checked').value;
+                        var url = "{{ route('handle-choose-location-checkout', ['id' => '14']) }}";
+                        url = url.replace('14',idUserAddressChoosed);
+                        window.location.href = url;
+                        
+                   
+                    }
+                    
+                    
+                        
+    </script>
 @endsection

@@ -75,14 +75,14 @@ class CartController extends Controller
         // Lấy ra cart mới nhất;
         $cart = cart::where('user_id', '=', Auth()->user()->id)->latest('created_at')->select('cart.id')->first();
         $product_item = product_item::find($item);
-        $item_in_cart = cart_item::with('cart')->where('cart_item.product_item_id','=',$item)->where('cart_item.cart_id', '=',$cart )
+        $item_in_cart = cart_item::with('cart')->where('cart_item.product_item_id','=',$item)->where('cart_item.cart_id', '=',$cart->id )
         ->latest('created_at')->first();
-        
+      
         // Nếu đã có tăng số lượng
         if($item_in_cart)
         {
             $item_in_cart->quantity += $request->quantity;
-         
+            $item_in_cart->save();
         } else // Nếu không thêm mới
         {
             $cartItem = new cart_item;

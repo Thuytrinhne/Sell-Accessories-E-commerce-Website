@@ -22,13 +22,15 @@ class PaymentController extends Controller
         // $order->date_order = $currentDateTime;
         $order->cart_id = $data['idCart'];
         $order->note = $request->input('order_note');
-        $order->payment_id = 2;                 
+        $order->payment_id = 2;     
+        $order->address_shipping_id= $request->input('idUserAddress');               
+            
         $order->save(); 
         // tạo order xong thì tạo cart mới 
         CartRespository::store();
         // thanh toán VNPAY
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://127.0.0.1:8000/";
+        $vnp_Returnurl = "http://127.0.0.1:8000/checkout-success/".$order->id;
         $vnp_TmnCode = "1VONXYET";//Mã website tại VNPAY 
         $vnp_HashSecret = "LSEXPOKTASYMIDNFZXJDCDTOMHAJQMPC"; //Chuỗi bí mật
         $vnp_TxnRef = $order->id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY

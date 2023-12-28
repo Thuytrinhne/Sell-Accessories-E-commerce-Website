@@ -13,27 +13,23 @@ use App\Models\Respositories\CartRespository;
 use  App\Models\Respositories\User_AddressRespository;
 
 class OrderService {
-    public static function index(Request $request)
+    public static function index()
     {
-        $userId = Auth()->user()->id;
-        $user_order = DB::select ("SELECT cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id, `order`.id, payment.name_method, `order`.date_order,`order`.status,
-                                        product_configuration.name_color,product_configuration.variation_value, product_configuration.variation_id 
-                                    FROM
-                                            `order`, cart_item, product_item, product,product_configuration, payment
-                                    WHERE
-                                            `order`.cart_id = cart_item.cart_id  
-                                          
-                                            and cart_item.product_item_id = product_item.id
-                                            and product_item.product_id = product.id
-                                            and `order`.user_id =$userId
-                                            and `order`.payment_id = payment.id
-                                            and product_configuration.product_item_id = product_item.id
-                                        
-                ");  
+        // đếm số lượng đơn hang
+        $user_order = [];
+        $orderCount = OrderRespository::countOrderOfUser();
+        foreach ( $orderCount as $order) {
+           
+            $order =OrderRespository::getInforOrderById($order->id);
+            $user_order[] = $order;
+
+
+        }
+        // dd( $user_order);
+    
         
         // $user_order = order::with('cart', 'cart.cartItems', 'cart.cartItems.productItems','cart.cartItems.productItems.product')->get();
-        $product_item_cart = CartController::getCartitem();
-        return view('.front.customer.history-orders',compact('user_order', 'product_item_cart'));
+        return view('.front.customer.history-orders',compact('user_order'));
     }
 
     public static function indexFilter($id)
@@ -63,8 +59,9 @@ class OrderService {
     }
 
     public static function DetailOrder($id) {
+       
         $id = $id;
-        $product_item_cart = CartController::getCartitem();
+        
 
         $user_order_infor = DB::select("
             SELECT distinct user.full_name, user.phone, detail_address, `order`.id, date_order
@@ -97,15 +94,56 @@ class OrderService {
             foreach($user_order as $item) {
                 $total_price += $item->price * $item->quantity;
             }
-                    return view('front.customer.detail-order',compact('product_item_cart','user_order','total_price','user_order_infor'));
+        return view('front.customer.detail-order',compact('user_order','total_price','user_order_infor'));
     }
+    public static function DetailOrderAdmin($id) {
+       
+        $id = $id;
+        
+
+        $user_order_infor = DB::select("
+        SELECT distinct payment.name_method, user_address.full_name, user_address.phone,city, district, village, detail_address, `order`.id, date_order, `order`.status       
+        FROM
+            user_address, address, `order`,user, payment
+        WHERE
+            user_address.address_id = address.id
+            and `order`.id = $id
+            and `order`.user_id = user.id
+            and user_address.id = `order`.`address_shipping_id`
+            and payment.id = `order`.`payment_id`
+                
+                
+        ");
+        
     
+
+        $user_order = DB::select ("SELECT distinct cart_item.quantity,product.name_product,product_item.price, product.description
+        
+        FROM
+                `order`, cart, cart_item, product_item, product, user
+        WHERE
+                `order`.cart_id = cart_item.cart_id
+                and cart_item.product_item_id = product_item.id
+                and product_item.product_id = product.id
+                and `order`.user_id = user.id
+                and `order`.id = '$id'
+                ");  
+
+            $total_price=0;
+            foreach($user_order as $item) {
+                $total_price += $item->price * $item->quantity;
+            }
+        return view('admin.detail-order',compact('user_order','total_price','user_order_infor'));
+    }
     
 
     public static function indexCheckout() {
         // lấy địa chỉ mặc định 
         $defaultAddress = User_AddressRespository::getUserAddressDefault();
-        
+        return OrderService::handleIndexCheckout($defaultAddress);
+    }
+    public static function handleIndexCheckout ($defaultAddress)
+    {
         $product_item_cart = CartController::getCartitem();
         //Lấy đặt hàng từ giỏ hàng ra checkout
        $total=0;
@@ -117,9 +155,11 @@ class OrderService {
     }
 
     public static function ReCheckout($id) {
+        $defaultAddress = User_AddressRespository::getUserAddressDefault();
+
         $id = $id;
         $product_item_cart = DB::select("
-        SELECT product.name_product,cart_item.quantity,product_item.price,cart_item.id,
+        SELECT cart_item.cart_id, product.name_product,cart_item.quantity,product_item.price,cart_item.id,
         product_configuration.name_color,product_configuration.variation_value, product_configuration.variation_id 
                                     FROM cart_item, product_item, product, product_configuration
                                     WHERE
@@ -133,7 +173,7 @@ class OrderService {
             $total += $item->price * $item->quantity;   
         }
        
-        return view('front.product-order-screens.checkout', compact('product_item_cart','total'));
+        return view('front.product-order-screens.checkout', compact('product_item_cart','total', 'defaultAddress'));
     }
 
     public static function checkoutSuccess($id) {

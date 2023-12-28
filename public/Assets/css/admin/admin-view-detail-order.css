@@ -1,0 +1,13 @@
+.containerDetail {
+    display: flex;
+    flex-direction: column;
+}
+.container_all {
+    display: flex;
+}
+.container_all-item1 {
+    flex: 7;
+}
+.container_all-item2 {
+    flex: 3;
+}

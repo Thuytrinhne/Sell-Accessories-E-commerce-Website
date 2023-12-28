@@ -98,6 +98,8 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
    })->name('admin.product');
 
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
+    Route::get('/order/detail/{id}', [OrderController::class, 'DetailOrderAdmin'])->name('admin.detailOrder');
+
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
     //Thêmm route xử lí report sản phẩm
     
@@ -253,7 +255,10 @@ Route::get('/checkout/{id}', [OrderController::class, 'ReCheckout'])->name('re-c
 Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
 
 Route::get('/change-location/{id}', [User_AddressController::class, 'changeCheckoutAddress'])->name('choose-location-checkout');
+Route::get('/handleChange-location/{id}', [User_AddressController::class, 'handleChangeCheckoutAddress'])->name('handle-choose-location-checkout');
 Route::get('/add-location', [User_AddressController::class, 'addCheckoutAddress'])->name('add-location-checkout');
+Route::post('/add-location', [User_AddressController::class, 'storeAddressCheckout'])->name('handle-add-location-checkout');
+Route::get('/back/{id}', [User_AddressController::class, 'backChooseLocation'])->name('back-choose-location');
 
 
 //  Route::get('/wishlist', function () {
