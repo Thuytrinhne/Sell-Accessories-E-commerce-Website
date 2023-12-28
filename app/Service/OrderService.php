@@ -102,7 +102,7 @@ class OrderService {
         
 
         $user_order_infor = DB::select("
-        SELECT distinct payment.name_method, user_address.full_name, user_address.phone,city, district, village, detail_address, `order`.id, date_order, `order`.status       
+        SELECT distinct payment.name_method, user_address.full_name, user_address.phone,city, district, village, detail_address, `order`.id, date_order, `order`.status, `order`.note     
         FROM
             user_address, address, `order`,user, payment
         WHERE
@@ -213,5 +213,10 @@ class OrderService {
         };
         
         return redirect()->back()->with('DestroySuccess', 'Xóa thành công');
+    }
+    public static function updateStatus(Request $request)
+    {
+        OrderRespository::updateStatus($request->idOrder, $request->status);
+        return redirect()->back()->with("updateStatusSuccess", "Cập nhật trạng thái đơn hàng thành công !");
     }
 }

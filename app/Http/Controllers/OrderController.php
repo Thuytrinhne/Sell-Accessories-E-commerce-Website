@@ -97,4 +97,8 @@ class OrderController extends Controller
     {
         return OrderService::destroy($id);
     }
+    public function updateStatus(Request $request)
+    {
+        return OrderService::updateStatus($request);
+    }
 }

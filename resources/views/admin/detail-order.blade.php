@@ -8,6 +8,21 @@
 @endsection
 
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session ('updateStatusSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('updateStatusSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <div class="container containerDetail">
         <div class="row title">
             <h1>Chi tiết đơn hàng</h1>
@@ -60,14 +75,47 @@
 
                     <div class="row progress">
                         <ul class="progress-lists">
-                            <li class="active"> Đặt hàng thành công</li>
-                            <li class="active">Kiểm hàng và đóng gói</li>
-                            <li class="active">Chuyển hàng cho shiper</li>
-                            <li>Nhận hàng thành công</li>
+                            @if($user_order_infor[0]->status ==1)
+                            <li class="active">Chưa xử lý</li>
+                            <li>Đã xử lý</li>
+                            <li>Đã thanh toán</li>
+                            @elseif ($user_order_infor[0]->status ==2)
+                            <li class="active">Chưa xử lý</li>
+                            <li class="active">Đã xử lý</li>
+                            <li>Đã thanh toán</li>
+                            @else
+                            <li class="active">Chưa xử lý</li>
+                            <li class="active">Đã xử lý</li>
+                            <li class="active">Đã thanh toán</li>
+                            @endif
                         </ul>
                     </div>
-                    
-                    <div class="row details_product">
+               
+                </div>
+                <div  class="container_all-item2">
+                    <div class="change_status">
+                        <h3>Order Action</h3>
+                        <form action="{{route('admin.order.updateStatus')}}" method="POST">
+                            @csrf
+                            <input hidden type="text" name="idOrder" value="{{ $user_order_infor[0]->id}}">
+                        <select id="district-select" class="body-user-display-input" name="status" >
+                                <option value="">Choose an action</option>
+                                <option value="2">Đã xử lý</option>
+                                <option value="3">Đã thanh toán</option>
+
+
+                            </select>
+                            <button type="submit" class="body-footer-seemore btn-red btn-bottom" href="">Cập nhật</button>
+                            </form>
+                    </div>
+                    <div class="note-order">
+                    <h3>Order Note</h3>
+                    <textarea name="" id="" cols="30" rows="10">  {{$user_order_infor[0]->note}}</textarea>
+                    </div>
+                </div>
+        </div>
+             
+        <div class="row details_product">
                         <div class="row details_header">
                             <div class="col name_product">
                                 <span>Sản phẩm</span>
@@ -126,12 +174,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div  class="container_all-item2">
-                
-                    hello
-                </div>
-        </div>
     </div>
                
               

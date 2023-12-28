@@ -63,5 +63,11 @@ class OrderRespository
                 ");  
 
     }
+    public static function updateStatus($idOrder, $status)
+    {
+        $order = order::find($idOrder);
+        $order->status = $status;
+        $order->save();
+    }
    
 }

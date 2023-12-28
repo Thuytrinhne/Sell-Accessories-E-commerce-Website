@@ -72,6 +72,8 @@
                             
                         </tbody>
                     </table>
+                    {{$order_list->links()}}     
+
                 </div>
 </div>
 @endsection('content')

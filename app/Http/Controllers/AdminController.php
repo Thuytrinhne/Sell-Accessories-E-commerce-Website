@@ -6,16 +6,15 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 use App\Service\AdminService ;
+use  App\Models\order;
+
 class AdminController extends Controller
 {
     public function OrderView() {
        
-        $order_list = DB::select("
-        SELECT `order`.*, `user`.`full_name`, `user`.`email`, `user`.`phone`
-        FROM `order`, user
-        WHERE
-            `order`.user_id = 2
-        ");
+        $order_list = $orders = order::select('order.*', 'user.full_name', 'user.email', 'user.phone')
+        ->join('user', 'order.user_id', '=', 'user.id')
+        ->paginate(8);
         return view('admin.order', compact('order_list'));
     }
 
