@@ -39,8 +39,10 @@ class OrderRespository
     }
     public static function countOrderOfUser()
     {
-        
-        return order::select('id')->where('user_id', Auth()->user()->id)->get();
+       
+        return order::select('id')->where('user_id',  Auth()->user()->id)
+        ->orderByDesc('created_at')
+        ->get();
 
     }
     public static function getInforOrderById($id)

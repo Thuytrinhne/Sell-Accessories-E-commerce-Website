@@ -29,7 +29,9 @@ class OrderController extends Controller
     public function DetailOrder($id) {
         return OrderService::DetailOrder($id);
     }
-
+    public  function DetailOrderAdmin($id) {
+        return OrderService::DetailOrderAdmin($id);
+    }
     public function indexCheckout() {
       
         return OrderService::indexCheckout();

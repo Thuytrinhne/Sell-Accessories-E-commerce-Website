@@ -11,10 +11,10 @@ class AdminController extends Controller
     public function OrderView() {
        
         $order_list = DB::select("
-            SELECT * 
-            FROM `order`, user
-            WHERE
-                `order`.user_id = user.id
+        SELECT `order`.*, `user`.`full_name`, `user`.`email`, `user`.`phone`
+        FROM `order`, user
+        WHERE
+            `order`.user_id = 2
         ");
         return view('admin.order', compact('order_list'));
     }

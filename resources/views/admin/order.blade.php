@@ -56,23 +56,17 @@
                                 <td>{{ $item->total_price }}</td>
                                 <td>@switch($item->status)
                                     @case(1)
-                                        Chờ xác nhận
+                                        Chưa xử lý
                                         @break
                                     @case(2)
-                                        Đang xử lý
+                                        Đã xử lý
                                         @break
                                     @case(3)
-                                        Đang vận chuyển
+                                        Đã thanh toán
                                         @break
-                                    @case(4)
-                                        Thành công
-                                        @break
-                                    @case(5)
-                                        Đã hủy
-                                        @break
-                                        
+                                       
                                 @endswitch</td>
-                                <td><a href="{{ route('front.order_detail',[$item->id])}}"><button>Chi tiết</button></a></td>
+                                <td><a href="{{ route('admin.detailOrder',[$item->id])}}"><button>Chi tiết</button></a></td>
                             </tr>
                             @endforeach
                             

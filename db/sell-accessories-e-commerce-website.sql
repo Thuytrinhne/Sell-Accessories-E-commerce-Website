@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2023 at 06:12 AM
+-- Generation Time: Dec 28, 2023 at 11:24 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,9 @@ CREATE TABLE `address` (
 INSERT INTO `address` (`id`, `city`, `district`, `village`, `detail_address`, `created_at`, `updated_at`) VALUES
 (1, 'Quảng Ngãi', 'Bình Sơn ', 'Bình Thuận ', 'THPT Trần Kỳ Phong, thị trấn Châu Ổ', '2023-11-06 09:33:32', '2023-11-06 09:33:32'),
 (2, 'Tỉnh Cao Bằng', 'Huyện Quảng Hòa', 'Xã Tự Do', 'trường thcs bình thuận', '2023-12-24 03:17:54', '2023-12-24 03:17:54'),
-(3, 'Tỉnh Quảng Ngãi', 'Huyện Bình Sơn', 'Xã Bình Thuận', 'nhà rj á', '2023-12-24 03:18:29', '2023-12-24 03:18:29');
+(3, 'Tỉnh Quảng Ngãi', 'Huyện Bình Sơn', 'Xã Bình Thuận', 'nhà rj á', '2023-12-24 03:18:29', '2023-12-24 03:18:29'),
+(4, 'Tỉnh Vĩnh Phúc', 'Huyện Bình Xuyên', 'Thị trấn Gia Khánh', '202 lạc long quân', '2023-12-28 07:28:56', '2023-12-28 07:28:56'),
+(5, 'Tỉnh Vĩnh Phúc', 'Huyện Lập Thạch', 'Xã Đình Chu', '20', '2023-12-28 07:33:46', '2023-12-28 07:33:46');
 
 -- --------------------------------------------------------
 
@@ -65,7 +67,18 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 1, '2023-11-09 07:25:47', '2023-11-09 07:25:47'),
-(2, 2, '2023-12-24 03:10:31', '2023-12-24 03:10:31');
+(2, 2, '2023-12-24 03:10:31', '2023-12-24 03:10:31'),
+(3, 2, '2023-12-27 02:18:30', '2023-12-27 02:18:30'),
+(4, 2, '2023-12-27 02:27:15', '2023-12-27 02:27:15'),
+(5, 2, '2023-12-27 02:40:54', '2023-12-27 02:40:54'),
+(6, 2, '2023-12-27 02:44:41', '2023-12-27 02:44:41'),
+(7, 2, '2023-12-27 02:46:08', '2023-12-27 02:46:08'),
+(8, 2, '2023-12-27 02:50:09', '2023-12-27 02:50:09'),
+(9, 2, '2023-12-27 02:51:00', '2023-12-27 02:51:00'),
+(10, 2, '2023-12-27 02:51:49', '2023-12-27 02:51:49'),
+(11, 2, '2023-12-27 02:53:28', '2023-12-27 02:53:28'),
+(12, 2, '2023-12-28 08:29:14', '2023-12-28 08:29:14'),
+(13, 2, '2023-12-28 08:30:13', '2023-12-28 08:30:13');
 
 -- --------------------------------------------------------
 
@@ -89,8 +102,23 @@ CREATE TABLE `cart_item` (
 --
 
 INSERT INTO `cart_item` (`id`, `quantity`, `cart_id`, `product_item_id`, `price`, `total_money`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 32, 77, '2023-11-09 07:26:00', '2023-11-09 07:26:00'),
-(2, 2, 2, 4, 25000, 40000, '2023-12-24 03:11:20', '2023-12-24 03:11:20');
+(1, 1, 1, 1, 8000, 77, '2023-11-09 07:26:00', '2023-11-09 07:26:00'),
+(2, 2, 2, 4, 25000, 40000, '2023-12-24 03:11:20', '2023-12-24 03:11:20'),
+(10, 1, 2, 5, 35000, 35000, '2023-12-26 23:18:07', '2023-12-26 23:18:07'),
+(13, 12, 3, 1, 2000, 24000, '2023-12-27 02:26:03', '2023-12-27 02:26:03'),
+(14, 10, 4, 5, 35000, 350000, '2023-12-27 02:27:34', '2023-12-27 02:27:34'),
+(15, 20, 5, 2, 35000, 700000, '2023-12-27 02:41:24', '2023-12-27 02:41:24'),
+(16, 7, 6, 2, 35000, 245000, '2023-12-27 02:45:58', '2023-12-27 02:45:58'),
+(17, 1, 7, 3, 35000, 35000, '2023-12-27 02:50:01', '2023-12-27 02:50:01'),
+(18, 11, 8, 2, 35000, 385000, '2023-12-27 02:50:51', '2023-12-27 02:50:51'),
+(19, 1, 9, 2, 35000, 35000, '2023-12-27 02:51:43', '2023-12-27 02:51:43'),
+(20, 12, 10, 3, 35000, 420000, '2023-12-27 02:52:49', '2023-12-27 02:52:49'),
+(27, 50, 11, 1, 2000, 80000, '2023-12-28 04:54:44', '2023-12-28 05:11:10'),
+(28, 4, 11, 42, 10000, 40000, '2023-12-28 05:11:19', '2023-12-28 05:11:19'),
+(29, 1, 12, 2, 35000, 35000, '2023-12-28 08:29:36', '2023-12-28 08:29:36'),
+(30, 17, 13, 1, 2000, 2000, '2023-12-28 10:18:27', '2023-12-28 10:20:43'),
+(31, 12, 13, 4, 35000, 420000, '2023-12-28 10:19:38', '2023-12-28 10:19:38'),
+(32, 15, 13, 5, 35000, 490000, '2023-12-28 10:21:01', '2023-12-28 10:21:08');
 
 -- --------------------------------------------------------
 
@@ -186,7 +214,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `order` (
   `id` int(11) NOT NULL,
-  `date_order` datetime DEFAULT NULL,
+  `date_order` datetime DEFAULT current_timestamp(),
   `total_price` int(11) DEFAULT NULL,
   `address_shipping_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
@@ -205,8 +233,8 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `date_order`, `total_price`, `address_shipping_id`, `user_id`, `payment_id`, `shipping_cost`, `status`, `delivered_date`, `note`, `cart_id`, `created_at`, `updated_at`) VALUES
-(1, '2023-11-09 14:26:51', 135, 1, 1, 1, 35, 1, '2023-11-09 14:26:51', 'not gì đó', 1, '2023-11-09 07:26:51', '2023-11-09 07:26:51'),
-(2, '2023-11-09 14:30:42', 50000, 1, 1, 1, 35000, 1, '2023-11-16 14:30:42', NULL, 1, '2023-11-09 07:31:23', '2023-11-09 07:31:23');
+(21, '2023-12-28 15:29:14', 2735492, 3, 2, 1, 35000, 1, '2024-01-04 15:29:14', NULL, 11, '2023-12-28 08:29:14', '2023-12-28 08:29:14'),
+(22, '2023-12-28 15:30:13', 69000, 4, 2, 2, 35000, 1, '2024-01-04 15:30:13', NULL, 12, '2023-12-28 08:30:13', '2023-12-28 08:30:13');
 
 -- --------------------------------------------------------
 
@@ -259,7 +287,8 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `name_method`, `created_at`, `updated_at`) VALUES
-(1, 'Thanh toán khi nhận hàng', '2023-11-06 09:35:48', '2023-11-06 09:35:48');
+(1, 'Thanh toán khi nhận hàng', '2023-11-06 09:35:48', '2023-11-06 09:35:48'),
+(2, 'Thanh toán với VN PAY', '2023-12-27 02:33:30', '2023-12-27 02:33:30');
 
 -- --------------------------------------------------------
 
@@ -505,23 +534,6 @@ INSERT INTO `user` (`id`, `full_name`, `phone`, `email`, `password`, `role_id`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user_address`
 --
 
@@ -542,8 +554,10 @@ CREATE TABLE `user_address` (
 
 INSERT INTO `user_address` (`id`, `full_name`, `phone`, `is_default`, `address_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'Nguyễn Trần Công Trung', '0878005489', b'1', 1, 1, '2023-11-06 09:40:25', '2023-11-06 09:40:25'),
-(2, 'Nguyễn Thùy Trinh', '0896442976', b'1', 2, 2, '2023-12-24 03:17:54', '2023-12-24 03:17:54'),
-(3, 'Nguyễn Anh Tuấn Ngọc', '0896442927', b'0', 3, 2, '2023-12-24 03:18:29', '2023-12-24 03:18:29');
+(2, 'Nguyễn Thùy Trinh', '0896442976', b'0', 2, 2, '2023-12-24 03:17:54', '2023-12-28 07:28:56'),
+(3, 'Nguyễn Anh Tuấn Ngọc', '0896442927', b'0', 3, 2, '2023-12-24 03:18:29', '2023-12-24 03:18:29'),
+(4, 'Nguyễn Thị Thùy Trinh', '+84389183498', b'0', 4, 2, '2023-12-28 07:28:56', '2023-12-28 07:33:46'),
+(5, 'Nguyễn Thị Thùy Trinh', '+84389183498', b'1', 5, 2, '2023-12-28 07:33:46', '2023-12-28 07:33:46');
 
 -- --------------------------------------------------------
 
@@ -584,7 +598,8 @@ CREATE TABLE `wishlist` (
 --
 
 INSERT INTO `wishlist` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2023-11-06 09:44:35', '2023-11-06 09:44:35');
+(1, 1, '2023-11-06 09:44:35', '2023-11-06 09:44:35'),
+(2, 2, '2023-12-24 06:38:54', '2023-12-24 06:38:54');
 
 -- --------------------------------------------------------
 
@@ -594,7 +609,7 @@ INSERT INTO `wishlist` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `wishlist_item` (
   `id` int(11) NOT NULL,
-  `wislist_id` int(11) DEFAULT NULL,
+  `wishlist_id` int(11) DEFAULT NULL,
   `product_id` int(11) DEFAULT -1,
   `product_item_id` int(11) DEFAULT -1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -605,8 +620,10 @@ CREATE TABLE `wishlist_item` (
 -- Dumping data for table `wishlist_item`
 --
 
-INSERT INTO `wishlist_item` (`id`, `whislist_id`, `product_id`, `product_item_id`, `created_at`, `updated_at`) VALUES
-(3, 1, 5, NULL, '2023-11-09 07:34:21', '2023-11-09 07:34:21');
+INSERT INTO `wishlist_item` (`id`, `wishlist_id`, `product_id`, `product_item_id`, `created_at`, `updated_at`) VALUES
+(3, 1, 5, NULL, '2023-11-09 07:34:21', '2023-11-09 07:34:21'),
+(15, 2, 2, -1, '2023-12-26 22:44:07', '2023-12-26 22:44:07'),
+(16, 2, -1, 1, '2023-12-26 22:45:03', '2023-12-26 22:45:03');
 
 --
 -- Indexes for dumped tables
@@ -738,13 +755,6 @@ ALTER TABLE `user`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
 -- Indexes for table `user_address`
 --
 ALTER TABLE `user_address`
@@ -770,7 +780,7 @@ ALTER TABLE `wishlist`
 --
 ALTER TABLE `wishlist_item`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `whislist_id` (`whislist_id`),
+  ADD KEY `whislist_id` (`wishlist_id`),
   ADD KEY `product_id` (`product_id`),
   ADD KEY `product_item_id` (`product_item_id`);
 
@@ -782,19 +792,19 @@ ALTER TABLE `wishlist_item`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -824,13 +834,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -869,16 +879,10 @@ ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `variation`
@@ -887,10 +891,16 @@ ALTER TABLE `variation`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `wishlist_item`
 --
 ALTER TABLE `wishlist_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables

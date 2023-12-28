@@ -98,6 +98,8 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
    })->name('admin.product');
 
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
+    Route::get('/order/detail/{id}', [OrderController::class, 'DetailOrderAdmin'])->name('admin.detailOrder');
+
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
     //Thêmm route xử lí report sản phẩm
     
