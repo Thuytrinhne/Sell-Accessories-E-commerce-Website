@@ -1,4 +1,4 @@
-<div class="container_list">
+<div class="col-lg-2 col-md-3 col-sm-12 container_list">
             <ul class="list_item">
                 <li class="list_choice"><a href="{{route('admin.dashboard')}}"  class="dashboard">
                         <ion-icon name="home-sharp"></ion-icon>

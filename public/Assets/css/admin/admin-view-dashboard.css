@@ -8,8 +8,8 @@
 .user_infor {
     position: relative;
 }
-.logout-link
-{
+
+.logout-link {
     text-decoration: none;
 }
 
@@ -128,7 +128,7 @@
 .detail_card {
     display: flex;
     background: #f1f1f1;
-    font-size: 2em;
+    font-size: 1.5em;
     width: 350px;
     height: 200px;
     border-radius: 15px;

@@ -1,16 +1,16 @@
-.frmAddCategory
-{
+.frmAddCategory {
     display: flex;
-    
+
 }
-.frmAddCategory input
-{
+
+.frmAddCategory input {
     display: block;
 }
-.frmAdd-fitContent
-{
+
+.frmAdd-fitContent {
     height: fit-content !important;
 }
+
 .category_header {
     display: flex;
     justify-content: space-between;
@@ -74,7 +74,7 @@
 }
 
 .category_list table {
-    width: 70%;
+    width: 100%;
     border-collapse: collapse;
     margin: 25px 0px;
     font-size: 1.2em;
