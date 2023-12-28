@@ -16,7 +16,19 @@
                 </script>
             
 @endif
-
+@if (session ('addWishSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('addWishSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <!-- end code trinh  -->
 <div class="body-main">
   
@@ -82,8 +94,8 @@
                               </div>   
                             </span>  
                             
-                              <a href="" class="body-links-detail">
-                                <div class="body-circle">
+                              <a onclick="addToWishlistClick({{$item->iaddToCartAjaxshơd}}, event, )" href="#" class="body-links-detail">
+                                <div class="body-circle" >
                                   <i class="fa-regular fa-heart body-icon-black"></i>  
                                 </div>   
                                 </a>         
@@ -97,7 +109,7 @@
                  
             </div>
             <div class="body-footer">
-                  <a href="" class="body-footer-seemore">Xem tất cả</a>
+                  <a href="{{ route('products.search') }}" class="body-footer-seemore">Xem tất cả</a>
             </div>
                
             <div class="body-catogory grid">
@@ -124,7 +136,37 @@
 
 
 
-      
+      <script>
+        function addToWishlistClick(id, event)
+        {
+          event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ a
+         
+          var url = "{{ route('wishlist.add') }}";
+
+          var form = document.createElement('form');
+          form.method = 'POST';
+          form.action = url;
+          // truyền token
+          var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+          var csrfInput = document.createElement('input');
+          csrfInput.type = 'hidden';
+          csrfInput.name = '_token';
+          csrfInput.value = csrfToken;
+        
+          form.appendChild(csrfInput);
+          document.body.appendChild(form);
+          // truyền product id 
+          var ProductIdInput = document.createElement('input');
+          ProductIdInput.type = 'hidden';
+          ProductIdInput.name = 'productId';
+          ProductIdInput.value = id;
+        
+          form.appendChild(ProductIdInput);
+          document.body.appendChild(form);
+          
+          form.submit();
+        }
+      </script>
 @endsection
     <!-- modal quickview-->  
 @section ('quick-view')

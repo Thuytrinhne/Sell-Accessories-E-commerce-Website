@@ -1,6 +1,6 @@
 @extends ('layouts.app')
 @section('css')
-<link rel="stylesheet" href="{{asset('Assets/css/front/filter.css')}}">
+<link rel="stylesheet" hrex="{{asset('Assets/css/front/filter.css')}}">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('body-main')
@@ -16,10 +16,9 @@
                         </div>
                     </div>
                       <h1 class="filter__tittle">
+                        Kết quả tìm kiếm cho: "{{ $search }}"
                       </h1>
-                      <h1 class="filter__tittle">
-                        {{ $category }}
-                      </h1>
+                      
                 </div>
                  <!-- end filter_header -->
                 

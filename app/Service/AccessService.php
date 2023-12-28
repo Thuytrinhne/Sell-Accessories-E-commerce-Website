@@ -81,8 +81,13 @@ class AccessService
     }
     public static function logout()
     {
+        $role = Auth::user()->role_id;
         Auth::logout();
+        if($role==1)
         return redirect()->route('homepage');
+        else if($role==3)
+        return redirect()->route('loginAdmin');
+
     }
     public static function forgotPassword()
     {

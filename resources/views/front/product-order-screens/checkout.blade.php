@@ -42,45 +42,55 @@
                             </div>
                             <a href="checkout/choose-location">Thay đổi</a>
                         </div>
-                        <form action="{{ route('checkout-success') }}" method="POST" >
+            <form action="{{ route('checkout-success') }}" method="POST" >
                             @csrf
                         <div class="info_input">
                             <label for="">GHI CHÚ ĐƠN HÀNG</label><br>
                             <textarea name="order_note" id="" cols="30" rows="10" placeholder="Ghi chú vào đây..." value=""></textarea>
                         </div>
-                    </div>
+                        </div>
                     
                     <!-- =============  end list  ============ -->
                 </div>
             </div>
 
-            <div class="payment_total">
-                <div class="payment_total_container">
+                <div class="payment_total">
+                 <div class="payment_total_container">
                     <div class="payment_preview">
                         <h3>Sản phẩm</h3>
                         <h3>Tạm tính</h3>
                         <!-- =================  product list  =================== -->
                         
                            
-                        @foreach ($product_item_cart as $key => $item)
-                        <input style="display: none" name="idOrder" value="{{ $item->id}}">
-                        
-                        <div class="product_list">
-                            <div class="product_name_container">
-                                
-                                    <label class="product_name">
-                                        <input type="text" name="name_product" value="{{ $item->name_product }}" disabled>
-                                        <span>x</span>
-                                        <input type="number" name="quantity" value="{{ $item->quantity }}" disabled>
-                                    </label>
-                                    <label class="variation">
-                                        <span>Color:</span>
-                                        <input type="text" name="variation_value" value=""  disabled>
-                                    </label>
-                                
-                            </div>
-                            <p>{{ $item->quantity * $item->price}}</p>
-                        @endforeach
+                                    @foreach ($product_item_cart as $key => $item)
+                                    <input style="display: none" name="idCart" value="{{$item->cart_id}}">
+                                    
+                                        <div class="product_list">
+                                            <div class="product_name_container">
+                                            
+                                                <label class="product_name">
+                                                    <input type="text" name="name_product" value="{{ $item->name_product }}" disabled>
+                                                    <span>x</span>
+                                                    <input type="number" name="quantity" value="{{ $item->quantity }}" disabled>
+                                                </label>
+                                                <label class="variation">
+                                                    <span>Color:
+                                                    </span>
+                                                    
+                                                    <input type="text" name="variation_value" value=" "  disabled>
+                                                </label>
+                                            
+                                        </div>
+                                        <p>@if($item->variation_id == 1)
+                                                
+                                            {{ $item->name_color }}
+                                        
+                                        @else 
+                                            {{ $item->variation_name }}
+                                        
+                                        @endif
+                                        </p>
+                                    @endforeach
                         <!-- =================  product list  =================== -->
                         <label class="total_cart">
                         <h3>Tạm tính</h3>
@@ -90,7 +100,7 @@
                         <p>ĐỒNG GIÁ: 35.000đ</p>
                         <label for="total_price" style="display: flex">
                             <h3>Tổng</h3>
-                        <input class="total_price" type="number" name="total_price" value="{{ $total + 35000 }}" disabled>
+                        <input class="total_price" type="text" name="total_price" value="{{ $total + 35000 }}" style="background-color: transparent" readonly>
                         </label>
                         
 
@@ -111,8 +121,10 @@
 
                         <p class="privacy">privacy</p>
 
-                        <button type="summit" class="order_btn">Đặt hàng</button>
-                    </form>
+                        <button type="summit" class="order_btn" name="redirect" >Đặt hàng</button>
+                        {{-- <button type="submit" name="redirect">Thanh toán bằng thẻ</button> --}}
+            </form>
+                    
                     </div>
                 </div>
             </div>

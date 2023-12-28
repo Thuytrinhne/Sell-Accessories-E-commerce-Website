@@ -181,7 +181,7 @@
             </div>
         </div>
         <div class="cancel_button">
-            <a href="" class="cancel_btn"><img src="./Assets/Images/close_button.png" alt=""></a>
+            <a href="" class="cancel_btn"><img src="/Assets/Images/close_button.png" alt=""></a>
         </div>
     </div>`;
       

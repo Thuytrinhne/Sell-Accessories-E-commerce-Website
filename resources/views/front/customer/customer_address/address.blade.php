@@ -38,6 +38,7 @@
                   <div class="body-user-display-title1 body-user-display-title3">Sổ địa chỉ</div>
                   <div class="body-user-display-listAddress">
                     <!-- address default  -->
+                    @if ($addressDefault != null)
                     <div class="body-user-display-listAddress-border">
                    
                       <div class="body-user-display-listItem body-user-display-listItem-main">
@@ -58,6 +59,7 @@
                         </span>
                       </div>
                     </div>
+                    @endif
                     <!-- address not default -->
                     @foreach($addressNotDefault as $item)
                     <div class="body-user-display-listAddress-border">

@@ -17,7 +17,7 @@
                     </div>
             </div>
             <!-- end breadcrumbs -->
-            <h1 class="body-title-content">Kết quả tìm kiếm: "not-found"</h1>
+            <h1 class="body-title-content">Kết quả tìm kiếm: "{{ $search}}"</h1>
         </div>
 
         <div class="row body-content">

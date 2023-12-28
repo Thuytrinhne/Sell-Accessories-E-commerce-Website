@@ -33,14 +33,24 @@ class ProductController extends Controller
         return ProductService::getModalProduct($product);
     }
 
-    public function getProductsByValue($value)
+    public function getProductsByValue(Request $request)
     {
-        return ProductService::getProductsByValue($value);
+        return ProductService::getProductsByValue($request);
     }
 
     public function getImagesByValue($value)
     {
         return ProductService::getImagesByValue($value);
+    }
+
+    // public function reportProductByDate(Request $request)
+    // {
+    //     return ProductService::reportProductByDate($request);
+    // }
+
+    public function filterReport(Request $request)
+    {
+        return ProductService::filterReport($request);
     }
     
     public function descProductsByPrice()

@@ -71,7 +71,7 @@
                     @if(count($products) > 0)
                     @foreach($products as $item)
                     <nav id="product_1" class="product product_1">
-                        <img src="/Assets/Images/product_1.jpg">
+                        <img src="{{$item->default_image}}">
                         <p> {{$item->name_product}} </p>
                         
                         <textarea name="description" disabled style="width: 90%"> {{$item->description}} </textarea>
@@ -112,7 +112,7 @@
                
                         <div style ="margin:0 auto">{{ $products->links() }}</div>
                 
-                <form action="{{ route('admin.product.add') }}" method="POST" class="selection selection_add" id="addForm">
+                <form action="{{ route('admin.product.add') }}" method="POST" class="selection selection_add" id="addForm" enctype="multipart/form-data">
                    @csrf
                     <div class="addCard">
                         <div class="nameAdd">
@@ -135,8 +135,11 @@
                                 <option value="{{ $cate->id }}">{{ $cate->name_category }}</option>
                                 @endforeach
                             </select>
+                        </div>
 
-                            <button onclick="AddNewTag()">+</button>
+                        <div class="nameAdd">
+                            <label  name="default_image">Ảnh mặc định: </label>
+                            <input type="file" name = "default_image" value="{{old('default_image')}}">
                         </div>
                         
                         <input type="submit" class="confirmAdd">
@@ -144,4 +147,5 @@
                     </div>
                 </form>
             </div>
+
 @endsection

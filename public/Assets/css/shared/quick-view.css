@@ -217,6 +217,10 @@
     text-transform:uppercase;
 }
 
+.info-buy__btn:hover {
+    background-color:#183A5C ;
+}
+
 .info-buy__btn::before {
     box-sizing: border-box;
     border-radius: 25px;

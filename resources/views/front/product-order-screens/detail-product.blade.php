@@ -3,6 +3,21 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/product.css')}}">
 @endsection
 @section('body-main')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session ('addWishSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('addWishSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <div class="container">
 
   <!-- begin breadcrumbs -->
@@ -73,14 +88,26 @@
               <div class="row">  
                 @foreach($variation_value as $value)
                 <button  class="color-option" 
-                                    style="background-color: {{$value->value}}; color: {{$value->value}} "
+                                    style="background-color: {{$value->variation_value}}; color: {{$value->variation_value}} "
                                     onclick="showProducts('{{$value->id}}')"> 
                               {{$value->value}} 
                             </button>
                 @endforeach
               </div>
 
-
+              <div class="input-group" style="margin: 20px">
+                <!-- <span class="input-group-btn">
+                    <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quantity">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </span> -->
+                <input type="number" name="quantity" id="input-number" value="" min="1" max="10000">
+                <!-- <span class="input-group-btn">
+                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quantity">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </span> -->
+            </div>
 
               <div class="row info-category" style="margin-top: 20px;">
                   <h4>Category: 
@@ -95,7 +122,7 @@
 
               <div class="row info-whistlist" style="margin: 20px 0px;">
                   <div class="col-5 info-whistlist-wrapper">                 
-                      <button onclick="addToCart()" class="info-whistlist-btn" > 
+                      <button onclick="addToWishlistClick()" class="info-whistlist-btn" > 
                         <i class="fa fa-heart" aria-hidden="true">  Add to whistlist</i>
                       </button>
                   </div>
@@ -103,7 +130,7 @@
 
               <div class="row info-buy">           
                   <div class="col-6 ">
-                      <button class="info-buy__btn">Thêm vào giỏ hàng</button>
+                      <button onclick="addToCartAjax('{{ $product->id }}')" class="info-buy__btn">Thêm vào giỏ hàng</button>
                   </div>
                   <div class="col-6">
                       <button class="info-buy__btn">Mua ngay sản phẩm</button>
@@ -217,13 +244,56 @@
 </div>
 </div>  
 <script>
-   function showProducts(product_item_id) {
+
+  let inputQuantity = 0;
+
+  document.addEventListener('DOMContentLoaded', function () {
+        var inputElement = document.getElementById('input-number');
+        
+        inputElement.addEventListener('input', function () {
+          inputQuantity = inputElement.value;
+        });
+    });
+  
+  let product_item_id = 0;
+
+  function addToCartAjax() {
+    alert(inputQuantity);
+        // Thực hiện AJAX request
+            $.ajax({
+                url: '/cart/add/' + product_item_id,
+                type: 'GET',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'quantity': inputQuantity,
+                },
+                success: function(data) {
+                  Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Đã thêm vào giỏ hàng !',
+                      showConfirmButton: false,
+                      timer: 2000
+                      })
+                       
+                },
+                error: function(error) {
+                    console.log('Lỗi:', error);
+                    // Xử lý lỗi nếu có
+                }
+            });
+  }
+
+
+   function showProducts(item_id) {
+    
         $.ajax({
-            url: '/get-images-by-value/' + product_item_id,
+            url: '/get-images-by-value/' + item_id,
             type: 'GET',
             success: function(data) {
-                console.log(data[0].image);
-                // Xử lý dữ liệu trả về và hiển thị danh sách sản phẩm
+                console.log(data[0].id);
+                product_item_id = data[0].id;
+
                 renderProducts(data);
             },
             error: function(error) {            
@@ -253,6 +323,47 @@
             );
             
         }
-}
+    }
+      // theem vao wish list 
+     function addToWishlistClick()
+      {
+        
+          if (product_item_id==0)
+          {
+              addProductIntoWishList("{{ route('wishlist.add') }}");
+          }
+          else
+          {
+              addProductIntoWishList("{{ route('wishlist.addProductItem') }}");
+          }
+      }
+
+       function  addProductIntoWishList(url)
+      {
+    
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = url;
+        // truyền token
+        var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        var csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = csrfToken;
+
+        form.appendChild(csrfInput);
+        document.body.appendChild(form);
+        // truyền product id 
+        var ProductIdInput = document.createElement('input');
+        ProductIdInput.type = 'hidden';
+        ProductIdInput.name = 'productId';
+        ProductIdInput.value = {{$product->id}};
+
+        form.appendChild(ProductIdInput);
+        document.body.appendChild(form);
+
+        form.submit();
+      }
+
 </script>
 @endsection
