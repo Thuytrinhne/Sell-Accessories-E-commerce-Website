@@ -1,77 +1,71 @@
-
-.checkout-main
-{
+.checkout-main {
     background: white;
 }
 /* =======  check out  ====== */
 .checkout_detail p,
-.checkout_detail dl{
+.checkout_detail dl {
     margin: 0;
 }
-.checkout{
+.checkout {
     height: 209px;
     background-color: #ebf7fa;
     text-align: center;
     padding: 60px 0;
 }
 
-.checkout .backhome a{
+.checkout .backhome a {
     color: #9a9a9b;
     text-decoration: none;
     font-size: 14px;
     align-items: end;
 }
 
-.checkout h1{
+.checkout h1 {
     margin-top: 12px;
     font-size: 36px;
     font-weight: 750;
 }
 /* ====================  end header  ===================== */
 
-
-
-
 /* ===============  checkout detail  ================ */
-.checkout_detail{
+.checkout_detail {
     margin: auto;
-    width: 80%;
+    width: 72%;
     margin-bottom: 32px;
 }
 
-
 /* ==========  location list  ========= */
-.location-list_containerPlus{
+.location-list_containerPlus {
     margin-right: 32px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 3px 12px;
 }
 
-.location-list_container{
+.location-list_container {
     margin: 48px 48px 32px;
     height: 80%;
     border-bottom: #dbdbdb solid 1px;
 }
 
-.location-detailPlus{
+.location-detailPlus {
     display: inline-block;
 }
 
-.location-detailPlus .area{
+.location-detailPlus .area {
     font-size: 14px;
     color: #666666;
 }
 
-.location-detail{
+.location-detail {
     font-size: 15px;
 }
 
-.location-tick{
+.location-tick {
     display: inline-block;
     position: relative;
 }
 
-.location-tick input{
+.location-tick input {
     --tick-size: 17px;
     position: absolute;
     top: 50%;
@@ -81,22 +75,22 @@
     width: var(--tick-size);
 }
 
-.payment_info{
+.payment_info {
     display: grid;
-    grid-template-columns: 64.2% 34%;
     padding: 32px 0 32px 0;
 }
 
-.location-list{
+.location-list {
     display: grid;
     grid-template-columns: 5% 90% 5%;
     margin-bottom: 16px;
     padding: 14px 16px;
     border-radius: 10px;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
+        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 
-.location-list a{
+.location-list a {
     text-decoration: none;
     color: #e05994;
     font-size: 16px;
@@ -104,24 +98,19 @@
     align-items: center;
 }
 
-.location-list a:hover{
+.location-list a:hover {
     color: #3eafcb;
 }
 
 /* ==========  end location list  ========= */
 
-
-
-
-
-
 /* =========  add location button  ======== */
-.location-add{
+.location-add {
     width: 100%;
     text-align: center;
 }
 
-.location-add a{
+.location-add a {
     font-size: 16px;
     color: #e05994;
     text-decoration: none;
@@ -129,96 +118,88 @@
     border-radius: 10px;
 }
 
-.location-add_container{
+.location-add_container {
     display: inline-block;
     /* padding: 14px 32px; */
 }
 
-.location-add:hover a{
-    background-color: #81D1E5;
+.location-add:hover a {
+    background-color: #81d1e5;
     color: white;
 }
 
-
 /* =========  end add location button  ======== */
 
-
 /* =============  total payment  =========== */
-.payment_total{
+.payment_total {
     background-color: rgb(242 242 242);
     height: 800px;
     border-radius: 10px;
 }
 
-.payment_total_container{
+.payment_total_container {
     padding: 40px;
 }
 
-.payment_preview h3{
+.payment_preview h3 {
     width: 49.2%;
     display: inline-block;
 }
 
-
-
-
-
 /* ===================  product list  ================== */
-.product_list{
+.product_list {
     margin: 24px 0 12px 0;
     border-bottom: #e1e1e1 dashed 1px;
 }
 
 .product_name_container,
-.product_list > p{
+.product_list > p {
     width: 49.3%;
     display: inline-block;
     font-size: 13px;
     color: #777;
 }
 
-.product_list .product_name{
+.product_list .product_name {
     font-size: 13px;
     color: #333333;
 }
 
 .variation dt,
-.variation dd{
+.variation dd {
     display: inline-block;
     color: #777;
 }
 
 /* ===================  product list  ================== */
 
-.payment_preview > p{
+.payment_preview > p {
     display: inline-block;
     font-size: 13px;
     color: #777;
     margin-bottom: 16px;
 }
 
-.payment_methods h2{
+.payment_methods h2 {
     margin: 32px 0;
     font-size: 19px;
 }
 
-.pick_methods{
+.pick_methods {
     font-size: 14px;
     border-bottom: #e5e5e5 solid 1px;
     margin-bottom: 18px;
     padding: 8px;
 }
 
-.payment_methods .privacy{
+.payment_methods .privacy {
     font-size: 13px;
     color: #777;
     padding: 8px;
     margin: 13px 0;
 }
 
-
-.order_btn
-{
+.order_btn {
     outline: none;
     text-decoration: none;
     position: relative;
@@ -228,22 +209,20 @@
     background-color: var(--primary-color);
     border-radius: 40px;
     text-align: center;
-    border:solid 4px transparent;
+    border: solid 4px transparent;
     cursor: pointer;
     padding: 17px 0;
     width: 70%;
     margin: auto;
 }
-.order_btn:hover
-{
+.order_btn:hover {
     color: white;
-    background-color: #81D1E5;
+    background-color: #81d1e5;
     transition: all 0.2s linear;
 }
-.order_btn::before
-{
+.order_btn::before {
     border-radius: 40px;
-    display:  block;
+    display: block;
     content: "";
     position: absolute;
     z-index: 0;
@@ -255,8 +234,5 @@
 }
 
 /* ===============  end checkout detail  ================ */
-
-
-
 
 /* ===================== FOOTER ====================== */
