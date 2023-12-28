@@ -16,9 +16,10 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        return OrderService::index($request);
+       
+        return OrderService::index();
     }
 
     public function indexFilter($id) {
@@ -28,7 +29,9 @@ class OrderController extends Controller
     public function DetailOrder($id) {
         return OrderService::DetailOrder($id);
     }
-
+    public  function DetailOrderAdmin($id) {
+        return OrderService::DetailOrderAdmin($id);
+    }
     public function indexCheckout() {
       
         return OrderService::indexCheckout();
@@ -55,7 +58,6 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {   
-        
         if($request->input('method_payment') == "Thanh toán tiền mặt"){
             return OrderService::store($request);
         }
@@ -94,5 +96,9 @@ class OrderController extends Controller
     public function destroy($id)
     {
         return OrderService::destroy($id);
+    }
+    public function updateStatus(Request $request)
+    {
+        return OrderService::updateStatus($request);
     }
 }

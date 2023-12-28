@@ -22,7 +22,6 @@
                 <div class="location-list_container">
                     <div class="order-info">
                         <h1>Thông tin nhận hàng</h1>
-                        <!-- <a href="choose-location.html">Thay đổi</a> -->
                     </div>
                     <!-- =============  location list  ============ -->
                     <div class="location-list">
@@ -32,64 +31,64 @@
                             </div>
                             <div class="location-detailPlus">
                                 <div class="location-detail">
-                                    <strong></strong>
-                                    -
-                                    0961432414
+                                    <strong>{{$defaultAddress->full_name}} </strong>
+                                    - {{$defaultAddress->phone}}
                                 </div>
                                 <div class="area">
-                                    Hội Sơn, An Hoà Hải, Tuy An, Phú Yên
+                                {{$defaultAddress->city}}, {{$defaultAddress->district}}, {{$defaultAddress->village}}, {{$defaultAddress->detail_address}}
                                 </div>
                             </div>
-                            <a href="checkout/choose-location">Thay đổi</a>
-                        </div>
-                        <form action="{{ route('checkout-success') }}" method="POST" >
+                            <a href="{{ route('choose-location-checkout', ['id' => $defaultAddress->id]) }}">Thay đổi</a>                        </div>
+                            <form action="{{ route('checkout-success') }}" method="POST" >
                             @csrf
+                        <input style="display: none" name="idUserAddress" value="{{$defaultAddress->id}}">
                         <div class="info_input">
                             <label for="">GHI CHÚ ĐƠN HÀNG</label><br>
                             <textarea name="order_note" id="" cols="30" rows="10" placeholder="Ghi chú vào đây..." value=""></textarea>
                         </div>
-                    </div>
+                        </div>
                     
                     <!-- =============  end list  ============ -->
                 </div>
             </div>
 
-            <div class="payment_total">
-                <div class="payment_total_container">
+                <div class="payment_total">
+                 <div class="payment_total_container">
                     <div class="payment_preview">
                         <h3>Sản phẩm</h3>
                         <h3>Tạm tính</h3>
                         <!-- =================  product list  =================== -->
                         
                            
-                        @foreach ($product_item_cart as $key => $item)
-                        <input style="display: none" name="idOrder" value="{{ $item->id}}">
-                        
-                        <div class="product_list">
-                            <div class="product_name_container">
-                                
-                                    <label class="product_name">
-                                        <input type="text" name="name_product" value="{{ $item->name_product }}" disabled>
-                                        <span>x</span>
-                                        <input type="number" name="quantity" value="{{ $item->quantity }}" disabled>
-                                    </label>
-                                    <label class="variation">
-                                        <span>Color:
-                                        </span>
+                                    @foreach ($product_item_cart as $key => $item)
+                                    <input style="display: none" name="idCart" value="{{$item->cart_id}}">
+                                    
+                                        <div class="product_list">
+                                            <div class="product_name_container">
+                                            
+                                                <label class="product_name">
+                                                    <input type="text" name="name_product" value="{{ $item->name_product }}" disabled>
+                                                    <span>x</span>
+                                                    <input type="number" name="quantity" value="{{ $item->quantity }}" disabled>
+                                                </label>
+                                                <label class="variation">
+                                                    <span>Color:
+                                                    </span>
+                                                    
+                                                    <input type="text" name="variation_value" value=" "  disabled>
+                                                </label>
+                                            
+                                        </div>
+                                        <p>@if($item->variation_id == 1)
+                                                
+                                            {{ $item->name_color }}
                                         
-                                        <input type="text" name="variation_value" value=" "  disabled>
-                                    </label>
-                                
-                            </div>
-                            <p>@if($item->variation_id == 1)
-                                      
-                                {{ $item->name_color }}
-                              
-                              @else 
-                                {{ $item->variation_name }}
-                              
-                              @endif</p>
-                        @endforeach
+                                        @else 
+                                            {{ $item->variation_name }}
+                                        
+                                        @endif
+                                        </p>
+                                    @endforeach
                         <!-- =================  product list  =================== -->
                         <label class="total_cart">
                         <h3>Tạm tính</h3>
@@ -122,7 +121,7 @@
 
                         <button type="summit" class="order_btn" name="redirect" >Đặt hàng</button>
                         {{-- <button type="submit" name="redirect">Thanh toán bằng thẻ</button> --}}
-                    </form>
+            </form>
                     
                     </div>
                 </div>

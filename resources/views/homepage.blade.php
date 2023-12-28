@@ -16,9 +16,22 @@
                 </script>
             
 @endif
-
+@if (session ('addWishSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('addWishSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
 <!-- end code trinh  -->
 <div class="body-main">
+  
             <div class="body-banner-container grid">
                 <div class="body-banner">
                    <div class="body-banner-item1">
@@ -42,10 +55,10 @@
                   <div class="body-listProduct">
                     <!-- item -->      
                     @foreach($products as $item)
-                    <div class="body-list__item" onclick="list__itemOnCick()" >
+                    <div class="body-list__item" >
                       <div>
                             <a class="body-item-link" href="{{ route('products.show', ['id' => $item->id]) }}">
-                              <img onclick="list__itemOnCick()" class="body-item-img" src="https://hippo.vn/wp-content/uploads/2023/07/z4490483330315_64b6f2340864e7bb11693475f0b74822-300x300.jpg" alt="{{$item->name_product}}">
+                              <img class="body-item-img" src="{{$item->default_image}}" alt="{{$item->name_product}}">
                             </a>
                       </div> 
                       <div class="body-item-des">
@@ -69,15 +82,20 @@
                                 </span>
                               </div>   
                             </a>  
-                            <a href="" class="body-links-detail">
+
+                            <span href="" class="body-links-detail">
                               <div class="body-circle">
-                                <span class="material-symbols-outlined body-icon-black body-icon-black--large">
+                                <button class="material-symbols-outlined body-icon-black body-icon-black--large" 
+                                id="quickview" 
+                                style="backgroud:none; border:none"
+                                data-product-id="{{ $item->id }}">
                                   visibility
-                                </span>    
+                                </button>    
                               </div>   
-                            </a>  
-                              <a href="" class="body-links-detail">
-                                <div class="body-circle">
+                            </span>  
+                            
+                              <a onclick="addToWishlistClick({{$item->id}}, event, )" href="#" class="body-links-detail">
+                                <div class="body-circle" >
                                   <i class="fa-regular fa-heart body-icon-black"></i>  
                                 </div>   
                                 </a>         
@@ -96,36 +114,14 @@
                
             <div class="body-catogory grid">
                       <div class="body-category-list">
+                        @foreach($categories as $item)
                         <div class="body-category-item">
-                          <a href="" class="body-category-link">
-                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
-                           <h3 class="body-category-name">LY SỨ (09)</h3>
+                          <a href="{{ route('get.products.by.category',[$item->id]) }}" class="body-category-link">
+                           <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
+                           <h3 class="body-category-name">{{ $item->name_category }}</h3>
                           </a>
                         </div>
-                        <div class="body-category-item">
-                          <a href="" class="body-category-link">
-                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
-                           <h3 class="body-category-name">DỤNG CỤ HỌC TẬP (109)</h3>
-                          </a>
-                        </div>
-                        <div class="body-category-item">
-                          <a href="" class="body-category-link">
-                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
-                           <h3 class="body-category-name">ĐỒ CHƠI (26)</h3>
-                          </a>
-                        </div>
-                        <div class="body-category-item">
-                          <a href="" class="body-category-link">
-                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
-                           <h3 class="body-category-name">LY SỨ (09)</h3>
-                          </a>
-                        </div>
-                        <div class="body-category-item">
-                          <a href="" class="body-category-link">
-                           <img src="https://hippo.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2-300x300-1.jpg" alt="" class="body-category-img">
-                           <h3 class="body-category-name">QUẠT CẦM TAY MINI (209)</h3>
-                          </a>
-                        </div>
+                        @endforeach
                       </div>
                       <div class="body-category-nav">
                           <button class="body-nav-btn" type="button">
@@ -137,6 +133,42 @@
                       </div>
             </div> 
           </div> 
+
+
+
+      <script>
+        function addToWishlistClick(id, event)
+        {
+          event.preventDefault(); // Ngăn chặn sự kiện mặc định của thẻ a
+         
+          var url = "{{ route('wishlist.add') }}";
+
+          var form = document.createElement('form');
+          form.method = 'POST';
+          form.action = url;
+          // truyền token
+          var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+          var csrfInput = document.createElement('input');
+          csrfInput.type = 'hidden';
+          csrfInput.name = '_token';
+          csrfInput.value = csrfToken;
+        
+          form.appendChild(csrfInput);
+          document.body.appendChild(form);
+          // truyền product id 
+          var ProductIdInput = document.createElement('input');
+          ProductIdInput.type = 'hidden';
+          ProductIdInput.name = 'productId';
+          ProductIdInput.value = id;
+        
+          form.appendChild(ProductIdInput);
+          document.body.appendChild(form);
+
+
+
+          form.submit();
+        }
+      </script>
 @endsection
     <!-- modal quickview-->  
 @section ('quick-view')

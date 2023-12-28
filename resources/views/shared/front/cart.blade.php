@@ -3,6 +3,7 @@
         <div class="modal__body modal__body--border">
 
 <div class="cart">
+<<<<<<< HEAD
     <div class="cart_container">
         <div class="product_container">
             <!-- ===============   product box  =============== -->
@@ -28,6 +29,23 @@
                     </dl>
                     <p class="product_price">{{ $item->price }}</p>
                     
+=======
+        <div class="cart_container">
+            <div class="product_container">
+                <!-- ===============   product box  =============== -->
+                
+               
+                <!-- ===============   product box  =============== -->
+
+                
+            </div>
+          
+          
+            <div class="payment_container" style="display: inline;">
+                <div class="total">
+                    <p>Tổng tiền</p>
+                    <p class="payment_container--total"style="text-align:end;"></p>
+>>>>>>> 1531e2abf5f7105589c9eac1e5390988229bf914
                 </div>
                 <!-- ===========  buy-amount  ============ -->
                 <div class="buy-amount_container">
@@ -47,8 +65,13 @@
                 </div>
                 <!-- ===========  buy-amount  ============ -->
 
+<<<<<<< HEAD
                 <div class="cancel_button">
                     <a href="{{ route('cart.destroy',[$item->id]) }}" class="cancel_btn"><img  src="./Assets/Images/close_button.png" alt="" ></a>
+=======
+                <div class="pay_button">
+                    <a class="pay_btn" href="{{route('checkout')}}">Thanh toán</a><br>
+>>>>>>> 1531e2abf5f7105589c9eac1e5390988229bf914
                 </div>
             </div>
             @endforeach

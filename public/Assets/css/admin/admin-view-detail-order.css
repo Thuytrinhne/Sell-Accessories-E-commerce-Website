@@ -1,0 +1,24 @@
+.containerDetail {
+    display: flex;
+    flex-direction: column;
+}
+.container_all {
+    display: flex;
+    gap: 30px;
+}
+.container_all-item1 {
+    flex: 7;
+}
+.container_all-item2 {
+    flex: 3;
+}
+.container_all-item2 button {
+    display: inline-block;
+    margin-top: 20px;
+}
+.change_status {
+    padding-bottom: 20px;
+}
+.note-order textarea {
+    width: 400px;
+}

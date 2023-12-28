@@ -7,16 +7,26 @@ use App\Models\user_address;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CartController;
 use App\Service\User_AddressService;
+use App\Http\Requests\User_AddressRequest;
+
 class User_AddressController extends Controller
 {
+    public function backChooseLocation($id)
+    {
+        return User_AddressService::backChooseLocation($id);
+    }
+    // display page choose-address when check out 
+    public function changeCheckoutAddress($id)
+    {
+        return User_AddressService::changeCheckoutAddress($id);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         return User_AddressService::index();
-        // $product_item_cart = CartController::getCartitem();
-        // return view('front.product-order-screens.choose-location', compact('product_item_cart'));
+       
     }
 
     public function addAddress() {
@@ -34,12 +44,16 @@ class User_AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(User_AddressRequest $request)
     {
         return User_AddressService::store($request);
 
     }
+    public function storeAddressCheckout(User_AddressRequest $request)
+    {
+        return User_AddressService:: storeAddressCheckout($request);
 
+    }
     /**
      * Display the specified resource.
      */
@@ -51,24 +65,36 @@ class User_AddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(user_address $user_address)
+    public function edit($id)
     {
-        //
+        return User_AddressService::edit($id);
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, user_address $user_address)
+    public function update(User_AddressRequest $request)
     {
-        //
+        return User_AddressService::update($request);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(user_address $user_address)
+    public function destroy($id)
     {
-        //
+       
+        return User_AddressService::destroy($id);
+
+    }
+    public function addCheckoutAddress()
+    {
+        return User_AddressService::addCheckoutAddress();
+    }
+    public function handleChangeCheckoutAddress($id)
+    {
+        return User_AddressService::handleChangeCheckoutAddress($id);
+
     }
 }

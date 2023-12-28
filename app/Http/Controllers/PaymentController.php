@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 use App\Models\order;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Respositories\CartRespository;
+use Auth;
 class PaymentController extends Controller
 {
     public static function vnpay_payment(Request $request) {
-        
         $data = $request->all();
-        
         $order = new Order();
         $order->total_price = $data['total_price'];
         
@@ -18,24 +18,28 @@ class PaymentController extends Controller
         $order->delivered_date = $deliveryTime;
         $order->status = 1;
         $order->shipping_cost = 35000;
-        $order->user_id = 1;
-        $order->date_order = $currentDateTime;
-        $order->cart_id = $data['idOrder'];
+        $order->user_id = Auth()->user()->id;
+        // $order->date_order = $currentDateTime;
+        $order->cart_id = $data['idCart'];
         $order->note = $request->input('order_note');
-        $order->payment_id = 2;                 
+        $order->payment_id = 2;     
+        $order->address_shipping_id= $request->input('idUserAddress');               
+            
         $order->save(); 
-
-$vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-$vnp_Returnurl = "http://127.0.0.1:8000/";
-$vnp_TmnCode = "1VONXYET";//Mã website tại VNPAY 
-$vnp_HashSecret = "LSEXPOKTASYMIDNFZXJDCDTOMHAJQMPC"; //Chuỗi bí mật
-$vnp_TxnRef = $order->id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-$vnp_OrderInfo = "Thanh toán hóa đơn";
-$vnp_OrderType = "Hippo Shop";
-$vnp_Amount = $data['total_price'] * 100;
-$vnp_Locale = "VN";
-$vnp_BankCode = "NCB";
-$vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        // tạo order xong thì tạo cart mới 
+        CartRespository::store();
+        // thanh toán VNPAY
+        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+        $vnp_Returnurl = "http://127.0.0.1:8000/checkout-success/".$order->id;
+        $vnp_TmnCode = "1VONXYET";//Mã website tại VNPAY 
+        $vnp_HashSecret = "LSEXPOKTASYMIDNFZXJDCDTOMHAJQMPC"; //Chuỗi bí mật
+        $vnp_TxnRef = $order->id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = "Thanh toán hóa đơn";
+        $vnp_OrderType = "Hippo Shop";
+        $vnp_Amount = $data['total_price'] * 100;
+        $vnp_Locale = "VN";
+        $vnp_BankCode = "NCB";
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
 
 
 //Add Params of 2.0.1 Version

@@ -32,6 +32,8 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>Mã đơn hàng</th>
+
                                 <th>Tên tài khoản</th>
                                 <th>SĐT</th>
                                 <th>Email</th>
@@ -46,6 +48,7 @@
                             @foreach($order_list as $key => $item)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
+                                <td>{{ $item->id }}</td>
                                 <td>{{ $item->full_name }}</td>
                                 <td>{{ $item->phone }}</td>
                                 <td>{{ $item->email }}</td>
@@ -53,28 +56,24 @@
                                 <td>{{ $item->total_price }}</td>
                                 <td>@switch($item->status)
                                     @case(1)
-                                        Chờ xác nhận
+                                        Chưa xử lý
                                         @break
                                     @case(2)
-                                        Đang xử lý
+                                        Đã xử lý
                                         @break
                                     @case(3)
-                                        Đang vận chuyển
+                                        Đã thanh toán
                                         @break
-                                    @case(4)
-                                        Thành công
-                                        @break
-                                    @case(5)
-                                        Đã hủy
-                                        @break
-                                        
+                                       
                                 @endswitch</td>
-                                <td><a href="{{ route('front.order_detail',[$key+1])}}"><button>Chi tiết</button></a></td>
+                                <td><a href="{{ route('admin.detailOrder',[$item->id])}}"><button>Chi tiết</button></a></td>
                             </tr>
                             @endforeach
                             
                         </tbody>
                     </table>
+                    {{$order_list->links()}}     
+
                 </div>
 </div>
 @endsection('content')

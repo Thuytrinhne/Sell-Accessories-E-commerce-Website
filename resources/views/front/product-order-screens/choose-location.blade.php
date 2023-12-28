@@ -22,121 +22,76 @@
                 <div class="location-list_container">
                     <h1 style="margin-bottom: 24px;">Thông tin nhận hàng</h1>
                     <!-- =============  location list  ============ -->
+                    @foreach($listUserAddress as $item)
                     <div class="location-list">
                         <div class="location-tick">
-                            <input type="radio" name="location-info" id="location-info">
+                            @if($id==$item->id)
+                            <input value ="{{$item->id}}" type="radio" name="location-info" id="location-info" checked>
+                            @else                        
+                            <input value = "{{$item->id}}" type="radio" name="location-info" id="location-info">
+
+                            @endif
                         </div>
                         <div class="location-detailPlus">
                             <div class="location-detail">
-                                <strong>Nguyễn Trung</strong>
-                                -
-                                0961432414
+                            <strong>{{$item->full_name}} </strong>
+                            - {{$item->phone}}
                             </div>
                             <div class="area">
-                                Hội Sơn, An Hoà Hải, Tuy An, Phú Yên
+                            {{$item->city}}, {{$item->district}}, {{$item->village}}, {{$item->detail_address}}
                             </div>
                         </div>
 
                         <a href="">Sửa</a>
                     </div>
+                    @endforeach
                     <!-- =============  end list  ============ -->
                     
-                    <div class="location-list">
-                        <div class="location-tick">
-                            <input type="radio" name="location-info" id="location-info">
-                        </div>
-                        <div class="location-detailPlus">
-                            <div class="location-detail">
-                                <strong>Nguyễn Trung</strong>
-                                -
-                                0961432414
-                            </div>
-                            <div class="area">
-                                Hội Sơn, An Hoà Hải, Tuy An, Phú Yên
-                            </div>
-                        </div>
-
-                        <a href="checkout.html">Sửa</a>
-                    </div>
+                   
                 </div>
 
                 <div class="location-add">
                     <div class="location-add_container">
-                        <a href="/checkout/add-location">
+                        <a href="{{route('add-location-checkout')}}">
                             <i class="fa-solid fa-circle-plus" style="margin-right: 2px;"></i>
                             Thêm địa chỉ
                         </a>
                     </div>
                 </div>
-            </div>
+                <div >
+                    <a class="body-footer-seemore" href="#" onclick="generateURLBack(event)" >TRỞ LẠI</a>
+                    <a class="body-footer-seemore" href="#" onclick="generateURL(event)">TIẾP TỤC</a>
 
-            <div class="payment_total">
-                <div class="payment_total_container">
-                    <div class="payment_preview">
-                        <h3>Sản phẩm</h3>
-                        <h3>Tạm tính</h3>
-                        <!-- =================  product list  =================== -->
-                        <div class="product_list">
-                            <div class="product_name_container">
-                                <p class="product_name">Tên sản phẩm x giá</p>
-                                <dl class="variation" >
-                                    <dt class="variation_color">Color: </dt>
-                                    <dd class="variation_color">
-                                        <p>Be</p>
-                                    </dd>
-                                </dl>
-                            </div>
-
-                            <p>130.000đ</p>
-                        </div>
-                            <div class="product_list">
-                            <div class="product_name_container">
-                                <p class="product_name">Tên sản phẩm x giá</p>
-                                <dl class="variation" >
-                                    <dt class="variation_color">Color: </dt>
-                                    <dd class="variation_color">
-                                        <p>Be</p>
-                                    </dd>
-                                </dl>
-                            </div>
-
-                            <p>130.000đ</p>
-                        </div>
-                        <!-- =================  product list  =================== -->
-
-                        <h3>Tạm tính</h3>
-                        <p>130.000đ</p>
-                        <h3>Giao hàng</h3>
-                        <p>ĐỒNG GIÁ: 35.000đ</p>
-                        <h3>Tổng</h3>
-                        <p style="font-size: 18px; font-weight: bold; color: black;">165.000đ</p>
-
-                        <div class="payment_methods">
-                            <h2>Phương thức thanh toán</h2>
-                            <div class="methods">
-                                <form action="">
-                                    <div class="pick_methods">
-                                        <input type="radio" name="" id="" > Chuyển khoản ngân hàng <br>
-                                        <p>description</p>
-                                    </div>
-                                    
-                                    <div class="pick_methods">
-                                        <input type="radio" name="" id=""> Thanh toán tiền mặt
-                                        <p>description</p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <p class="privacy">privacy</p>
-
-                        <div class="order_btn">
-                            <a>Đặt hàng</a>
-                        </div>
-                    </div>
                 </div>
             </div>
+
+         
         </div>
     </div>
     </div>
+    <script>
+                    var idUserAddressChoosed = document.querySelector('input[name="location-info"]:checked').value;
+                    document.cookie = "idUserAddressChoosed=" + encodeURIComponent(idUserAddressChoosed) + "; path=/; expires=Thu, 01 Jan 2024 00:00:00 UTC;"
+                    function generateURL(event) {
+                        event.preventDefault()
+                        var idUserAddress = document.querySelector('input[name="location-info"]:checked').value;
+                        var url = "{{ route('handle-choose-location-checkout', ['id' => '14']) }}";
+                        url = url.replace('14',idUserAddress);
+                        window.location.href = url;
+                        
+                   
+                    }
+                    function generateURLBack(event) {
+                        event.preventDefault()
+                        var idUserAddress = document.querySelector('input[name="location-info"]:checked').value;
+                        var url = "{{ route('handle-choose-location-checkout', ['id' => '14']) }}";
+                        url = url.replace('14',idUserAddressChoosed);
+                        window.location.href = url;
+                        
+                   
+                    }
+                    
+                    
+                        
+    </script>
 @endsection

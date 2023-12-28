@@ -25,15 +25,20 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
+Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+
 
 //Route qtoan them vao
 Route::group(['prefix' => '/'], function () {
    
-   Route::get('/', [ProductController::class, 'getProduct'])->name('products.getProduct');
+   Route::get('/', [ProductController::class, 'getProduct'])->name('homepage');
+
+   Route::get('/product-category/{category}',[ProductController::class,'getProductsByCategory'])->name('get.products.by.category');
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
-   Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+
+   Route::get('/search-product', [ProductController::class,'searchProduct'])->name('products.search');
 
    Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
 
@@ -43,7 +48,11 @@ Route::group(['prefix' => '/'], function () {
 
    Route::get('/get-product-asc}', [ProductController::class, 'ascProductsByPrice'])->name('get.product.by.asc');
    
+   Route::get('/get-product/{product}', [ProductController::class, 'getModalProduct'])->name('get.modal.product');
+
    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
+
+   // Route::match(['get', 'post'], '/report-product-by-date', [ProductController::class, 'reportProductByDate']);
    
 });
 
@@ -55,26 +64,25 @@ Route::get('/aboutUs', function () {
 
 
 //Route qtoan them vao
-Route::group(['prefix' => '/'], function () {
+// Route::group(['prefix' => '/'], function () {
    
-   Route::get('/', [ProductController::class, 'getProduct'])->name('homepage');
+//    Route::get('/', [ProductController::class, 'getProduct'])->name('homepage');
    
-   Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
+//    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
-   Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
 
-   Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
+//    Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
 
-   Route::get('/get-images-by-value/{value}', [ProductController::class, 'getImagesByValue'])->name('get.images.by.value');
+//    Route::get('/get-images-by-value/{value}', [ProductController::class, 'getImagesByValue'])->name('get.images.by.value');
    
-   Route::get('/get-product-desc}', [ProductController::class, 'descProductsByPrice'])->name('get.product.by.desc');
+//    Route::get('/get-product-desc}', [ProductController::class, 'descProductsByPrice'])->name('get.product.by.desc');
 
-   Route::get('/get-product-asc}', [ProductController::class, 'ascProductsByPrice'])->name('get.product.by.asc');
+//    Route::get('/get-product-asc}', [ProductController::class, 'ascProductsByPrice'])->name('get.product.by.asc');
    
-   Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
+//    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
    
-});
-// route Product  (qtoan)
+// });
+// // route Product  (qtoan)
 
 // start admin 
 // login for admin 
@@ -90,13 +98,20 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
    })->name('admin.product');
 
     Route::get('/order', [AdminController::class, 'OrderView'])->name('admin.order');
+    Route::get('/order/detail/{id}', [OrderController::class, 'DetailOrderAdmin'])->name('admin.detailOrder');
     Route::get('/order/filter', [AdminController::class, 'OrderView1'])->name('admin.order.filter');
+    Route::post('/order/updateStatus', [OrderController::class, 'updateStatus'])->name('admin.order.updateStatus');
+
     //Thêmm route xử lí report sản phẩm
     
     //Thêmm route xử lí report sản phẩm
+    //QToan Thêm route xử lí report sản phẩm
     Route::get('/report', [ProductController::class,'report'])->name('admin.report');
-   
-   //  Thêm route admin product và item
+    Route::match(['get', 'post'],'/report/filter', [ProductController::class,'filterReport'])->name('admin.filterReport');
+
+
+
+   //Qtoan  Thêm route admin product và item
    Route::prefix('product')->group( function()
    {
       // hiển thị sản phẩm
@@ -126,7 +141,6 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
        Route::post('/item/update/{item}', [ProductController::class,'updateItem'])->name('admin.product.item.update');
        // Xử lí xóa
        Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
-
 
    });
 
@@ -181,7 +195,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
       Route::post('update/{id}', [CategoryController::class,'update'])->name('admin.category.update');
       // Xử lí search
       Route::get('search', [CategoryController::class,'search'])->name('admin.category.search');
-   
+      
    }
    );
 });
@@ -197,6 +211,10 @@ Route::get('/customer/account', function () {
 Route::get('/customer/address', [User_AddressController::class,'index'])->name('front.address');
 Route::get('/customer/address/add', [User_AddressController::class,'create'])->name('front.add-address');
 Route::post('/customer/address/add', [User_AddressController::class,'store'])->name('front.handle-add-address');
+Route::get('/customer/address/delete/{id}', [User_AddressController::class,'destroy'])->name('front.handle-delete-address');
+Route::get('/customer/address/edit/{id}', [User_AddressController::class,'edit'])->name('front.edit-address');
+Route::post('/customer/address/edit', [User_AddressController::class,'update'])->name('front.handle-edit-address');
+
 
 
 // end địa chỉ customer
@@ -236,14 +254,14 @@ Route::post('/pass-verify/{token}', [AccessController::class,'handlePassVerify']
 Route::get('/checkout',[OrderController::class, 'indexCheckout'] )->name('checkout');
 Route::get('/checkout/{id}', [OrderController::class, 'ReCheckout'])->name('re-checkout');
 Route::post('/checkout/add',[OrderController::class, 'store'])->name('checkout-success');
-Route::get('/checkout/choose-location', [User_AddressController::class, 'index'])->name('choose-location');
-Route::get('/checkout/add-location', [User_AddressController::class, 'addAddress'])->name('add-location');
-Route::get('/checkout/choose-location', function () {
-    return view('front.product-order-screens.choose-location');
- })->name('choose-location');
- Route::get('/checkout/add-location', function () {
-    return view('front.product-order-screens.add-location');
- })->name('add-location');
+
+Route::get('/change-location/{id}', [User_AddressController::class, 'changeCheckoutAddress'])->name('choose-location-checkout');
+Route::get('/handleChange-location/{id}', [User_AddressController::class, 'handleChangeCheckoutAddress'])->name('handle-choose-location-checkout');
+Route::get('/add-location', [User_AddressController::class, 'addCheckoutAddress'])->name('add-location-checkout');
+Route::post('/add-location', [User_AddressController::class, 'storeAddressCheckout'])->name('handle-add-location-checkout');
+Route::get('/back/{id}', [User_AddressController::class, 'backChooseLocation'])->name('back-choose-location');
+
+
 //  Route::get('/wishlist', function () {
 //     return view('front.product-order-screens.wishlist');
 //Cổng thanh toán điện tử
@@ -253,15 +271,17 @@ Route::get('/checkout/choose-location', function () {
 
 Route::prefix('/wishlist') -> group(function () {
    Route::get('/', [WishlishController::class,'index'])->name('wishlist');
-   Route::match(['GET','POST'],'/add/{id}', [WishlishController::class,'storeformproduct_item_id'])->name('storeproduct_item_id.wishlists');
-   Route::match(['GET','POST'],'/add/{id}', [WishlishController::class,'storeformproduct_id'])->name('storeproduct_id.wishlists');
-   Route::match(['GET','POST'],'/delete/{id}', [WishlishController::class,'destroy'])->name('destroy.wishlists');
+   Route::post ('/addProduct', [WishlishController::class,'storefromproduct_id'])->name('wishlist.add');
+   Route::post ('/addProductItem', [WishlishController::class,'storefromproduct_item_id'])->name('wishlist.addProductItem');
+   Route::get ('/deleteWishlistItem/{idWishlistItem}', [WishlishController::class,'destroy'])->name('wishlist.delete');
+
+   // Route::match(['GET','POST'],'/add/{id}', [WishlishController::class,'storeformproduct_item_id'])->name('storeproduct_item_id.wishlists');
+   // Route::match(['GET','POST'],'/add/{id}', [WishlishController::class,'storeformproduct_id'])->name('storeproduct_id.wishlists');
+   // Route::match(['GET','POST'],'/delete/{id}', [WishlishController::class,'destroy'])->name('destroy.wishlists');
 });
 
 
- Route::get('/filter', function () {
-    return view('front.product-order-screens.filter');
- })->name('filter');
+
  Route::get('/detail-product', function () {
     return view('front.product-order-screens.detail-product');
  })->name('');
@@ -282,6 +302,8 @@ Route::prefix('/customer/orders')->group(function () {
 
 
 Route::get ('/cart',[CartController::class, 'getCartitemJSon'] )->name('cart');
+//Thêm vào giỏ hàng
+Route::match (['get','post'],'/cart/add/{item}',[CartController::class, 'store'] )->name('cart')->name('cart.add');
 
 Route::get('/destroy/{id}',[CartController::class, 'destroyItem'])->name('cart.destroy');
 

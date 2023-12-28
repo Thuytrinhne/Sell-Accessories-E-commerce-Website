@@ -3,8 +3,10 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/account.css')}}"> 
 @endsection;
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @if (session ('updateInforSuccess'))
-            {
+            
                 <script>
                      Swal.fire({
                 position: 'center',
@@ -14,7 +16,7 @@
                 timer: 2000
                 })
                 </script>
-            }
+            
 @endif
 <div class="body-user-display-myaccount">
                 <div class="body-user-display-header1">

@@ -3,11 +3,42 @@
 <link rel="stylesheet" href="{{asset('Assets/css/front/address.css')}}"> 
 @endsection;
 @section('content')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session ('addAddressSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('addAddressSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
+@if (session ('deleteAddressSuccess'))
+            
+                <script>
+                     Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: '{{session('deleteAddressSuccess')}}',
+                showConfirmButton: false,
+                timer: 2000
+                })
+                </script>
+            
+@endif
+
+
 <div class="body-user-display-addressUser">
                 <div class="body-user-display-header-address">
                   <div class="body-user-display-title1 body-user-display-title3">Sổ địa chỉ</div>
                   <div class="body-user-display-listAddress">
                     <!-- address default  -->
+                    @if ($addressDefault != null)
                     <div class="body-user-display-listAddress-border">
                    
                       <div class="body-user-display-listItem body-user-display-listItem-main">
@@ -23,11 +54,12 @@
   
                         </div>
                         <span class="body-user-display-address-edit">
-                          <a class="body-user-display-address-link" href="">Chỉnh sửa
+                          <a class="body-user-display-address-link" href="{{route('front.edit-address', ['id' => $addressDefault->id])}}">Chỉnh sửa
                           </a>
                         </span>
                       </div>
                     </div>
+                    @endif
                     <!-- address not default -->
                     @foreach($addressNotDefault as $item)
                     <div class="body-user-display-listAddress-border">
@@ -42,8 +74,11 @@
   
                         </div>
                         <span class="body-user-display-address-edit">
-                          <a class="body-user-display-address-link" href="">Chỉnh sửa
-                            <img src="https://hasaki.vn/images/graphics/icon_delete.gif" alt="">
+                          <a class="body-user-display-address-link" href="{{route('front.edit-address', ['id' => $item->id])}}">Chỉnh sửa
+                            
+                          </a>
+                          <a href="{{route('front.handle-delete-address', ['id' => $item->id])}}">
+                          <img src="https://hasaki.vn/images/graphics/icon_delete.gif" alt="">
                           </a>
                         </span>
                       </div>
@@ -58,5 +93,6 @@
                   <a href="{{route('front.add-address')}}"><button class="body-footer-seemore btn-red">Thêm địa chỉ mới</button></a>
                 </div>
               </div>
+            
 @endsection
              
