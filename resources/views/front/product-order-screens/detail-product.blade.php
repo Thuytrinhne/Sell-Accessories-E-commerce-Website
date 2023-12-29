@@ -28,11 +28,9 @@
               <spand class="breadcrumbs__slash" >/</spand>
               <a href="" class="breadcrumbs__a">Shop </a>
               <spand class="breadcrumbs__slash">/</spand>
-              <a href="" class="breadcrumbs__a">Phụ kiện tóc & Máy làm tóc</a>
+              <a href="{{ route('get.products.by.category',[$category->id]) }}" class="breadcrumbs__a">{{$category->name_category}}</a>
               <spand class="breadcrumbs__slash">/</spand>
-              <a href="" class="breadcrumbs__a">Kẹp tóc</a>
-              <spand class="breadcrumbs__slash">/</spand>
-              <a href="" class="breadcrumbs__a breadcrumbs__a--active">Kẹp tóc nơ</a>
+              <a href="" class="breadcrumbs__a breadcrumbs__a--active">{{$product->name_product}}</a>
           </div>
       </div>
   </div>
@@ -90,7 +88,7 @@
                 <button  class="color-option" 
                                     style="background-color: {{$value->variation_value}}; color: {{$value->variation_value}} "
                                     onclick="showProducts('{{$value->id}}')"> 
-                              {{$value->value}} 
+                                    {{$value->variation_value}} 
                             </button>
                 @endforeach
               </div>
@@ -101,7 +99,7 @@
                         <i class="fas fa-minus"></i>
                     </button>
                 </span> -->
-                <input type="number" name="quantity" id="input-number" value="" min="1" max="10000">
+                <input type="number" name="quantity" id="input-number" value="1" min="1" max="10000">
                 <!-- <span class="input-group-btn">
                     <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quantity">
                         <i class="fas fa-plus"></i>
@@ -154,8 +152,6 @@
                   
               </ul>
 
-              
-
               <div class="tab-description">
                   <div class="row ">
                       <textarea name="description" 
@@ -188,6 +184,15 @@
                               <img class="body-item-img" src="{{$item->default_image}}" alt="{{$item->name_product}}">
                             </a>
                       </div> 
+                      <div class="body-item-des">
+                        <a class="body-item-link" href="#">
+                              {{$item->name_product}}</a>
+                        <div class="body-item-price">
+                          <span>{{$item->discount_price}}₫</span>
+                          
+                        </div>
+                      </div>
+      
                       
       
                       <div class="container">
@@ -244,7 +249,8 @@
 </div>
 </div>  
 <script>
-  let inputQuantity = 0;
+
+  let inputQuantity = 1;
 
   document.addEventListener('DOMContentLoaded', function () {
         var inputElement = document.getElementById('input-number');
@@ -256,9 +262,7 @@
   
   let product_item_id = 0;
 
-  
-  function addToCartAjax() {
-    alert(inputQuantity);
+  function addToCartAjax(product_item_id) {
         // Thực hiện AJAX request
             $.ajax({
                 url: '/cart/add/' + product_item_id,
@@ -361,11 +365,8 @@
         form.appendChild(ProductIdInput);
         document.body.appendChild(form);
 
-
-
         form.submit();
       }
-
 
 </script>
 @endsection

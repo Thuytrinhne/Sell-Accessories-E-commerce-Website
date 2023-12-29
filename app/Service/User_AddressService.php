@@ -41,8 +41,8 @@ class User_AddressService
         }
         public static function edit($id)
         {
-            $user_address = User_AddressRespository::getUserAddressById($id);
           
+            $user_address = User_AddressRespository::getUserAddressById($id);
              return view('front.customer.customer_address.edit-address', compact('user_address', 'id'));
 
         }

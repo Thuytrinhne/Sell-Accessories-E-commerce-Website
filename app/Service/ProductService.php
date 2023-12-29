@@ -44,9 +44,10 @@ class ProductService
             })
             ->paginate(10);
              $variation = variation::with('product_configurations')->get();
+        
+            $category = "Lọc theo giá ";
 
-
-        return view('front.product-order-screens.filter', compact('products','variation'));
+        return view('front.product-order-screens.filter', compact('products','variation','category'));
     }
 
     public static function create()
@@ -57,7 +58,6 @@ class ProductService
 
     public static function store(ProductRequest $request)
     {
-        
         
             $image = time() . '.' . $request->default_image->extension();
             $request->default_image->move(public_path('Product_images'), $image);
@@ -97,7 +97,6 @@ class ProductService
         ->where('product.id', '=', $id )
         ->first();
         
-
         $variation_value = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
@@ -109,23 +108,23 @@ class ProductService
         ->where('product.id', '=', $id )
         ->get();
 
-        $category_id = product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        $category = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->select( 
-            'category.id',
+            'category.id','category.name_category'
         )
         ->where('product.id', '=', $id )
         ->first();
 
         $relatedProduct = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->select( 
-            'product.name_product', 'product.id', 'product.default_image',
+            'product.name_product', 'product.id', 'product.default_image','product_item.discount_price',
         )
-        ->where('product.category_id', '=', $category_id->id )
+        ->where('product.category_id', '=', $category->id )
         ->take(5)
         ->get();
 
-        return view('front.product-order-screens.detail-product',['product' => $products],compact('variation_value','relatedProduct'));
+        return view('front.product-order-screens.detail-product',['product' => $products,'category' => $products],compact('variation_value','relatedProduct'));
     }
 
     public static function edit($id)
@@ -167,7 +166,6 @@ class ProductService
 
     public static function getProduct()
     {
-
         // Lấy 10 sản phẩm mới tạo gần đấy nhất hiện thị trong sản phẩm mới
         $products= product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->orderBy('product.created_at','desc')
@@ -175,50 +173,77 @@ class ProductService
             'product.name_product','product.id', 'product.default_image',
             'product_item.price', 'product_item.discount_price',
         )
-        ->take(10)
+        ->take(32)
         ->get();   
 
-        $categories = category::take(5)->get();
-        
+        $categories = category::get();
+
         return view('homepage',compact('products','categories'));
     }
 
 
     public static function getProductsByCategory($category)
     {
-        $products = product::join('category', 'category.id', '=','product.category_id')
-        ->join('product_item', 'product.id', '=', 'product_item.product_id')
-        ->where('category.id','=',$category)
-        ->paginate(10);
+        $products = Product::join('category', 'category.id', '=', 'product.category_id')
+            ->join('product_item', 'product.id', '=', 'product_item.product_id')
+            ->where('category.id', '=', $category)
+            ->paginate(10);
 
-        if($products->isEmpty())
-        {
+        if ($products->isEmpty()) {
             return response()->view('front.product-order-screens.not-found', [], 404);
         }
 
-        $variation = variation::with('product_configurations')->get();
+        $variation = Variation::with('product_configurations')->get();
 
-        return view('front.product-order-screens.filter', compact('products','variation'));
+        $category = Category::where('id', '=', $category)->select('name_category')->first();
+        $category = $category->name_category;
+
+        return view('front.product-order-screens.filter', compact('products', 'variation','category'));
     }
 
 
-    public static function getProductsByValue($value)
+    public static function getProductsByValue(Request $request)
     {
 
-        $products = product::join('product_item', 'product.id', '=', 'product_item.product_id')
-        ->join('category','product.category_id','=','category.id')
-        ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-        ->join('variation','product_configuration.variation_id','=','variation.id')
-        ->select(
-            'product.name_product', 'product.id',
-            'product_item.price', 'product_item.discount_price','product_item.SKU',
-            'product.default_image',
-            'variation.name',
-            'category.name_category',
-        )
-        ->where('product_configuration.variation_value', '=', $value )->get();
+        $products = Product::join('product_item', 'product.id', '=', 'product_item.product_id')
+            ->join('category', 'product.category_id', '=', 'category.id')
+            ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
+            ->join('variation', 'product_configuration.variation_id', '=', 'variation.id')
+            ->select(
+                'product.name_product', 'product.id',
+                'product_item.price', 'product_item.discount_price', 'product_item.SKU',
+                'product.default_image',
+                'variation.name as variation_name',
+                'category.name_category',
+            );
+
+        if ($request->variation != null) {
+            $products = $products->where('product_configuration.variation_value', '=', $request->variation);
+        }
+
+        switch ($request->orderby) {
+            case 'asc':
+                $products = $products->orderBy('product_item.price', 'asc');
+                break;
+
+            case 'desc':
+                $products = $products->orderBy('product_item.price', 'desc');
+                break;
+
+            case 'latest':
+                $products = $products->orderBy('product.created_at', 'desc');
+                break;
+
+            default:
+                $products = $products->orderBy('product.created_at', 'asc');
+                break;
+        }
+
+        $products = $products->paginate(10);
 
         return $products;
+
+
     }
 
     // public static function reportProductByDate(Request $request)
@@ -251,7 +276,7 @@ class ProductService
             ->orWhereBetween('product.updated_at', [$startDate, $endDate])
             ->paginate(10);
 
-            return(view('admin.report',compact('products','categories')));
+            return(view('admin.report',compact('products','categories'))->with('product_report'));
         }
 
         $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
@@ -266,9 +291,58 @@ class ProductService
         {
             return redirect()->back()->with('Notfound', 'Không có sản phẩm nào phù hợp!!!');
         }
-        
-        return(view('admin.report',compact('products','categories')));
+
+        return(view('admin.report',compact('products','categories'))->with('product_report'));
     }
+
+    // public static function reportProductByDate(Request $request)
+    // {   
+    //     $startDate = $request->input('start_date');
+    //     $endDate = $request->input('end_date');
+
+    //     $products = Product::whereBetween('created_at', [$startDate, $endDate])
+    //         ->orWhereBetween('updated_at', [$startDate, $endDate])
+    //         ->get();
+        
+        
+
+    //     return $products;   
+    // }
+
+    // public static function filterReport(Request $request)
+    // {
+    //     $startDate = $request->input('start_date');
+    //     $endDate = $request->input('end_date');
+
+    //     $categories = category::get();
+    //     $category = $request->input('name_category');
+
+    //     if(!$category)
+    //     {   
+    //         $categories = category::get();
+
+    //         $products = Product::join('category','category.id','=','product.category_id')->whereBetween('product.created_at', [$startDate, $endDate])
+    //         ->orWhereBetween('product.updated_at', [$startDate, $endDate])
+    //         ->paginate(10);
+
+    //         return(view('admin.report',compact('products','categories')));
+    //     }
+
+    //     $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
+    //     ->where(function ($query) use ($startDate, $endDate, $category) {
+    //         $query->whereBetween('product.created_at', [$startDate, $endDate])
+    //             ->orWhereBetween('product.updated_at', [$startDate, $endDate]);
+    //     })
+    //     ->where('product.category_id', '=', $category)
+    //     ->paginate(10);
+
+    //     if($products->isEmpty())
+    //     {
+    //         return redirect()->back()->with('Notfound', 'Không có sản phẩm nào phù hợp!!!');
+    //     }
+        
+    //     return(view('admin.report',compact('products','categories')));
+    // }
 
     public static function getModalProduct($product)
     {
@@ -345,17 +419,12 @@ class ProductService
 
     public static function latestProductsByPrice()
     {       
-        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('product.created_at', 'asc')->paginate(10);
-
-         $variation = variation::with('product_configurations')->get();
-
-        return view('front.product-order-screens.filter', compact('products','variation'));      
+             
     }
 
     public static function searchProduct(Request $request)
     {
         $search = $request->input('searchProduct');
-
 
         $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')
         ->where('name_product','like','%'. $search . '%')->paginate(10);
@@ -364,11 +433,11 @@ class ProductService
 
         if($products->isEmpty())
         {
-            return view('front.product-order-screens.not-found', compact('products','variation'));
+            return view('front.product-order-screens.not-found', compact('products','variation','search' ));
         }
 
     
-        return view('front.product-order-screens.filter', compact('products','variation'));    
+        return view('front.product-order-screens.search', compact('products','variation', 'search'));    
     }
 
     public static function search(Request $request)

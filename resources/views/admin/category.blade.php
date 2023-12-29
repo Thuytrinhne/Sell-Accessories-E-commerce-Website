@@ -18,6 +18,9 @@
                     {{ csrf_field() }} 
                     <div>
                     <input type="text" placeholder="Nhập danh mục mới" name="name_category" value="{{ old('name_category') }}">
+                    <br>
+                    <label for="">Thêm hình:</label>
+                    <input type="file" name="image_category">
                     @error('name_category')
                         <span style="color:red;">{{$message}}</span>
                     @enderror
@@ -52,7 +55,7 @@
                                     <th>Mã thể loại</th>
                                     <th>Tên thể loại</th>
                                     <th>Thể loại cha</th>
-
+                                    <th>Ảnh danh mục</th>
                                 </tr>
                             </thead>
                             <tbody>

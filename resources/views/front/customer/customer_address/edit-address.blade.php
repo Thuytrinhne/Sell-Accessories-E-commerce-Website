@@ -38,7 +38,7 @@
                             <label for="text">Tên</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input name="full_name" class="body-user-display-input"type="text" value="{{ $user_address[0]->full_name}}">
+                            <input name="full_name" class="body-user-display-input"type="text" value="{{ $user_address->full_name}}">
                             @error('full_name')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
@@ -53,7 +53,7 @@
                             <label for="text">Số điện thoại</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input name="phone" class="body-user-display-input"type="phone" value="{{ $user_address[0]->phone}}">
+                            <input name="phone" class="body-user-display-input"type="phone" value="{{ $user_address->phone}}">
                             @error('phone')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
@@ -124,7 +124,7 @@
                             <label for="text">Địa chỉ nhận hàng</label>
                           </td>
                           <td class="body-user-display-td-input">
-                            <input name = "detail_address" class="body-user-display-input"type="text" value="{{$user_address[0]->detail_address}}">
+                            <input name = "detail_address" class="body-user-display-input"type="text" value="{{$user_address->detail_address}}">
                             @error('confirmPass')
                             <br>
                                 <span class="msg-error">{{$message}}</span>
@@ -132,9 +132,9 @@
                           </td>
                        
                       </table>
-                      @if($user_address[0]->is_default == "0")
+                      @if($user_address->is_default == "0")
                        
-                      <input class="checkbox-defaultAddress" type="checkbox" name="default" value ="1" {{ $user_address[0]->is_default == '1' ? 'checked' : '' }}>
+                      <input class="checkbox-defaultAddress" type="checkbox" name="default" value ="1" {{ $user_address->is_default == '1' ? 'checked' : '' }}>
                       <span  class="checkbox-defaultAddress">Đặt làm địa chỉ mặc định</span>
                       @endif
                       </div>
@@ -168,7 +168,7 @@
 function handleProvinceData(data) {
     // Xử lý dữ liệu trả về từ API ở đây
     // load danh sách tỉnh lên thẻ select
-    var city = "{{ $user_address[0]->city }}";
+    var city = "{{ $user_address->city }}";
 
     var selectElement = document.getElementById("city-select");
 
@@ -206,7 +206,7 @@ function loadListDistrict(code) {
     });
 }
 function handleDistrictData(data) {
-    var district = "{{ $user_address[0]->district }}";
+    var district = "{{ $user_address->district }}";
     var selectElement = document.getElementById("district-select");
     selectElement.innerHTML = "";
     // tạo option chọn khu vực
@@ -248,7 +248,7 @@ function loadListWards(code) {
     });
 }
 function handleWardsData(data) {
-  var ward = "{{ $user_address[0]->village }}";
+  var ward = "{{ $user_address->village }}";
 
     var selectElement = document.getElementById("ward-select");
     selectElement.innerHTML = "";

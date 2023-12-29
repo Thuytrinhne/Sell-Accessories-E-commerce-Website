@@ -33,9 +33,9 @@ class ProductController extends Controller
         return ProductService::getModalProduct($product);
     }
 
-    public function getProductsByValue($value)
+    public function getProductsByValue(Request $request)
     {
-        return ProductService::getProductsByValue($value);
+        return ProductService::getProductsByValue($request);
     }
 
     public function getImagesByValue($value)
