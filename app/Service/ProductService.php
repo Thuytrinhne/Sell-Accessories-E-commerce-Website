@@ -515,21 +515,23 @@ class ProductService
     public static function updateItem(ItemRequest $request, $item) 
     {
         
+        
+
             $image = time() . '.' . $request->image->extension();
             $request->image->move(public_path('Product_item_images'), $image);
             $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
             $items = product_item::find($item);
 
-            $product_configuration = product_configuration::where('product_configuration.id','=',$item)
+            $product_configuration = product_configuration::where('product_configuration.product_item_id','=',$item)
             ->first();
-        
+            $product_configuration->variation_value = $request->input('variation_value');
             $items->price = $request->input('price');
             $items->quantity = $request->input('quantity');
             $items->SKU = $request->input('SKU');
             $items->discount_price = $request->input('discount_price');
             $items->image = $imageName;
 
-            $product_configuration->variation_value = $request->input('variation_value');
+        
             // Lưu dữ liệu vào bảng products
             $items->save();
             $product_configuration->save();

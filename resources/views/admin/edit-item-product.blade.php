@@ -54,13 +54,12 @@
 
                         <div class="amountAdd" style="display:flex;">
                             <label>Variation name:</label>
-                            <select style="font-size: 15px" id ="options"
-                                    class="form-select" aria-label="Default select example" 
-                                    name="name" value=" {{$item->name}}" disabled>
-                                @foreach($variation as $variation)
-                                    <option value="{{$item->name}}">{{$item->name}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="name" value="{{$item->name}}" disabled>
+                            
+                                    @error('name')
+                                        <span style="color:red;">{{$message}}</span>
+                                    @enderror
+                            
                         </div>
 
 
@@ -79,7 +78,9 @@
                         <div class="imageAdd">
                             <label>Ảnh sản phẩm: <img src="{{$item->image}}" alt=""> </label>
                             <input type="file"  name="image" value="{{$item->image}}"  title="Choose your image">
-
+                                    @error('image')
+                                        <span style="color:red;">{{$message}}</span>
+                                    @enderror
                         </div>
                         
                         <input type="submit" class="confirmAdd" 

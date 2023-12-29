@@ -26,7 +26,7 @@ class ItemRequest extends FormRequest
             'price' => 'bail|required|numeric|min:0',
             'discount_price' => 'bail|required|numeric|min:0',
             'quantity' => 'bail|required|integer|min:1',    
-            'name' => 'bail|required',    
+               
             'SKU' => 'bail|required',   
             'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg' 
         ];
@@ -43,7 +43,8 @@ class ItemRequest extends FormRequest
             'quantity.integer' => ':attribute phải là số nguyên dương!',
             'quantity.min' => ':attribute phải lớn hơn 0!',
             'image.mimes' => ':attribute chỉ nhập ảnh định dạng jpeg, png, jpg, gif, svg!',
-            'name' => ':attribute ko đc bỏ trống !',
+            'image.required' => ':attribute ko đc bỏ trống!',
+            
             'SKU' => ':attribute ko đc bỏ trống !',
             
         ];

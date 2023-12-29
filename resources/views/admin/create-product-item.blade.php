@@ -63,8 +63,6 @@
                             <select style="font-size: 15px" id ="options"
                                     class="form-select" aria-label="Default select example" 
                                     name="name" value="">
-
-                                    <option value=""></option>
                                     <option value="màu">màu</option>
                                     <option value="size">size</option>
 
@@ -87,14 +85,6 @@
                               
                             </div>
                        
-
-                        <!-- <div class="nameAdd">
-                            <label>Variation value </label>
-                            <input type="text" placeholder="Nhập value" name="value" value="{{ old('value') }}">
-                            @error('value')
-                                <span style="color:red;">{{$message}}</span>
-                            @enderror
-                        </div> -->
 
                         <div class="nameAdd">
                         <label for="image" class="form-label">Ảnh: </label>
