@@ -56,6 +56,7 @@
                         <div class="tag">
                             <label >Thể loại</label>
                             <select name="category_id">
+                                <option value="{{$item->category_id}}">{{ $item->name_category }}</option>
                                 @foreach($category as $cate)
                                 <option value="{{ $cate->id }}">{{ $cate->name_category }}</option>
                                 @endforeach

@@ -129,7 +129,9 @@ class ProductService
     {
         
         $category = category::get();
-        $products = product::where('product.id','=',$id)->get();
+        $products = product::join('category','category.id','=','product.category_id')
+        ->where('product.id','=',$id)
+        ->get();
         return(view('admin.edit-product',compact('products','category','id')));
     }
 

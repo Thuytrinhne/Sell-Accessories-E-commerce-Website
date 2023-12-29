@@ -18,8 +18,11 @@
                     {{ csrf_field() }} 
                     <div>
                     <input type="text" placeholder="Nhập danh mục mới" name="name_category" value="{{ old('name_category') }}">
-                    <input type="file" name="image_category">
                     @error('name_category')
+                        <span style="color:red;">{{$message}}</span>
+                    @enderror
+                    <input type="file" name="image_category">
+                    @error('image_category')
                         <span style="color:red;">{{$message}}</span>
                     @enderror
                     </div>
@@ -86,7 +89,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->name_category}}</td>
                         <td>{{$item->parent_id}}</td>
-                        <td></td>
+                        <td> <img src="{{$item->image_category}}" style="width :100px;height:100px"> </td>
                         </tr>
                         @endforeach
                  

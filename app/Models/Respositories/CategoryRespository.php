@@ -17,14 +17,14 @@ class CategoryRespository
     {
         
         $category = category::leftjoin('category as ct', 'category.parent_id', '=', 'ct.id')
-        ->select('category.id','category.name_category', 'ct.name_category as parent_id')
+        ->select('category.id','category.name_category','category.image_category', 'ct.name_category as parent_id')
         ->paginate(5);
         return $category;
     }
     public static function index()
     {
         $category = category::leftjoin('category as ct', 'category.parent_id', '=', 'ct.id')
-        ->select('category.id','category.name_category', 'ct.name_category as parent_id')
+        ->select('category.id','category.name_category','category.image_category', 'ct.name_category as parent_id')
         ->get();
         return $category;
     }
@@ -32,8 +32,10 @@ class CategoryRespository
     /**
      * Store a newly created resource in storage.
      */
-    public static function store(CategoryRequest $request)
+    public static function store(CategoryRequest $request)  
     {
+
+
         $image = time() . '.' . $request->image_category->extension();
         $request->image_category->move(public_path('Category_images'), $image);
         $imageName = 'http://127.0.0.1:8000/Category_images/'.$image;

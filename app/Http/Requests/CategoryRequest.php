@@ -24,6 +24,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name_category' => 'bail|required|unique:category|max:100',
+            'image_category' => 'bail|required',
             
         ];
     }
@@ -31,6 +32,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name_category.required' => ':attribute bắt buộc phải nhập !',
+            'image_category.required' => ':attribute bắt buộc phải nhập !',
             'name_category.unique' => ':attribute đã tồn tại !',
             'name_category.max' => ':attribute tối đa :max ký tự !',
         ];
@@ -38,7 +40,8 @@ class CategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name_category' => 'Tên danh mục'
+            'name_category' => 'Tên danh mục',
+            'image_category' => 'Ảnh danh mục'
         ];
     }
     public function withValidator($validator)

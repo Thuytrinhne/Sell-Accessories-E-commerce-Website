@@ -26,7 +26,7 @@ class ItemRequest extends FormRequest
             'price' => 'bail|required|numeric|min:0',
             'discount_price' => 'bail|required|numeric|min:0',
             'quantity' => 'bail|required|integer|min:1',    
-               
+                   
             'SKU' => 'bail|required',   
             'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg' 
         ];
