@@ -24,6 +24,7 @@ class WishlistService
     {
         // kiểm tra có wishlist?
         $idWishList = WishlistRespository::getIdWishListByIdUser();
+        
         if($idWishList ==0)
         {
             // chưa thì tạo wishlist mới

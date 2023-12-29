@@ -14,5 +14,6 @@ class CartRespository
         $cart = new cart();
         $cart->user_id = Auth()->user()->id;
         $cart ->save();
+        return $cart;
   }
 }

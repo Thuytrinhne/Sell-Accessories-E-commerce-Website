@@ -22,7 +22,7 @@
                                     <th>Giới tính</th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
-                                    <th>Password</th>
+                                    
                                     <th>Ngày sinh</th>
                                     <th></th>
                                 </tr>
@@ -35,7 +35,7 @@
                                         <td>{{ $ad->sex==1? "Nam" : "Nữ" }}</td>
                                         <td>{{ $ad->phone }}</td>
                                         <td>{{ $ad->email }}</td>
-                                        <td>{{ $ad->password }}</td>
+                                     
                                         <td>{{ $ad->birth }}</td>
                                         <td>
                                                 <a href="{{ route('edit.admin', ['id' => $ad->id]) }}" class="btn btn-info">SỬA</a>
@@ -62,7 +62,7 @@
                                     <th>Giới tính</th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
-                                    <th>Password</th>
+                                 
                                     <th>Ngày sinh</th>
                                     <th></th>
                                 </tr>
@@ -75,7 +75,7 @@
                                         <td>{{ $st->sex==1? "Nam" : "Nữ"  }}</td>
                                         <td>{{ $st->phone }}</td>
                                         <td>{{ $st->email }}</td>
-                                        <td>{{ $st->password }}</td>
+                                      
                                         <td>{{ $st->birth }}</td>
                                         <td>
                                                 <a href="{{ route('edit.staff', ['id' => $st->id]) }}" class="btn btn-info">SỬA</a>
@@ -106,7 +106,7 @@
                                     <th>Giới tính</th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
-                                    <th>Password</th>
+                                 
                                     <th>Ngày sinh</th>
                                     <th></th>
                                 </tr>
@@ -119,7 +119,7 @@
                                         <td>{{ $usr->sex==1? "Nam" : "Nữ"  }}</td>
                                         <td>{{ $usr->phone }}</td>
                                         <td>{{ $usr->email }}</td>
-                                        <td>{{ $usr->password }}</td>
+                                       
                                         <td>{{ $usr->birth }}</td>
                                         <td>
                                             <a href="{{ route('edit.user', ['id' => $usr->id]) }}" class="btn btn-info">SỬA</a>

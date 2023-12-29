@@ -95,3 +95,8 @@
     color: white;
     font-weight: bold;
 }
+.filter_list form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

@@ -13,7 +13,7 @@
                 
             </div>
           
-          
+         
             <div class="payment_container" style="display: inline;">
                 <div class="total">
                     <p>Tổng tiền</p>
@@ -24,7 +24,7 @@
                 <div class="pay_button">
                     <a class="pay_btn" href="{{route('checkout')}}">Thanh toán</a><br>
                 </div>
-            </div>
+            </div> 
             
         </div>
         <button class="modal__btn-close" onclick="closeCart()">
@@ -40,4 +40,6 @@
              view_screen.style.display = 'none';
           }
       </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </div>

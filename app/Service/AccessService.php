@@ -57,6 +57,7 @@ class AccessService
                 $user->sex=$request->sex;
                 $user->birth= $request->birth;
                 $user->save();
+               
                 return redirect()-> route('login')->with('SignUpSuccess', 'Đăng ký thành công');
             }
             else
@@ -67,6 +68,7 @@ class AccessService
 
         }
     }
+   
     public static function postLogin(Request $request)
     {
        

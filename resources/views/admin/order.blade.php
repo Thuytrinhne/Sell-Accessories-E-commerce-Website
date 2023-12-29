@@ -9,34 +9,36 @@
 
                 </div>
                 <div class="filter_list">
+                <form id ="formSort"action="{{ route('admin.order.filter') }}" method="GET" >
+
                     <div>
                         <label>Bắt đầu</label>
-                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <input id ="start-date" name="start-date" type="date" data-date="" data-date-format="DD MMMM YYYY" value="">
                         <label>Đến</label>
-                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
-                        <button>Tìm kiếm</button>
-                        <form action="{{ route('admin.order.filter') }}" method="GET" >
+                        <input  id ="end-date"  name ="end-date" type="date" data-date="" data-date-format="DD MMMM YYYY" value="">
+                        <button onclick="filterByDate()">Tìm kiếm</button>
+                        
                             <div class="rangeCost">
                                 <div class="sliderValue">
                                     <span>Giá đơn hàng:</span>
-                                    <input type="number" name="price_filter" id="span_sliderValue" value="0">
+                                    <input type="number" name="price_filter" id="sortPrice" value="">
                                     <span>₫</span>
                                 </div>
                                 
                             
                             </div>
                             <button type="submit" style="display:none">
-                        </form>
+                        
                     </div>
-                            <div>
-                            <select class="filter-sort__select" id="sortOptions" >
+                        <div>
+                            <select name="sortStatus" class="filter-sort__select" id="sortOptions" >
                           <option class="filter-sort__option" value="">Sort by</option>
                           <option class="filter-sort__option" value="1">Đơn hàng chưa xử lý</option>
                           <option class="filter-sort__option" value="2">Đơn hàng đã xử lý</option>
                           <option class="filter-sort__option" value="3">Đơn hàng đã thanh toán</option>
-                        </select>
+                            </select>
                         </div>
-                    
+                </form>
                     
                 </div>
                 
@@ -59,6 +61,7 @@
                         </thead>
 
                         <tbody>
+                            @if($order_list!= null)
                             @foreach($order_list as $key => $item)
                             <tr>
                                 <td>{{ $key + 1 }}</td>
@@ -83,17 +86,28 @@
                                 <td><a href="{{ route('admin.detailOrder',[$item->id])}}"><button>Chi tiết</button></a></td>
                             </tr>
                             @endforeach
+                            {{$order_list->links()}}     
+                            @endif
                             
                         </tbody>
                     </table>
-                    {{$order_list->links()}}     
+                   
 
                 </div>
 </div>
 <script>
+    
+    
         $('#sortOptions').on('change', function() {
-                    selectedValue = $(this).val();
-                    alert( selectedValue );
+                    
+            // Lấy tham chiếu đến form
+            var form = document.getElementById('formSort');
+
+            // Submit form
+            form.submit();
         });
+        
+    
+            
 </script>
 @endsection('content')
