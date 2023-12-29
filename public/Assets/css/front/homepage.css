@@ -1136,4 +1136,9 @@
     .body-category-list div:nth-child(5){
         display: none;
     }
+
+    .body-item-links{
+        right: -17%;
+
+    }
 }

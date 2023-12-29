@@ -131,7 +131,20 @@
 
 /* ===================== FOOTER ====================== */
 @media screen and (max-width:430px) {
-    
+    .signin_header{
+        height: 60px;
+        /* margin: 0 2px; */
+        justify-content: center;
+
+    }
+
+    .signin_login-text ,.signin_header> a{
+        display: none;
+    }
+
+    .signin_body img{
+        width: 430px;
+    }
 
 }
 

@@ -483,12 +483,6 @@ a.breadcrumbs__a--active {
         margin: auto;
     }
 
-    #container
-
-    .info-header {
-
-    }
-
     .col-7{
         display: flex;
         width: 100%;
@@ -503,7 +497,10 @@ a.breadcrumbs__a--active {
         width: 100%;
         padding: 0;
     }
-    .footer{
-        /* display: none; */
-    }
+
+}
+
+@media screen and (max-width: 820px) and (min-width: 431px) {
+    #current-image{
+        width: 100%;}
 }
