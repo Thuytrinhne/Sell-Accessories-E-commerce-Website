@@ -42,7 +42,8 @@
                     <div class="addCard">
                         <div class="nameAdd">
                             <label>Tên thể loại: </label>
-                            <input type="text" placeholder="Tên thể loại" name="name_category" value=" {{$category->name_category}} " > 
+                            <input type="text" placeholder="Tên thể loại" name="name_category" value=" {{$category->name_category}} " >
+                           
                         </div>
                         
                         <div class="tag">
@@ -53,6 +54,11 @@
                                 <option value="{{ $cate->id }}">{{ $cate->name_category }}</option>
                                 @endforeach   
                             </select>
+                        </div>
+                        <div class="nameAdd">
+                            <label>Ảnh thể loại: </label>
+                            <input type="file"  name="image_category">
+                           
                         </div>
                         
                         <input type="submit" class="confirmAdd">

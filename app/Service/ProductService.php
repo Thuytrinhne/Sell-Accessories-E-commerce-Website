@@ -59,7 +59,6 @@ class ProductService
     public static function store(ProductRequest $request)
     {
         
-        
             $image = time() . '.' . $request->default_image->extension();
             $request->default_image->move(public_path('Product_images'), $image);
             $imageName = 'http://127.0.0.1:8000/Product_images/'.$image;
