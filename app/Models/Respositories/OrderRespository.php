@@ -47,9 +47,18 @@ class OrderRespository
         ->get();
 
     }
+    public static function countOrderOfUserByStatus($id)
+    {
+       
+        return order::select('id')->where('user_id',  Auth()->user()->id)
+        ->where('status' ,'=', $id)
+        ->orderByDesc('created_at')
+        ->get();
+
+    }
     public static function getInforOrderById($id)
     {
-        return DB::select ("SELECT cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id, `order`.id, payment.name_method, `order`.date_order,`order`.status,
+        return DB::select ("SELECT product_item.image,cart_item.quantity,product.name_product,product_item.price,cart_item.cart_id, `order`.id, payment.name_method, `order`.date_order,`order`.status,
                                         product_configuration.name_color,product_configuration.variation_value, product_configuration.variation_id 
                                     FROM
                                             `order`, cart_item, product_item, product,product_configuration, payment

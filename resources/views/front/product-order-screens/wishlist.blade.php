@@ -52,7 +52,11 @@
                         <i class="fa-solid fa-circle-xmark"></i>
                     </a>
                 </div>
-                <img src="./Assets/Images/product_img.jpeg" alt="">
+                @if(($item->product_id == -1))
+                <img src="{{$item->image}}" alt="">
+                @else
+                <img src="{{$item->default_image}}" alt="">
+                @endif
                 <div class="product_info">
                     <a class="product_name">{{$item->name_product}}</a>
                 </div>

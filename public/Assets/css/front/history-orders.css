@@ -12,6 +12,11 @@
     height: 81px;
     height: 81px;
 }
+.item_order-infor img {
+    height: 70px;
+    width: 77px;
+    margin-right: 20px;
+}
 
 .item_order-infor-name {
     font-size: 1.6rem;

@@ -149,7 +149,7 @@
             total += item.price * item.quantity;
             listDOM.innerHTML +=
             `<div class="product_box">
-        <img src="./Assets/Images/product_img.jpeg" alt="" style="width: 60px; height: auto;">
+        <img src="${item.image}" alt="" style="width: 60px; height: auto;">
         <div class="product_info">
             <p class="product_name">${item.name_product}</p>
             <dl class="variation">

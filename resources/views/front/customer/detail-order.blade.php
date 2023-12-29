@@ -50,6 +50,7 @@
         
         <div class="row details_product">
             <div class="row details_header">
+                
                 <div class="col name_product">
                     <span>Sản phẩm</span>
                 </div>
@@ -68,7 +69,7 @@
                 <div class="col infor_details_product">
                     <div class="col image_product">
                         <img
-                            src="https://media.hcdn.vn/catalog/product/p/r/promotions-auto--205100146-8681-nuoc-tay-trang-l-oreal-3-in-1-lam-sach-sau-400ml_KH4pAbQauf5vGiUY_img_358x358_843626_fit_center.png">
+                            src="{{ $item->image }}">
                     </div>
                     <div class="col name_product">
                         <div class="row brand_product">

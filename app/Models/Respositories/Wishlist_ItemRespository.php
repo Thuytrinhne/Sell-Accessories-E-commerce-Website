@@ -27,7 +27,7 @@ class Wishlist_ItemRespository
     {
         $id =  Auth::user()->id;
        return  $wishlistItems=  DB::select
-       ("select wishlist_item.id, product.name_product, product_item.price, product_item.quantity, wishlist_item.product_id, wishlist_item.product_item_id from wishlist join wishlist_item 
+       ("select product_item.image, product.default_image, wishlist_item.id, product.name_product, product_item.price, product_item.quantity, wishlist_item.product_id, wishlist_item.product_item_id from wishlist join wishlist_item 
        on wishlist.id = wishlist_item.wishlist_id 
        left join product_item on product_item.id = wishlist_item.product_item_id 
        left join product 

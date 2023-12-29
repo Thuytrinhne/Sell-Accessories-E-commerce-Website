@@ -7,10 +7,10 @@
                 <div class="body-user-display-header">
                     <a href="{{ route('.front.customer.history-orders')}}" class="body-footer-seemore body-footer-seemore-Active">Tất cả</a>
                     <a href="{{ route('filter.history-order', 1) }}" class="body-footer-seemore">Mới đặt</a>
-                    <a href="{{ route('filter.history-order', 2) }}" class="body-footer-seemore">Đã xác nhận</a>
-                    <a href="{{ route('filter.history-order', 3) }}" class="body-footer-seemore">Đang giao hàng</a>
-                    <a href="{{ route('filter.history-order', 4) }}" class="body-footer-seemore">Thành công</a>
-                    <a href="{{ route('filter.history-order', 5) }}" class="body-footer-seemore">Đã hủy</a>
+                    <a href="{{ route('filter.history-order', 2) }}" class="body-footer-seemore">Đã xử lý</a>
+                    <a href="{{ route('filter.history-order', 3) }}" class="body-footer-seemore">Đã thanh toán</a>
+                    <a href="{{ route('filter.history-order', 4) }}" class="body-footer-seemore">Đã hủy</a>
+
                 </div>
                 <hr class="body-user-display-line">
                 <div class="body-user-display-container">
@@ -56,7 +56,7 @@
                             @foreach($item as $product)
                             <div class="item_order-detail">
                               <div class="item_order-infor">
-                                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llygp6dq2ean69_tn" alt="">
+                                <img src="{{ $product->image }}" alt="">
                                 <div>
                                     <strong class="item_order-infor-name">{{ $product->name_product}}</strong>
                                     <div class="item_order-infor-sort">Phân loại hàng:
