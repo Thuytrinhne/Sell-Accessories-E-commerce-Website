@@ -1,6 +1,6 @@
 @extends ('layouts.admin')
 @section ('content')
-<div class="content manage account_management">
+<div class="row content manage account_management">
                 <div class="title_manage">
                     <h1>Quản lý tài khoản</h1>
                 </div>
