@@ -11,10 +11,19 @@
     margin: 0 260px;
 }
 
+.forgot-pass_header > a{
+    color: #e05994; 
+    font-size: 16px;
+}
+
 
 /* ==============  body  ============== */
 .forgot-pass_body{
     position: relative;
+}
+
+.forgot-pass_body > img{
+    height: 602px; width: 100%;
 }
 
 .forgot-pass_body-form{
@@ -33,6 +42,11 @@
 .forgot-pass_body-form-container{
     margin: 45px 52px;
 
+}
+
+.forgot-pass_body-form-container > h2{
+    margin-bottom: 22px; 
+    font-size: 24px;
 }
 .forgot-pass_body-input 
 {
@@ -87,11 +101,33 @@
     right: 0px;
     border: 2px dashed var(--white-color);
 }
+.x h3{
+    display: inline-block; 
+    font-size: 28px; 
+    margin-left: 32px;
+}
+
+.forgot-pass_header img {
+    height: 48px;
+}
 
 
 /* ===================== FOOTER ====================== */
 
 
+@media screen and (max-width:430px) {
+    
 
+}
+
+@media screen and (max-width:820px) and (min-width:431px) {
+    
+    h3.forgot-pass_header-text,
+    .forgot-pass_header > a{
+        display: none;
+    }
+    
+    
+}
 
   

@@ -30,19 +30,19 @@
         <div class="signin-header-container">
             <div class="signin_header">
                 <div class="signin_logocontainer" >
-                    <a href="" ><img src="./Assets/Images/hippo-logo.png" alt="" style="height: 48px;"></a>
+                    <a href="" ><img src="./Assets/Images/hippo-logo.png" alt=""></a>
                     <p class="signin_login-text">Đăng nhập</p>
                 </div>
-                <a href="" style=" font-size: 16px;">Bạn cần giúp đỡ?</a>
+                <a href="">Bạn cần giúp đỡ?</a>
             </div>
         </div>
         <!-- ================ signin body ================ -->
         <div class="signin_body">
-            <img src="./Assets/Images/background_shoppe.jpeg" alt="" style="height: 602px; width: 100%;">
+            <img src="./Assets/Images/background_shoppe.jpeg" alt="">
 
             <div class="signin_body-form" >
                 <div class="sign_body-form-container">
-                    <h2 style="margin-bottom: 20px; font-size: 24px;">Đăng nhập</h2>
+                    <h2>Đăng nhập</h2>
                     <form action="{{route('postLogin')}}" method="POST">
                         @csrf
                     <div class="signin_body-input">

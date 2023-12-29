@@ -11,10 +11,18 @@
     margin: 0 260px;
 }
 
+.forgot-pass_header > a{
+    color: #e05994; font-size: 16px;
+}
+
 
 /* ==============  body  ============== */
 .forgot-pass_body{
     position: relative;
+}
+
+.forgot-pass_body > img{
+    height: 602px; width: 100%;
 }
 
 .forgot-pass_body-form{
@@ -33,6 +41,27 @@
 .forgot-pass_body-form-container{
     margin: 45px 52px;
 
+
+}
+
+.forgot-pass_body-form-container{
+    h2 {
+        margin-bottom: 28px; 
+        font-size: 24px;
+    }
+    
+
+}
+
+.forgot-pass_logocontainer> a{
+    height: 48px;
+}
+
+.forgot-pass_header-text {
+    display: inline-block; 
+    font-size: 28px; 
+    margin-left: 32px;
+
 }
 
 
@@ -42,6 +71,12 @@
     padding: 7px 15px;
     border-radius: 7px;
     width: 100%;
+}
+
+.forgot-pass_body-input label{
+    margin-bottom: 6px; 
+    font-size: 13px; 
+    color: rgb(129, 129, 129);
 }
 
 .forgot-pass_btn
@@ -80,9 +115,35 @@
     right: 0px;
     border: 2px dashed var(--white-color);
 }
-
+.forgot-pass_logocontainer img {
+    height: 48px;
+}
 
 /* ===================== FOOTER ====================== */
 
 
-  
+@media screen and (max-width:430px) {
+    h3.forgot-pass_header-text,
+    .forgot-pass_header > a{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:820px) and (min-width:431px) {
+    
+    h3.forgot-pass_header-text,
+    .forgot-pass_header > a{
+        display: none;
+    }
+    .forgot-pass_header{
+        justify-content: center;
+    }
+    .forgot-pass_body-form{
+        left: 25%;
+        transform: translateX(-50%);
+        transform: translateY(-50% );
+    }
+    
+    
+}

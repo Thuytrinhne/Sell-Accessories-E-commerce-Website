@@ -29,18 +29,18 @@
         <!-- ================ signup header ================ -->
         <div class="signup_header">
             <div class="signup_logocontainer" >
-                <a href="" ><img src="./Assets/Images/hippo-logo.png" alt="" style="height: 48px;"></a>
+                <a href="" ><img src="./Assets/Images/hippo-logo.png" alt="" ></a>
                 <p class="signin_login-text">Đăng ký</p>
 
             </div>
-            <a href="" style="color: #e05994; font-size: 16px;">Bạn cần giúp đỡ?</a>
+            <a href="" >Bạn cần giúp đỡ?</a>
         </div>
         <!-- ================ signup body ================ -->
         <div class="signup_body">
-            <img src="./Assets/Images/background-signup.jpg" alt="" style="height:470px;">
+            <img src="./Assets/Images/background-signup.jpg" alt="" >
             <div class="signup_body-form" >
                 <div class="signup_body-form-container">
-                    <h2 style="margin-bottom: 18px; font-size: 24px;">Đăng ký</h2>
+                    <h2 style="">Đăng ký</h2>
                     <form class="postUser" action="{{route('postUser')}}" method="POST">
                         @csrf
                             <div class="signup_body-input">

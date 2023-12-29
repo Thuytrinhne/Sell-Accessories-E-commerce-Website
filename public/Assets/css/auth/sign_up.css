@@ -14,6 +14,11 @@
     margin: 0 260px;
 }
 
+.signup_header > a{
+    color: #e05994; 
+    font-size: 16px
+}
+
 
 /* ==============  body  ============== */
 .signup_body{
@@ -21,6 +26,10 @@
     margin-top: 50px;
     display: flex;
     justify-content: space-evenly;
+}
+
+.signup_body > img{
+    height:470px;
 }
 
 .signup_body-form{
@@ -42,6 +51,14 @@
     margin-top: -20px;
 
 
+}
+
+.signup_body-form-container > h2{
+    margin-bottom: 18px; font-size: 24px;
+}
+
+.signup_logocontainer > a{
+    height: 48px;
 }
 
 .verified{
@@ -163,6 +180,10 @@
     margin-top: 18px; 
     color: rgb(195, 191, 191); 
     text-align: center;
+}
+
+.signup_logocontainer img {
+    height: 48px;
 }
 
 

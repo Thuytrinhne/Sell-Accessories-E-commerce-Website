@@ -7,21 +7,19 @@
 <div class="forgot-pass">
         <!-- ================ Forgot-pass header ================ -->
         <div class="forgot-pass_header">
-            <div class="forgot-pass_logocontainer" >
+            <div class="x" >
                 <a href="" ><img src="https://hipposhop.vn/wp-content/uploads/2023/04/hippo-logo.png" alt="" style="height: 48px;"></a>
-                <h3 class="forgot-pass_header-text" style="display: inline-block; 
-                font-size: 28px; 
-                margin-left: 32px;">Quên mật khẩu</h3>
+                <h3 class="forgot-pass_header-text" >Quên mật khẩu</h3>
             </div>
-            <a href="" style="color: #e05994; font-size: 16px;">Bạn cần giúp đỡ?</a>
+            <a href="" >Bạn cần giúp đỡ?</a>
         </div>
         <!-- ================ Forgot-pass body ================ -->
         <div class="forgot-pass_body">
-            <img src="./Assets/Images/background_shoppe.jpeg" alt="" style="height: 602px; width: 100%;">
+            <img src="./Assets/Images/background_shoppe.jpeg" alt="" >
 
             <div class="forgot-pass_body-form" >
                 <div class="forgot-pass_body-form-container">
-                    <h2 style="margin-bottom: 22px; font-size: 24px;">Quên mật khẩu</h2>
+                    <h2>Quên mật khẩu</h2>
                     <form action="{{route('handle-pass-verify', ['token' => $user->remember_token])}}" method="POST">
                         @csrf
                     <div class="forgot-pass_body-input">
