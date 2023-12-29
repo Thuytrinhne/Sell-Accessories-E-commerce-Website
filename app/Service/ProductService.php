@@ -82,6 +82,7 @@ class ProductService
      */
     public static function show($id)
     {
+       
         $products = product::join('product_item', 'product.id', '=', 'product_item.product_id')
         ->join('category','product.category_id','=','category.id')
         ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
@@ -184,6 +185,8 @@ class ProductService
 
     public static function getProductsByCategory($category)
     {
+       
+        
         $products = Product::join('category', 'category.id', '=', 'product.category_id')
             ->join('product_item', 'product.id', '=', 'product_item.product_id')
             ->where('category.id', '=', $category)

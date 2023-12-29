@@ -36,14 +36,12 @@
                                   Đã xác nhận
                                   @break
                               @case(3)
-                                  Đang giao hàng
+                                 Đã thanh toán
                                   @break
                               @case(4)
-                                  Thành công
-                                  @break
-                              @case(5)
                                   Đã hủy
                                   @break
+                             
                                   
                           @endswitch</span>
                             <a style="" href="{{ route('front.order_detail',$item[0]->id)}}">Xem chi tiết</a>
@@ -65,7 +63,7 @@
                                         {{$product->name_color }}
                                       
                                       @else 
-                                        {{$product->variation_name }}
+                                        {{$product->variation_value }}
                                       
                                       @endif
                                     </div>

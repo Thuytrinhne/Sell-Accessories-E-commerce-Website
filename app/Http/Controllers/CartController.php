@@ -81,6 +81,7 @@ class CartController extends Controller
 
         }
         $product_item = product_item::find($item);
+       
         $item_in_cart = cart_item::with('cart')->where('cart_item.product_item_id','=',$item)->where('cart_item.cart_id', '=',$cart->id )
         ->latest('created_at')->first();
         
@@ -94,7 +95,11 @@ class CartController extends Controller
             $cartItem = new cart_item;
             $cartItem->quantity = $request->quantity;
             $cartItem->product_item_id = $item;
+            if( $product_item->discount_price != null)
             $cartItem->price = $product_item->discount_price;
+            else
+            $cartItem->price = $product_item->price;
+
             $cartItem->total_money = $cartItem->quantity * $cartItem->price;
             $cartItem->cart_id =  $cart->id;
             $cartItem->save(); 
@@ -102,7 +107,44 @@ class CartController extends Controller
         
         return response()->json($item_in_cart);
     }
+    public static function storeNotAjax(Request $request)
+    {
+       
+         //Lấy ra cart mới nhất;
+         $cart = cart::where('user_id', '=', Auth()->user()->id)->latest('created_at')->select('cart.id')->first();
+         if ($cart== null) // nếu chưa có cart (user mới)
+         {
+             $cart = CartRespository::store();
+ 
+         }
+         $product_item = product_item::find($request->product_item_id);
+        
+         $item_in_cart = cart_item::with('cart')->where('cart_item.product_item_id','=',$request->product_item_id)->where('cart_item.cart_id', '=',$cart->id )
+         ->latest('created_at')->first();
+         
+         // Nếu đã có tăng số lượng
+         if($item_in_cart)
+         {
+             $item_in_cart->quantity += 1;
+             $item_in_cart->save();
+         } else // Nếu không thêm mới
+         {
+             $cartItem = new cart_item;
+             $cartItem->quantity = 1;
+             $cartItem->product_item_id = $item;
+             if( $product_item->discount_price != null)
+             $cartItem->price = $product_item->discount_price;
+             else
+             $cartItem->price = $product_item->price;
+ 
+             $cartItem->total_money = $cartItem->quantity * $cartItem->price;
+             $cartItem->cart_id =  $cart->id;
+             $cartItem->save(); 
+         }
+         return redirect()->back();
 
+
+    }
     /**
      * Display the specified resource.
      */

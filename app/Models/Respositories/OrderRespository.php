@@ -37,7 +37,8 @@ class OrderRespository
     public static function destroy($id)
     {
         $order = order::find($id);
-        $order->delete();
+        $order->status = 4;
+        $order->save();
     }
     public static function countOrderOfUser()
     {

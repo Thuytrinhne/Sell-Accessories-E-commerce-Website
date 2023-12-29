@@ -25,8 +25,6 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
-// Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
-
 
 //Route qtoan them vao
 Route::group(['prefix' => '/'], function () {
@@ -62,26 +60,6 @@ Route::get('/aboutUs', function () {
 
 
 
-//Route qtoan them vao
-// Route::group(['prefix' => '/'], function () {
-   
-//    Route::get('/', [ProductController::class, 'getProduct'])->name('homepage');
-   
-//    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
-
-
-//    Route::get('/get-images-by-value/{value}', [ProductController::class, 'getImagesByValue'])->name('get.images.by.value');
-   
-//    Route::get('/get-product-desc}', [ProductController::class, 'descProductsByPrice'])->name('get.product.by.desc');
-
-//    Route::get('/get-product-asc}', [ProductController::class, 'ascProductsByPrice'])->name('get.product.by.asc');
-   
-//    Route::get('/get-product-latest}', [ProductController::class, 'latestProductsByPrice'])->name('get.product.by.latest');
-   
-// });
-// // route Product  (qtoan)
-
-// start admin 
 // login for admin 
 Route::get('/admin/login', [AdminController::class,'login'])->name('loginAdmin');
 Route::post('/admin/login', [AdminController::class,'postLoginAdmin'])->name('postLoginAdmin');
@@ -109,7 +87,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
 
    //Qtoan  Thêm route admin product và item
-   Route::prefix('product')->group( function()
+   Route::middleware('isAdmin')->prefix('product')->group( function()
    {
       // hiển thị sản phẩm
       Route::get('/', [ProductController::class,'index'])->name('admin.product');
@@ -153,8 +131,8 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
   
 
-   Route::match(['get','post'],'/search', [AccountController::class,'search'] ) -> name('admin.search_account');;
-   Route::prefix('account')->group( function(){
+   Route::middleware('isAdmin')->match(['get','post'],'/search', [AccountController::class,'search'] ) -> name('admin.search_account');;
+   Route::middleware('isAdmin')->prefix('account')->group( function(){
       // hiển thị danh sách danh mục 
       Route::any('/', [AccountController::class,'index'])->name('admin.account');
       // // xử lý thêm danh mục
@@ -178,7 +156,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
    });
 
 
-   Route::prefix('category')->group( function()
+   Route::middleware('isAdmin')->prefix('category')->group( function()
    {
       // hiển thị danh sách danh mục 
       Route::get('/', [CategoryController::class,'index'])->name('admin.category');
@@ -299,7 +277,10 @@ Route::prefix('/customer/orders')->group(function () {
 
 Route::get ('/cart',[CartController::class, 'getCartitemJSon'] )->name('cart');
 //Thêm vào giỏ hàng
-Route::match (['get','post'],'/cart/add/{item}',[CartController::class, 'store'] )->name('cart')->name('cart.add');
+Route::match (['get','post'],'/cart/add/{item}',[CartController::class, 'store'] )->name('cart.add');
+
+// thêm sản phẩm vào giỏ hàng trinh
+Route::post('/addToCart',[CartController::class, 'storeNotAjax'])->name('addToCart');
 
 Route::get('/destroy/{id}',[CartController::class, 'destroyItem'])->name('cart.destroy');
 

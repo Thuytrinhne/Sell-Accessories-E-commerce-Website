@@ -70,18 +70,23 @@
                 </div>
                 @else  
                 <div class="product_info">
-                    <p class="product_name">Out Of Stock</p>
+                    <p class="product_name">In Stock</p>
                 </div>
                 @endif
                 
                 @if(($item->product_id == -1))
                 <div class="product_info">
-                    <a class="product_name" >Thêm vào giỏ hàng</a>
+                    <form action="{{route('addToCart')}}" method="POST">
+                        @csrf
+                        <input value="{{$item->product_item_id }}" name="product_item_id" type="text" hidden>
+                    <button type="submit" class="product_name" >Thêm vào giỏ hàng</button>
+                    
+                    </form>
                 </div>
                 @else
 
                 <div class="product_info">
-                    <a href=""
+                    <a href="{{route('products.show', ['id' => $item->product_id])}}"
                      class="product_name">
                      Lựa chọn các tùy chọn</a>
                 </div>

@@ -84,7 +84,7 @@
                                             {{ $item->name_color }}
                                         
                                         @else 
-                                            {{ $item->variation_name }}
+                                            {{ $item->variation_value }}
                                         
                                         @endif
                                         </p>

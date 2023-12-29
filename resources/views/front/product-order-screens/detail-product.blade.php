@@ -332,17 +332,16 @@
       // theem vao wish list 
      function addToWishlistClick()
       {
-        
           if (product_item_id==0)
           {
-              addProductIntoWishList("{{ route('wishlist.add') }}");
+              addProductIntoWishList("{{ route('wishlist.add') }}", {{$product->id}});
           }
           else
           {
-              addProductIntoWishList("{{ route('wishlist.addProductItem') }}");
+              addProductIntoWishList("{{ route('wishlist.addProductItem') }}", product_item_id);
           }
       }
-       function  addProductIntoWishList(url)
+       function  addProductIntoWishList(url, idProduct)
       {
     
         var form = document.createElement('form');
@@ -361,7 +360,7 @@
         var ProductIdInput = document.createElement('input');
         ProductIdInput.type = 'hidden';
         ProductIdInput.name = 'productId';
-        ProductIdInput.value = {{$product->id}};
+        ProductIdInput.value = idProduct;
 
         form.appendChild(ProductIdInput);
         document.body.appendChild(form);
