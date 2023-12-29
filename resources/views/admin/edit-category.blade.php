@@ -37,7 +37,7 @@
                
                 
                 @if($category)
-                <form action="{{route('admin.category.update',[$category->id])}}" method="POST" class="selection selection_add" id="addForm" style="display:block">
+                <form action="{{route('admin.category.update',[$category->id])}}" method="POST" class="selection selection_add" id="addForm" style="display:block" enctype="multipart/form-data">
                    @csrf
                     <div class="addCard">
                         <div class="nameAdd">

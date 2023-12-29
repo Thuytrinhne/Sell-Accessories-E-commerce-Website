@@ -34,14 +34,13 @@ class CategoryRespository
      */
     public static function store(CategoryRequest $request)
     {
-        
-        $image = time() . '.' . $request->input('image_category')->extension();
-        $request->default_image->move(public_path('Category_images'), $image);
+        $image = time() . '.' . $request->image_category->extension();
+        $request->image_category->move(public_path('Category_images'), $image);
         $imageName = 'http://127.0.0.1:8000/Category_images/'.$image;
 
         $category = new Category;
         $category->name_category=$request->input('name_category');
-        $category->image_category=imageName;
+        $category->image_category=$imageName;
         
         
         if (!($request->input('parent_id')==='NULL'))

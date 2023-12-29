@@ -195,16 +195,18 @@ class ProductService
 
         $variation = Variation::with('product_configurations')->get();
 
-        $category = Category::where('id', '=', $category)->select('name_category')->first();
+        $category = Category::where('id', '=', $category)->first();
+        $category_id = $category->id;
         $category = $category->name_category;
+        
 
-        return view('front.product-order-screens.filter', compact('products', 'variation','category'));
+
+        return view('front.product-order-screens.filter', compact('products', 'variation','category','category_id'));
     }
 
 
     public static function getProductsByValue(Request $request)
-    {
-
+    {   
         $products = Product::join('product_item', 'product.id', '=', 'product_item.product_id')
             ->join('category', 'product.category_id', '=', 'category.id')
             ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
@@ -217,10 +219,34 @@ class ProductService
                 'category.name_category',
             );
 
+        //Kiểm tra xem có lọc theo danh mục 
+        if($request->category){
+            $products = $products
+            ->where('category.id','=',$request->category);
+        }else{
+            $products = $products;
+        }
+
+        //Kiểm tra có lọc giá không
+        if($request->minPrice || $request->maxPrice){
+            $minPrice =$request->minPrice;
+            $maxPrice = $request->maxPrice;
+            
+            $products = $products
+            ->when($minPrice, function ($query) use ($minPrice) {
+                return $query->where('price', '>=', $minPrice);
+            })
+            ->when($maxPrice, function ($query) use ($maxPrice) {
+                return $query->where('price', '<=', $maxPrice);
+            });
+        }
+
+        //Kiểm tra có filter theo variation
         if ($request->variation != null) {
             $products = $products->where('product_configuration.variation_value', '=', $request->variation);
         }
 
+        //Kiểm tra có sortBy
         switch ($request->orderby) {
             case 'asc':
                 $products = $products->orderBy('product_item.price', 'asc');
@@ -242,8 +268,6 @@ class ProductService
         $products = $products->paginate(10);
 
         return $products;
-
-
     }
 
     // public static function reportProductByDate(Request $request)

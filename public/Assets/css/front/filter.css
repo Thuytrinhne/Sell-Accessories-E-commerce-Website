@@ -162,6 +162,12 @@ a.breadcrumbs__a--active {
     font-size: 13px;
 }
 
+.checkmark {
+    display: none;
+}
+
+
+
 .color-option {
     width: 50px;
     height: 50px;
@@ -171,8 +177,13 @@ a.breadcrumbs__a--active {
     background-color: transparent;
     text-align: center;
     line-height: 50px;
+    border: 1px dotted pink;
+    position: relative;
 }
 
+.color-option:focus {
+    border: 3px solid green;
+}
 .size-option {
     text-align: center;
     width: 30px;
@@ -187,6 +198,22 @@ a.breadcrumbs__a--active {
     margin-top: 15px;
     background-color: #F8F8F8;
     padding: 40px;
+}
+
+.body-content {
+    justify-content: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.body-content {
+    font-size: 17px;
+    color: #999999;
+}
+
+.body-content-img {
+    height: 300px;
+    width: 329px;
 }
 
 

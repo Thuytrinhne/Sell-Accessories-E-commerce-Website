@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Input;
 |
 */
 
-Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
+// Route::get('/filter', [ProductController::class, 'filter'])->name('products.filter');
 
 
 //Route qtoan them vao

@@ -14,7 +14,7 @@
                 </div>
                 <div class="category_addlist">
                     <h2>Thêm danh mục</h2>
-                    <form class="frmAddCategory" method="POST" action="{{route('admin.category.add')}}" id="myForm">
+                    <form class="frmAddCategory" method="POST" action="{{route('admin.category.add')}}" id="myForm" enctype="multipart/form-data">
                     {{ csrf_field() }} 
                     <div>
                     <input type="text" placeholder="Nhập danh mục mới" name="name_category" value="{{ old('name_category') }}">
@@ -88,6 +88,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->name_category}}</td>
                         <td>{{$item->parent_id}}</td>
+                        <td></td>
                         </tr>
                         @endforeach
                  

@@ -56,6 +56,7 @@ class CategoryService
      * Show the form for editing the specified resource.
      */
     public static function edit($id)
+    
     {
         $categories = CategoryRespository::index();
         $category = CategoryRespository::index()->find($id); 
@@ -69,9 +70,14 @@ class CategoryService
     public static function update(Request $request,$id)
     {
         $category =category::find($id);
+        
+        $image = time() . '.' . $request->image_category->extension();
+        $request->image_category->move(public_path('Category_images'), $image);
+        $imageName = 'http://127.0.0.1:8000/Category_images/'.$image;
 
         $category->name_category = $request->input('name_category');
         $category->parent_id = $request->input('parent_id');
+        $category->image_category = $imageName;
 
         $category->save();
     
