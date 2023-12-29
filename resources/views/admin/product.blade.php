@@ -78,20 +78,22 @@
                         <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
 
-                            <a class="Add" href="{{route('admin.product.item',[$item->id])}}">
-                                <ion-icon name="add-circle-outline"></ion-icon>
-                                Details
+                            <a href="{{route('admin.product.item',[$item->id])}}">
+                                 <button class="Edit" >
+                                 <ion-icon name="add-circle-outline"></ion-icon>
+                                 Detail</button>
                             </a>
 
                             <a href="{{route('admin.product.edit',[$item->id])}}">
-                            <button class="Edit" >
-                                <ion-icon name="pencil"></ion-icon>
-                            Sửa</button>
+                                <button class="Edit" >
+                                    <ion-icon name="pencil"></ion-icon>
+                                 Sửa</button>
                             </a>
 
-                            <a class="Delete" href="{{route('admin.product.destroy',[$item->id])}}">
-                            <ion-icon name="trash-bin"></ion-icon>
-                                Xóa
+                            <a href="{{route('admin.product.destroy',[$item->id])}}">
+                                <button class="Delete" >
+                                <ion-icon name="trash-bin"></ion-icon>
+                                 Xóa</button>
                             </a>
                         </div>
                     </nav>

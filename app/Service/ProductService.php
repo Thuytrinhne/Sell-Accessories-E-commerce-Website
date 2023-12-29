@@ -494,25 +494,27 @@ class ProductService
         {
             $imageName = time() . '.' . $request->image->extension();
             $request->image->move(public_path('Assets/Images'), $imageName);
+            $items = product_item::find($item);
+
+            $product_configuration = product_configuration::where('product_configuration.id','=',$item)
+            ->first();
+        
+            $items->price = $request->input('price');
+            $items->quantity = $request->input('quantity');
+            $items->SKU = $request->input('SKU');
+            $items->discount_price = $request->input('discount_price');
+            $items->image = $imageName;
+
+            $product_configuration->variation_value = $request->input('variation_value');
+
+            // Lưu dữ liệu vào bảng products
+            $items->save();
+            $product_configuration->save();
+            return redirect('admin/product')->with('success','Sửa thành công');
         }
 
-        $items = product_item::find($item);
-
-        $product_configuration = product_configuration::where('product_configuration.id','=',$item)
-        ->first();
-    
-        $items->price = $request->input('price');
-        $items->quantity = $request->input('quantity');
-        $items->SKU = $request->input('SKU');
-        $items->discount_price = $request->input('discount_price');
-        $items->image = $imageName;
-
-        $product_configuration->variation_value = $request->input('variation_value');
-
-        // Lưu dữ liệu vào bảng products
-        $items->save();
-        $product_configuration->save();
-        return redirect('admin/product')->with('success','Sửa thành công');
+        return redirect('admin/product')->with('error','Sửa ko thành công !!!');
+            
     }
 
     public static function destroyItem($item)

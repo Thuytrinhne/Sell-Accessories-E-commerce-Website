@@ -33,7 +33,12 @@
                 @endif
 
         <div class="manage_admin">
-                            <a href="{{route('admin.product.item.create',[$product])}}">Thêm sản phẩm chi tiết</a>
+                            <a class="Add_item_product" href="{{route('admin.product.item.create',[$product])}}">
+                                
+                                <button class="Add_item_product_btn">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                                Thêm sản phẩm chi tiết
+                            </button></a>
                         
                             <table class="staff_account">
                                 <thead>
@@ -66,8 +71,10 @@
                                         <td class = "table_img-wrapper"> <img src="{{$item->image}} " alt=" {{$item->id}}" class="table_img">  </td>
                                     
                                         <td>
-                                            <a href="{{ route('admin.product.item.edit',[$item->id]) }}"><button>Sửa</button></a>
-                                            <a href="{{ route('admin.product.item.destroy',[$item->id]) }}"><button>Xóa</button></a>
+                                            <a href="{{ route('admin.product.item.edit',[$item->id]) }}">
+                                                <button class="edit_product_item">Sửa</button></a>
+                                            <a href="{{ route('admin.product.item.destroy',[$item->id]) }}">
+                                                <button class="delete_product_item">Xóa</button></a>
                                         </td>
                                         
                                     </tr>

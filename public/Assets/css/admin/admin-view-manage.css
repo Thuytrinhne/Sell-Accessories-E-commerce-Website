@@ -155,3 +155,44 @@
     font-weight: bold;
     margin: 15px;
 }
+
+.Add_item_product_btn {
+    background-color: #e05994;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    margin-left:15px;
+}
+
+.Add_item_product_btn:hover {
+    background-color: #183a5c;
+    transform: scale(1.2);
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.edit_product_item {
+    background-color: #183a5c;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
+}
+
+.edit_product_item:hover {
+    background-color: green;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
+    transform: scale(1.1);
+}
+
+
+.delete_product_item {
+    background-color: #183a5c;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
