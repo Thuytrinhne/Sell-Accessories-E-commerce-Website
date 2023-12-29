@@ -128,7 +128,7 @@
 
               <div class="row info-buy">           
                   <div class="col-6 ">
-                      <button onclick="addToCartAjax('{{ $product->id }}')" class="info-buy__btn">Thêm vào giỏ hàng</button>
+                      <button onclick="addToCartAjax()" class="info-buy__btn">Thêm vào giỏ hàng</button>
                   </div>
                   <div class="col-6">
                       <button class="info-buy__btn">Mua ngay sản phẩm</button>
@@ -262,8 +262,9 @@
   
   let product_item_id = 0;
 
-  function addToCartAjax(product_item_id) {
+  function addToCartAjax() {
         // Thực hiện AJAX request
+        
             $.ajax({
                 url: '/cart/add/' + product_item_id,
                 type: 'GET',

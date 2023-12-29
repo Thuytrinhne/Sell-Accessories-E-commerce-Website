@@ -8,6 +8,7 @@ use App\Models\cart_item;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use App\Models\Respositories\CartRespository;
 
 class CartController extends Controller
 {
@@ -75,13 +76,18 @@ class CartController extends Controller
 
     public function store(Request $request,$item)
     {
-
-        // Lấy ra cart mới nhất;
+        
+        //Lấy ra cart mới nhất;
         $cart = cart::where('user_id', '=', Auth()->user()->id)->latest('created_at')->select('cart.id')->first();
+        if ($cart== null) // nếu chưa có cart (user mới)
+        {
+            $cart = CartRespository::store();
+
+        }
         $product_item = product_item::find($item);
         $item_in_cart = cart_item::with('cart')->where('cart_item.product_item_id','=',$item)->where('cart_item.cart_id', '=',$cart->id )
         ->latest('created_at')->first();
-      
+        
         // Nếu đã có tăng số lượng
         if($item_in_cart)
         {

@@ -139,7 +139,12 @@ class OrderService {
 
     public static function indexCheckout() {
         // lấy địa chỉ mặc định 
+
         $defaultAddress = User_AddressRespository::getUserAddressDefault();
+        if($defaultAddress == null)
+        {
+            return view('front.product-order-screens.addFirstAddress');
+        }
         return OrderService::handleIndexCheckout($defaultAddress);
     }
     public static function handleIndexCheckout ($defaultAddress)

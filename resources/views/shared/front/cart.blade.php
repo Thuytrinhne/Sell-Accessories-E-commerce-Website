@@ -40,7 +40,7 @@
                 
             </div>
           
-          
+         
             <div class="payment_container" style="display: inline;">
                 <div class="total">
                     <p>Tổng tiền</p>
@@ -71,33 +71,10 @@
 =======
                 <div class="pay_button">
                     <a class="pay_btn" href="{{route('checkout')}}">Thanh toán</a><br>
->>>>>>> 1531e2abf5f7105589c9eac1e5390988229bf914
                 </div>
             </div>
-            @endforeach
-            <!-- ===============   product box  =============== -->
-
             
         </div>
-        @php
-            $total_price=0;
-            foreach($product_item_cart as $item) {
-            $total_price += $item->price * $item->quantity;
-            }
-        @endphp
-        <div class="payment_container" style="display: inline;">
-            <div class="total">
-                <p>Tổng tiền</p>
-                <p style="text-align:end;">{{ $total_price }}đ</p>
-            </div>
-        
-
-            <div class="pay_button">
-                <a class="pay_btn" href="checkout">Thanh toán</a><br>
-            </div>
-        </div>
-        
-    </div>
         <button class="modal__btn-close" onclick="closeCart()">
             X
         </button>
@@ -111,4 +88,6 @@
              view_screen.style.display = 'none';
           }
       </script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </div>
