@@ -92,7 +92,9 @@
                         <input type="file" name="image">
                         </div>
                         
-                        <input type="submit" class="confirmAdd">
+                        <input type="submit" class="confirmAdd" 
+                        style="background-color: #4CAF50; color: white; 
+                        padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
                         
                     </div>
                 </form>
