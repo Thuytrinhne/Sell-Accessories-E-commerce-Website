@@ -198,28 +198,14 @@ class ProductService
         $category = $category->name_category;
         
 
+
         return view('front.product-order-screens.filter', compact('products', 'variation','category','category_id'));
     }
 
 
     public static function getProductsByValue(Request $request)
     {   
-      
-        //Kiểm tra xem có lọc theo danh mục 
-        if($request->category){
-            $products = Product::join('product_item', 'product.id', '=', 'product_item.product_id')
-            ->join('category', 'product.category_id', '=', 'category.id')
-            ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-            ->join('variation', 'product_configuration.variation_id', '=', 'variation.id')
-            ->select(
-                'product.name_product', 'product.id',
-                'product_item.price', 'product_item.discount_price', 'product_item.SKU',
-                'product.default_image',
-                'variation.name as variation_name',
-                'category.name_category',
-            )->where('category.id','=',$request->category);
-        }else{
-            $products = Product::join('product_item', 'product.id', '=', 'product_item.product_id')
+        $products = Product::join('product_item', 'product.id', '=', 'product_item.product_id')
             ->join('category', 'product.category_id', '=', 'category.id')
             ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
             ->join('variation', 'product_configuration.variation_id', '=', 'variation.id')
@@ -230,6 +216,13 @@ class ProductService
                 'variation.name as variation_name',
                 'category.name_category',
             );
+
+        //Kiểm tra xem có lọc theo danh mục 
+        if($request->category){
+            $products = $products
+            ->where('category.id','=',$request->category);
+        }else{
+            $products = $products;
         }
 
         //Kiểm tra có lọc giá không
@@ -237,17 +230,7 @@ class ProductService
             $minPrice =$request->minPrice;
             $maxPrice = $request->maxPrice;
             
-            $products = Product::join('product_item', 'product.id', '=', 'product_item.product_id')
-            ->join('category', 'product.category_id', '=', 'category.id')
-            ->join('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
-            ->join('variation', 'product_configuration.variation_id', '=', 'variation.id')
-            ->select(
-                'product.name_product', 'product.id',
-                'product_item.price', 'product_item.discount_price', 'product_item.SKU',
-                'product.default_image',
-                'variation.name as variation_name',
-                'category.name_category',
-            )
+            $products = $products
             ->when($minPrice, function ($query) use ($minPrice) {
                 return $query->where('price', '>=', $minPrice);
             })

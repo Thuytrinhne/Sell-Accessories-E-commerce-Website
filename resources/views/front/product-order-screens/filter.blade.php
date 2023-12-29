@@ -34,7 +34,6 @@
                           <label for="max_price" class="price-range-title">Đến:</label>
                           <input class="price-input" type="number" name="max_price" id="max_price" value="{{ request('max_price') }}" placeholder="Max Price">
 
-                          <button type="submit" class="price-search-btn">Lọc</button>
                       </form>
                     </div>
                    
@@ -72,15 +71,16 @@
 
                  <div class="row filter-widget">
                   @foreach($variation as $name)
-                    <div class="col-4 filter-color">
-                        <h4>{{$name->name}}</h4>
+                    <div class="col-5 filter-color">
+                        <h4 style="text-transform:capitalize">{{$name->name}}</h4>
                         <div class="row">
                           @foreach($name->product_configurations as $product_configuration)
                           <button
                               id="variationSelected"
                               class="color-option"
-                              style="background-color: {{$product_configuration->variation_value}}; color: {{$product_configuration->variation_value}}; border: 1px solid pink"
+                              style="background-color: {{$product_configuration->variation_value}}; color: {{$product_configuration->variation_value}}; "
                               onclick="showProducts(' {{$product_configuration->variation_value}} ')">
+                            
                               {{$product_configuration->variation_value}}
                           </button>
                           @endforeach
@@ -88,6 +88,9 @@
                         </div>
                     </div>
                   @endforeach
+                    <div class="col-2">
+                    <button onclick="resetAll()" class="price-search-btn">Xóa bộ lọc</button>
+                    </div>
                   </div>
                   
                  <div class="row">
@@ -157,7 +160,7 @@
 var selectedVariation;
 var selectedValue;
 var categoryId = document.getElementById('category_id').dataset.cateId;
-let minPrice, maxPrice;
+let minPrice =0, maxPrice=999999;
 
     $('#min_price').on('input', function() {
         minPrice = $(this).val();
@@ -175,15 +178,6 @@ let minPrice, maxPrice;
             showProducts(selectedVariation);
         });
 
-  //Xử lí khi nhấn lọc giá
-  function handleFormSubmit(event) {
-    event.preventDefault();
-    let minPrice = document.getElementById('min_price').value;
-    let maxPrice = document.getElementById('max_price').value;
-    console.log(minPrice);
-    showProducts(selectedVariation);
-}
-
   //Gọi ajax filter
    function showProducts(variation) {
         selectedVariation = variation;
@@ -199,14 +193,35 @@ let minPrice, maxPrice;
                     'maxPrice': maxPrice,
                 },
             success: function(data) {
-                console.log(data.data);
-                renderProducts(data.data);
+              if (data === null || data.data === null || data.data.length === 0) {
+                // Xử lý khi Ajax trả về null hoặc mảng rỗng
+                console.log('Dữ liệu trả về là null hoặc mảng rỗng');
+                renderNotFound();
+              } else {
+                  console.log(data.data);
+                  renderProducts(data.data);
+              }
             },
             error: function(error) {   
                 console.log('Bị loi roi');
             }
         });
     }
+
+    // hàm render nd khi ko có sản phẩm nào
+    function renderNotFound(){
+      $('#productList').empty();
+
+      $('#productList').append(
+          '<div class="row body-content" style="width:100%">'+
+              '<span class="body-content-title">'+
+                  'Không tìm thấy sản phẩm nào phù hợp với tìm kiếm của bạn.'+
+              '</span>'+
+              '<img class="body-content-img" src="https://hippo.vn/wp-content/themes/babystreet/image/search-no-results.jpg" alt="">'+
+          '</div>'
+      );
+    }
+
     //hàm render nội dụng lấy từ ajax
     function renderProducts(products) {
         
@@ -215,7 +230,7 @@ let minPrice, maxPrice;
 
         for (let i = 0; i < products.length; i++) {
             $('#productList').append(
-                '<div class="body-list__item">' +
+                '<div class="body-list__item" >' +
                     '<div>' +
                         '<a class="body-item-link" href="/detail-product/'+ products[i].id + '">' +
                             '<img class="body-item-img" src="' + products[i].default_image + '" alt="">' +
@@ -230,6 +245,11 @@ let minPrice, maxPrice;
                 '</div>'
             );
         }
+    }
+
+    // Hàm xóa filter 
+    function resetAll(){
+      location.reload();
     }
 
 </script>
