@@ -17,7 +17,7 @@
                     </div>
                       <h1 class="filter__tittle">
                       </h1>
-                      <h1 class="filter__tittle">
+                      <h1 class="filter__tittle" id="category_id" data-cate-id="{{ $category_id }}">
                         {{ $category }}
                       </h1>
                 </div>
@@ -27,7 +27,7 @@
                  <!-- begin filter content -->
                  <div class="row filter__content">
                     <div class="col-5 price-range-container">
-                      <form action = "{{route('products.filter')}}" method="get">                        
+                      <form onsubmit="handleFormSubmit(event)">                        
                           <label for="min_price" class="price-range-title">Giá từ:</label>
                           <input class="price-input" type="number" name="min_price" id="min_price" value="{{ request('min_price') }}" placeholder="Min Price">
 
@@ -142,6 +142,7 @@
                     
                     </div>
                     <div style="margin-left:50px">{{ $products->links() }}</div>
+
                   </div>
                  
                  </div>
@@ -152,15 +153,38 @@
 </div>
 
 <script>
-
+//Khai báo
 var selectedVariation;
 var selectedValue;
+var categoryId = document.getElementById('category_id').dataset.cateId;
+let minPrice, maxPrice;
 
+    $('#min_price').on('input', function() {
+        minPrice = $(this).val();
+        showProducts(selectedVariation);
+    });
+
+    $('#max_price').on('input', function() {
+        maxPrice = $(this).val();
+        showProducts(selectedVariation);
+    })
+
+  // Xử lí khi nhấn sortBy
     $('#sortOptions').on('change', function() {
             selectedValue = $(this).val();
             showProducts(selectedVariation);
         });
 
+  //Xử lí khi nhấn lọc giá
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    let minPrice = document.getElementById('min_price').value;
+    let maxPrice = document.getElementById('max_price').value;
+    console.log(minPrice);
+    showProducts(selectedVariation);
+}
+
+  //Gọi ajax filter
    function showProducts(variation) {
         selectedVariation = variation;
         $.ajax({
@@ -170,6 +194,9 @@ var selectedValue;
                     '_token': '{{ csrf_token() }}',
                     'orderby': selectedValue,
                     'variation': selectedVariation,
+                    'category': categoryId,
+                    'minPrice': minPrice,
+                    'maxPrice': maxPrice,
                 },
             success: function(data) {
                 console.log(data.data);
@@ -180,13 +207,12 @@ var selectedValue;
             }
         });
     }
-
+    //hàm render nội dụng lấy từ ajax
     function renderProducts(products) {
         
         // Xóa nội dung hiện tại của #productList
         $('#productList').empty();
 
-        // Lặp qua danh sách sản phẩm và thêm chúng vào #productList
         for (let i = 0; i < products.length; i++) {
             $('#productList').append(
                 '<div class="body-list__item">' +

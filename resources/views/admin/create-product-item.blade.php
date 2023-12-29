@@ -89,7 +89,7 @@
 
                         <div class="mb-3">
                         <label for="image" class="form-label">Multiple files input example</label>
-                       <input type="file" name="image">
+                        <input type="file" name="image">
                         </div>
                         
                         <input type="submit" class="confirmAdd">
