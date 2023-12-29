@@ -23,7 +23,40 @@
     text-align: center;
 }
 
-.select_report button {
+.select_list {
+    display: grid;
+    margin: 10px 60px 0px 20px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 1rem;
+    font-size: 1.5em;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+    width: 90%;
+    text-align: center;
+}
+
+.select_list button {
+    text-decoration: none;
+    font-weight: bold;
+    color: #e05994;
+    background: #ffffff;
+    border: transparent;
+}
+
+.select_list button:hover {
+    color: #183a5c;
+    background-color: transparent;
+    transform: scale(1.2);
+}
+
+.select_list button:focus {
+    color: #183a5c;
+    background-color: transparent;
+    transform: scale(1.2);
+}
+
+.select_list button {
     text-decoration: none;
     font-weight: bold;
     color: #e05994;

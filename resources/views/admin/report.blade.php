@@ -15,6 +15,16 @@
 
                     </script>
                 @endif   
+
+                @if($display == 1)
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        
+                            showContent('selection_product');
+                    });
+                </script>
+                @endif
+
                 <div class="title_report">
                     <h1>Thống kê</h1>
                 </div>
@@ -105,6 +115,8 @@
 
                 
 </div>
+
+
 
   <!-- <script>
     $(document).ready(function() {

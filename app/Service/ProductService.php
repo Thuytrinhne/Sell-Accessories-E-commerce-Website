@@ -286,6 +286,8 @@ class ProductService
 
     public static function filterReport(Request $request)
     {
+        $display = 1;
+      
         $startDate = $request->input('start_date');
         $endDate = $request->input('end_date');
 
@@ -300,7 +302,7 @@ class ProductService
             ->orWhereBetween('product.updated_at', [$startDate, $endDate])
             ->paginate(10);
 
-            return(view('admin.report',compact('products','categories'))->with('product_report'));
+            return(view('admin.report',[$display],compact('products','categories','display'))->with('product_report',1));
         }
 
         $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
@@ -316,7 +318,7 @@ class ProductService
             return redirect()->back()->with('Notfound', 'Không có sản phẩm nào phù hợp!!!');
         }
 
-        return(view('admin.report',compact('products','categories'))->with('product_report'));
+        return(view('admin.report',compact('products','categories','display'))->with('product_report',1));
     }
 
     // public static function reportProductByDate(Request $request)
@@ -420,32 +422,6 @@ class ProductService
         return $products;
     }
 
-
-    public static function descProductsByPrice()
-    {
-       
-        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'desc')->get();
-
-        return view('front.product-order-screens.filter', compact('products','variation'));
-        
-    }
-
-    public static function ascProductsByPrice()
-    {
-       
-        $products = product_item::join('product', 'product.id', '=', 'product_item.product_id')->orderBy('price', 'asc')->paginate(10);
-
-         $variation = variation::with('product_configurations')->get();
-
-        return view('front.product-order-screens.filter', compact('products','variation'));
-        
-    }
-
-    public static function latestProductsByPrice()
-    {       
-             
-    }
-
     public static function searchProduct(Request $request)
     {
         $search = $request->input('searchProduct');
@@ -460,7 +436,6 @@ class ProductService
             return view('front.product-order-screens.not-found', compact('products','variation','search' ));
         }
 
-    
         return view('front.product-order-screens.search', compact('products','variation', 'search'));    
     }
 
@@ -476,6 +451,7 @@ class ProductService
 
     public static function report(Request $request)
     {
+        $display = 0;
         $categories = category::get();
         $category = $request->input('name_category');
 
@@ -489,7 +465,7 @@ class ProductService
         ->distinct()
         ->paginate(10);
 
-        return(view('admin.report',compact('products','categories')));
+        return(view('admin.report',compact('products','categories','display')));
     }
 
     // Xử lí item_product

@@ -5,9 +5,14 @@
                     <h1>Quản lý tài khoản</h1>
                 </div>
                 <div class="manage_list">
+                <div class="select_list">
+                    <button href="#" class="report_order" onclick="displayContent('manage-admin')">Danh sách admin</button>
+                    <button href="#" class="report_staff" onclick="displayContent('manage-staff')">Danh sách staff</button>
+                    <button href="#" class="report_customer" onclick="displayContent('manage-user')">Danh sách user</button>
+                </div>
 
-                <div class="manage_admin">
-                        <h2>Danh sách Admin</h2>
+                <div class="manage_admin" id="manage-admin">
+                        <!-- <h2>Danh sách Admin</h2> -->
                         <a href="{{route('store.admin')}}" class="btn btn-primary">Thêm tài khoản Admin</a>
                         @if(Session::has('thongbao'))
                             <div class="alert alert-success">
@@ -46,8 +51,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="manage_staff">
-                        <h2>Danh sách Staff</h2>
+                    <div class="manage_staff" id="manage-staff" style="display:none">
+                        <!-- <h2>Danh sách Staff</h2> -->
                         <a href="{{route('store.staff')}}" class="btn btn-primary">Thêm tài khoản nhân viên</a>
                         @if(Session::has('thongbao'))
                             <div class="alert alert-success">
@@ -87,9 +92,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="manage_user">
-                        <h2>Danh sách khách hàng</h2>
-                        <form action="{{ route ('admin.search_account') }}" method="POST" class="form-inline" role="form">
+                    <div class="manage_user" id="manage-user" style="display:none">
+                        <!-- <h2>Danh sách khách hàng</h2> -->
+                        <!-- <form action="{{ route ('admin.search_account') }}" method="POST" class="form-inline" role="form">
                             <div class="form-group">
                                 @csrf
                                 <input  name="q"  type="text" class="form-control" id="" placeholder="Nhập từ khoá tìm kiếm"
@@ -97,7 +102,7 @@
 
                                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                             </div>
-                        </form>
+                        </form> -->
                         <table class="user_account">
                             <thead>
                                 <tr>
@@ -132,4 +137,37 @@
                     </div>
                 </div>
             </div>
+<script>
+    var manageAdmin = document.getElementById('manage-admin');
+    var manageStaff = document.getElementById('manage-staff');
+    var manageUser = document.getElementById('manage-user');
+
+    // Hàm để ẩn tất cả các phần tử
+    function hideAllContent() {
+        manageAdmin.style.display = 'none';
+        manageStaff.style.display = 'none';
+        manageUser.style.display = 'none';
+    }
+
+    function displayContent(contentType) {
+        hideAllContent(); // Ẩn tất cả trước khi hiển thị
+
+        switch (contentType) {
+            case 'manage-admin':
+                manageAdmin.style.display = 'block';
+                break;
+            case 'manage-staff':
+                manageStaff.style.display = 'block';
+                break;
+            case 'manage-user':
+                manageUser.style.display = 'block';
+                break;
+            // Thêm các trường hợp khác nếu cần
+            default:
+                console.error('Loại quản lý không hợp lệ.');
+                break;
+        }
+    }
+
+</script>
 @endsection
