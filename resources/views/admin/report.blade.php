@@ -61,9 +61,9 @@
                         @csrf
                         <h2>Tìm kiếm</h2>
                         <label>Bắt đầu</label>
-                        <input type="date" data-date="" name="start_date"  data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <input type="date" data-date="" name="start_date"  data-date-format="DD MMMM YYYY" value="2022-08-09">
                         <label>Đến</label>
-                        <input type="date" data-date="" name="end_date"  data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <input type="date" data-date="" name="end_date"  data-date-format="DD MMMM YYYY" value="2023-08-09">
                         <label>Thể loại</label>
                         <select name="name_category">
                             <option value="">Tất cả</option>

@@ -8,7 +8,7 @@ use App\Models\Respositories\AccountRespository;
 use App\Http\Requests\AccountRequest;
 class AccountService 
 {
-    public function storeAdmin(Request $request)
+    public static function storeAdmin(Request $request)
     {
         if($request->isMethod('POST')){
             $validate = $request->validate([
@@ -28,7 +28,7 @@ class AccountService
         } return view('admin.account.create_account');
     }
     
-    public function editAdmin(Request $request, string $id)
+    public static function editAdmin(Request $request, string $id)
     {
         $admin = user::find($id);
         if($request->isMethod('POST')){ 
@@ -48,7 +48,7 @@ class AccountService
         }return view('admin.account.edit_account', compact('admin'));
     }
     
-    public function destroyAdmin(string $id)
+    public static function destroyAdmin(string $id)
     {
         $admin = user::find($id);
         $admin -> delete();
@@ -59,7 +59,7 @@ class AccountService
 
 
 // =======================  Thêm xoá sửa staff =========================
-public function storeStaff(Request $request)
+public static function storeStaff(Request $request)
     {
         if($request->isMethod('POST')){
             $validate = $request->validate([
@@ -80,7 +80,7 @@ public function storeStaff(Request $request)
         } return view('admin.account.create_staff_account');
     }
     
-    public function editStaff(Request $request, string $id)
+    public static function editStaff(Request $request, string $id)
     {
         $staff = user::find($id);
         if($request->isMethod('POST')){ 
@@ -100,7 +100,7 @@ public function storeStaff(Request $request)
         }return view('admin.account.edit_staff_account', compact('staff'));
     }
     
-    public function destroyStaff(string $id)
+    public static function destroyStaff(string $id)
     {
         $staff = user::find($id);
         $staff -> delete();
@@ -112,7 +112,7 @@ public function storeStaff(Request $request)
 
 
 // =======================  Thêm xoá sửa user =========================
-public function storeUser(Request $request)
+public static function storeUser(Request $request)
     {
         if($request->isMethod('POST')){
             $validate = $request->validate([
@@ -133,7 +133,7 @@ public function storeUser(Request $request)
         } return view('admin.account.create_user_account');
     }
     
-    public function editUser(Request $request, string $id)
+    public static function editUser(Request $request, string $id)
     {
         $user = user::find($id);
         if($request->isMethod('POST')){ 
@@ -153,7 +153,7 @@ public function storeUser(Request $request)
         }return view('admin.account.edit_user_account', compact('user'));
     }
     
-    public function destroyUser(string $id)
+    public static function destroyUser(string $id)
     {
         $user = user::find($id);
         $user -> delete();
@@ -161,13 +161,14 @@ public function storeUser(Request $request)
     }
 // =======================  END Thêm xoá sửa user =========================
 
-    public function search(){
-        $q = input::get('q');
-        $watches = user::where('ten','','LIKE','%' .$q. '%') -> get();
+    public static function search(Request $request){
+        $q = $request->input('q');
+        $watches = User::where('full_name', 'LIKE', '%' . $q . '%')->get();
+
         if(count($watches) > 0){
-            return view('/account', ['watches' => $watches]);
-        }else {
-            return view('/account', with('thongbao', 'Khong tim thay user'));
+            return view('/account', ['watches' => $watches],compact("admin", "staff", "user"));
+        } else {
+            return view('/account')->with('thongbao', 'Khong tim thay user');
         }
     }
 }

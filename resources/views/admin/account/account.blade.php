@@ -89,15 +89,10 @@
                     </div>
                     <div class="manage_user">
                         <h2>Danh sách khách hàng</h2>
-                        <!-- <form action="{{ route ('admin.search_account') }}" method="POST">
-                            @csrf
-                            <input type="text" name="q" placeholder="nhập từ khoá cần tìm">
-                            <button type="submit">Tìm kiếm</button>
-                        </form> -->
-                        <form action="" method="POST" class="form-inline" role="form">
+                        <form action="{{ route ('admin.search_account') }}" method="POST" class="form-inline" role="form">
                             <div class="form-group">
-                                <!-- <label for="" class="sr-only">label</label> -->
-                                <input type="text" class="form-control" id="" placeholder="Nhập từ khoá tìm kiếm"
+                                @csrf
+                                <input  name="q"  type="text" class="form-control" id="" placeholder="Nhập từ khoá tìm kiếm"
                                 style=" width:20%; padding: 7px; display: inline-block; font-size:14px">
 
                                 <button type="submit" class="btn btn-primary">Tìm kiếm</button>
