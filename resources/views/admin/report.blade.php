@@ -15,6 +15,7 @@
 
                     </script>
                 @endif   
+                <div id="productReportValue" data-value="{{ $product_report }}"></div>
                 <div class="title_report">
                     <h1>Thống kê</h1>
                 </div>
@@ -105,6 +106,20 @@
 
                 
 </div>
+
+<script>
+    // Đảm bảo rằng DOM đã được tải trước khi thực hiện các thao tác
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lấy giá trị của product_report từ thuộc tính data
+        var productReportValue = document.getElementById('productReportValue').dataset.value;
+
+        // Kiểm tra nếu product_report không bằng 1
+        if (productReportValue == 1) {
+            // Gọi hàm showContent và truyền tham số 'selection_product'
+            showContent('selection_product');
+        }
+    });
+</script>
 
   <!-- <script>
     $(document).ready(function() {
