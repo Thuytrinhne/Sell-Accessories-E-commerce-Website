@@ -24,20 +24,32 @@
                         <div class="priceAdd">
                             <label>Giá sản phẩm: </label>
                             <input type="text" placeholder="Giá sản phẩm" name="price" value=" {{$item->price}} ">
+                                    @error('price')
+                                        <span style="color:red;">{{$message}}</span>
+                                    @enderror
                         </div>
                         
                         <div class="priceAdd">
                             <label>Giá discount:</label>
                             <input type="text" placeholder="Giá discount" name="discount_price" value=" {{$item->discount_price}} ">
+                                    @error('discount_price')
+                                        <span style="color:red;">{{$message}}</span>
+                                    @enderror
                         </div>
                         <div class="amountAdd">
                             <label>Số lượng:</label>
                             <input type="text" placeholder="Số lượng" name="quantity" value=" {{$item->quantity}} ">
+                                    @error('quantity')
+                                        <span style="color:red;">{{$message}}</span>
+                                    @enderror
                         </div>
 
                         <div class="nameAdd">
                             <label>SKU: </label>
                             <input type="text" placeholder="Nhập SKU" name="SKU" value=" {{$item->SKU}} ">
+                                    @error('SKU')
+                                        <span style="color:red;">{{$message}}</span>
+                                    @enderror
                         </div>
 
                         <div class="amountAdd" style="display:flex;">
@@ -46,12 +58,11 @@
                                     class="form-select" aria-label="Default select example" 
                                     name="name" value=" {{$item->name}}" disabled>
                                 @foreach($variation as $variation)
-                                    <option value="{{$variation->name}}">{{$variation->name}}</option>
+                                    <option value="{{$item->name}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        
 
                         @if($item->name == 'màu')
                             <div class="nameAdd" id="colorPickerContainer" style="display:flex;">
@@ -66,8 +77,9 @@
                         @endif
 
                         <div class="imageAdd">
-                            <label>Ảnh sản phẩm: </label>
-                            <input type="file"  name="image" value=" {{$item->image}}"  title="Choose your image">
+                            <label>Ảnh sản phẩm: <img src="{{$item->image}}" alt=""> </label>
+                            <input type="file"  name="image" value="{{$item->image}}"  title="Choose your image">
+
                         </div>
                         
                         <input type="submit" class="confirmAdd" 

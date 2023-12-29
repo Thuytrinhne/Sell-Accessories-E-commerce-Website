@@ -142,6 +142,9 @@
                         <div class="nameAdd">
                             <label  name="default_image">Ảnh mặc định: </label>
                             <input type="file" name = "default_image" value="{{old('default_image')}}">
+                            @error('default_image')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
                         </div>
                         
                         <input type="submit" class="confirmAdd">
