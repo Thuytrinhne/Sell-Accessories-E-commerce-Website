@@ -37,10 +37,9 @@ Route::group(['prefix' => '/'], function () {
    
    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
-
    Route::get('/search-product', [ProductController::class,'searchProduct'])->name('products.search');
-
-   Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
+   
+   Route::get('/get-products-by-value', [ProductController::class,'getProductsByValue'])->name('get.products.by.value');
 
    Route::get('/get-images-by-value/{value}', [ProductController::class, 'getImagesByValue'])->name('get.images.by.value');
    
@@ -70,8 +69,6 @@ Route::get('/aboutUs', function () {
    
 //    Route::get('/detail-product/{id}', [ProductController::class, 'show'])->name('products.show');
 
-
-//    Route::get('/get-products-by-value/{value}', [ProductController::class, 'getProductsByValue'])->name('get.products.by.value');
 
 //    Route::get('/get-images-by-value/{value}', [ProductController::class, 'getImagesByValue'])->name('get.images.by.value');
    

@@ -31,6 +31,8 @@ class OrderRespository
         
         return $order->id;
     }
+    
+    
 
     public static function destroy($id)
     {

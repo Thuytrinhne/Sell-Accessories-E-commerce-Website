@@ -21,20 +21,21 @@
               <div class="row" id="variation_value">  
               </div>
 
+              <input type="number" name="quantity" id="input-number" value="1" min="1" max="10000">
+
               <div class="row info-category" style="margin-top: 20px;" id="name_category">
               </div>
 
-
               <div class="row info-whistlist" style="margin: 20px 0px;">
                   <div class="col-6 info-whistlist-wrapper">                 
-                      <button onclick="addToCart()" class="info-whistlist-btn" > 
+                      <button onclick="" class="info-whistlist-btn" > 
                         <i class="fa fa-heart" aria-hidden="true">  Add to whistlist</i>
                       </button>
                   </div>
               </div>
 
               <div class="row info-buy">           
-                  <div class="col-6 ">
+                  <div class="col-6" id="addToCartAjax">
                       <button class="info-buy__btn">Thêm vào giỏ hàng</button>
                   </div>
                   <div class="col-6">
@@ -93,8 +94,8 @@
             $('#variation_name').empty();
             $('#variation_value').empty();
             $('#name_category').empty();
+            $('#addToCartAjax').empty();
             
-
             $('#default_image').append(
                       '<img id="current-image" src="'+product[0].default_image+'" alt="" style="width:95%;height:95%">'
             );
@@ -102,9 +103,6 @@
             $('#name_product').append(
                 '<h1 class="info-header__h1">'+product[0].name_product+'</h1>'
             );
-
-            
-
 
             $('#price').append(
                 '<div class="col-1 info-price--default">'+
@@ -141,20 +139,61 @@
                       '<a href="" class="info-category-link">'+product[0].name_category+'</a>'+
                   '</h4>'
             );
+
+            $('#addToCartAjax').append(
+                '<button class="info-buy__btn" onclick="addToCartAjax('+product[0].id+')">Thêm vào giỏ hàng</button>'
+            );
                     
         };
 
         
-
         modalclose.addEventListener('click', function () {
             quickViewModal.style.display = 'none';
         });
     });
 
+    let inputQuantity = 1;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var inputElement = document.getElementById('input-number');
+        
+        inputElement.addEventListener('input', function () {
+          inputQuantity = inputElement.value;
+        });
+    });
+
+    function addToCartAjax(product_item_id) {
+    console.log(inputQuantity);
+        // Thực hiện AJAX request
+            $.ajax({
+                url: '/cart/add/' + product_item_id,
+                type: 'GET',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'quantity': inputQuantity,
+                },
+                success: function(data) {
+                  Swal.fire({
+                      position: 'center',
+                      icon: 'success',
+                      title: 'Đã thêm vào giỏ hàng !',
+                      showConfirmButton: false,
+                      timer: 2000
+                      })
+                       
+                },
+                error: function(error) {
+                    console.log('Lỗi:', error);
+                    // Xử lý lỗi nếu có
+                }
+            });
+  }
+
     
 </script>
 
 <script>
+
    function showProducts(product_item_id) {
         $.ajax({
             url: '/get-images-by-value/' + product_item_id,

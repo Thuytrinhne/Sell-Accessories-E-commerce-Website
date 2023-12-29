@@ -109,29 +109,31 @@
                  
             </div>
             <div class="body-footer">
-                  <a href="" class="body-footer-seemore">Xem tất cả</a>
+                  <a href="{{ route('products.search') }}" class="body-footer-seemore">Xem tất cả</a>
             </div>
                
-            <div class="body-catogory grid">
-                      <div class="body-category-list">
-                        @foreach($categories as $item)
-                        <div class="body-category-item">
-                          <a href="{{ route('get.products.by.category',[$item->id]) }}" class="body-category-link">
-                           <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
-                           <h3 class="body-category-name">{{ $item->name_category }}</h3>
-                          </a>
-                        </div>
-                        @endforeach
-                      </div>
-                      <div class="body-category-nav">
-                          <button class="body-nav-btn" type="button">
-                            <i class="fa-solid fa-angle-left body-nav-icon"></i>
-                          </button>
-                          <button class="body-nav-btn" type="button">
-                            <i class="fa-solid fa-angle-right body-nav-icon btn-left"></i>
-                          </button>
-                      </div>
-            </div> 
+            <div class="body-catogory grid" style="overflow: hidden">
+              <div class="body-category-list" id="slider-container">
+                  @foreach($categories as $item)
+                  <div class="body-category-item">
+                      <a href="{{ route('get.products.by.category',[$item->id]) }}" class="body-category-link">
+                          <img src="https://hipposhop.vn/wp-content/uploads/2023/07/z4490504219755_dbc9c3ca1627f10b3ca79d1260de72c2.jpg" alt="" class="body-category-img">
+                          <h3 class="body-category-name">{{ $item->name_category }}</h3>
+                      </a>
+                  </div>
+                  @endforeach
+              </div>
+              <div class="body-category-nav">
+                  <button class="body-nav-btn" onclick="prevSlide()">
+                      <i class="fa-solid fa-angle-left body-nav-icon"></i>
+                  </button>
+                  <button class="body-nav-btn" onclick="nextSlide()">
+                      <i class="fa-solid fa-angle-right body-nav-icon"></i>
+                  </button>
+              </div>
+          </div>
+
+            
           </div> 
 
 
@@ -163,12 +165,31 @@
         
           form.appendChild(ProductIdInput);
           document.body.appendChild(form);
-
-
-
+          
           form.submit();
         }
       </script>
+
+  <script>
+      let currentPosition = 0;
+      const itemWidth = document.querySelector('.body-category-item').offsetWidth + 20; // Including margin
+      const container = document.getElementById('slider-container');
+
+      function nextSlide() {
+          if (currentPosition > -(container.scrollWidth - container.offsetWidth)) {
+              currentPosition -= itemWidth;
+              container.style.transform = 'translateX(' + currentPosition + 'px)';
+          }
+      }
+
+      function prevSlide() {
+          if (currentPosition < 0) {
+              currentPosition += itemWidth;
+              container.style.transform = 'translateX(' + currentPosition + 'px)';
+          }
+      }
+  </script>
+
 @endsection
     <!-- modal quickview-->  
 @section ('quick-view')
