@@ -18,11 +18,11 @@
 function showContent(className) {
     if (className === 'selection_list') {
         document.querySelector(`.selection.selection_add`).style.display = 'none';
-        document.querySelector(`.selection.${className}`).style.display = 'Grid';
+        document.querySelector(`.selection.${className}`).style.display = 'flex';
     }
     if (className === 'selection_add') {
         document.querySelector(`.selection.selection_list`).style.display = 'none';
-        document.querySelector(`.selection.${className}`).style.display = 'Grid';
+        document.querySelector(`.selection.${className}`).style.display = 'flex';
 
     }
     if (className == 'selection_order') {

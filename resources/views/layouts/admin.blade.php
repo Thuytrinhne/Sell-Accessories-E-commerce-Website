@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="{{asset('Assets/css/admin/admin-view-product.css')}}">
     <link rel="stylesheet" href="{{asset('Assets/css/admin/admin-view-dashboard.css')}}">
     <link rel="stylesheet" href="{{asset('Assets/css/admin/admin-view-category.css')}}">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <!-- toastr -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -85,16 +87,22 @@
         
     </style>
     <header class="header"></header>
-    <div class="container">
+    <div class="container-fluid">
+        <div class="row">
         <!-- nav here -->
         @include('shared.admin.nav')
-        <div>
+        <div class="col-lg-10 col-md-9 col-sm-12 ">
         <!-- content show here -->
         @yield('content');
         </div>
     </div>
+    </div>
     
     <script src="{{asset('Assets/js/admin.js')}}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
   
 

@@ -67,15 +67,20 @@
                     </script>
                 @endif
 
-                <div class="selection selection_list">
+                <div class="row selection selection_list">
                     @if(count($products) > 0)
                     @foreach($products as $item)
-                    <nav id="product_1" class="product product_1">
+                    <nav id="product_1" class="col-lg-2 col-md-5 col-sm-12 product product_1">
+                    <div class="row">
                         <img src="{{$item->default_image}}">
+                    </div>
+                    <div class="row">
                         <p> {{$item->name_product}} </p>
-                        
+                    </div>
+                    <div class="row">
                         <textarea name="description" disabled style="width: 90%"> {{$item->description}} </textarea>
-                        <div style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
+                    </div>
+                        <div class="row" style="border: 1px solid #f1f1f1;width: 90% ; margin: 10px;"></div>
                         <div class="Edit-Delete">
 
                             <a class="Add" href="{{route('admin.product.item',[$item->id])}}">

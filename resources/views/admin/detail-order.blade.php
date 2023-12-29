@@ -23,14 +23,14 @@
                 </script>
             
 @endif
-<div class="container containerDetail">
+<div class="row container containerDetail">
         <div class="row title">
             <h1>Chi tiết đơn hàng</h1>
         </div>
-        <div class="container_all">
-                <div  class="container_all-item1">
+        <div class="row container_all">
+                <div  class="col-lg-7 container_all-item1">
                     <div class="row infor">
-                        <div class="col infor_order">
+                        <div class="col-lg-12 col-md-12 infor_order">
                             <div class="row order_key">
                                 <span>Đơn hàng:</span>
                                 <span> #{{ $user_order_infor[0]->id }}</span>
@@ -56,14 +56,14 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col location_delivery">
+                        <div class="col-lg-12 location_delivery">
                             <span>Địa chỉ người nhận</span>
                             <p>{{ $user_order_infor[0]->full_name }}</p>
                             <p>Điện thoại: {{ $user_order_infor[0]->phone }}</p>
                             <p>{{ $user_order_infor[0]->city }}, {{ $user_order_infor[0]->district }}, {{ $user_order_infor[0]->village }}, {{ $user_order_infor[0]->detail_address }}
                             </p>
                         </div>
-                        <div class="col infor_payment">
+                        <div class="col-lg-12 infor_payment">
                             <span>Phương thức thanh toán</span>
                             <p>{{$user_order_infor[0]->name_method}}</p>
                             <span>Thông tin vận chuyển</span>
@@ -92,7 +92,7 @@
                     </div>
                
                 </div>
-                <div  class="container_all-item2">
+                <div  class="col-lg-3 col-md-12 container_all-item2">
                     <div class="change_status">
                         <h3>Order Action</h3>
                         <form action="{{route('admin.order.updateStatus')}}" method="POST">

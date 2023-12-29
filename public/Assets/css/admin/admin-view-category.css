@@ -1,16 +1,15 @@
-.frmAddCategory
-{
+.frmAddCategory {
     display: flex;
-    
 }
-.frmAddCategory input
-{
+
+.frmAddCategory input {
     display: block;
 }
-.frmAdd-fitContent
-{
+
+.frmAdd-fitContent {
     height: fit-content !important;
 }
+
 .category_header {
     display: flex;
     justify-content: space-between;
@@ -33,13 +32,11 @@
     color: #e05994;
 }
 
-
 .category_addlist input {
     margin: 0px 15px 0px 15px;
     outline: none;
     border: none;
     border-bottom: 1px solid #dddddd;
-
 }
 
 .category_addlist input:hover {
@@ -60,7 +57,6 @@
     font-weight: bold;
 }
 
-
 .category_list {
     margin: 10px 60px 0px 20px;
     background-color: white;
@@ -74,7 +70,7 @@
 }
 
 .category_list table {
-    width: 70%;
+    width: 100%;
     border-collapse: collapse;
     margin: 25px 0px;
     font-size: 1.2em;
@@ -88,13 +84,11 @@
     color: #e05994;
 }
 
-
 .category_list input {
     margin: 0px 15px 0px 15px;
     outline: none;
     border: none;
     border-bottom: 1px solid #dddddd;
-
 }
 
 .category_list input:hover {
@@ -115,14 +109,11 @@
     font-weight: bold;
 }
 
-
-
 .category_table thead tr {
     background-color: #f78da7;
     color: #183a5c;
     font-weight: bold;
     height: 50px;
-
 }
 
 .category_table th,
@@ -151,4 +142,13 @@
     transform: scale(1.1);
     color: white;
     font-weight: bold;
+}
+body {
+    background: #f2f1f6 !important;
+}
+.user_infor {
+    text-align: center;
+}
+.logout {
+    right: 12%;
 }
