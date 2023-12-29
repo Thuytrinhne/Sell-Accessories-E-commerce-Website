@@ -116,3 +116,130 @@ a.body-footer-seemore.body-footer-delete {
 a.body-footer-seemore.body-footer-delete:hover {
     background-color: rgb(255, 0, 0);
 }
+/* iphone 14 promax */
+@media screen and (max-width: 430px) {
+    .body-user-feature-footer{
+        width: 41vh;
+
+        display: grid;
+        grid-template-columns: 50% 50%;
+        margin: 24px;
+    }
+
+    .body-user-display-myaccount, .body-user-display-container1, .body-user-flex{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .body-user-display-myaccount{
+        max-width: 400px;
+    }
+
+    .body-user-display{
+        width: 90%;
+        margin: auto;
+    }
+
+    .body-user{
+        display: block;
+    }
+
+    .body-user-feature-header{
+        justify-content: center;
+        width: 430px;
+    }
+    .body-user-display-listAddress{
+        flex-direction: column;
+    }
+
+    .body-user-display-listAddress-border{
+        width: 100%;
+    }
+
+    .body-footer-seemore.btn-red{
+        padding: 0 24px;
+        font-size: 1.2rem;
+    }
+
+    .body-footer-seemore::before{
+        /* padding: 0 16px; */
+        width: 100%;
+    }
+
+    .body-user-display-header{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .item_order-title-link{
+        flex-direction: column;
+    }
+
+    .item_order-title-link div:nth-child(2){
+        display: flex;
+        justify-content: space-around;
+    }
+}
+
+/* ipad air */
+@media screen and (max-width: 995px) and (min-width: 431px) {
+    .body-user {
+        margin: 0 12px;
+    }
+
+    
+    .body-user-display-myaccount, .body-user-display-container1{
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .body-user-display{
+        max-width: 540px;
+    }
+
+
+    .footer-container{
+        grid-template-columns: 30% 40% 30%;
+
+    }
+    
+    .body-user-display-tbl{
+        display: block;
+    }
+
+    .body-user-display-listAddress{
+        flex-direction: column;
+    }
+
+    .body-user-display-listAddress-border{
+        width: 100%;
+    }
+
+    .body-user-display-header{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .item_order-title-link{
+        flex-direction: column;
+    }
+
+    .item_order-title-link div:nth-child(2){
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .account-container{
+        margin-top: 16px;
+    }
+
+}
+/* pc */
+@media screen and (max-width: 2000px) and (min-width: 995px) {
+    
+
+    
+}
+
+

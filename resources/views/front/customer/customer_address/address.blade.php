@@ -1,7 +1,7 @@
 @extends('front.customer.index')
 @section('css')
 <link rel="stylesheet" href="{{asset('Assets/css/front/address.css')}}">
-@endsection;
+@endsection
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

@@ -139,7 +139,152 @@ padding: 50px 0px;
         font-size: 2.5rem;
     }
 
-    .checkout_detail i{
-        font-size: 4rem;
+    .fa-circle-xmark{
+        font-size: 2rem;
     }
+
+    .product_box-container{
+        width: 80%;
+    }
+
+    .product_box{
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .product_info .product_name{
+        font-size: 1.5rem;
+
+    }
+    .product_box .product_box1 img{
+        height: 109.5px;
+        width: 109.5px;
+        margin-left: 8px;
+
+    }
+
+    .product_box2 > .product_info:first-child > a{
+        font-size: 2.5rem;
+    }
+
+    .product_box1{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+}
+
+/* ipad air */
+@media screen and (max-width: 995px) and (min-width: 431px) {
+    .product_container {
+        height: 79vh;
+    }
+    .product_box-container h1{
+        font-size: 2.5rem;
+    }
+
+    .fa-circle-xmark{
+        font-size: 2.5rem;
+    }
+
+    .product_box-container{
+        width: 80%;
+    }
+
+    .product_box{
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .product_info .product_name{
+        font-size: 2rem;
+
+    }
+    .product_box .product_box1 img{
+        height: 100px;
+        width: 100px;
+        margin-left: 16px;
+
+    }
+
+    .product_box2 > .product_info > a{
+        font-size: 2.1rem;
+    }
+
+    .product_box2 > .product_info:first-child > a{
+        font-size: 2.7rem;
+    }
+
+    .product_box1{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product_box2{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product_info{
+        margin: 0 8px;
+    }
+
+}
+
+@media screen and (max-width: 2000px) and (min-width: 996px) {
+    .product_box-container h1{
+        font-size: 2.5rem;
+    }
+
+    .fa-circle-xmark{
+        font-size: 2.5rem;
+    }
+
+    .product_box-container{
+        width: 80%;
+    }
+
+    .product_box{
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .product_info .product_name{
+        font-size: 2rem;
+
+    }
+    .product_box .product_box1 img{
+        height: 100px;
+        width: 100px;
+        margin-left: 16px;
+
+    }
+
+    .product_box2 > .product_info > a{
+        font-size: 2.1rem;
+    }
+
+    .product_box2 > .product_info:first-child > a{
+        font-size: 2.7rem;
+    }
+
+    .product_box1{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product_box2{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .product_info{
+        margin: 0 50px;
+    }
+
+
+    
 }

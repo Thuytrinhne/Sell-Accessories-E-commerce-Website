@@ -163,3 +163,26 @@
     outline: none;
     color: #777;
 }
+/* iphone 14 promax */
+@media screen and (max-width: 430px) {
+    .product_container {
+        height: 76vh;
+    }
+
+    .cart_container .product_box{
+        justify-content: space-between;
+    }
+
+    .cart_container .product_info{
+        flex-direction: column;
+        justify-content: start;
+    }
+}
+
+/* ipad air */
+@media screen and (max-width: 995px) and (min-width: 431px) {
+    .product_container {
+        height: 79vh;
+    }
+
+}

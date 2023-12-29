@@ -599,7 +599,8 @@
     height: auto;
     position: absolute;
     top: 50%;
-    left: -1%;
+    transform: translateY(-50%);
+    left: 1%;
     right: 1%;
     display: flex;
     justify-content: space-between;
@@ -969,7 +970,7 @@
     }
 
     .logo-header {
-        display: block;
+        display: flex;
         text-align: center;
         position: absolute;
         left: 50%;
@@ -1005,9 +1006,7 @@
     .footer-container {
         grid-template-columns: 30% 40% 30%;
     }
-    .footer-container .footer-list:last-child {
-        display: none;
-    }
+    
     .body-assort{
         display: none;
     }
@@ -1015,6 +1014,54 @@
     .navbar .navbar-expand-lg .bg-body-tertiary .header__nav{
         z-index: 100;
     }
+
+    .container-fluid{
+        height: 100px;
+        z-index: 100;
+    }
+
+    .navbar-list{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 17px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .body-category-item, .body-category-item img{
+        height: 180px;
+        width: 180px;
+    }
+
+    .body-category-list{
+        margin: 50px 0 50px 12px;
+    }
+
+    .body-category-list div:nth-child(5){
+        display: none;
+    }
+
+    .footer-link-center, .footer-logo{
+        width: 170px;
+    }
+
+    .nav-link-black, .nav-link-black:hover {
+        color: black;
+        margin: 0;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .body-assort-item .body-assort-item1 a{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    .fa-user{
+        font-size: 24px;
+        margin: auto;
+    }
+
 }
 
 /* FOOTER */
@@ -1046,7 +1093,47 @@
         width: 168px;
     }
 
-    /* .footer{
+    .container-search{
+        margin: 0;
+        width: 47%;
+
+    }
+
+    .search-header{
+        width: 100%;
+        margin: 0;
+
+    }
+
+    .container-search-text{
+        padding: 0 0 4px;
+    }
+
+    .navbar-list{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 17px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .footer-link-center{
+        margin-top: 12px;
+    }
+
+    .body-category-item, .body-category-item img{
+        height: 180px;
+        width: 180px;
+    }
+
+    .body-category-list{
+        margin: 50px 0 50px 12px;
+    }
+
+    .body-category-list div:nth-child(3),
+    .body-category-list div:nth-child(4),
+    .body-category-list div:nth-child(5){
         display: none;
-    } */
+    }
 }

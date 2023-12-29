@@ -2,6 +2,11 @@
     display: flex;
     gap: 36px;
 }
+
+.add-address-container p{
+    margin-top: 12px;
+}
+
 .body-user-display-frm {
     flex-basis: auto;
 }

@@ -77,7 +77,7 @@
 .body-user-display {
     margin-left: 27px;
     background-color: white;
-    width: 1091px;
+    width: 1000px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.13);
     padding: 12px 15px;
 }
@@ -217,9 +217,7 @@
         grid-template-columns: 30% 40% 30%;
 
     }
-    .footer-container .footer-list:last-child{
-        display: none;
-    }
+
     .body-user-display-tbl{
         display: block;
     }
