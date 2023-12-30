@@ -173,15 +173,19 @@ class ProductService
 
     public static function getProduct()
     {
-        // Lấy 10 sản phẩm mới tạo gần đấy nhất hiện thị trong sản phẩm mới
-        $products= product::join('product_item', 'product.id', '=', 'product_item.product_id')
-        ->orderBy('product.created_at','desc')
-        ->select(
-            'product.name_product','product.id', 'product.default_image',
-            'product_item.price', 'product_item.discount_price',
-        )
+        $products = Product::selectRaw('
+        product.name_product,
+        product.id,
+        product.default_image,
+        product_item.price,
+        product_item.discount_price
+        ')
+        ->join('product_item', 'product.id', '=', 'product_item.product_id')
+        ->whereRaw('product_item.id IN (SELECT MIN(id) FROM product_item GROUP BY product_id)')
+        ->orderBy('product.created_at', 'desc')
         ->take(32)
-        ->get();   
+        ->get();
+  
 
         $categories = category::get();
 
@@ -419,6 +423,7 @@ class ProductService
         ->groupBy('date')
         ->get();
 
+        $display ='1';
 
         $categories = category::get();
         $category = $request->input('name_category');
@@ -433,7 +438,7 @@ class ProductService
         ->distinct()
         ->paginate(10);
 
-        return(view('admin.report',compact('products','categories','display','ordersStatistics')));
+        return(view('admin.report',compact('products','categories','display','ordersStatistics','display')));
     }
 
     // Xử lí item_product

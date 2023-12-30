@@ -36,7 +36,7 @@
 
                 </div>
                 <div class="selection_order">
-                <form action="{{ route('admin.filterReport') }}" method="POST" class="search_product">
+                <!-- <form action="{{ route('admin.filterReport') }}" method="POST" class="search_product">
                         @csrf
                         <h2>Tìm kiếm</h2>
                         <label>Bắt đầu</label>
@@ -51,7 +51,7 @@
                             @endforeach
                         </select>
                         <button type="submit" id="btn-submit-datepicker">Xác nhận</button>
-                    </form>
+                    </form> -->
                     <table class="content_report">
                         <thead>
                             <tr>
