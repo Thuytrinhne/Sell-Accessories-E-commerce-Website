@@ -88,10 +88,13 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Sản phẩm</th>
-                                <th>Danh mục</th>
-                                <th>Số lượng</th>
-                                <th>Ngày cập nhật</th>
+                                <th>Mã sản phẩm</th>
+
+                                <th>Tên Sản phẩm</th>
+                                <th>Thuộc Danh mục</th>
+                                <th>Tổng số orders</th>
+                                <th>Tổng số lượng đã bán</th>
+                                <th>Tổng danh thu</th>
                             </tr>
                         </thead>
                         @php
@@ -101,10 +104,16 @@
                         <tbody>
                             <tr>
                                 <td>{{++$stt}}</td>
+                                <td>{{ $item->idProduct }}</td>
+
                                 <td>{{ $item->name_product }}</td>
                                 <td>{{ $item->name_category }}</td>
-                                <td>{{ $item->productItems->sum('quantity') }} Product Item</td>
-                                <td>{{ $item->updated_at }}</td>
+                                <td>{{ $item->sl }}</td>
+
+                                <td>{{ $item->total_quantity }}</td>
+                                <td>{{ $item->total_revenue }}</td>
+
+
                             </tr>
                         </tbody>
                         @endforeach

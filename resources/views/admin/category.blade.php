@@ -20,10 +20,7 @@
                     <input type="text" placeholder="Nhập danh mục mới" name="name_category" value="{{ old('name_category') }}">
                     <br>
                     <label for="">Thêm hình:</label>
-                    <input type="file" name="image_category">
-                    @error('name_category')
-                        <span style="color:red;">{{$message}}</span>
-                    @enderror
+                    
                     <input type="file" name="image_category">
                     @error('image_category')
                         <span style="color:red;">{{$message}}</span>

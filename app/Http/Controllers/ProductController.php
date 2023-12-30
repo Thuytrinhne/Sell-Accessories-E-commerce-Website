@@ -11,7 +11,8 @@ use App\Models\product_item;
 use App\Models\variation_option;
 use App\Models\variation;   
 use App\Models\product_images;   
-
+use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Requests\ItemUpdateRequest;
 
 use Illuminate\Http\Request;
 
@@ -106,7 +107,7 @@ class ProductController extends Controller
         return ProductService::edit($id);
     }
 
-    public function update(ProductRequest $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
         return ProductService::update($request,$id);
 
@@ -153,7 +154,7 @@ class ProductController extends Controller
         return ProductService::editItem($itemID);
     }
 
-    public function updateItem(ItemRequest $request, $item) 
+    public function updateItem(ItemUpdateRequest $request, $item) 
     {
 
         return ProductService::updateItem($request,$item);

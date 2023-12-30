@@ -90,7 +90,7 @@ class CategoryRespository
         $search = $request->input('search');
 
         $category = category::leftjoin('category as ct', 'category.parent_id', '=', 'ct.id')
-        ->select('category.id','category.name_category', 'ct.name_category as parent_id')
+        ->select('category.id','category.name_category', 'ct.name_category as parent_id', 'category.image_category')
         ->where('category.name_category','like','%' . $search . '%')
         ->paginate(5);
 

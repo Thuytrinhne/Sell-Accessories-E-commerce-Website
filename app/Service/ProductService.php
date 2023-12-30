@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Requests\ProductUpdateRequest;
 use App\Http\Requests\ItemRequest;
 use App\Models\product;
 use App\Models\category;
@@ -13,6 +14,7 @@ use App\Models\order;
 use App\Models\cart_item; 
 use App\Models\cart; 
 use DB;
+use App\Http\Requests\ItemUpdateRequest;
 
 use Illuminate\Http\Request;
 
@@ -137,20 +139,22 @@ class ProductService
     }
 
 
-    public static function update(ProductRequest $request, $id)
+    public static function update(ProductUpdateRequest $request, $id)
     {
-
-        $image = time() . '.' . $request->default_image->extension();
-        $request->default_image->move(public_path('Product_item_images'), $image);
-        $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
-
+       
         $product =product::find($id);
 
         $product->name_product = $request->input('name_product');
         $product->description = $request->input('description');
         $product->category_id = $request->input('category_id');
+        if ($request->has('default_image'))
+        {
+        $image = time() . '.' . $request->default_image->extension();
+        $request->default_image->move(public_path('Product_item_images'), $image);
+        $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
         $product->default_image = $imageName;
 
+        }
         $product->save();
     
         return redirect('admin/product')->with('success','Sửa danh mục thành công');
@@ -303,31 +307,22 @@ class ProductService
         $endDate = $request->input('end_date')." 23:59:59";
       
         $category = $request->input('name_category');
-        if(!$category)
+        $categories = category::get();
+
+        if($category != null)
         {   
-            $categories = category::get();
            // use store procdedure
+           $products = DB::select('CALL sp_ReportProductByOneCategory(?, ?, ?)', [$category, $startDate, $endDate]);            
            
-            
-
-
-            return(view('admin.report',[$display],compact('products','categories','display'))->with('product_report',1));
         }
-        dd("hi");
-        $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
-        ->where(function ($query) use ($startDate, $endDate, $category) {
-            $query->whereBetween('product.created_at', [$startDate, $endDate])
-                ->orWhereBetween('product.updated_at', [$startDate, $endDate]);
-        })
-        ->where('product.category_id', '=', $category)
-        ->paginate(10);
-
-        if($products->isEmpty())
+        else
         {
-            return redirect()->back()->with('Notfound', 'Không có sản phẩm nào phù hợp!!!');
+        $products = DB::select('CALL sp_ReportProductByAllCategory( ?, ?)', [ $startDate, $endDate]);            
+           
         }
-
-        return(view('admin.report',compact('products','categories','display'))->with('product_report',1));
+        return(view('admin.report',[$display],compact('products','categories','display'))->with('product_report',1));
+    
+      
     }
 
     // public static function reportProductByDate(Request $request)
@@ -460,20 +455,14 @@ class ProductService
 
     public static function report(Request $request)
     {
+        // load thống kê sản phẩm 
         $display = 0;
         $categories = category::get();
         $category = $request->input('name_category');
 
-        $products = product::leftjoin('product_item','product.id','=','product_item.product_id')
-        ->leftjoin('category','category.id','=','product.category_id')
-        ->leftjoin('cart_item','product_item.id','=','cart_item.product_item_id')
-        ->leftjoin('cart','cart.id','=','cart_item.cart_id')
-        ->leftjoin('order','order.cart_id','=','cart.id')
-        ->select('category.name_category',
-                 'product.*')
-        ->distinct()
-        ->paginate(10);
+        $products = DB::select('CALL sp_ReportProduct()');            
 
+        
         return(view('admin.report',compact('products','categories','display')));
     }
 
@@ -565,14 +554,11 @@ class ProductService
         return view('admin.edit-item-product',compact('item','itemID','variation'));
     }
 
-    public static function updateItem(ItemRequest $request, $item) 
+    public static function updateItem(ItemUpdateRequest $request, $item) 
     {
         
         
-
-            $image = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('Product_item_images'), $image);
-            $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
+       
             $items = product_item::find($item);
 
             $product_configuration = product_configuration::where('product_configuration.product_item_id','=',$item)
@@ -582,8 +568,14 @@ class ProductService
             $items->quantity = $request->input('quantity');
             $items->SKU = $request->input('SKU');
             $items->discount_price = $request->input('discount_price');
-            $items->image = $imageName;
-
+            if ($request->has('image'))
+            {
+                $image = time() . '.' . $request->image->extension();
+                $request->image->move(public_path('Product_item_images'), $image);
+                $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
+                $items->image = $imageName;
+    
+            }
         
             // Lưu dữ liệu vào bảng products
             $items->save();
