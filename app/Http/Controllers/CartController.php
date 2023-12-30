@@ -96,7 +96,7 @@ class CartController extends Controller
             $cartItem->quantity = $request->quantity;
             $cartItem->product_item_id = $item;
             if( $product_item->discount_price != null)
-            $cartItem->price = $product_item->discount_price;
+            $cartItem->price = $product_item->price;
             else
             $cartItem->price = $product_item->price;
 

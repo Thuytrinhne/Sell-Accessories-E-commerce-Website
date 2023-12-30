@@ -21,16 +21,16 @@
             
 @endif
 <div class="checkout">
-        <div class="checkout_container">
-            <div class="backhome" style="font-size: 12px;">
-                <a href="">HOME</a>
-                /
-                <a href="">WISHLIST</a>
-            </div>
-    
-            <h1>WISHLIST</h1>
+    <div class="checkout_container">
+        <div class="backhome" style="font-size: 12px;">
+            <a href="">HOME</a>
+            /
+            <a href="">WISHLIST</a>
         </div>
+
+        <h1>WISHLIST</h1>
     </div>
+</div>
 
 
 

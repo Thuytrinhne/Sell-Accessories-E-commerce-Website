@@ -36,6 +36,8 @@
                           <option class="filter-sort__option" value="1">Đơn hàng chưa xử lý</option>
                           <option class="filter-sort__option" value="2">Đơn hàng đã xử lý</option>
                           <option class="filter-sort__option" value="3">Đơn hàng đã thanh toán</option>
+                          <option class="filter-sort__option" value="4">Đơn hàng đã hủy</option>
+
                             </select>
                         </div>
                 </form>
@@ -81,7 +83,9 @@
                                     @case(3)
                                         Đã thanh toán
                                         @break
-                                       
+                                        @case(4)
+                                        Đã hủy
+                                        @break
                                 @endswitch</td>
                                 <td><a href="{{ route('admin.detailOrder',[$item->id])}}"><button>Chi tiết</button></a></td>
                             </tr>

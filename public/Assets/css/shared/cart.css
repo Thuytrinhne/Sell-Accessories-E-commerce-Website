@@ -5,14 +5,12 @@
 
 .modal-custom-cart {
     display: none;
-
 }
 
 .cart {
     /* background-color: ; */
     width: 100vw;
     height: 100vh;
-
 }
 
 .cart_container {
@@ -62,7 +60,6 @@
     display: grid;
     grid-template-columns: 50% 50%;
     margin: 12px 0 36px 0;
-
 }
 
 .total p {
@@ -88,7 +85,7 @@
 
 .pay_btn:hover {
     color: white;
-    background-color: #81D1E5;
+    background-color: #81d1e5;
     transition: all 0.2s linear;
 }
 
@@ -105,11 +102,9 @@
     border: 2px dashed var(--white-color);
 }
 
-
 .pay_button {
     text-align: center;
 }
-
 
 /* ===========  buy-amount  ============ */
 .buy-amount_container {
@@ -137,14 +132,12 @@
 }
 
 .buy-amount button svg {
-
     color: #909090;
 }
 
 .buy-amount button:hover svg {
     color: #7e7e7e;
 }
-
 
 .buy-amount input {
     border: #ececec solid 1px;
@@ -155,4 +148,26 @@
     font-size: 14px;
     outline: none;
     color: #777;
+}
+/* iphone 14 promax */
+@media screen and (max-width: 430px) {
+    .product_container {
+        height: 76vh;
+    }
+
+    .cart_container .product_box {
+        justify-content: space-between;
+    }
+
+    .cart_container .product_info {
+        flex-direction: column;
+        justify-content: start;
+    }
+}
+
+/* ipad air */
+@media screen and (max-width: 995px) and (min-width: 431px) {
+    .product_container {
+        height: 79vh;
+    }
 }

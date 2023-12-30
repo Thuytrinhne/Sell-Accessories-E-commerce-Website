@@ -12,7 +12,7 @@ use App\Models\variation;
 use App\Models\order; 
 use App\Models\cart_item; 
 use App\Models\cart; 
-
+use DB;
 
 use Illuminate\Http\Request;
 
@@ -289,25 +289,24 @@ class ProductService
 
     public static function filterReport(Request $request)
     {
+      
         $display = 1;
       
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-
-        $categories = category::get();
+        $startDate = $request->input('start_date')." 00:00:00";
+        $endDate = $request->input('end_date')." 23:59:59";
+      
         $category = $request->input('name_category');
-
         if(!$category)
         {   
             $categories = category::get();
+           // use store procdedure
+           
+            
 
-            $products = Product::join('category','category.id','=','product.category_id')->whereBetween('product.created_at', [$startDate, $endDate])
-            ->orWhereBetween('product.updated_at', [$startDate, $endDate])
-            ->paginate(10);
 
             return(view('admin.report',[$display],compact('products','categories','display'))->with('product_report',1));
         }
-
+        dd("hi");
         $products = Product::leftJoin('category', 'category.id', '=', 'product.category_id')
         ->where(function ($query) use ($startDate, $endDate, $category) {
             $query->whereBetween('product.created_at', [$startDate, $endDate])
