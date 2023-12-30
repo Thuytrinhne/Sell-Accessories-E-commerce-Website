@@ -409,7 +409,17 @@ class ProductService
 
     public static function report(Request $request)
     {
-        $display = 0;
+        
+        $ordersStatistics = Order::query()
+        ->selectRaw('DATE(created_at) as date, 
+                    COUNT(*) as total_orders,
+                    SUM(CASE WHEN status = 4 THEN 1 ELSE 0 END) as cancelled_orders,
+                    SUM(CASE WHEN status = 3 THEN 1 ELSE 0 END) as paid_orders,
+                    SUM(CASE WHEN status = 3 THEN total_price ELSE 0 END) as total_revenue')
+        ->groupBy('date')
+        ->get();
+
+
         $categories = category::get();
         $category = $request->input('name_category');
 
@@ -423,7 +433,7 @@ class ProductService
         ->distinct()
         ->paginate(10);
 
-        return(view('admin.report',compact('products','categories','display')));
+        return(view('admin.report',compact('products','categories','display','ordersStatistics')));
     }
 
     // Xử lí item_product

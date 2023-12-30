@@ -36,32 +36,42 @@
 
                 </div>
                 <div class="selection_order">
-                    <div class="search_order">
+                <form action="{{ route('admin.filterReport') }}" method="POST" class="search_product">
+                        @csrf
                         <h2>Tìm kiếm</h2>
                         <label>Bắt đầu</label>
-                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
+                        <input type="date" data-date="" name="start_date"  data-date-format="DD MMMM YYYY" value="2022-08-09">
                         <label>Đến</label>
-                        <input type="date" data-date="" data-date-format="DD MMMM YYYY" value="2015-08-09">
-                        <!-- <button>Xác nhận</button> -->
-                    </div>
+                        <input type="date" data-date="" name="end_date"  data-date-format="DD MMMM YYYY" value="2023-08-09">
+                        <label>Thể loại</label>
+                        <select name="name_category">
+                            <option value="">Tất cả</option>
+                            @foreach($categories as $cate)
+                            <option value="{{$cate->id}}">{{$cate->name_category}}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit" id="btn-submit-datepicker">Xác nhận</button>
+                    </form>
                     <table class="content_report">
                         <thead>
                             <tr>
                                 <th>Ngày</th>
-                                <th>Số đơn hàng</th>
-                                <th>Số đơn hủy</th>
+                                <th>Tổng đơn hàng</th>
+                                <th>Đã hủy</th>
+                                <th>Đã thanh toán</th>
                                 <th>Doanh thu</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
+                        @foreach($ordersStatistics as $stats)
                             <tr>
-                                <td>23</td>
-                                <td>30</td>
-                                <td>2</td>
-                                <td>3000000</td>
-                                <td><button>Chi tiết</button></td>
+                                <td>{{ $stats->date }}</td>
+                                <td>{{ $stats->total_orders }}</td>
+                                <td>{{ $stats->cancelled_orders }}</td>
+                                <td>{{ $stats->paid_orders }}</td>
+                                <td>{{ $stats->total_revenue }}</td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

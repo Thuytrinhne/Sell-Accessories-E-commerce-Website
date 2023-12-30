@@ -73,13 +73,13 @@
                         </div>
 
                          
-                            <div class="nameAdd" id="colorPickerContainer" style="display:;">
+                            <div class="nameAdd" id="colorPickerContainer" style="display:none;">
                                 <label for="exampleColorInput" class="form-label">Variation value: </label>
                                 <input type="color" class="form-control form-control-color" name="color_value" value=" "  title="Choose your color">
                                     
                             </div>
                         
-                            <div class="nameAdd" id="sizeInputContainer" style="display:;">
+                            <div class="nameAdd" id="sizeInputContainer" style="display:none;">
                                 <label for="exampleColorInput" class="form-label">Variation value: </label>
                                 <input type="text"  name="size_value" value=" "  title="Choose your size">
                               
@@ -102,7 +102,7 @@
                     </div>
                 </form>
 
-                <!-- <script>
+                <script>
                     // Lắng nghe sự kiện thay đổi của select
                     document.getElementById('options').addEventListener('change', function () {
                         var selectedValue = this.value;
@@ -116,6 +116,6 @@
                             document.getElementById('sizeInputContainer').style.display = 'flex';
                         }
                     });
-                </script> -->
+                </script>
             </div>
 @endsection

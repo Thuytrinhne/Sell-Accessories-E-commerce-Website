@@ -100,10 +100,10 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
     
     //Thêmm route xử lí report sản phẩm
     //QToan Thêm route xử lí report sản phẩm
+    
     Route::get('/report', [ProductController::class,'report'])->name('admin.report');
     Route::match(['get', 'post'],'/report/filter', [ProductController::class,'filterReport'])->name('admin.filterReport');
-
-
+    Route::match(['get', 'post'],'/report/filter', [ProductController::class,'filterReport'])->name('admin.filterReport');
 
    //Qtoan  Thêm route admin product và item
    Route::prefix('product')->group( function()
