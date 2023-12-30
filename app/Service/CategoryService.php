@@ -39,7 +39,6 @@ class CategoryService
      */
     public static  function store(CategoryRequest $request)
     {
-        
         CategoryRespository::store($request);
         return redirect()->back()->withInput();
     }

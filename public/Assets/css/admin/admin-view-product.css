@@ -123,6 +123,7 @@
 .Edit:hover {
     background: #e05994;
     transform: scale(1.2);
+    
 }
 
 .Delete {
@@ -130,10 +131,14 @@
 }
 
 .Delete:hover {
-    color: #ffffff;
-    background-color: red;
+    background: red;
     transform: scale(1.2);
+    color:white;
+    
 }
+
+
+
 
 
 /* Add */
@@ -354,4 +359,7 @@
     height: 80px;
     overflow: hidden;
 
+.Edit-Delete {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }

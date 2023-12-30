@@ -23,29 +23,42 @@ class ItemRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'price' => 'bail|required',
-            'quantity' => 'bail|required',    
-            'name' => 'bail|required',    
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg' 
+            'price' => 'bail|required|numeric|min:0',
+            'discount_price' => 'bail|required|numeric|min:0',
+            'quantity' => 'bail|required|integer|min:1',    
+                   
+            'SKU' => 'bail|required',   
+            'image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg' 
         ];
     }
     public function messages()
     {
         return [
-            'price.required' => ':attribute bắt buộc phải nhập !',
-            'quantity.required' => ':attribute bắt buộc phải nhập !',
-            'name.required' => ':attribute bắt buộc phải nhập !',
-            'image.required' => ':attribute bắt buộc phải nhập !',
-            'image.mimes' => ':attribute chỉ nhập ảnh định dạng jpeg,png,jpg,gif,svg!!!',
+            'discount_price.required' => ':attribute bắt buộc phải nhập!',
+            'discount_price.numeric' => ':attribute phải là một số!',
+            'discount_price.min' => ':attribute phải lớn hơn hoặc bằng 0!',
+            'price.required' => ':attribute bắt buộc phải nhập!',
+            'price.numeric' => ':attribute phải là một số!',
+            'price.min' => ':attribute phải lớn hơn hoặc bằng 0!',
+            'quantity.integer' => ':attribute phải là số nguyên dương!',
+            'quantity.min' => ':attribute phải lớn hơn 0!',
+            'image.mimes' => ':attribute chỉ nhập ảnh định dạng jpeg, png, jpg, gif, svg!',
+            'image.required' => ':attribute ko đc bỏ trống!',
+            
+            'SKU' => ':attribute ko đc bỏ trống !',
+            
         ];
     }
     public function attributes()
     {
         return [
+            'discount_price' => 'Giá discount',
             'price' => 'Giá sản phẩm',
             'quantity' => 'Số lượng sản phẩm',
+            'SKU' => "Mã sku",
             'image' => 'Ảnh',
-            'name' => 'Variation'
+            'name' => 'Variation',
+            
         ];
     }
     public function withValidator($validator)

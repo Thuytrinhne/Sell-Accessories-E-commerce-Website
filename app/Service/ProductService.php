@@ -59,11 +59,9 @@ class ProductService
     public static function store(ProductRequest $request)
     {
         
-            $image = time() . '.' . $request->default_image->extension();
-            $request->default_image->move(public_path('Product_images'), $image);
-            $imageName = 'http://127.0.0.1:8000/Product_images/'.$image;
-
-
+        $image = time() . '.' . $request->default_image->extension();
+        $request->default_image->move(public_path('Product_images'), $image);
+        $imageName = 'http://127.0.0.1:8000/Product_images/'.$image;
         
 
         $product = new product;
@@ -130,19 +128,28 @@ class ProductService
 
     public static function edit($id)
     {
+        
         $category = category::get();
-        $products = product::where('product.id','=',$id)->get();
+        $products = product::join('category','category.id','=','product.category_id')
+        ->where('product.id','=',$id)
+        ->get();
         return(view('admin.edit-product',compact('products','category','id')));
     }
 
 
-    public static function update(Request $request, $id)
+    public static function update(ProductRequest $request, $id)
     {
+
+        $image = time() . '.' . $request->default_image->extension();
+        $request->default_image->move(public_path('Product_item_images'), $image);
+        $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
+
         $product =product::find($id);
 
         $product->name_product = $request->input('name_product');
         $product->description = $request->input('description');
         $product->category_id = $request->input('category_id');
+        $product->default_image = $imageName;
 
         $product->save();
     
@@ -477,7 +484,9 @@ class ProductService
         ->leftjoin('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
         ->leftjoin('variation','product_configuration.variation_id','=','variation.id')
         ->where('product_item.product_id','=',$product)
-        ->select('product_item.id','product_item.price','product_item.discount_price','product_item.quantity','product_item.SKU','variation.name',
+        ->select('product_item.id','product_item.price','product_item.image',
+        'product_item.discount_price','product_item.quantity',
+        'product_item.SKU','variation.name',
                 'product_configuration.variation_value')
         ->get();
 
@@ -491,13 +500,11 @@ class ProductService
 
     public static function storeItem(ItemRequest $request,$product)
     {   
+         
 
-        if($request->hasFile('image'))
-        {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('Product_item_images'), $imageName);
-        }
-
+        $image = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('Product_item_images'), $image);
+        $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
        
         $productI = new product_item();
         $variation = new variation();
@@ -515,14 +522,29 @@ class ProductService
         $productI->save();
         $variation->save();
         
-        // Create a new ProductConfiguration and associate it with Variation and ProductItem
-        $product_configuration = new product_configuration();
-        $product_configuration->variation_value = $request->input('value');
-        // Associate with Variation (n-1 relationship)
-        $product_configuration->variation()->associate($variation);
-        // Associate with ProductItem (1-1 relationship)
-        $product_configuration->productItem()->associate($productI);
-        $product_configuration->save();
+        if($request->input('color_value') && $request->input('name') == 'màu'){
+            // Create a new ProductConfiguration and associate it with Variation and ProductItem
+            $product_configuration = new product_configuration();
+            
+            $product_configuration->variation_value = $request->input('color_value');
+            // Associate with Variation (n-1 relationship)
+            $product_configuration->variation()->associate($variation);
+            // Associate with ProductItem (1-1 relationship)
+            $product_configuration->productItem()->associate($productI);
+            $product_configuration->save();
+        }
+
+        if($request->input('size_value') && $request->input('name') == 'size'){
+            // Create a new ProductConfiguration and associate it with Variation and ProductItem
+            $product_configuration = new product_configuration();
+            
+            $product_configuration->variation_value = $request->input('size_value');
+            // Associate with Variation (n-1 relationship)
+            $product_configuration->variation()->associate($variation);
+            // Associate with ProductItem (1-1 relationship)
+            $product_configuration->productItem()->associate($productI);
+            $product_configuration->save();
+        }
 
         
         return redirect('admin/product')->with('success','Thêm thành công');
@@ -530,6 +552,7 @@ class ProductService
 
     public static function editItem($itemID)
     {
+        
         $item = product_item::leftjoin('product_configuration', 'product_item.id', '=', 'product_configuration.product_item_id')
         ->leftjoin('variation','product_configuration.variation_id','=','variation.id')
         ->where('product_item.id','=',$itemID)
@@ -537,41 +560,46 @@ class ProductService
 
         $variation = variation::with('product_configurations')->get();
 
+       
+
         return view('admin.edit-item-product',compact('item','itemID','variation'));
     }
 
-    public static function updateItem(Request $request, $item) 
+    public static function updateItem(ItemRequest $request, $item) 
     {
         
-        if($request->hasFile('image'))
-        {
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('Assets/Images'), $imageName);
-        }
+        
 
-        $items = product_item::find($item);
+            $image = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('Product_item_images'), $image);
+            $imageName = 'http://127.0.0.1:8000/Product_item_images/'.$image;
+            $items = product_item::find($item);
 
-        $product_configuration = product_configuration::where('product_configuration.id','=',$item)
-        ->first();
-    
-        $items->price = $request->input('price');
-        $items->quantity = $request->input('quantity');
-        $items->SKU = $request->input('SKU');
-        $items->discount_price = $request->input('discount_price');
-        $items->image = $imageName;
+            $product_configuration = product_configuration::where('product_configuration.product_item_id','=',$item)
+            ->first();
+            $product_configuration->variation_value = $request->input('variation_value');
+            $items->price = $request->input('price');
+            $items->quantity = $request->input('quantity');
+            $items->SKU = $request->input('SKU');
+            $items->discount_price = $request->input('discount_price');
+            $items->image = $imageName;
 
-        $product_configuration->variation_value = $request->input('variation_value');
+        
+            // Lưu dữ liệu vào bảng products
+            $items->save();
+            $product_configuration->save();
+            return redirect('admin/product')->with('success','Sửa thành công');
+        
 
-        // Lưu dữ liệu vào bảng products
-        $items->save();
-        $product_configuration->save();
-        return redirect('admin/product')->with('success','Sửa thành công');
+        return redirect('admin/product')->with('error','Sửa ko thành công !!!');
+            
     }
 
     public static function destroyItem($item)
     {
         try
-        {
+        {   $product_configuration = product_configuration::where('product_configuration.product_item_id','=',$item);
+            $product_configuration->delete();
             $item = product_item::find($item); 
             $item->delete();
         }catch (\Exception  $exception) {

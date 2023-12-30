@@ -106,7 +106,7 @@ class ProductController extends Controller
         return ProductService::edit($id);
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
         return ProductService::update($request,$id);
 
@@ -153,7 +153,7 @@ class ProductController extends Controller
         return ProductService::editItem($itemID);
     }
 
-    public function updateItem(Request $request, $item) 
+    public function updateItem(ItemRequest $request, $item) 
     {
 
         return ProductService::updateItem($request,$item);

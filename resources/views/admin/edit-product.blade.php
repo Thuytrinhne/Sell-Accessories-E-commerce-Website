@@ -43,6 +43,9 @@
                         <div class="nameAdd">
                             <label>Tên sản phẩm: </label>
                             <input type="text" placeholder="Tên sản phẩm" name="name_product" value="{{$item->name_product}}" > 
+                            @error('name_product')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="nameAdd">
                             <label  name="description">Mô tả: </label>
@@ -53,6 +56,7 @@
                         <div class="tag">
                             <label >Thể loại</label>
                             <select name="category_id">
+                                <option value="{{$item->category_id}}">{{ $item->name_category }}</option>
                                 @foreach($category as $cate)
                                 <option value="{{ $cate->id }}">{{ $cate->name_category }}</option>
                                 @endforeach
@@ -60,8 +64,13 @@
                         </div>
 
                         <div class="nameAdd">
-                            <label  name="default_image">Ảnh mặc định: </label>
+                            <label  name="default_image">Ảnh mặc định:
+                                <img src="{{$item->default_image}}" style = "width:100px;height:100px" >
+                            </label>
                             <input type="file" name = "default_image" value="{{$item->default_image}}">
+                            @error('default_image')
+                                <span style="color:red;">{{$message}}</span>
+                            @enderror
                         </div>
                         
                         <input type="submit" class="confirmAdd">

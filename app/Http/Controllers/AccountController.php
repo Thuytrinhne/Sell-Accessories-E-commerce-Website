@@ -19,9 +19,9 @@ class AccountController extends Controller
         // $i = $id;
         // $j = 0;
         // $k = 0;
-        $admin = user::all();
-        $staff = user::all();
-        $user = user::all();
+        $admin = user::where('user.role_id','=',1)->get();
+        $staff = user::where('user.role_id','=',2)->get();
+        $user = user::where('user.role_id','=',3)->get();
         return view("admin.account.account", compact("admin", "staff", "user"));
     }
 // =======================  Thêm xoá sửa admin =========================

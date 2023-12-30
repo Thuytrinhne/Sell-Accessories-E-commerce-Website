@@ -24,6 +24,10 @@
                     @error('name_category')
                         <span style="color:red;">{{$message}}</span>
                     @enderror
+                    <input type="file" name="image_category">
+                    @error('image_category')
+                        <span style="color:red;">{{$message}}</span>
+                    @enderror
                     </div>
                     <select class="frmAdd-fitContent" name="parent_id" required>
                                 <option value="NULL">Danh mục cha</option>
@@ -88,7 +92,7 @@
                         <td>{{$item->id}}</td>
                         <td>{{$item->name_category}}</td>
                         <td>{{$item->parent_id}}</td>
-                        <td></td>
+                        <td> <img src="{{$item->image_category}}" style="width :100px;height:100px"> </td>
                         </tr>
                         @endforeach
                  

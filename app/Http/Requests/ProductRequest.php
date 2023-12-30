@@ -24,6 +24,7 @@ class ProductRequest extends FormRequest
     {
         return [
             'name_product' => 'bail|required|unique:product|max:50',
+            'default_image' => 'required'
 
         ];
     }
@@ -33,12 +34,14 @@ class ProductRequest extends FormRequest
             'name_product.required' => ':attribute bắt buộc phải nhập !',
             'name_product.unique' => ':attribute đã tồn tại !',
             'name_product.max' => ':attribute tối đa :max ký tự !',
+            'default_image' => ':attribute phải nhập !!'
         ];
     }
     public function attributes()
     {
         return [
-            'name_product' => 'Tên sản phẩm'
+            'name_product' => 'Tên sản phẩm',
+            'default_image' => 'Ảnh sản phẩm'
         ];
     }
     public function withValidator($validator)
