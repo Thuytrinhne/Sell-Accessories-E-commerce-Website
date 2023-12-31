@@ -284,4 +284,6 @@ Route::post('/addToCart',[CartController::class, 'storeNotAjax'])->name('addToCa
 
 Route::get('/destroy/{id}',[CartController::class, 'destroyItem'])->name('cart.destroy');
 
-Route::get('/test',[CartController::class, 'getCartitemJSon']);
+Route::get('/test',function () {
+   return view('emails.test');
+});
