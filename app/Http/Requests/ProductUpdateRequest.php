@@ -24,6 +24,7 @@ class ProductUpdateRequest extends FormRequest
     {
         return [
             'name_product' => 'bail|required|max:50',
+            'default_image' => 'bail|required|image|mimes:jpeg,png,jpg,gif,svg',
             
 
         ];
@@ -34,7 +35,9 @@ class ProductUpdateRequest extends FormRequest
             'name_product.required' => ':attribute bắt buộc phải nhập !',
             'name_product.unique' => ':attribute đã tồn tại !',
             'name_product.max' => ':attribute tối đa :max ký tự !',
-            'default_image' => ':attribute phải nhập !!'
+            'default_image.required' => ':attribute phải nhập !!',
+            'default_image.mimes' => ':attribute chỉ đc nhập jpeg, jpg, gif, svg !!'
+
         ];
     }
     public function attributes()

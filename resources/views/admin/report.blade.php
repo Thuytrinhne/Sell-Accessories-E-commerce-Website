@@ -63,6 +63,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                        @if($display != 1)
                         @foreach($ordersStatistics as $stats)
                             <tr>
                                 <td>{{ $stats->date }}</td>
@@ -72,6 +73,7 @@
                                 <td>{{ $stats->total_revenue }}</td>
                             </tr>
                         @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

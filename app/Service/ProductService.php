@@ -142,7 +142,13 @@ class ProductService
     public static function update(ProductUpdateRequest $request, $id)
     {
        
+       
+
         $product =product::find($id);
+
+        if(!$product){
+            return redirect('admin/product')->with('error','Sản phẩm ko tồn tại');
+           }
 
         $product->name_product = $request->input('name_product');
         $product->description = $request->input('description');
@@ -469,7 +475,7 @@ class ProductService
         ->groupBy('date')
         ->get();
 
-        $display ='1';
+        $display ='0';
 
         $categories = category::get();
         $category = $request->input('name_category');

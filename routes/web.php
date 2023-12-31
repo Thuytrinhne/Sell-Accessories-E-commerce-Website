@@ -117,7 +117,7 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
        // Xử lí xóa
        Route::get('/item/destroy/{item}', [ProductController::class,'destroyItem'])->name('admin.product.item.destroy');
 
-   });
+});
 
    //  Route::get('/order', function () {
    //  return view('admin.order');
@@ -179,28 +179,28 @@ Route::middleware('isAdmin')->prefix('admin')->group(function ()
 
 
 // router customer
-Route::get('/customer/account', function () {
+Route::middleware('isUser')->get('/customer/account', function () {
    return view('front.customer.account');
 })->name('front.account');
 // địa chỉ customer
-Route::get('/customer/address', [User_AddressController::class,'index'])->name('front.address');
-Route::get('/customer/address/add', [User_AddressController::class,'create'])->name('front.add-address');
-Route::post('/customer/address/add', [User_AddressController::class,'store'])->name('front.handle-add-address');
-Route::get('/customer/address/delete/{id}', [User_AddressController::class,'destroy'])->name('front.handle-delete-address');
-Route::get('/customer/address/edit/{id}', [User_AddressController::class,'edit'])->name('front.edit-address');
-Route::post('/customer/address/edit', [User_AddressController::class,'update'])->name('front.handle-edit-address');
+Route::middleware('isUser')->get('/customer/address', [User_AddressController::class,'index'])->name('front.address');
+Route::middleware('isUser')->get('/customer/address/add', [User_AddressController::class,'create'])->name('front.add-address');
+Route::middleware('isUser')->post('/customer/address/add', [User_AddressController::class,'store'])->name('front.handle-add-address');
+Route::middleware('isUser')->get('/customer/address/delete/{id}', [User_AddressController::class,'destroy'])->name('front.handle-delete-address');
+Route::middleware('isUser')->get('/customer/address/edit/{id}', [User_AddressController::class,'edit'])->name('front.edit-address');
+Route::middleware('isUser')->post('/customer/address/edit', [User_AddressController::class,'update'])->name('front.handle-edit-address');
 
 
 // end địa chỉ customer
-Route::get('customer/orders/delete/{id}', [OrderController::class,'destroy'])->name('admin.order.destroy');
-Route::get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'])->name('front.order_detail');
+Route::middleware('isUser')->get('customer/orders/delete/{id}', [OrderController::class,'destroy'])->name('admin.order.destroy');
+Route::middleware('isUser')->get('/customer/orders/detail/{id}', [OrderController::class,'DetailOrder'])->name('front.order_detail');
 // end router customer
 // cập nhật lại mật khẩu 
 
-Route::get ('/customer/account/changePassWord',  [AccessController::class,'updatePassword'])->name('updatePassword');
-Route::post ('/customer/account/changePassWord',  [AccessController::class,'handleUpdatePassword'])->name('handleUpdatePassword');
+Route::middleware('isUser')->get ('/customer/account/changePassWord',  [AccessController::class,'updatePassword'])->name('updatePassword');
+Route::middleware('isUser')->post ('/customer/account/changePassWord',  [AccessController::class,'handleUpdatePassword'])->name('handleUpdatePassword');
 // chỉnh sửa thông tin cá nhân 
-Route::post ('/customer/account/updateProfile',  [AccessController::class,'updateInforUser'])->name('updateInforUser');
+Route::middleware('isUser')->post ('/customer/account/updateProfile',  [AccessController::class,'updateInforUser'])->name('updateInforUser');
 
 
 // start router auth
@@ -268,7 +268,7 @@ Route::prefix('/wishlist') -> group(function () {
  
 
 
-Route::prefix('/customer/orders')->group(function () {
+Route::middleware('isUser')->prefix('/customer/orders')->group(function () {
    // Hiển thị danh sách các danh mục
    Route::get('/', [OrderController::class, 'index'])->name('.front.customer.history-orders');
    Route::get('/{id}', [OrderController::class, 'indexFilter'])->name('filter.history-order');
