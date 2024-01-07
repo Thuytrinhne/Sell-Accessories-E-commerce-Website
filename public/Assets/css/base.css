@@ -17,7 +17,7 @@
 html {
     font-size: 10px; /* 100%: 16px, 62.5%: 10px */
     line-height: 1.6rem;
-    font-family: "Roboto", sans-serif; /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
+    font-family: "Roboto", sans-serif !important; /* khi font roboto chưa kịp load  => hiển thị font sans-serif */
     box-sizing: border-box;
 }
 .grid {

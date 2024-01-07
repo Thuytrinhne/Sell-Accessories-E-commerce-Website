@@ -644,7 +644,6 @@
 .footer {
     height: 530px;
     border-top: 4px solid var(--partial-color);
-    margin: 0 40px;
 }
 .footer-container {
     /* display: grid;
@@ -653,6 +652,7 @@
     justify-content: space-between;
     /* column-gap: 20px; */
     background-color: var(--white-color);
+    padding-top: 34px;
 }
 .footer-list {
     font-size: 1.3rem;
@@ -968,7 +968,9 @@
     .nav-item-frame {
         display: none;
     }
-
+    .footer {
+        margin: 0 40px;
+    }
     .logo-header {
         display: flex;
         text-align: center;

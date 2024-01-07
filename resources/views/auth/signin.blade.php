@@ -38,7 +38,7 @@
         </div>
         <!-- ================ signin body ================ -->
         <div class="signin_body">
-            <img src="./Assets/Images/background_shoppe.jpeg" alt="" >
+            <img src="./Assets/Images/background-signup.jpg" alt="" >
 
             <div class="signin_body-form" >
                 <div class="sign_body-form-container">

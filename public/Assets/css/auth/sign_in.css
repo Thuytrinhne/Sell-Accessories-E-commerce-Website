@@ -27,11 +27,13 @@
 /* ==============  body  ============== */
 .signin_body {
     position: relative;
+    padding-bottom: 82px;
 }
 
 .signin_body img {
-    height: 602px;
-    width: 100%;
+    height: 470px;
+    margin-left: 200px;
+    margin-top: 50px;
 }
 
 .signin_body-form {
