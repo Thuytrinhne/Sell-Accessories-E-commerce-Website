@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2023 at 11:24 AM
+-- Generation Time: Dec 30, 2023 at 06:39 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,70 @@ SET time_zone = "+00:00";
 --
 -- Database: `sell-accessories-e-commerce-website`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ReportProduct` ()   BEGIN
+    CREATE TEMPORARY TABLE temp_table
+    AS
+    SELECT product.id as idProduct, product.name_product, category.name_category, product_item.id, SUM(cart_item.quantity) AS total_quantity, SUM(cart_item.price*cart_item.quantity) AS total_revenue, count(`order`.id) as sl
+    FROM `order`
+    JOIN cart ON cart.id = `order`.cart_id
+    JOIN cart_item ON cart_item.cart_id = cart.id
+    JOIN product_item ON product_item.id = cart_item.product_item_id
+    JOIN product ON product_item.product_id = product.id
+    join category
+    on category.id = product.category_id
+  
+    GROUP BY product.id,product_item.id, product.name_product;
+
+    SELECT idProduct, name_product, name_category, SUM(total_quantity) AS total_quantity, SUM(total_revenue) AS total_revenue, sl
+    FROM temp_table
+    GROUP BY idProduct, name_product;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ReportProductByAllCategory` (IN `startDate` DATETIME, IN `endDate` DATETIME)   BEGIN
+    CREATE TEMPORARY TABLE temp_table
+    AS
+    SELECT product.id as idProduct, product.name_product, category.name_category, product_item.id, SUM(cart_item.quantity) AS total_quantity, SUM(cart_item.price*cart_item.quantity) AS total_revenue, count(`order`.id) as sl
+    FROM `order`
+    JOIN cart ON cart.id = `order`.cart_id
+    JOIN cart_item ON cart_item.cart_id = cart.id
+    JOIN product_item ON product_item.id = cart_item.product_item_id
+    JOIN product ON product_item.product_id = product.id
+    join category
+    on category.id = product.category_id
+    WHERE   `order`.date_order >= startDate AND `order`.date_order <= endDate
+    GROUP BY product.id,product_item.id, product.name_product;
+
+    SELECT idProduct, name_product, name_category, SUM(total_quantity) AS total_quantity, SUM(total_revenue) AS total_revenue, sl
+    FROM temp_table
+    GROUP BY idProduct, name_product;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ReportProductByOneCategory` (IN `category` INT, IN `startDate` DATETIME, IN `endDate` DATETIME)   BEGIN
+    CREATE TEMPORARY TABLE temp_table
+    AS
+    SELECT product.id as idProduct, product.name_product, category.name_category, product_item.id, SUM(cart_item.quantity) AS total_quantity, SUM(cart_item.price*cart_item.quantity) AS total_revenue, count(`order`.id) as sl
+    FROM `order`
+    JOIN cart ON cart.id = `order`.cart_id
+    JOIN cart_item ON cart_item.cart_id = cart.id
+    JOIN product_item ON product_item.id = cart_item.product_item_id
+    JOIN product ON product_item.product_id = product.id
+    join category
+    on category.id = product.category_id
+    WHERE product.category_id = category
+    and  `order`.date_order >= startDate AND `order`.date_order <= endDate
+    GROUP BY product.id,product_item.id, product.name_product;
+
+    SELECT idProduct, name_product, name_category, SUM(total_quantity) AS total_quantity, SUM(total_revenue) AS total_revenue, sl
+    FROM temp_table
+    GROUP BY idProduct, name_product;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -66,19 +130,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`id`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2023-11-09 07:25:47', '2023-11-09 07:25:47'),
-(2, 2, '2023-12-24 03:10:31', '2023-12-24 03:10:31'),
-(3, 2, '2023-12-27 02:18:30', '2023-12-27 02:18:30'),
-(4, 2, '2023-12-27 02:27:15', '2023-12-27 02:27:15'),
-(5, 2, '2023-12-27 02:40:54', '2023-12-27 02:40:54'),
-(6, 2, '2023-12-27 02:44:41', '2023-12-27 02:44:41'),
-(7, 2, '2023-12-27 02:46:08', '2023-12-27 02:46:08'),
-(8, 2, '2023-12-27 02:50:09', '2023-12-27 02:50:09'),
-(9, 2, '2023-12-27 02:51:00', '2023-12-27 02:51:00'),
-(10, 2, '2023-12-27 02:51:49', '2023-12-27 02:51:49'),
-(11, 2, '2023-12-27 02:53:28', '2023-12-27 02:53:28'),
-(12, 2, '2023-12-28 08:29:14', '2023-12-28 08:29:14'),
-(13, 2, '2023-12-28 08:30:13', '2023-12-28 08:30:13');
+(20, 2, '2023-12-30 05:30:47', '2023-12-30 05:30:47'),
+(21, 2, '2023-12-30 05:31:49', '2023-12-30 05:31:49');
 
 -- --------------------------------------------------------
 
@@ -102,23 +155,8 @@ CREATE TABLE `cart_item` (
 --
 
 INSERT INTO `cart_item` (`id`, `quantity`, `cart_id`, `product_item_id`, `price`, `total_money`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 8000, 77, '2023-11-09 07:26:00', '2023-11-09 07:26:00'),
-(2, 2, 2, 4, 25000, 40000, '2023-12-24 03:11:20', '2023-12-24 03:11:20'),
-(10, 1, 2, 5, 35000, 35000, '2023-12-26 23:18:07', '2023-12-26 23:18:07'),
-(13, 12, 3, 1, 2000, 24000, '2023-12-27 02:26:03', '2023-12-27 02:26:03'),
-(14, 10, 4, 5, 35000, 350000, '2023-12-27 02:27:34', '2023-12-27 02:27:34'),
-(15, 20, 5, 2, 35000, 700000, '2023-12-27 02:41:24', '2023-12-27 02:41:24'),
-(16, 7, 6, 2, 35000, 245000, '2023-12-27 02:45:58', '2023-12-27 02:45:58'),
-(17, 1, 7, 3, 35000, 35000, '2023-12-27 02:50:01', '2023-12-27 02:50:01'),
-(18, 11, 8, 2, 35000, 385000, '2023-12-27 02:50:51', '2023-12-27 02:50:51'),
-(19, 1, 9, 2, 35000, 35000, '2023-12-27 02:51:43', '2023-12-27 02:51:43'),
-(20, 12, 10, 3, 35000, 420000, '2023-12-27 02:52:49', '2023-12-27 02:52:49'),
-(27, 50, 11, 1, 2000, 80000, '2023-12-28 04:54:44', '2023-12-28 05:11:10'),
-(28, 4, 11, 42, 10000, 40000, '2023-12-28 05:11:19', '2023-12-28 05:11:19'),
-(29, 1, 12, 2, 35000, 35000, '2023-12-28 08:29:36', '2023-12-28 08:29:36'),
-(30, 17, 13, 1, 2000, 2000, '2023-12-28 10:18:27', '2023-12-28 10:20:43'),
-(31, 12, 13, 4, 35000, 420000, '2023-12-28 10:19:38', '2023-12-28 10:19:38'),
-(32, 15, 13, 5, 35000, 490000, '2023-12-28 10:21:01', '2023-12-28 10:21:08');
+(42, 1, 20, 77, 85000, 85000, '2023-12-30 05:30:47', '2023-12-30 05:30:47'),
+(43, 1, 20, 75, 56000, 56000, '2023-12-30 05:31:01', '2023-12-30 05:31:01');
 
 -- --------------------------------------------------------
 
@@ -132,20 +170,34 @@ CREATE TABLE `category` (
   `parent_id` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `deleted` bit(1) NOT NULL DEFAULT b'0'
+  `deleted` bit(1) NOT NULL DEFAULT b'0',
+  `image_category` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name_category`, `parent_id`, `created_at`, `updated_at`, `deleted`) VALUES
-(1, 'Balo & Túi xách, Ví tiền', NULL, '2023-11-06 09:35:09', '2023-11-06 09:35:09', b'0'),
-(2, 'Phụ kiện tóc & Máy làm tóc', NULL, '2023-11-06 09:35:09', '2023-11-06 09:35:09', b'0'),
-(3, 'Quạt cầm tay & Đồ điện dụng', NULL, '2023-11-06 09:35:09', '2023-11-06 09:35:09', b'0'),
-(4, 'Dụng cụ học tập', 4, '2023-11-06 09:35:09', '2023-11-06 09:35:09', b'0'),
-(5, 'Đồ chơi', 6, '2023-11-06 09:35:09', '2023-11-06 09:35:09', b'0'),
-(6, 'Bình giữ nhiệt & Ly', NULL, '2023-11-06 09:35:09', '2023-11-06 09:35:09', b'0');
+INSERT INTO `category` (`id`, `name_category`, `parent_id`, `created_at`, `updated_at`, `deleted`, `image_category`) VALUES
+(69, 'Balo & Túi xách, Ví tiền', NULL, '2023-12-29 16:05:12', '2023-12-30 04:32:09', b'0', 'http://127.0.0.1:8000/Category_images/1703910729.jpg'),
+(70, 'Phụ kiện tóc & Máy làm tóc', NULL, '2023-12-29 16:06:22', '2023-12-29 16:06:22', b'0', 'http://127.0.0.1:8000/Category_images/1703865982.jpg'),
+(71, 'Quạt cầm tay & Đồ điện dụng', NULL, '2023-12-29 16:08:04', '2023-12-29 16:08:04', b'0', 'http://127.0.0.1:8000/Category_images/1703866084.jpg'),
+(72, 'Dụng cụ học tập', NULL, '2023-12-29 16:08:24', '2023-12-29 16:08:24', b'0', 'http://127.0.0.1:8000/Category_images/1703866104.jpg'),
+(73, 'Đồ chơi', NULL, '2023-12-29 16:09:29', '2023-12-29 16:09:29', b'0', 'http://127.0.0.1:8000/Category_images/1703866169.jpg'),
+(74, 'Bình giữ nhiệt & Ly', NULL, '2023-12-29 16:10:05', '2023-12-29 16:10:05', b'0', 'http://127.0.0.1:8000/Category_images/1703866205.jpg'),
+(75, 'Túi xách', 69, '2023-12-29 16:11:57', '2023-12-29 16:11:57', b'0', 'http://127.0.0.1:8000/Category_images/1703866317.jpg'),
+(76, 'Túi đa năng', 69, '2023-12-29 16:12:33', '2023-12-29 16:12:33', b'0', 'http://127.0.0.1:8000/Category_images/1703866353.jpg'),
+(77, 'Túi đựng laptop', 69, '2023-12-29 16:13:36', '2023-12-29 16:13:36', b'0', 'http://127.0.0.1:8000/Category_images/1703866416.jpg'),
+(78, 'Cài tóc', 70, '2023-12-29 16:14:26', '2023-12-29 16:14:26', b'0', 'http://127.0.0.1:8000/Category_images/1703866466.jpg'),
+(79, 'Cột tóc', 70, '2023-12-29 16:15:17', '2023-12-29 16:15:17', b'0', 'http://127.0.0.1:8000/Category_images/1703866517.jpg'),
+(80, 'Kẹp tóc', 70, '2023-12-29 16:21:16', '2023-12-29 16:21:16', b'0', 'http://127.0.0.1:8000/Category_images/1703866876.jpg'),
+(81, 'Quạt cầm tay mini', 71, '2023-12-30 04:21:28', '2023-12-30 04:21:28', b'0', 'http://127.0.0.1:8000/Category_images/1703910088.jpg'),
+(82, 'Quạt giấy', 71, '2023-12-30 04:22:33', '2023-12-30 04:22:33', b'0', 'http://127.0.0.1:8000/Category_images/1703910153.jpg'),
+(83, 'Bút chì', 72, '2023-12-30 04:23:18', '2023-12-30 04:23:18', b'0', 'http://127.0.0.1:8000/Category_images/1703910198.jpg'),
+(85, 'Lego', 73, '2023-12-30 04:25:18', '2023-12-30 04:25:18', b'0', 'http://127.0.0.1:8000/Category_images/1703910318.jpg'),
+(86, 'Ly thủy tinh', 74, '2023-12-30 04:25:53', '2023-12-30 04:25:53', b'0', 'http://127.0.0.1:8000/Category_images/1703910353.jpg'),
+(87, 'Thước', 72, '2023-12-30 04:39:08', '2023-12-30 04:39:08', b'0', 'http://127.0.0.1:8000/Category_images/1703911148.jpg'),
+(88, 'Ví', 69, '2023-12-30 04:54:56', '2023-12-30 04:54:56', b'0', 'http://127.0.0.1:8000/Category_images/1703912096.jpg');
 
 -- --------------------------------------------------------
 
@@ -233,8 +285,7 @@ CREATE TABLE `order` (
 --
 
 INSERT INTO `order` (`id`, `date_order`, `total_price`, `address_shipping_id`, `user_id`, `payment_id`, `shipping_cost`, `status`, `delivered_date`, `note`, `cart_id`, `created_at`, `updated_at`) VALUES
-(21, '2023-12-28 15:29:14', 2735492, 3, 2, 1, 35000, 1, '2024-01-04 15:29:14', NULL, 11, '2023-12-28 08:29:14', '2023-12-28 08:29:14'),
-(22, '2023-12-28 15:30:13', 69000, 4, 2, 2, 35000, 1, '2024-01-04 15:30:13', NULL, 12, '2023-12-28 08:30:13', '2023-12-28 08:30:13');
+(27, '2023-12-30 12:31:49', 176000, 3, 2, 1, 35000, 2, '2024-01-06 12:31:49', 'dễ vỡ', 20, '2023-12-30 05:31:49', '2023-12-30 05:32:41');
 
 -- --------------------------------------------------------
 
@@ -312,25 +363,6 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_access_tokens`
---
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `product`
 --
 
@@ -350,45 +382,13 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name_product`, `description`, `category_id`, `created_at`, `updated_at`, `deleted`, `default_image`) VALUES
-(1, 'Kẹp tóc nơ', 'rất đẹp á', 1, '2023-11-06 09:37:48', '2023-12-10 11:50:15', b'0', 'https://aothungame.vn/wp-content/uploads/imager_97443.jpg'),
-(2, 'Lược gỡ rối tóc', 'rất đẹp', 2, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(3, 'Cài tóc ngọc trai', 'rất đẹp', 3, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(4, 'Lược gỡ rối', 'rất đẹp', 4, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(5, 'Băng đô nơ to', 'rất đẹp', 5, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(6, 'Cài tóc hoa hồng trắng', 'rất đẹp', 6, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(7, 'Cài tóc tay thỏ', 'rất đẹp', 1, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(8, 'Cài tóc len lông cừu', 'rất đẹp', 2, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(9, 'Cài tóc', 'rất đẹp', 3, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(10, 'Cài tóc bằng da', 'rất đẹp', 4, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(11, 'Kẹp tóc nơ đính ngọc trai', 'rất đẹp', 1, '2023-11-06 09:37:48', '2023-12-10 18:26:04', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(13, 'Lược gỡ rối tóc+ gương', 'rất đẹp', 1, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(14, 'Lược gỡ rối +gương gập nhỏ gọn', 'rất đẹp', 2, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(15, 'Trâm cài tóc', 'rất đẹp', 3, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(16, 'Ly giữ nhiệt inox+ ống hút', 'rất đẹp', 4, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(17, 'Cài tóc hình gấu', 'rất đẹp', 1, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(18, 'Cài tóc ngôi sao', 'rất đẹp', 2, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(19, 'Cài tóc mèo đen', 'rất đẹp', 4, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(20, 'Cài tóc nơ hồng to', 'rất đẹp', 2, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(21, 'Cài tóc Kuromi', 'rất đẹp', 4, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(22, 'Cài tóc đính đá', 'rất đẹp', 5, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(23, 'Ly giữ nhiệt nhựa+ kèm ống hút nhựa', 'rất đẹp', 3, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(24, 'Cài tóc chữ D', 'rất đẹp', 4, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(25, 'Bình giữ nhiệt', 'rất đẹp', 5, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(26, 'Cài tóc nơ đính đá', 'rất đẹp', 6, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png'),
-(27, 'Lọ đựng bút', 'rất đẹp', 3, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', ''),
-(28, 'Lọ đựng bút bằng lưới', 'rất đẹp', 2, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', ''),
-(29, 'Dập ghim mini', 'rất đẹp', 5, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', ''),
-(30, 'Tranh tô màu số hóa', 'rất đẹp', 3, '2023-11-06 09:37:48', '2023-11-06 09:37:48', b'0', ''),
-(84, 'Luong Quoc Toan', '', 0, '2023-12-09 13:25:45', '2023-12-09 13:25:45', b'0', ''),
-(86, 'aâ', '', 0, '2023-12-09 13:41:36', '2023-12-09 13:41:36', b'0', ''),
-(87, 'Luong Quoc Toan', '', 0, '2023-12-09 13:43:21', '2023-12-09 13:43:21', b'0', ''),
-(88, 'Luong Quoc Toan', 'aâ', 1, '2023-12-09 13:47:35', '2023-12-09 13:47:35', b'0', ''),
-(91, 'Lương Quốc Toàn Trường', 'Như c rất xịn', 5, '2023-12-10 10:02:48', '2023-12-10 10:02:48', b'0', ''),
-(95, 'The my beo', 'rat dep', 1, '2023-12-10 16:00:00', '2023-12-10 16:00:00', b'0', ''),
-(96, '2', '1', 1, '2023-12-10 18:29:09', '2023-12-10 18:29:09', b'0', ''),
-(99, 'aaaaaaaaaa', 'sdfádfsdfàds', 1, '2023-12-12 21:32:46', '2023-12-12 21:32:46', b'0', ''),
-(100, 'tgjv', 'jkk', 1, '2023-12-24 04:55:58', '2023-12-24 04:55:58', b'0', 'http://127.0.0.1:8000/Product_images/1703393758.png'),
-(101, 'hhvbmn', 'nmn', 1, '2023-12-24 05:08:39', '2023-12-24 05:08:39', b'0', 'http://127.0.0.1:8000/Product_images/1703394519.png');
+(109, 'Lego con mèo', 'xinh lắm nhá', 85, '2023-12-29 17:35:14', '2023-12-30 04:53:08', b'0', 'http://127.0.0.1:8000/Product_item_images/1703911988.jpg'),
+(110, 'Kẹp tóc nơ xinh', NULL, 79, '2023-12-29 17:46:58', '2023-12-30 04:42:17', b'0', 'http://127.0.0.1:8000/Product_item_images/1703911337.jpg'),
+(113, 'Ví đựng tiền', NULL, 88, '2023-12-30 04:55:12', '2023-12-30 04:55:12', b'0', 'http://127.0.0.1:8000/Product_images/1703912112.jpg'),
+(114, 'Lược gỡ rối tóc', NULL, 78, '2023-12-30 05:15:34', '2023-12-30 05:15:34', b'0', 'http://127.0.0.1:8000/Product_images/1703913334.jpg'),
+(115, 'Túi xách', NULL, 75, '2023-12-30 05:17:41', '2023-12-30 05:17:41', b'0', 'http://127.0.0.1:8000/Product_images/1703913461.jpg'),
+(116, 'Túi xách sarino', NULL, 75, '2023-12-30 05:19:38', '2023-12-30 05:19:38', b'0', 'http://127.0.0.1:8000/Product_images/1703913578.jpg'),
+(117, 'Ly thủy tinh hologram', NULL, 86, '2023-12-30 05:21:46', '2023-12-30 05:21:46', b'0', 'http://127.0.0.1:8000/Product_images/1703913706.jpg');
 
 -- --------------------------------------------------------
 
@@ -411,19 +411,20 @@ CREATE TABLE `product_configuration` (
 --
 
 INSERT INTO `product_configuration` (`product_item_id`, `variation_id`, `created_at`, `updated_at`, `id`, `name_color`, `variation_value`) VALUES
-(1, 1, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 1, 'red', '#FF0000'),
-(2, 1, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 2, 'lime', '#00FF00'),
-(3, 1, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 3, 'blue', '#0000FF'),
-(4, 1, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 4, 'yellow', '#FFFF00'),
-(5, 1, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 5, 'cyan', '#00FFFF'),
-(6, 2, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 6, '', 'X'),
-(7, 2, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 7, '', 'M'),
-(8, 2, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 8, '', 'XL'),
-(9, 2, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 9, '', 'K'),
-(10, 2, '2023-12-17 03:47:09', '2023-12-17 03:47:09', 10, '', 'XS'),
-(11, 2, '2023-12-17 04:07:12', '2023-12-17 04:07:12', 11, '', 'XLL'),
-(42, 1, '2023-12-17 04:07:12', '2023-12-17 04:07:12', 12, 'Navy', '#000080'),
-(45, 1, '2023-12-17 04:07:12', '2023-12-17 04:07:12', 13, 'Grey', '#808080');
+(64, 31, '2023-12-30 04:58:44', '2023-12-30 04:58:44', 13, NULL, '#ffff00'),
+(65, 32, '2023-12-30 05:02:11', '2023-12-30 05:13:34', 14, NULL, '#000000'),
+(67, 34, '2023-12-30 05:08:44', '2023-12-30 05:13:45', 16, NULL, '#000000'),
+(68, 35, '2023-12-30 05:09:10', '2023-12-30 05:09:10', 17, NULL, '#000000'),
+(69, 36, '2023-12-30 05:09:41', '2023-12-30 05:09:41', 18, NULL, '#ffa6a6'),
+(70, 37, '2023-12-30 05:10:29', '2023-12-30 05:10:29', 19, NULL, '#ffaaaa'),
+(71, 38, '2023-12-30 05:16:25', '2023-12-30 05:16:25', 20, NULL, '#ff9f9f'),
+(72, 39, '2023-12-30 05:17:04', '2023-12-30 05:17:04', 21, NULL, '#8080ff'),
+(73, 40, '2023-12-30 05:18:31', '2023-12-30 05:18:31', 22, NULL, '#fbca59'),
+(74, 41, '2023-12-30 05:19:01', '2023-12-30 05:19:01', 23, NULL, '#ffffff'),
+(75, 42, '2023-12-30 05:20:22', '2023-12-30 05:20:22', 24, NULL, '#8080ff'),
+(76, 43, '2023-12-30 05:20:46', '2023-12-30 05:20:46', 25, NULL, '#ff8080'),
+(77, 44, '2023-12-30 05:22:19', '2023-12-30 05:22:19', 26, NULL, '1'),
+(78, 45, '2023-12-30 05:22:54', '2023-12-30 05:22:54', 27, NULL, '2');
 
 -- --------------------------------------------------------
 
@@ -437,13 +438,6 @@ CREATE TABLE `product_images` (
   `product_image` text NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `product_images`
---
-
-INSERT INTO `product_images` (`id`, `product_id`, `product_image`, `created_at`) VALUES
-(1, 1, 'djtmeme', '2023-12-17 05:36:54');
 
 -- --------------------------------------------------------
 
@@ -470,19 +464,20 @@ CREATE TABLE `product_item` (
 --
 
 INSERT INTO `product_item` (`id`, `product_id`, `price`, `quantity`, `SKU`, `image`, `discount_price`, `state`, `created_at`, `updated_at`, `deleted`) VALUES
-(1, 1, 54000, 23, 'Nothing', 'https://c.wallhere.com/photos/0b/33/Ekko_Leauge_of_Legends_Ekko_League_of_Legends_Riot_Games_futuristic_video_game_art_fire_PC_gaming-1855907.jpg!d', 2000, b'1', '2023-11-06 09:38:28', '2023-12-10 08:06:45', b'0'),
-(2, 2, 34000, 53, 'something', 'https://toquoc.mediacdn.vn/thumb_w/640/280518851207290880/2023/6/16/1-1686878499743583349365.png', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(3, 3, 48000, 52, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490402928689_dfc0efbbfedbb29f1af546750a490069.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(4, 4, 46000, 12, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/09/z4660347193749_28fe6cf4d8b7d70713d599881eeb9919.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(5, 5, 30000, 47, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490406203138_7af56f475493733186ab6812c2defbd5.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(6, 6, 60000, 42, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490593992903_3da963e09b450d38d4c174e8a7a4e332.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(7, 7, 40000, 54, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490593992903_3da963e09b450d38d4c174e8a7a4e332.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(8, 8, 10000, 64, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490594005199_8757521d795a6d6ec2a89251c3d8b97f.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(9, 9, 50000, 24, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490594001350_2b4503381803c6eccfb99c46545e8770.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(10, 10, 48000, 32, 'something', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490593997765_0cb375fc7e712a5db6bd34843b78bc31.jpg', 35000, b'1', '2023-11-06 09:38:28', '2023-11-06 09:38:28', b'0'),
-(11, 10, 45000, 10, 'somthing', 'https://hipposhop.vn/wp-content/uploads/2023/07/z4490333280085_8a269e5ee87979795a56a6a1e67f893f.jpg', 10000, b'1', '2023-11-21 19:05:26', '2023-11-21 19:05:26', b'0'),
-(42, 1, 123, 123, 'smoe', 'https://avatars.github\r\n\r\n\r\n\r\n\r\ncontent.com/u/69000303?v=4', 10000, b'1', '2023-12-10 19:37:28', '2023-12-10 19:37:28', b'0'),
-(45, 1, 122, 123, 'smoe', 'https://lol-skin.weblog.vc/img/wallpaper/splash/Kassadin_6.jpg?1701786054', NULL, b'1', '2023-12-12 21:32:34', '2023-12-12 21:32:34', b'0');
+(64, 109, 50000, 256, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703912324.jpg', 20000, b'1', '2023-12-30 04:58:44', '2023-12-30 04:58:44', b'0'),
+(65, 110, 25000, 256, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703912531.jpg', 20000, b'1', '2023-12-30 05:02:11', '2023-12-30 05:02:11', b'0'),
+(67, 113, 115000, 254, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703913259.jpg', 115000, b'1', '2023-12-30 05:08:44', '2023-12-30 05:14:19', b'0'),
+(68, 113, 115000, 586, '67YHJ', 'http://127.0.0.1:8000/Product_item_images/1703912950.jpg', 115000, b'1', '2023-12-30 05:09:10', '2023-12-30 05:09:10', b'0'),
+(69, 113, 115000, 256, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703912981.jpg', 115000, b'1', '2023-12-30 05:09:41', '2023-12-30 05:09:41', b'0'),
+(70, 110, 25000, 256, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703913029.jpg', 20000, b'1', '2023-12-30 05:10:29', '2023-12-30 05:10:29', b'0'),
+(71, 114, 55000, 55000, '67YHJ', 'http://127.0.0.1:8000/Product_item_images/1703913385.jpg', 55000, b'1', '2023-12-30 05:16:25', '2023-12-30 05:16:25', b'0'),
+(72, 114, 55000, 55000, '67YHJ', 'http://127.0.0.1:8000/Product_item_images/1703913424.jpg', 55000, b'1', '2023-12-30 05:17:04', '2023-12-30 05:17:04', b'0'),
+(73, 115, 185000, 25, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703913511.jpg', 185000, b'1', '2023-12-30 05:18:31', '2023-12-30 05:18:31', b'0'),
+(74, 115, 185000, 56, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703913541.jpg', 185000, b'1', '2023-12-30 05:19:01', '2023-12-30 05:19:01', b'0'),
+(75, 116, 56000, 256, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703913622.jpg', 50000, b'1', '2023-12-30 05:20:22', '2023-12-30 05:20:22', b'0'),
+(76, 116, 56000, 562, '78NHJ', 'http://127.0.0.1:8000/Product_item_images/1703913646.jpg', 56000, b'1', '2023-12-30 05:20:46', '2023-12-30 05:20:46', b'0'),
+(77, 117, 85000, 844, '67YHJ', 'http://127.0.0.1:8000/Product_item_images/1703913739.jpg', 80000, b'1', '2023-12-30 05:22:19', '2023-12-30 05:22:19', b'0'),
+(78, 117, 85000, 123, '67YHJ', 'http://127.0.0.1:8000/Product_item_images/1703913774.jpg', 80000, b'1', '2023-12-30 05:22:54', '2023-12-30 05:23:11', b'0');
 
 -- --------------------------------------------------------
 
@@ -548,7 +543,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `full_name`, `phone`, `email`, `password`, `role_id`, `sex`, `birth`, `created_at`, `updated_at`, `deleted`, `remember_token`) VALUES
 (1, 'Nguyễn Trần Công Trung', '0878005489', 'cskh@gmail.com', '123456789', 1, 0, '2002-04-01', '2023-11-06 09:39:35', '2023-11-06 09:39:35', b'0', NULL),
-(2, 'Nguyễn Thùy Trinh', NULL, 'mongthitrinhtkp@gmail.com', '$2y$12$FUStFETzMJLB2aER4IHWbO3RsxLnPAHhNoINl.gZuldLc92KcNCey', 3, 0, '2023-12-28', '2023-12-24 03:09:14', '2023-12-24 03:14:19', b'0', NULL);
+(2, 'Nguyễn Thùy Trinh', '0389183497', 'mongthitrinhtkp@gmail.com', '$2y$12$FUStFETzMJLB2aER4IHWbO3RsxLnPAHhNoINl.gZuldLc92KcNCey', 3, 0, '2023-12-28', '2023-12-24 03:09:14', '2023-12-24 03:14:19', b'0', NULL);
 
 -- --------------------------------------------------------
 
@@ -573,9 +568,7 @@ CREATE TABLE `user_address` (
 
 INSERT INTO `user_address` (`id`, `full_name`, `phone`, `is_default`, `address_id`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'Nguyễn Trần Công Trung', '0878005489', b'1', 1, 1, '2023-11-06 09:40:25', '2023-11-06 09:40:25'),
-(2, 'Nguyễn Thùy Trinh', '0896442976', b'0', 2, 2, '2023-12-24 03:17:54', '2023-12-28 07:28:56'),
 (3, 'Nguyễn Anh Tuấn Ngọc', '0896442927', b'0', 3, 2, '2023-12-24 03:18:29', '2023-12-24 03:18:29'),
-(4, 'Nguyễn Thị Thùy Trinh', '+84389183498', b'0', 4, 2, '2023-12-28 07:28:56', '2023-12-28 07:33:46'),
 (5, 'Nguyễn Thị Thùy Trinh', '+84389183498', b'1', 5, 2, '2023-12-28 07:33:46', '2023-12-28 07:33:46');
 
 -- --------------------------------------------------------
@@ -597,7 +590,25 @@ CREATE TABLE `variation` (
 
 INSERT INTO `variation` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'màu', '2023-11-06 09:40:45', '2023-11-06 09:40:45'),
-(2, 'size', '2023-11-06 09:40:45', '2023-11-06 09:40:45');
+(2, 'size', '2023-11-06 09:40:45', '2023-11-06 09:40:45'),
+(28, 'size', '2023-12-29 17:47:19', '2023-12-29 17:47:19'),
+(29, 'size', '2023-12-29 20:35:05', '2023-12-29 20:35:05'),
+(30, 'màu', '2023-12-30 02:32:16', '2023-12-30 02:32:16'),
+(31, 'màu', '2023-12-30 04:58:44', '2023-12-30 04:58:44'),
+(32, 'màu', '2023-12-30 05:02:11', '2023-12-30 05:02:11'),
+(33, 'màu', '2023-12-30 05:04:36', '2023-12-30 05:04:36'),
+(34, 'màu', '2023-12-30 05:08:44', '2023-12-30 05:08:44'),
+(35, 'màu', '2023-12-30 05:09:10', '2023-12-30 05:09:10'),
+(36, 'màu', '2023-12-30 05:09:41', '2023-12-30 05:09:41'),
+(37, 'màu', '2023-12-30 05:10:29', '2023-12-30 05:10:29'),
+(38, 'màu', '2023-12-30 05:16:25', '2023-12-30 05:16:25'),
+(39, 'màu', '2023-12-30 05:17:04', '2023-12-30 05:17:04'),
+(40, 'màu', '2023-12-30 05:18:31', '2023-12-30 05:18:31'),
+(41, 'màu', '2023-12-30 05:19:01', '2023-12-30 05:19:01'),
+(42, 'màu', '2023-12-30 05:20:22', '2023-12-30 05:20:22'),
+(43, 'màu', '2023-12-30 05:20:46', '2023-12-30 05:20:46'),
+(44, 'size', '2023-12-30 05:22:19', '2023-12-30 05:22:19'),
+(45, 'size', '2023-12-30 05:22:54', '2023-12-30 05:22:54');
 
 -- --------------------------------------------------------
 
@@ -640,9 +651,7 @@ CREATE TABLE `wishlist_item` (
 --
 
 INSERT INTO `wishlist_item` (`id`, `wishlist_id`, `product_id`, `product_item_id`, `created_at`, `updated_at`) VALUES
-(3, 1, 5, NULL, '2023-11-09 07:34:21', '2023-11-09 07:34:21'),
-(15, 2, 2, -1, '2023-12-26 22:44:07', '2023-12-26 22:44:07'),
-(16, 2, -1, 1, '2023-12-26 22:45:03', '2023-12-26 22:45:03');
+(29, 2, 117, -1, '2023-12-30 05:37:01', '2023-12-30 05:37:01');
 
 --
 -- Indexes for dumped tables
@@ -774,13 +783,6 @@ ALTER TABLE `user`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
 -- Indexes for table `user_address`
 --
 ALTER TABLE `user_address`
@@ -824,19 +826,19 @@ ALTER TABLE `address`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `cart_item`
 --
 ALTER TABLE `cart_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `email_verification`
@@ -860,7 +862,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -875,22 +877,22 @@ ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=118;
+
+--
+-- AUTO_INCREMENT for table `product_configuration`
+--
+ALTER TABLE `product_configuration`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `product_item`
 --
 ALTER TABLE `product_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -920,7 +922,7 @@ ALTER TABLE `user_address`
 -- AUTO_INCREMENT for table `variation`
 --
 ALTER TABLE `variation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
@@ -932,7 +934,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `wishlist_item`
 --
 ALTER TABLE `wishlist_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
